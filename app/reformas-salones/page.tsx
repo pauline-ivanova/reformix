@@ -11,7 +11,6 @@ import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
   HomeIcon,
   LightBulbIcon,
-  RulerIcon,
   DocumentCheckIcon,
   PuzzlePieceIcon,
   MoonIcon,
@@ -58,7 +57,7 @@ export default async function ReformasSalonesPage() {
       description: "Seleccionamos materiales duraderos y trabajamos con técnicas que garantizan un resultado impecable.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <RulerIcon className="w-8 h-8" />
+          <PaintBrushIcon className="w-8 h-8" />
         </div>
       ),
     },

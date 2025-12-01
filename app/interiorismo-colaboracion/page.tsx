@@ -15,7 +15,6 @@ import {
   UserGroupIcon,
   DocumentCheckIcon,
   LightBulbIcon,
-  HandshakeIcon,
   WrenchScrewdriverIcon,
 } from '@heroicons/react/24/solid';
 

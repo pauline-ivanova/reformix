@@ -9,7 +9,6 @@ import CTA from "@/app/components/blocks/CTA";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
-  RulerIcon,
   SparklesIcon,
   CalendarDaysIcon,
   DocumentCheckIcon,
@@ -37,7 +36,7 @@ export default async function ReformasCocinasPage() {
       description: "Maximizamos cada centímetro. Creamos un 'triángulo de trabajo' eficiente para que cocinar sea un placer.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <RulerIcon className="w-8 h-8" />
+          <SparklesIcon className="w-8 h-8" />
         </div>
       ),
     },

@@ -9,7 +9,6 @@ import CTA from "@/app/components/blocks/CTA";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
-  RulerIcon,
   LightBulbIcon,
   CalendarDaysIcon,
   KeyIcon,
@@ -37,7 +36,7 @@ export default async function ReformasIntegralesPisosPage() {
       description: "Somos expertos en sacar el máximo partido a pisos, eliminando pasillos inútiles y creando distribuciones abiertas y lógicas.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <RulerIcon className="w-8 h-8" />
+          <HomeIcon className="w-8 h-8" />
         </div>
       ),
     },
@@ -97,7 +96,7 @@ export default async function ReformasIntegralesPisosPage() {
       description: "Desde suelos de parquet o microcemento hasta armarios empotrados diseñados al milímetro para aprovechar cada rincón. Cuidamos los detalles que definen la calidad y el confort.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <RulerIcon className="w-8 h-8" />
+          <SparklesIcon className="w-8 h-8" />
         </div>
       ),
     },
