@@ -1,0 +1,305 @@
+import Hero from "@/app/components/blocks/Hero";
+import FeatureGrid from "@/app/components/blocks/FeatureGrid";
+import AboutSection from "@/app/components/blocks/AboutSection";
+import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
+import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
+import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
+import ServiceAreas from "@/app/components/blocks/ServiceAreas";
+import CTA from "@/app/components/blocks/CTA";
+import { Metadata } from "next";
+import { generateStandardMetadata } from "@/lib/metadata-utils";
+import {
+  ChartBarIcon,
+  ShieldCheckIcon,
+  UserGroupIcon,
+  DocumentCheckIcon,
+  HomeIcon,
+  LightBulbIcon,
+  SparklesIcon,
+  BuildingOfficeIcon,
+} from '@heroicons/react/24/solid';
+
+export const metadata: Metadata = {
+  title: "Aislamiento Térmico y Acústico en Barcelona",
+  description: "Expertos en aislamiento térmico y acústico en Barcelona y Vallès Occidental. Mejora el confort, reduce el ruido y ahorra en tus facturas de energía.",
+  ...generateStandardMetadata({
+    title: "Aislamiento Térmico y Acústico en Barcelona",
+    description: "Expertos en aislamiento térmico y acústico en Barcelona y Vallès Occidental. Mejora el confort, reduce el ruido y ahorra en tus facturas de energía.",
+    url: "https://reformix.barcelona/aislamiento-termico-acustico",
+    pagePath: "/aislamiento-termico-acustico",
+    keywords: ["aislamiento termico Barcelona", "aislamiento acustico Barcelona", "SATE Barcelona", "aislamiento vivienda"],
+  }),
+};
+
+export default async function AislamientoTermicoAcusticoPage() {
+  const features = [
+    {
+      title: "Análisis Termográfico",
+      description: "Opcionalmente, realizamos un estudio con cámara térmica para detectar los principales puentes térmicos y actuar donde es más necesario.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ChartBarIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Materiales Certificados",
+      description: "Trabajamos solo con aislantes de primeras marcas (lana de roca, XPS, SATE) que garantizan el máximo rendimiento.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ShieldCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Instaladores Cualificados",
+      description: "Nuestro equipo propio está formado en la correcta instalación de cada tipo de aislante para evitar fallos.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <UserGroupIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Ahorro Demostrable",
+      description: "Te asesoramos sobre cómo el aislamiento impactará en tu certificado energético y en tus facturas.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <DocumentCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+  ];
+
+  const solutions = [
+    {
+      title: "Aislamiento de Paredes Interiores",
+      description: "Instalamos trasdosados de pladur con lana de roca o mineral, una solución muy eficaz para aislar del frío/calor y del ruido de los vecinos.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <BuildingOfficeIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Aislamiento de Techos",
+      description: "Creamos falsos techos con material aislante para reducir el ruido del piso superior y evitar la pérdida de calor por el techo.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <HomeIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Aislamiento de Fachadas (SATE)",
+      description: "Aplicamos el Sistema de Aislamiento Térmico por el Exterior (SATE), la solución más completa para eliminar puentes térmicos y renovar la fachada.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <BuildingOfficeIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+  ];
+
+  const benefits = [
+    {
+      title: "Ahorro Económico Directo",
+      description: "Reduce drásticamente el consumo en calefacción y aire acondicionado. La inversión se amortiza con el ahorro en las facturas.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <DocumentCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Mayor Confort y Bienestar",
+      description: "Disfruta de una temperatura estable todo el año y de un ambiente silencioso y tranquilo en tu propio hogar.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <HomeIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Mejora la Calificación Energética",
+      description: "Un buen aislamiento mejora la letra de tu certificado energético, lo que revaloriza tu propiedad de cara a una futura venta o alquiler.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <SparklesIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      <Hero
+        title="Aislamiento Térmico y Acústico en Barcelona y Vallès Occidental"
+        titleLines={[
+          "Aislamiento Térmico",
+          "y Acústico en Barcelona",
+          "y Vallès Occidental"
+        ]}
+        subtitle="Vive en confort todo el año, reduce el ruido exterior y ahorra hasta un 30% en tus facturas de calefacción y aire acondicionado. Mejoramos la eficiencia energética de tu hogar."
+        primaryCTA={{
+          text: "Mejora el Confort de tu Hogar",
+          href: "/contacto"
+        }}
+        backgroundImage="/images/hero-bg.webp"
+      />
+      <FeatureGrid
+        title="Soluciones de Aislamiento Eficaces y Garantizadas"
+        subtitle="Aplicamos las técnicas y materiales más avanzados para asegurar un resultado medible en confort y ahorro energético."
+        features={features}
+        columns={4}
+      />
+      <AboutSection
+        logoPath="/images/reformix-logo-vertical-white.png"
+        text="En Reformix Barcelona somos expertos en mejorar la eficiencia energética y el confort de viviendas y locales en Barcelona y el Vallès Occidental. Nuestro equipo técnico estudia cada caso para proponer la solución de aislamiento térmico o acústico más adecuada, utilizando materiales de primera calidad e instaladores propios para garantizar un resultado óptimo y duradero."
+      />
+      <FeatureGrid
+        title="¿Sufres de Ruido, Frío en Invierno o Calor Excesivo en Verano?"
+        subtitle="Una vivienda mal aislada no solo es incómoda, sino que también supone un gasto energético constante. Estos son los problemas que un buen aislamiento puede resolver de raíz."
+        features={[
+          {
+            title: "Facturas de Energía Elevadas",
+            description: "La principal consecuencia. La calefacción y el aire acondicionado \"se escapan\" por paredes, techos y ventanas mal aisladas.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <DocumentCheckIcon className="w-8 h-8" />
+              </div>
+            ),
+          },
+          {
+            title: "Ruidos Molestos del Exterior",
+            description: "El tráfico, los vecinos o el ruido de la calle se cuelan en tu casa, impidiendo el descanso y la concentración.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <HomeIcon className="w-8 h-8" />
+              </div>
+            ),
+          },
+          {
+            title: "Calor Sofocante en Verano",
+            description: "Las paredes y techos se sobrecalientan y convierten tu casa en un horno, obligando a un uso excesivo del aire acondicionado.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <LightBulbIcon className="w-8 h-8" />
+              </div>
+            ),
+          },
+          {
+            title: "Paredes Frías y Humedad",
+            description: "Superficies frías al tacto que generan una sensación de desconfort constante y pueden provocar condensación y moho.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <ShieldCheckIcon className="w-8 h-8" />
+              </div>
+            ),
+          },
+        ]}
+        columns={4}
+      />
+      <FeatureGrid
+        title="Soluciones Profesionales para Aislar tu Vivienda"
+        subtitle="Aplicamos diferentes técnicas de aislamiento en función del problema a resolver, siempre buscando la máxima eficacia y la mínima obra."
+        features={solutions}
+        columns={3}
+      />
+      <FeatureGrid
+        title="Más Confort en Casa, Menos Gasto en Facturas"
+        subtitle="Un buen aislamiento se traduce directamente en una mejor calidad de vida y en un ahorro visible desde la primera factura."
+        features={benefits}
+        columns={3}
+      />
+      <WhyChooseUs />
+      <TestimonialsCarousel />
+      <FAQTwoColumn
+        items={[
+          {
+            question: "¿Se pierde mucho espacio al aislar por el interior?",
+            answer: "Muy poco. Un trasdosado de pladur con un buen aislante suele tener un grosor total de entre 5 y 8 cm, una pérdida mínima para una ganancia de confort enorme."
+          },
+          {
+            question: "¿Qué es más efectivo, aislar por dentro o por fuera (SATE)?",
+            answer: "El SATE es la solución más completa porque elimina todos los puentes térmicos de la fachada. El aislamiento interior es una alternativa excelente cuando no se puede actuar por fuera."
+          },
+          {
+            question: "¿Realmente se nota el ahorro en las facturas?",
+            answer: "Sí, de forma significativa. Dependiendo del estado previo de la vivienda y la solución aplicada, el ahorro en climatización (frío/calor) puede llegar a superar el 30-40%."
+          },
+          {
+            question: "¿El aislamiento térmico también sirve para el ruido?",
+            answer: "Sí, muchos materiales como la lana de roca o la fibra de vidrio son excelentes aislantes tanto térmicos como acústicos, por lo que obtienes un doble beneficio."
+          },
+          {
+            question: "¿Hay subvenciones para mejorar la eficiencia energética?",
+            answer: "Sí, a menudo existen ayudas y subvenciones de la administración para obras que mejoran la eficiencia energética. Podemos informarte sobre las convocatorias vigentes."
+          },
+          {
+            question: "Tengo humedades por condensación, ¿el aislamiento lo soluciona?",
+            answer: "En la mayoría de los casos, sí. Al aislar una pared fría, se evita el contraste de temperaturas que provoca la condensación, eliminando el problema de raíz."
+          }
+        ]}
+      />
+      <ServiceAreas
+        areas={[
+          {
+            title: "Barcelona y Área Metropolitana",
+            cities: [
+              "Barcelona",
+              "L'Hospitalet de Llobregat",
+              "Badalona",
+              "Santa Coloma de Gramenet",
+              "Cornellà de Llobregat",
+              "Esplugues de Llobregat",
+              "Sant Just Desvern",
+              "Sant Joan Despí",
+              "Sant Boi de Llobregat",
+              "El Prat de Llobregat",
+              "Viladecans",
+              "Castelldefels",
+              "Gavà",
+              "Sant Adrià de Besòs",
+              "Montcada i Reixac"
+            ]
+          },
+          {
+            title: "Vallès Occidental",
+            cities: [
+              "Sabadell",
+              "Terrassa",
+              "Sant Cugat del Vallès",
+              "Cerdanyola del Vallès",
+              "Ripollet",
+              "Barberà del Vallès",
+              "Sant Quirze del Vallès",
+              "Badia del Vallès",
+              "Castellar del Vallès",
+              "Sentmenat",
+              "Santa Perpètua de Mogoda",
+              "Polinyà",
+              "Palau-solità i Plegamans",
+              "Rellinars",
+              "Ullastrell",
+              "Matadepera",
+              "Gallifa"
+            ]
+          }
+        ]}
+      />
+      <CTA
+        title="¿Quieres una casa más confortable y eficiente?"
+        description="Contacta con nosotros. Estudiaremos tu caso y te ofreceremos un presupuesto para la solución de aislamiento térmico o acústico que necesitas en Barcelona y el Vallès Occidental."
+        buttonText="Pide tu Estudio y Presupuesto"
+        buttonHref="/contacto"
+        features={[
+          "Visita y diagnóstico inicial gratis",
+          "Presupuesto 100% cerrado",
+          "Garantía por escrito"
+        ]}
+      />
+    </>
+  );
+}
+
