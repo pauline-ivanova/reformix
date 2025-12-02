@@ -78,7 +78,7 @@ export default function ProcessSection({
           {steps.map((step, index) => (
             <div key={index} className="relative">
               {step.shape === 'banner' ? (
-                <div className="relative bg-brand-secondary text-white p-8 pb-16 clip-path-banner">
+                <div className="relative text-white p-8 pb-16 clip-path-banner" style={{ backgroundColor: '#b84d2a' }}>
                   <div className="mb-2">
                     <span className="text-6xl font-bold text-white leading-none opacity-90">
                       {step.number}
@@ -167,7 +167,7 @@ export default function ProcessSection({
              {/* Step 02 - Banner Shape */}
              <div className="w-full relative z-10 mt-12">
                 <div className="relative w-full" style={{ paddingBottom: '120%' }}>
-                   <div className="absolute inset-0 bg-[#C4572f] border-none outline-none" style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)' }}>
+                   <div className="absolute inset-0 border-none outline-none" style={{ backgroundColor: '#b84d2a', clipPath: 'polygon(0% 0%, 100% 0%, 100% 85%, 50% 100%, 0% 85%)' }}>
                       <div className="p-10 flex flex-col h-full items-start text-left pt-20">
                          <span className="text-[10rem] font-black text-white leading-none block mb-2 opacity-90">
                             {steps[1].number}

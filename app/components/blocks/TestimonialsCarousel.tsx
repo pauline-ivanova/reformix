@@ -139,7 +139,7 @@ export default function TestimonialsCarousel() {
                     <div className="font-bold text-sm text-[#333]">
                       {testimonial.name}
                     </div>
-                    <div className="text-[13px] text-[#777]">
+                    <div className="text-[13px] text-[#666]">
                       {testimonial.location}
                     </div>
                   </div>
@@ -149,14 +149,14 @@ export default function TestimonialsCarousel() {
           </div>
 
           {/* Pagination Dots */}
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-3 mt-8">
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToPage(index)}
-                className={`w-2 h-2 rounded-full transition-all ${
+                className={`w-6 h-6 rounded-full transition-all flex items-center justify-center ${
                   index === currentIndex
-                    ? 'bg-brand-primary w-8'
+                    ? 'bg-brand-primary w-12'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`Go to slide ${index + 1}`}

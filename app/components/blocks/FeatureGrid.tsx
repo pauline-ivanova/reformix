@@ -49,9 +49,15 @@ export default function FeatureGrid({
                   {feature.icon}
                 </div>
               )}
-              <h3 className="text-xl font-semibold mb-3 text-brand-text-heading">
-                {feature.title}
-              </h3>
+              {title ? (
+                <h3 className="text-xl font-semibold mb-3 text-brand-text-heading">
+                  {feature.title}
+                </h3>
+              ) : (
+                <h2 className="text-xl font-semibold mb-3 text-brand-text-heading">
+                  {feature.title}
+                </h2>
+              )}
               <p className="text-brand-text-body leading-relaxed">
                 {feature.description}
               </p>

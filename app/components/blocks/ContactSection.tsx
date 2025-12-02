@@ -48,6 +48,7 @@ export default function ContactSection() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="rounded-lg"
+                title="Ubicación de Reformix Barcelona en Sabadell"
               ></iframe>
             </div>
             <div className="space-y-4">

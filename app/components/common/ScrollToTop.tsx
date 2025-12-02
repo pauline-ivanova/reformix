@@ -8,15 +8,21 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button when page is scrolled down 300px
-      if (window.scrollY > 300) {
+      const scrollY = window.scrollY
+      const documentHeight = document.documentElement.scrollHeight
+      const windowHeight = window.innerHeight
+      const distanceFromBottom = documentHeight - (scrollY + windowHeight)
+      
+      // Show button when scrolled down 300px, but hide if within 500px of bottom (footer area)
+      if (scrollY > 300 && distanceFromBottom > 500) {
         setIsVisible(true)
       } else {
         setIsVisible(false)
       }
     }
 
-    window.addEventListener('scroll', toggleVisibility)
+    window.addEventListener('scroll', toggleVisibility, { passive: true })
+    toggleVisibility() // Initial check
 
     return () => {
       window.removeEventListener('scroll', toggleVisibility)

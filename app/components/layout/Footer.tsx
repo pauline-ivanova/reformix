@@ -322,13 +322,42 @@ export default function Footer() {
 
           {/* Bottom Bar */}
           <div className="mt-12 border-t border-white/20 pt-8">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <p className="text-xs leading-5 text-gray-400">
-                &copy; {new Date().getFullYear()} Reformix Barcelona. Todos los derechos reservados.
-              </p>
-              <p className="text-xs leading-5 text-gray-400">
-                Reformas en Barcelona y Vallès Occidental desde 2014
-              </p>
+            <div className="flex flex-col space-y-4">
+              {/* Main Copyright Row */}
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div className="flex flex-col gap-2 text-center sm:text-left">
+                  <p className="text-sm text-gray-300">
+                    &copy; {new Date().getFullYear()} Reformix Barcelona. Todos los derechos reservados.
+                  </p>
+                  <p className="text-sm text-gray-300">
+                    Reformas en Barcelona y Vallès Occidental desde 2014
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2 text-center sm:text-right">
+                  <p className="text-xs text-gray-400/90 tracking-wide">
+                    Desarrollado por
+                  </p>
+                  <a 
+                    href="https://qwantix.agency" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center sm:justify-end gap-1.5 text-gray-300 hover:text-white transition-all duration-300 font-medium group/link"
+                  >
+                    <span className="relative">
+                      qwantix.agency
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-white transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <svg 
+                      className="w-3.5 h-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 transition-all duration-300" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
