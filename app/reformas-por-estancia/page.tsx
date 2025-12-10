@@ -2,11 +2,13 @@ import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
 import ServicesSection from "@/app/components/blocks/ServicesSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
+import ProcessSection from "@/app/components/blocks/ProcessSection";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -16,14 +18,18 @@ import {
   ShieldCheckIcon,
   HomeIcon,
   SparklesIcon,
+  ClockIcon,
+  BoltIcon,
+  WrenchScrewdriverIcon,
 } from '@heroicons/react/24/solid';
+
 
 export const metadata: Metadata = {
   title: "Reformas por Estancia en Barcelona y Vallès Occidental",
-  description: "Especialistas en reformas por estancia en Barcelona y Vallès Occidental. Reforma de cocina, baño, salón y más. Presupuesto cerrado y garantía. ¡Pide tu visita!",
+  description: "Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía. Solicita tu visita gratis.",
   ...generateStandardMetadata({
     title: "Reformas por Estancia en Barcelona y Vallès Occidental",
-    description: "Especialistas en reformas por estancia en Barcelona y Vallès Occidental. Reforma de cocina, baño, salón y más. Presupuesto cerrado y garantía. ¡Pide tu visita!",
+    description: "Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía. Solicita tu visita gratis.",
     url: "https://reformix.barcelona/reformas-por-estancia",
     pagePath: "/reformas-por-estancia",
     keywords: ["reformas por estancia", "reforma cocina Barcelona", "reforma baño Barcelona", "reforma salón Barcelona", "reforma habitación Barcelona"],
@@ -33,26 +39,17 @@ export const metadata: Metadata = {
 export default async function ReformasPorEstanciaPage() {
   const features = [
     {
-      title: "Diseño y Ergonomía",
-      description: "Maximizamos cada centímetro. Creamos espacios funcionales y ergonómicos adaptados a tu estilo de vida y necesidades.",
+      title: "Presupuesto Cerrado, Sin Extras",
+      description: "Importes desglosados y pactados desde el inicio. Si surge un imprevisto, lo consensuamos antes de actuar.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <HomeIcon className="w-8 h-8" />
+          <ShieldCheckIcon className="w-8 h-8" />
         </div>
       ),
     },
     {
-      title: "Materiales de Calidad",
-      description: "Solo trabajamos con proveedores de confianza para garantizar acabados duraderos y de calidad superior.",
-      icon: (
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <SparklesIcon className="w-8 h-8" />
-        </div>
-      ),
-    },
-    {
-      title: "Plazos Garantizados",
-      description: "Sabemos que no puedes estar mucho tiempo sin usar tu espacio. Nos comprometemos por escrito con un calendario de obra realista.",
+      title: "Plazos Realistas y Cumplidos",
+      description: "Planificación detallada y jefe de obra asignado. Te informamos del avance sin que tengas que perseguirnos.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <CalendarDaysIcon className="w-8 h-8" />
@@ -60,8 +57,17 @@ export default async function ReformasPorEstanciaPage() {
       ),
     },
     {
-      title: "Presupuesto Sin Sorpresas",
-      description: "Detallamos cada partida para que tengas control total. El precio que firmamos es el precio que pagas.",
+      title: "Equipo Propio y Control de Calidad",
+      description: "Oficios coordinados y supervisión constante en obra para asegurar la calidad de cada acabado.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <UserGroupIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Garantía por Escrito",
+      description: "Entrega con garantía y documentación necesaria. Estamos para responder también en el postventa.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <ShieldCheckIcon className="w-8 h-8" />
@@ -72,64 +78,64 @@ export default async function ReformasPorEstanciaPage() {
 
   const services = [
     {
-      title: "Reforma de Cocina",
-      subtitle: "— El Corazón de tu Hogar",
-      description: "Transformamos tu cocina en un espacio funcional, luminoso y lleno de vida. Diseños a medida, almacenamiento inteligente y distribución ergonómica para que cocinar sea un placer.",
-      services: [
-        "Diseño funcional y ergonómico",
-        "Almacenamiento inteligente",
-        "Instalación de electrodomésticos",
-        "Iluminación estratégica"
-      ],
-      image: "/images/reforma-cocina-moderna.webp",
-      imageAlt: "Reforma de cocina moderna en Barcelona",
-      ctaText: "Saber más sobre reformas de cocina",
+      title: "Reformas de Cocinas",
+      subtitle: "",
+      description: "De espacio de trabajo a corazón del hogar. Diseños funcionales y luminosos.",
+      services: [],
+      image: "/images/reformas-cocinas.webp",
+      imageAlt: "Reforma de cocinas en Barcelona con muebles modernos e instalación profesional",
+      ctaText: "Ver Soluciones",
       ctaHref: "/reformas-cocinas"
     },
     {
-      title: "Reforma de Baño",
-      subtitle: "— Tu Oasis Personal",
-      description: "Creamos espacios de relajación y funcionalidad. Desde baños modernos con ducha hasta baños de lujo, siempre pensando en tu comodidad y bienestar.",
-      services: [
-        "Instalaciones de fontanería renovadas",
-        "Alicatados y revestimientos",
-        "Mobiliario a medida",
-        "Suelo radiante y calefacción"
-      ],
-      image: "/images/reforma-cocina-moderna.webp",
-      imageAlt: "Reforma de baño en Barcelona",
-      ctaText: "Descubre las reformas de baño",
+      title: "Reformas de Baños",
+      subtitle: "",
+      description: "Tu oasis de relax y funcionalidad. Materiales modernos y eficientes.",
+      services: [],
+      image: "/images/reformas-de-banos-en-barcelona.webp",
+      imageAlt: "Reforma de baño moderno en Barcelona con ducha de obra y acabados de diseño",
+      ctaText: "Ver Soluciones",
       ctaHref: "/reformas-banos"
     },
     {
-      title: "Reforma de Salón",
-      subtitle: "— Donde se Vive la Vida",
-      description: "El salón es el espacio donde se comparten los mejores momentos. Creamos ambientes acogedores, luminosos y adaptados a tu estilo de vida, ya sea con una distribución abierta o espacios más íntimos.",
-      services: [
-        "Redistribución de espacios",
-        "Instalación de suelos y techos",
-        "Iluminación y climatización",
-        "Carpintería y acabados"
-      ],
-      image: "/images/reforma-integral-salon.webp",
-      imageAlt: "Reforma de salón en Barcelona",
-      ctaText: "Ver reformas de salón",
+      title: "Reformas de Salón",
+      subtitle: "",
+      description: "El corazón de tu hogar, ahora más abierto, integrado y lleno de luz natural.",
+      services: [],
+      image: "/images/reformas-salones.webp",
+      imageAlt: "Reforma de salón moderno en Barcelona con diseño elegante y luz natural",
+      ctaText: "Ver Soluciones",
       ctaHref: "/reformas-salones"
     },
     {
-      title: "Reforma de Habitaciones",
-      subtitle: "— Tu Espacio de Descanso",
-      description: "Transformamos las habitaciones en espacios de descanso y trabajo. Desde dormitorios principales hasta habitaciones infantiles o estudios, creamos ambientes adaptados a cada necesidad.",
-      services: [
-        "Instalación de suelos",
-        "Carpintería a medida",
-        "Iluminación y climatización",
-        "Pintura y acabados"
-      ],
-      image: "/images/reforma-integral-salon.webp",
-      imageAlt: "Reforma de habitación en Barcelona",
-      ctaText: "Conoce las reformas de habitaciones",
+      title: "Reformas de Dormitorios",
+      subtitle: "",
+      description: "Tu refugio personal, optimizado para garantizar el mejor descanso y el orden.",
+      services: [],
+      image: "/images/reformas-de-habitaciones-en-barcelona.webp",
+      imageAlt: "Reforma de dormitorio moderno en Barcelona con diseño elegante y tonos grises",
+      ctaText: "Ver Soluciones",
       ctaHref: "/reformas-habitaciones"
+    },
+    {
+      title: "Terrazas y Balcones",
+      subtitle: "",
+      description: "Gana un espacio extra para disfrutar del exterior durante todo el año.",
+      services: [],
+      image: "/images/reformas-de-terrazas.webp",
+      imageAlt: "Terraza reformada con suelo cerámico moderno y vistas al mar al atardecer",
+      ctaText: "Ver Soluciones",
+      ctaHref: "/reformas-terrazas-balcones"
+    },
+    {
+      title: "Entradas y Almacenaje",
+      subtitle: "",
+      description: "La primera impresión y el orden diario son clave. Soluciones a tu medida.",
+      services: [],
+      image: "/images/reforma-de-recibidores-en-barcelona.webp",
+      imageAlt: "Reforma de recibidor moderno en Barcelona con diseño elegante y funcional",
+      ctaText: "Ver Soluciones",
+      ctaHref: "/reformas-recibidores"
     }
   ];
 
@@ -142,58 +148,159 @@ export default async function ReformasPorEstanciaPage() {
           "en Barcelona",
           "y Vallès Occidental"
         ]}
-        subtitle="Renovamos cada rincón de tu hogar. Transformamos cómo vives en tu hogar, ya sea con una reforma de cocina para ganar espacio o una reforma de baño para crear tu oasis personal."
+        subtitle="Elige la estancia que quieres transformar y te guiamos con soluciones concretas, presupuesto cerrado y plazos claros."
         primaryCTA={{
-          text: "Solicitar Presupuesto",
+          text: "Pedir visita",
           href: "/contacto"
         }}
         backgroundImage="/images/reforma-cocina-moderna.webp"
       />
       <FeatureGrid
-        title="Tu Nueva Estancia: Diseño, Calidad y Compromiso"
-        subtitle="Entendemos que cada espacio de tu hogar tiene su propia función. Por eso, cada reforma que realizamos en Barcelona y el Vallès se basa en estos cuatro pilares."
         features={features}
         columns={4}
+        disableFeatureHeadings
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
-        text="Con más de 10 años de experiencia, en Reformix Barcelona nos dedicamos a crear espacios a medida en Barcelona y el Vallès Occidental. Contamos con un equipo propio de instaladores, montadores y diseñadores para garantizar un control total sobre la calidad y los plazos de tu proyecto."
+        text="Somos una empresa de reformas con equipo propio que trabaja en Barcelona, Sabadell y Vallès Occidental. Nos especializamos en intervenciones por estancia, planificando para minimizar molestias en casa, proteger el resto de la vivienda y coordinar oficios para acabados coherentes con el estilo de tu hogar."
       />
       <ServicesSection
-        title="Soluciones para Crear la Estancia que Necesitas"
-        subtitle="Analizamos tu espacio y tus rutinas para ofrecerte soluciones inteligentes que transforman por completo cada rincón de tu hogar."
+        title="Cada Estancia, una Nueva Oportunidad"
+        subtitle="Haz clic en el espacio que quieres renovar y descubre soluciones específicas, ejemplos reales de nuestro trabajo y un proceso claro para transformar tu hogar."
         services={services}
+        columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <FeatureGrid
+        title="Tu Hogar, Mejorado. Tu Rutina, Intacta."
+        subtitle="Nuestro método de trabajo está diseñado para que la mejora de tu casa no signifique un caos en tu vida. Nos enfocamos tanto en la calidad del resultado como en la tranquilidad del proceso."
+        features={[
           {
-            question: "¿Cuánto tiempo no podré usar el espacio durante la reforma?",
-            answer: "Intentamos minimizarlo al máximo. El tiempo sin poder usar el espacio suele ser desde la fase de demolición hasta la instalación de acabados, que suele ser la última semana de trabajo. Te informamos del calendario exacto."
+            title: "Mínimas Molestias",
+            description: "Protegemos las zonas de paso, aislamos el área de trabajo y realizamos una limpieza diaria para que el polvo y el desorden no invadan tu espacio.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <ShieldCheckIcon className="w-8 h-8" />
+              </div>
+            ),
           },
           {
-            question: "¿Puedo vivir en casa durante una reforma de cocina o baño?",
-            answer: "En reformas parciales como una cocina o un baño es posible, y siempre nos organizamos para causar las menores molestias. Te informamos con antelación de las fases más molestas para que puedas planificarte."
+            title: "Rapidez y Eficiencia",
+            description: "Gracias a nuestro equipo propio y una planificación exhaustiva, optimizamos los tiempos para que recuperes tu espacio lo antes posible.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <BoltIcon className="w-8 h-8" />
+              </div>
+            ),
           },
           {
-            question: "¿Qué garantías ofrecéis en las reformas por estancia?",
-            answer: "Todos nuestros trabajos están garantizados por escrito y ofrecemos un servicio postventa para tu total tranquilidad. La garantía cubre tanto los materiales como la mano de obra."
+            title: "Integración Perfecta",
+            description: "Cuidamos que los nuevos acabados, materiales y estilo se integren de forma natural con el resto de tu vivienda, creando un resultado coherente y armonioso.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <HomeIcon className="w-8 h-8" />
+              </div>
+            ),
+          },
+        ]}
+        columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
+      />
+      <TestimonialsCarousel
+        title="Clientes que Transformaron su Hogar, Estancia por Estancia"
+        subtitle="La satisfacción de quienes ya han confiado en nosotros es nuestra mejor carta de presentación. Lee las opiniones de clientes de Barcelona y el Vallès Occidental."
+        testimonials={[
+          {
+            text: "El baño quedó moderno, cómodo y muy práctico. La diferencia se nota cada día, especialmente en los detalles de funcionalidad.",
+            initials: "JR",
+            name: "Jorge R.",
+            location: "Sabadell"
           },
           {
-            question: "¿Es necesario un permiso de obra para reformar una estancia?",
-            answer: "Para una reforma estándar que no modifica la estructura (cambiar alicatados, muebles, instalaciones) suele ser suficiente con un 'enterado de obras' o 'asentado', un trámite sencillo que gestionamos nosotros."
+            text: "Abrimos el salón hacia el pasillo y el espacio parece el doble de grande. Mucha más luz y sensación de amplitud.",
+            initials: "CM",
+            name: "Carla M.",
+            location: "Terrassa"
           },
           {
-            question: "¿Qué incluye exactamente el presupuesto?",
-            answer: "Nuestro presupuesto cerrado desglosa todo: demolición, retirada de escombros, mano de obra de todos los oficios (albañil, fontanero, electricista, montador), materiales de construcción y mobiliario si lo contratas con nosotros."
+            text: "Con los nuevos armarios y la distribución, el dormitorio transmite calma y orden. Irina nos asesoró en la elección y el resultado fue perfecto.",
+            initials: "VL",
+            name: "Víctor L.",
+            location: "Cerdanyola del Vallès"
           },
           {
-            question: "¿Trabajáis con cualquier marca de muebles o electrodomésticos?",
-            answer: "Trabajamos con una selección de proveedores de confianza que nos ofrecen buena calidad y garantía, pero estamos abiertos a instalar los muebles o electrodomésticos que tú elijas y compres por tu cuenta."
-          }
+            text: "La entrada de casa cambió por completo. Ahora tenemos espacio para todo y da una bienvenida mucho más acogedora.",
+            initials: "DT",
+            name: "David T.",
+            location: "Badalona"
+          },
+          {
+            text: "Reformamos el balcón y ahora lo disfrutamos todo el año. Se ha convertido en nuestro rincón favorito para relajarnos.",
+            initials: "LP",
+            name: "Laura P.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Nuestra cocina pasó de ser un espacio pequeño y oscuro a convertirse en el lugar donde más tiempo pasamos en familia. Con Reformix todo el proceso fue sencillo y sin complicaciones.",
+            initials: "AG",
+            name: "Ana G.",
+            location: "Barcelona"
+          },
         ]}
       />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
+          {
+            question: "¿Puedo seguir viviendo en casa durante la reforma?",
+            answer: "Sí. Nuestro proceso está diseñado para ello. Aislamos la zona de trabajo, protegemos los accesos y realizamos limpieza diaria para minimizar las molestias."
+          },
+          {
+            question: "¿Cuánto suele durar la reforma de una cocina o un baño?",
+            answer: "Depende del tamaño y la complejidad, pero una reforma estándar de baño suele durar entre 2-3 semanas, y una de cocina entre 3-4 semanas, incluyendo mobiliario."
+          },
+          {
+            question: "¿Gestionáis todos los oficios (fontanero, electricista, pintor)?",
+            answer: "Sí, nuestro equipo propio incluye todos los oficios necesarios. No tendrás que coordinar a diferentes industriales; tu jefe de obra se encarga de todo."
+          },
+          {
+            question: "¿Qué pasa si quiero cambiar algo a mitad de la obra?",
+            answer: "Es posible. Analizamos el cambio, te presentamos un anexo al presupuesto con el coste y el impacto en el plazo, y solo procedemos con tu aprobación por escrito."
+          },
+          {
+            question: "¿Cómo protegéis el resto de la vivienda del polvo y los daños?",
+            answer: "Es nuestra prioridad. Cubrimos suelos de zonas de paso, sellamos puertas con plásticos con cremallera y usamos aspiración industrial en las herramientas de corte."
+          },
+          {
+            question: "El presupuesto que me dais, ¿incluye los materiales y acabados?",
+            answer: "El presupuesto inicial incluye la mano de obra y materiales de construcción. Los acabados (baldosas, grifería, sanitarios) se cotizan aparte según tu elección, aunque podemos incluir una partida estimada para que tengas una visión global."
+          }
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Reformas por Estancia en Barcelona y Vallès Occidental",
+          description: "Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Room-by-Room Remodeling',
+          url: '/reformas-por-estancia',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas por Estancia', url: '/reformas-por-estancia' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn titleLines={["Preguntas Frecuentes", "sobre Reformas por Estancia"]} items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {
@@ -241,14 +348,14 @@ export default async function ReformasPorEstanciaPage() {
         ]}
       />
       <CTA
-        title="¿Hablamos de tu Nueva Estancia?"
-        description="Da el primer paso para conseguir el espacio que siempre has querido. Contacta con nosotros, agenda una visita sin compromiso y recibe una propuesta detallada y un presupuesto cerrado para tu proyecto en Barcelona o el Vallès Occidental."
+        title="¿Empezamos a dar forma a tu idea?"
+        description="Contacta con nosotros para agendar una visita sin compromiso. Medimos el espacio, escuchamos tus necesidades y en 48-72 horas te entregamos un presupuesto cerrado y detallado."
         buttonText="Pedir Presupuesto"
         buttonHref="/contacto"
         features={[
-          "Visita y asesoramiento inicial gratis",
-          "Presupuesto 100% cerrado",
-          "Garantía por escrito"
+          "Asesoramiento inicial gratuito",
+          "Visita y medición sin coste",
+          "Presupuesto detallado y cerrado"
         ]}
       />
     </>

@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     description: 'Contacta con Reformix Barcelona para solicitar un presupuesto gratuito. Estamos en Sabadell, Vallès Occidental. Teléfono: +34 642 029 572.',
     url: `${baseUrl}/contacto`,
     pagePath: '/contacto',
+    keywords: ['contacto reformas Barcelona', 'presupuesto reformas', 'Reformix Barcelona contacto', 'reformas Sabadell'],
   }),
 };
 
@@ -40,7 +41,7 @@ export default function ContactPage() {
                   <PhoneIcon className="w-6 h-6 text-brand-accent flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-brand-text-heading mb-1">Teléfono</h3>
-                    <a href="tel:+34642029572" className="text-brand-text-body hover:text-brand-accent">
+                    <a href="tel:+34642029572" className="text-brand-text-body hover:text-brand-accent" aria-label="Llamar por teléfono: +34 642 029 572">
                       +34 642 029 572
                     </a>
                   </div>
@@ -51,7 +52,7 @@ export default function ContactPage() {
                   </svg>
                   <div>
                     <h3 className="font-semibold text-brand-text-heading mb-1">WhatsApp</h3>
-                    <a href="https://wa.me/34642029572" target="_blank" rel="noopener noreferrer" className="text-brand-text-body hover:text-brand-accent">
+                    <a href="https://wa.me/34642029572" target="_blank" rel="noopener noreferrer" className="text-brand-text-body hover:text-brand-accent" aria-label="Contactar por WhatsApp: +34 642 029 572">
                       +34 642 029 572
                     </a>
                   </div>

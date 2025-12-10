@@ -1,6 +1,5 @@
-'use client';
-
-import { FaMapMarkedAlt } from 'react-icons/fa';
+// Server component - no 'use client' needed
+// Using inline SVG instead of react-icons to avoid client-side JavaScript
 
 interface ServiceArea {
   title: string;
@@ -12,6 +11,12 @@ interface ServiceAreasProps {
   intro?: string;
   areas: ServiceArea[];
 }
+
+const MapIcon = () => (
+  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+  </svg>
+);
 
 export default function ServiceAreas({ 
   title = "Áreas de Servicio",
@@ -36,7 +41,7 @@ export default function ServiceAreas({
             <div key={index} className="flex gap-4">
               <div className="flex-shrink-0">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-brand-secondary/10 text-brand-secondary">
-                  <FaMapMarkedAlt className="w-6 h-6" />
+                  <MapIcon />
                 </div>
               </div>
               <div className="flex-1">

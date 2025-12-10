@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContentFiles, parseContentFileName } from '@/lib/content-utils';
+import { getAllContentFiles, parseContentFileName, getLegalPages } from '@/lib/content-utils';
+import fs from 'fs';
+import path from 'path';
 
 function formatDate(date: Date): string {
   const year = date.getFullYear();
@@ -30,6 +32,39 @@ function countPagesByCategory(contentFiles: ReturnType<typeof getAllContentFiles
   }).length;
 }
 
+function countReformasComercialesPages(): number {
+  const appDir = path.join(process.cwd(), 'app');
+  if (!fs.existsSync(appDir)) {
+    return 0;
+  }
+  
+  // Known reformas comerciales sublandings
+  const reformasComercialesSlugs = [
+    'reformas-comerciales', // Hub page
+    'reformas-oficinas',
+    'locales-comerciales-retail',
+    'restaurantes-bares',
+    'clinicas-centros-sanitarios',
+    'gimnasios-centros-deportivos',
+    'hoteles-alojamientos',
+  ];
+  
+  // Count pages in each reformas comerciales directory
+  let count = 0;
+  for (const slug of reformasComercialesSlugs) {
+    const dir = path.join(appDir, slug);
+    if (fs.existsSync(dir)) {
+      const pagePath = path.join(dir, 'page.tsx');
+      const pagePathJs = path.join(dir, 'page.js');
+      if (fs.existsSync(pagePath) || fs.existsSync(pagePathJs)) {
+        count++;
+      }
+    }
+  }
+  
+  return count;
+}
+
 export async function GET(request: NextRequest) {
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   const host = request.headers.get('host') || 'localhost:3000';
@@ -41,9 +76,10 @@ export async function GET(request: NextRequest) {
   const reformasIntegralesCount = countPagesByCategory(contentFiles, '01');
   const reformasEstanciaCount = countPagesByCategory(contentFiles, '02');
   const serviciosTecnicosCount = countPagesByCategory(contentFiles, '03');
-  const staticPagesCount = 7; // Contacto, Sobre Nosotros, Proyectos, Áreas de Servicio, Privacidad, Aviso Legal, Cookies
+  const reformasComercialesCount = countReformasComercialesPages();
+  const staticPagesCount = getLegalPages().length; // Count only legal/informational pages
   
-  const totalPages = reformasIntegralesCount + reformasEstanciaCount + serviciosTecnicosCount + staticPagesCount;
+  const totalPages = reformasIntegralesCount + reformasEstanciaCount + serviciosTecnicosCount + reformasComercialesCount + staticPagesCount;
   
   // List of all sitemaps
   const sitemaps = [
@@ -66,7 +102,13 @@ export async function GET(request: NextRequest) {
       pageCount: serviciosTecnicosCount,
     },
     {
-      loc: `${baseUrl}/sitemap-static.xml`,
+      loc: `${baseUrl}/sitemap-reformas-comerciales.xml`,
+      lastmod: now,
+      name: 'Reformas Comerciales',
+      pageCount: reformasComercialesCount,
+    },
+    {
+      loc: `${baseUrl}/sitemap-legal.xml`,
       lastmod: now,
       name: 'Información y Legal',
       pageCount: staticPagesCount,
@@ -202,7 +244,7 @@ ${sitemaps.map(sitemap => `  <sitemap>
       font-size: 14px;
     }
     td a {
-      color: #C4572f;
+      color: #B84A2A;
       text-decoration: none;
     }
     td a:hover {
@@ -215,7 +257,7 @@ ${sitemaps.map(sitemap => `  <sitemap>
       font-size: 14px;
     }
     .nav-breadcrumb a {
-      color: #C4572f;
+      color: #B84A2A;
       text-decoration: none;
     }
     .nav-breadcrumb a:hover {
@@ -287,6 +329,7 @@ ${sitemaps.map(sitemap => `  <sitemap>
         • Reformas Integrales: <strong>${reformasIntegralesCount}</strong> páginas<br>
         • Reformas por Estancia: <strong>${reformasEstanciaCount}</strong> páginas<br>
         • Servicios Técnicos: <strong>${serviciosTecnicosCount}</strong> páginas<br>
+        • Reformas Comerciales: <strong>${reformasComercialesCount}</strong> páginas<br>
         • Información y Legal: <strong>${staticPagesCount}</strong> páginas
       </p>
     </div>

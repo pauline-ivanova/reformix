@@ -25,6 +25,111 @@ function formatDate(date: Date): string {
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
 
+/**
+ * Known servicios técnicos pages (based on servicios-tecnicos hub page)
+ * This includes all pages that are part of servicios técnicos category
+ */
+const SERVICIOS_TECNICOS_SLUGS = new Set([
+  'servicios-tecnicos', // Hub page
+  'aislamiento-termico-acustico',
+  'pladur',
+  'carpinteria',
+  'fontaneria',
+  'electricidad',
+  'pintura-interior',
+  'albanileria',
+  'calefaccion-climatizacion',
+  'impermeabilizaciones',
+]);
+
+/**
+ * Gets all static pages from app/ that are servicios técnicos pages
+ * This includes both pages with category 03 content files and static-only pages
+ */
+function getCategory03StaticPages(): Array<{
+  slug: string;
+  lastModified: Date;
+  title?: string;
+}> {
+  const staticPages: Array<{
+    slug: string;
+    lastModified: Date;
+    title?: string;
+  }> = [];
+  
+  const appDir = path.join(process.cwd(), 'app');
+
+  // Directories to exclude
+  const excludeDirs = [
+    'api',
+    'components',
+    '[slug]',
+    'sitemap',
+    'sitemap_index.xml',
+    'sitemap-reformas-integrales.xml',
+    'sitemap-reformas-estancia.xml',
+    'sitemap-servicios-tecnicos.xml',
+    'sitemap-legal.xml',
+    'sitemap.xml',
+    'site-map',
+    '_next',
+  ];
+
+  function scanDirectory(dir: string, baseSlug: string = ''): void {
+    if (!fs.existsSync(dir)) {
+      return;
+    }
+
+    const items = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const item of items) {
+      // Skip hidden files and directories
+      if (item.name.startsWith('.')) {
+        continue;
+      }
+
+      // Skip excluded directories
+      if (excludeDirs.includes(item.name)) {
+        continue;
+      }
+
+      const fullPath = path.join(dir, item.name);
+
+      if (item.isDirectory()) {
+        // Recursively scan subdirectories
+        const newSlug = baseSlug ? `${baseSlug}/${item.name}` : item.name;
+        scanDirectory(fullPath, newSlug);
+      } else if (item.name === 'page.tsx' || item.name === 'page.js') {
+        // Found a page file
+        const slug = baseSlug || '';
+        
+        // Include if it's a known servicios técnicos page
+        if (slug && SERVICIOS_TECNICOS_SLUGS.has(slug)) {
+          // Get file modification date
+          let lastModified: Date;
+          try {
+            const stats = fs.statSync(fullPath);
+            lastModified = stats.mtime;
+          } catch {
+            lastModified = new Date();
+          }
+
+          staticPages.push({
+            slug,
+            lastModified,
+            title: slug.split('-').map(word => 
+              word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' '),
+          });
+        }
+      }
+    }
+  }
+
+  scanDirectory(appDir);
+  return staticPages;
+}
+
 export async function GET(request: NextRequest) {
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   const host = request.headers.get('host') || 'localhost:3000';
@@ -40,12 +145,77 @@ export async function GET(request: NextRequest) {
     title?: string;
   }> = [];
 
-  // Add category 03 pages (Servicios Técnicos)
+  // Get all static pages from app/ that are servicios técnicos
+  const staticPages = getCategory03StaticPages();
+  const staticPageSlugs = new Set(staticPages.map(p => p.slug));
+  const addedSlugs = new Set<string>();
+
+  // First, add the hub page (servicios-tecnicos) if it exists
+  // Prefer static page over content file
+  const hubPage = staticPages.find(p => p.slug === 'servicios-tecnicos');
+  if (hubPage) {
+    routes.push({
+      url: `${baseUrl}/${hubPage.slug}`,
+      lastModified: hubPage.lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8, // Hub page has slightly higher priority
+      title: hubPage.title || 'Servicios Técnicos',
+    });
+    addedSlugs.add('servicios-tecnicos');
+  } else {
+    // If no static page, check for content file
+    const hubContentFile = contentFiles.find(file => {
+      const parsed = parseContentFileName(file.slug);
+      return parsed && parsed.category === '03' && parsed.slug === 'servicios-tecnicos';
+    });
+    if (hubContentFile) {
+      const parsed = parseContentFileName(hubContentFile.slug);
+      if (parsed) {
+        const filePath = path.join(contentDirectory, `${hubContentFile.slug}.md`);
+        routes.push({
+          url: `${baseUrl}/${parsed.slug}`,
+          lastModified: getFileModDate(filePath),
+          changeFrequency: 'monthly',
+          priority: 0.8,
+          title: hubContentFile.metadata.title || 'Servicios Técnicos',
+        });
+        addedSlugs.add('servicios-tecnicos');
+      }
+    }
+  }
+
+  // Then, add all other static pages from app/ (they take priority over content files)
+  staticPages.forEach(staticPage => {
+    // Skip hub page (already added)
+    if (staticPage.slug === 'servicios-tecnicos') {
+      return;
+    }
+
+    routes.push({
+      url: `${baseUrl}/${staticPage.slug}`,
+      lastModified: staticPage.lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      title: staticPage.title || staticPage.slug.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' '),
+    });
+    addedSlugs.add(staticPage.slug);
+  });
+
+  // Finally, add category 03 content files that don't have static pages
   contentFiles.forEach((file) => {
     const parsed = parseContentFileName(file.slug);
     
     if (parsed && parsed.category === '03') {
       const slug = parsed.slug;
+      
+      // Skip if already added as static page
+      if (addedSlugs.has(slug)) {
+        return;
+      }
+      
+      // Use content file
       const filePath = path.join(contentDirectory, `${file.slug}.md`);
       routes.push({
         url: `${baseUrl}/${slug}`,
@@ -56,6 +226,7 @@ export async function GET(request: NextRequest) {
           word.charAt(0).toUpperCase() + word.slice(1)
         ).join(' '),
       });
+      addedSlugs.add(slug);
     }
   });
 
@@ -129,7 +300,7 @@ ${routes.map(entry => `  <url>
       font-size: 14px;
     }
     .nav-breadcrumb a {
-      color: #C4572f;
+      color: #B84A2A;
       text-decoration: none;
     }
     .nav-breadcrumb a:hover {

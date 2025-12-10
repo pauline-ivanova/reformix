@@ -1,21 +1,115 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
-import AboutSection from "@/app/components/blocks/AboutSection";
-import ServicesSection from "@/app/components/blocks/ServicesSection";
-import ProcessSection from "@/app/components/blocks/ProcessSection";
-import CompanySection from "@/app/components/blocks/CompanySection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
-import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
-import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
-import ServiceAreas from "@/app/components/blocks/ServiceAreas";
-import ContactSection from "@/app/components/blocks/ContactSection";
+import HeroPreload from "@/app/components/common/HeroPreload";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import dynamic from 'next/dynamic';
+import { Metadata } from 'next';
+import { generateStandardMetadata } from '@/lib/metadata-utils';
+import { 
+  reformasIntegralesPageData as reformasIntegralesData,
+  reformasPorEstanciaPageData as reformasPorEstanciaData,
+  serviciosTecnicosPageData as serviciosTecnicosData,
+  reformasComercialesPageData as reformasComercialesData
+} from '@/lib/page-data';
 
-import {
-  DocumentCheckIcon,
-  UserCircleIcon,
-  CalendarDaysIcon,
-  ShieldCheckIcon,
-} from '@heroicons/react/24/solid';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+
+export const metadata: Metadata = {
+  title: "Reformas en Barcelona y Vallès Occidental | Reformix",
+  description: "Empresa de reformas en Barcelona y Vallès Occidental. Reformas integrales y por estancia con presupuestos cerrados y garantía por escrito. ¡Pide presupuesto!",
+  ...generateStandardMetadata({
+    title: "Reformas en Barcelona y Vallès Occidental | Reformix",
+    description: "Empresa de reformas en Barcelona y Vallès Occidental. Reformas integrales y por estancia con presupuestos cerrados y garantía por escrito. ¡Pide presupuesto!",
+    url: baseUrl,
+    pagePath: '/',
+    image: '/images/hero-bg.webp', // Hero image for social sharing
+    keywords: [
+      'reformas Barcelona',
+      'reformas integrales',
+      'empresa de reformas',
+      'reformas Sabadell',
+      'Vallès Occidental',
+      'rehabilitación',
+      'presupuesto cerrado',
+      'garantía por escrito'
+    ],
+  }),
+};
+
+// AboutSection is below fold - defer JS loading to reduce TBT and improve TTI
+const AboutSection = dynamic(() => import("@/app/components/blocks/AboutSection"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-20 bg-brand-primary" />, // Placeholder to prevent layout shift
+});
+
+// ServicesSection is below fold - defer JS loading to reduce TBT and improve TTI
+const ServicesSection = dynamic(() => import("@/app/components/blocks/ServicesSection"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+// Below-fold components - defer JS loading to improve Time to Interactive
+const ProcessSection = dynamic(() => import("@/app/components/blocks/ProcessSection"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const CompanySection = dynamic(() => import("@/app/components/blocks/CompanySection"), {
+  ssr: false, // Client component with heavy JS, defer loading
+  loading: () => <div className="py-20 bg-brand-primary" />, // Placeholder
+});
+
+const WhyChooseUs = dynamic(() => import("@/app/components/blocks/WhyChooseUs"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const TestimonialsCarousel = dynamic(() => import("@/app/components/blocks/TestimonialsCarousel"), {
+  ssr: false, // Carousel with JS, defer loading
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const FAQTwoColumn = dynamic(() => import("@/app/components/blocks/FAQTwoColumn"), {
+  ssr: false, // Interactive component, defer loading
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const ServiceAreas = dynamic(() => import("@/app/components/blocks/ServiceAreas"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const ContactSection = dynamic(() => import("@/app/components/blocks/ContactSection"), {
+  ssr: false, // Defer to reduce initial JS bundle
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+// Use inline SVG instead of icons to avoid loading @heroicons/react bundle
+// This reduces initial JavaScript bundle size significantly
+const DocumentIcon = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+  </svg>
+);
+
+const UserIcon = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
 
 export default async function HomePage() {
   const features = [
@@ -24,7 +118,7 @@ export default async function HomePage() {
       description: "Te entregamos un presupuesto cerrado y transparente. Sin costes ocultos ni sorpresas en la factura final.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <DocumentCheckIcon className="w-8 h-8" />
+          <DocumentIcon />
         </div>
       ),
     },
@@ -33,7 +127,7 @@ export default async function HomePage() {
       description: "Olvídate de coordinar gremios. Seremos tu único punto de contacto y nos responsabilizaremos de todo el proyecto.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <UserCircleIcon className="w-8 h-8" />
+          <UserIcon />
         </div>
       ),
     },
@@ -42,7 +136,7 @@ export default async function HomePage() {
       description: "Planificamos cada fase con rigor para cumplir las fechas acordadas y que puedas disfrutar de tu hogar cuanto antes.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <CalendarDaysIcon className="w-8 h-8" />
+          <CalendarIcon />
         </div>
       ),
     },
@@ -51,7 +145,7 @@ export default async function HomePage() {
       description: "Tu reforma está protegida. Nuestro trabajo tiene una garantía real por escrito y un servicio postventa a tu disposición.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <ShieldCheckIcon className="w-8 h-8" />
+          <ShieldIcon />
         </div>
       ),
     },
@@ -59,6 +153,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <HeroPreload imagePath="/images/hero-bg.webp" />
       <Hero
         title="Empresa de Reformas en Barcelona y Vallès Occidental"
         titleLines={[
@@ -84,6 +179,7 @@ export default async function HomePage() {
       <ServicesSection
         title="Servicios de Reformas en Barcelona y Vallès Occidental"
         subtitle="Desde una reforma integral llave en mano que transforme por completo tu hogar, hasta los detalles técnicos que garantizan su confort. Descubre cómo podemos mejorar tu calidad de vida."
+        columns={2}
         services={[
           {
             title: "Reformas Integrales",
@@ -94,8 +190,8 @@ export default async function HomePage() {
               "Rehabilitación de casas",
               "Proyectos de interiorismo"
             ],
-            image: "/images/reforma-integral-salon.webp",
-            imageAlt: "Salón moderno tras reforma integral en Barcelona",
+            image: reformasIntegralesData.image,
+            imageAlt: reformasIntegralesData.imageAlt,
             ctaText: "Ver más sobre reformas integrales",
             ctaHref: "/reformas-integrales"
           },
@@ -108,8 +204,8 @@ export default async function HomePage() {
               "Reforma de baño",
               "Reforma de salón o habitaciones"
             ],
-            image: "/images/reforma-cocina-moderna.webp",
-            imageAlt: "Cocina moderna tras reforma en Barcelona",
+            image: reformasPorEstanciaData.image,
+            imageAlt: reformasPorEstanciaData.imageAlt,
             ctaText: "Descubre las reformas por estancia",
             ctaHref: "/reformas-por-estancia"
           },
@@ -122,8 +218,8 @@ export default async function HomePage() {
               "Carpintería, pladur y pintura decorativa",
               "Aislamiento térmico y acústico"
             ],
-            image: "/images/servicios-tecnicos-planos.webp",
-            imageAlt: "Servicios técnicos de reforma - planos y herramientas",
+            image: serviciosTecnicosData.image,
+            imageAlt: serviciosTecnicosData.imageAlt,
             ctaText: "Conoce nuestros servicios técnicos",
             ctaHref: "/servicios-tecnicos"
           },
@@ -136,10 +232,10 @@ export default async function HomePage() {
               "Retail fit-out",
               "Adaptación de espacios para clínicas, restaurantes y más"
             ],
-            image: "/images/reforma-oficinas.webp",
-            imageAlt: "Oficina moderna tras reforma comercial en Barcelona",
+            image: reformasComercialesData.image,
+            imageAlt: reformasComercialesData.imageAlt,
             ctaText: "Ver soluciones para empresas",
-            ctaHref: "/contacto"
+            ctaHref: "/reformas-comerciales"
           }
         ]}
       />
@@ -150,8 +246,8 @@ export default async function HomePage() {
       <CompanySection />
       <WhyChooseUs />
       <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      {(() => {
+        const faqs = [
           {
             question: "¿Cuánto cuesta una reforma de baño en el área de Barcelona?",
             answer: "El precio varía según los metros y calidades, pero para darte transparencia, en Reformix Barcelona siempre ofrecemos presupuestos cerrados con un desglose completo por partidas."
@@ -176,8 +272,15 @@ export default async function HomePage() {
             question: "¿Ofrecéis garantía por escrito y servicio postventa?",
             answer: "Por supuesto. Todos nuestros trabajos están garantizados por escrito y ofrecemos un servicio postventa para tu total tranquilidad."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {

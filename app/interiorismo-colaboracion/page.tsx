@@ -6,6 +6,8 @@ import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -19,11 +21,11 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Ejecución de Proyectos de Interiorismo en Barcelona",
-  description: "Gestionamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona. Tu visión, ejecutada a la perfección por nuestro equipo.",
+  title: "Interiorismo en Barcelona y Vallès | Reformix",
+  description: "Ejecutamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona y Vallès. Tu visión, ejecutada a la perfección. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Ejecución de Proyectos de Interiorismo en Barcelona",
-    description: "Gestionamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona. Tu visión, ejecutada a la perfección por nuestro equipo.",
+    title: "Interiorismo en Barcelona y Vallès | Reformix",
+    description: "Ejecutamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona y Vallès. Tu visión, ejecutada a la perfección. ¡Pide presupuesto!",
     url: "https://reformix.barcelona/interiorismo-colaboracion",
     pagePath: "/interiorismo-colaboracion",
     keywords: ["proyectos interiorismo Barcelona", "ejecución interiorismo", "colaboración arquitectos", "ejecución proyectos diseño"],
@@ -144,13 +146,12 @@ export default async function InteriorismoColaboracionPage() {
           text: "Contactar para Colaborar",
           href: "/contacto"
         }}
-        backgroundImage="/images/reforma-oficinas.webp"
+        backgroundImage="/images/proyectos-de-interiorismo.webp"
       />
       <FeatureGrid
-        title="Un Gran Diseño Merece una Ejecución a su Altura"
-        subtitle="Has invertido tu talento y tu tiempo en crear un proyecto único para tu cliente. Pero ahora llega el momento crítico: la obra. La elección de una empresa constructora que no entienda tu visión puede convertir un sueño en una fuente constante de problemas."
         features={features}
         columns={4}
+        disableFeatureHeadings
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
@@ -167,11 +168,14 @@ export default async function InteriorismoColaboracionPage() {
         subtitle="Nuestra meta es simple: hacer que tus proyectos brillen y tu trabajo sea más sencillo. Al colaborar con nosotros, no solo garantizas una ejecución perfecta, sino que ganas un aliado estratégico."
         features={benefits}
         columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
       />
       <WhyChooseUs />
       <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿El presupuesto es realmente cerrado? ¿Qué pasa con los imprevistos?",
             answer: "Trabajamos con presupuesto cerrado sobre mediciones y proyecto ejecutivo. Si aparece un imprevisto no contemplado (vicio oculto), lo documentamos, proponemos opciones con coste/impacto y no ejecutamos nada sin tu aprobación por escrito."
@@ -196,8 +200,32 @@ export default async function InteriorismoColaboracionPage() {
             question: "¿Cómo gestionáis plazos y penalizaciones por retraso?",
             answer: "Planificamos con cronograma detallado y puntos de control. Si tu contrato exige penalizaciones, podemos contemplarlas en acuerdo específico siempre que el planning y hitos estén consensuados desde el inicio."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Ejecución de Proyectos de Interiorismo en Barcelona",
+          description: "Gestionamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona. Tu visión, ejecutada a la perfección por nuestro equipo.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Interior Design Execution',
+          url: '/interiorismo-colaboracion',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Interiorismo y Colaboración', url: '/interiorismo-colaboracion' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {

@@ -17,6 +17,7 @@ interface ServicesSectionProps {
   titleLines?: string[];
   subtitle?: string;
   services: Service[];
+  columns?: 2 | 3;
 }
 
 export default function ServicesSection({
@@ -24,6 +25,7 @@ export default function ServicesSection({
   titleLines,
   subtitle,
   services,
+  columns = 3,
 }: ServicesSectionProps) {
   // Default title lines for the specific long title
   const defaultTitleLines = title === 'Servicios de Reformas en Barcelona y Vallès Occidental' 
@@ -78,7 +80,7 @@ export default function ServicesSection({
             {subtitle}
           </p>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className={`grid grid-cols-1 ${columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-8 lg:gap-12`}>
           {services.map((service, index) => (
             <div
               key={index}
@@ -91,7 +93,9 @@ export default function ServicesSection({
                   alt={service.imageAlt}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes={columns === 2 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
+                  priority={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
                 />
               </div>
               
@@ -108,24 +112,26 @@ export default function ServicesSection({
                 </p>
                 
                 {/* Services List */}
-                <ul className="mb-6 space-y-2">
-                  {service.services.map((item, itemIndex) => (
-                    <li key={itemIndex} className="flex items-start">
-                      <svg
-                        className="w-5 h-5 text-brand-primary mr-2 mt-0.5 flex-shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <span className="text-brand-text-body">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                {service.services && service.services.length > 0 && (
+                  <ul className="mb-6 space-y-2">
+                    {service.services.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start">
+                        <svg
+                          className="w-5 h-5 text-brand-primary mr-2 mt-0.5 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className="text-brand-text-body">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 
                 {/* CTA Button */}
                 <Link

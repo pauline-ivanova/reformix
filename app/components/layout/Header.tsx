@@ -1,16 +1,49 @@
 'use client'
 
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Dialog, Menu, Transition } from '@headlessui/react'
-import {
-  Bars3Icon,
-  XMarkIcon,
-  HomeIcon,
-  WrenchScrewdriverIcon,
-  HomeModernIcon,
-  ChevronDownIcon,
-} from '@heroicons/react/24/solid'
+import Image from 'next/image'
+
+// Inline SVG icons to avoid loading @heroicons/react bundle
+const Bars3Icon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+  </svg>
+)
+
+const HomeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+  </svg>
+)
+
+const WrenchScrewdriverIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655-5.653a2.548 2.548 0 00-4.005 4.005l4.655 5.653m0 0l3.59-3.59m0 0a2.548 2.548 0 004.005-4.005m-4.005 4.005V9.75" />
+  </svg>
+)
+
+const HomeModernIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 3.75l-1.5.545M18.75 3l-1.5.545m0 3.75l-1.5.545M9.75 9l-1.5.545M10.5 7.5l-1.5.545M4.5 21h9M3.75 9H7.5m-1.5 3h6m-6 3h6m-3-9v3m0 0v3m0-3h3m-3 0h3" />
+  </svg>
+)
+
+const BuildingOfficeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 21h16.5M4.5 3h15m-15 18v-8.25c0-.621.504-1.125 1.125-1.125h12.75c.621 0 1.125.504 1.125 1.125V21M4.5 3v8.25m0-8.25H3m1.5 0h15m-15 0v8.25m0-8.25H3m13.5 0v8.25m0-8.25h-3m3 0h3m-9 0v8.25m0-8.25h-1.5m1.5 0h1.5" />
+  </svg>
+)
+
+// Dynamic import for DesktopMenu - it uses heavy @headlessui/react, defer loading
+import dynamic from 'next/dynamic';
+import MobileMenu from './MobileMenu';
+
+// Defer DesktopMenu loading until after page is interactive to reduce TBT
+const DesktopMenu = dynamic(() => import('./DesktopMenu'), {
+  ssr: false, // Defer @headlessui/react bundle loading
+  loading: () => null, // No placeholder to avoid any JS execution
+});
 
 const navigation = [
   { 
@@ -42,37 +75,72 @@ const navigation = [
     icon: WrenchScrewdriverIcon,
     subservices: [
       { name: 'Aislamiento Térmico y Acústico', href: '/aislamiento-termico-acustico' },
+      { name: 'Pladur y Falsos Techos', href: '/pladur' },
       { name: 'Carpintería', href: '/carpinteria' },
       { name: 'Fontanería', href: '/fontaneria' },
       { name: 'Electricidad', href: '/electricidad' },
       { name: 'Pintura Interior', href: '/pintura-interior' },
+      { name: 'Albañilería', href: '/albanileria' },
+      { name: 'Calefacción y Climatización', href: '/calefaccion-climatizacion' },
+      { name: 'Impermeabilizaciones', href: '/impermeabilizaciones' },
+    ],
+  },
+  { 
+    name: 'Reformas Comerciales', 
+    href: '/reformas-comerciales',
+    icon: BuildingOfficeIcon,
+    subservices: [
+      { name: 'Reformas de Oficinas', href: '/reformas-oficinas' },
+      { name: 'Locales Comerciales y Retail', href: '/locales-comerciales-retail' },
+      { name: 'Restaurantes y Bares', href: '/restaurantes-bares' },
+      { name: 'Clínicas y Centros Sanitarios', href: '/clinicas-centros-sanitarios' },
+      { name: 'Gimnasios y Centros Deportivos', href: '/gimnasios-centros-deportivos' },
+      { name: 'Hoteles y Alojamientos', href: '/hoteles-alojamientos' },
     ],
   },
 ]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [shouldLoadDesktopMenu, setShouldLoadDesktopMenu] = useState(false)
 
+  // Defer DesktopMenu loading until after initial render to reduce TBT
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+    // Only load on desktop viewport
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      // Load after a short delay to allow critical content to render first
+      // Use requestIdleCallback for better performance, but with shorter timeout
+      const loadMenu = () => {
+        setShouldLoadDesktopMenu(true);
+      };
+
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(loadMenu, { timeout: 1500 });
+      } else {
+        // Fallback: load after DOMContentLoaded
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(loadMenu, 500);
+          });
+        } else {
+          setTimeout(loadMenu, 500);
+        }
+      }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
-    }`}>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5 flex items-center">
-            <img
+            <Image
               src="/reformix-logo.svg"
               alt="Reformix Barcelona"
+              width={150}
+              height={40}
               className="h-10 w-auto"
+              priority
             />
           </Link>
         </div>
@@ -83,178 +151,30 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Abrir menú principal</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-10">
-          {navigation.map((item) => (
-            <Menu key={item.name} as="div" className="relative">
-              <Menu.Button className="group flex items-center gap-x-1.5 text-sm font-semibold leading-6 text-brand-text-heading hover:text-brand-primary transition-all duration-200 relative">
-                {item.name}
-                <ChevronDownIcon className="h-3.5 w-3.5 transition-transform duration-200 group-hover:rotate-180" aria-hidden="true" />
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-brand-primary transition-all duration-200 group-hover:w-full"></span>
-              </Menu.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 translate-y-2 scale-95"
-                enterTo="opacity-100 translate-y-0 scale-100"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-y-0 scale-100"
-                leaveTo="opacity-0 translate-y-2 scale-95"
-              >
-                <Menu.Items className="absolute left-0 z-10 mt-3 w-64 origin-top-left rounded-xl bg-white shadow-xl ring-1 ring-gray-900/5 focus:outline-none overflow-hidden">
-                  <div className="py-2">
-                    {item.subservices.map((subservice) => (
-                      <Menu.Item key={subservice.name}>
-                        {({ active }) => (
-                          <Link
-                            href={subservice.href}
-                            className={`group/item relative flex items-center px-5 py-3 text-sm transition-all duration-150 ${
-                              active 
-                                ? 'bg-gradient-to-r from-brand-accent-neutral to-transparent text-brand-primary font-medium' 
-                                : 'text-gray-700 hover:text-brand-primary'
-                            }`}
-                          >
-                            <span className={`absolute left-0 top-0 bottom-0 w-1 bg-brand-primary transition-all duration-200 ${
-                              active ? 'opacity-100' : 'opacity-0 group-hover/item:opacity-50'
-                            }`}></span>
-                            <span className="flex-1">{subservice.name}</span>
-                            <svg 
-                              className={`w-4 h-4 transition-transform duration-200 ${
-                                active ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0 group-hover/item:translate-x-0 group-hover/item:opacity-100'
-                              }`}
-                              fill="none" 
-                              viewBox="0 0 24 24" 
-                              stroke="currentColor"
-                            >
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </Link>
-                        )}
-                      </Menu.Item>
-                    ))}
-                    <div className="my-2 border-t border-gray-100"></div>
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href={item.href}
-                          className={`flex items-center px-5 py-3 text-sm font-semibold transition-all duration-150 ${
-                            active 
-                              ? 'bg-brand-primary text-white' 
-                              : 'text-brand-primary hover:bg-brand-accent-neutral'
-                          }`}
-                        >
-                          <span className="mr-2">
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                          </span>
-                          Ver todas las opciones
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
-          ))}
+        {/* Desktop menu - lazy loaded, only renders when visible, deferred until interactive */}
+        <div className="hidden lg:flex lg:gap-x-10 lg:flex-shrink-0">
+          {shouldLoadDesktopMenu && <DesktopMenu navigation={navigation} />}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:ml-6 lg:flex-shrink-0">
           <Link
             href="/contacto"
-            className="group relative rounded-lg bg-brand-primary px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:bg-brand-primary/95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary transition-all duration-200 overflow-hidden"
+            className="group relative rounded-lg bg-brand-primary px-4 py-2.5 xl:px-6 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:bg-brand-primary/95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary transition-all duration-200 overflow-hidden whitespace-nowrap"
           >
             <span className="relative z-10">Presupuesto Gratis</span>
             <span className="absolute inset-0 bg-gradient-to-r from-brand-accent to-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
           </Link>
         </div>
       </nav>
-      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
-        </Transition.Child>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300 transform"
-          enterFrom="translate-x-full"
-          enterTo="translate-x-0"
-          leave="ease-in duration-200 transform"
-          leaveFrom="translate-x-0"
-          leaveTo="translate-x-full"
-        >
-          <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm shadow-2xl">
-            <div className="flex items-center justify-between mb-8">
-              <Link href="/" className="-m-1.5 p-1.5 flex items-center" onClick={() => setMobileMenuOpen(false)}>
-                <img
-                  src="/reformix-logo.svg"
-                  alt="Reformix Barcelona"
-                  className="h-8 w-auto"
-                />
-              </Link>
-              <button
-                type="button"
-                className="-m-2.5 rounded-lg p-2.5 text-brand-text-heading hover:bg-brand-accent-neutral transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="sr-only">Cerrar menú</span>
-                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
-            </div>
-            <div className="space-y-1">
-              {navigation.map((item) => (
-                <div key={item.name} className="mb-4">
-                  <Link
-                    href={item.href}
-                    className="flex items-center justify-between rounded-xl px-4 py-3 text-base font-semibold leading-7 text-brand-text-heading hover:bg-brand-accent-neutral hover:text-brand-primary transition-all duration-200 group"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <span className="flex items-center gap-2">
-                      <item.icon className="h-5 w-5 text-brand-primary" />
-                      {item.name}
-                    </span>
-                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </Link>
-                  {item.subservices && item.subservices.length > 0 && (
-                    <div className="ml-6 mt-2 space-y-1 border-l-2 border-brand-accent-neutral pl-4">
-                      {item.subservices.map((subservice) => (
-                        <Link
-                          key={subservice.name}
-                          href={subservice.href}
-                          className="block rounded-lg px-4 py-2.5 text-sm leading-6 text-gray-600 hover:bg-brand-accent-neutral hover:text-brand-primary transition-all duration-200"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {subservice.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <Link
-                href="/contacto"
-                className="group relative rounded-lg bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg w-full block text-center transition-all duration-200 overflow-hidden"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <span className="relative z-10">Presupuesto Gratis</span>
-                <span className="absolute inset-0 bg-gradient-to-r from-brand-accent to-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
-              </Link>
-            </div>
-          </Dialog.Panel>
-        </Transition.Child>
-      </Dialog>
+      {mobileMenuOpen && (
+        <MobileMenu 
+          mobileMenuOpen={mobileMenuOpen} 
+          setMobileMenuOpen={setMobileMenuOpen}
+          navigation={navigation}
+        />
+      )}
     </header>
   )
 }

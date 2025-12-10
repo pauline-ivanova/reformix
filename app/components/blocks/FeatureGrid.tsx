@@ -7,10 +7,13 @@ interface Feature {
 }
 
 interface FeatureGridProps {
-  title?: string;
+  title?: string | ReactNode;
   subtitle?: string;
   features: Feature[];
   columns?: 2 | 3 | 4;
+  backgroundClassName?: string;
+  paddingClassName?: string;
+  disableFeatureHeadings?: boolean;
 }
 
 export default function FeatureGrid({
@@ -18,6 +21,9 @@ export default function FeatureGrid({
   subtitle,
   features,
   columns = 4,
+  backgroundClassName = "bg-white",
+  paddingClassName = "py-16",
+  disableFeatureHeadings = false,
 }: FeatureGridProps) {
   const gridCols = {
     2: 'md:grid-cols-2',
@@ -26,7 +32,7 @@ export default function FeatureGrid({
   };
 
   return (
-    <section className="relative py-16 bg-white overflow-hidden">
+    <section className={`relative ${paddingClassName} ${backgroundClassName} overflow-hidden border-0 outline-none`}>
       <div className="container mx-auto px-4 max-w-7xl">
         {title && (
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-text-heading">
@@ -49,7 +55,11 @@ export default function FeatureGrid({
                   {feature.icon}
                 </div>
               )}
-              {title ? (
+              {disableFeatureHeadings ? (
+                <p className="text-xl font-semibold mb-3 text-brand-text-heading">
+                  {feature.title}
+                </p>
+              ) : title ? (
                 <h3 className="text-xl font-semibold mb-3 text-brand-text-heading">
                   {feature.title}
                 </h3>

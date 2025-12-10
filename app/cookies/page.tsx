@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Política de cookies de Reformix Barcelona. Información sobre el uso de cookies en nuestro sitio web.',
   ...generateStandardMetadata({
     title: 'Política de Cookies | Reformix Barcelona',
-    description: 'Política de cookies de Reformix Barcelona.',
+    description: 'Política de cookies de Reformix Barcelona. Información sobre el uso de cookies en nuestro sitio web.',
     url: pageUrl,
     pagePath: '/cookies',
     robots: { index: true, follow: true },

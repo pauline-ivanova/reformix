@@ -1,11 +1,13 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import Image from "next/image";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -23,11 +25,11 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Servicio de Fontanería para Reformas en Barcelona",
-  description: "Renovamos la fontanería de tu hogar con materiales duraderos y soluciones eficientes. Garantizamos instalaciones sin fugas en Barcelona y Vallès Occidental.",
+  title: "Fontanería en Barcelona y Vallès Occidental | Reformix",
+  description: "Renovamos la instalación de fontanería en Barcelona y Vallès. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Servicio de Fontanería para Reformas en Barcelona",
-    description: "Renovamos la fontanería de tu hogar con materiales duraderos y soluciones eficientes. Garantizamos instalaciones sin fugas en Barcelona y Vallès Occidental.",
+    title: "Fontanería en Barcelona y Vallès Occidental | Reformix",
+    description: "Renovamos la instalación de fontanería en Barcelona y Vallès. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
     url: "https://reformix.barcelona/fontaneria",
     pagePath: "/fontaneria",
     keywords: ["servicios fontanería reformas", "fontanería Barcelona", "instalación fontanería", "renovación tuberías"],
@@ -94,15 +96,6 @@ export default async function FontaneriaPage() {
       ),
     },
     {
-      title: "Diseño a Medida para tu Comodidad",
-      description: "Planificamos contigo la ubicación de cada toma de agua y desagüe para que tu nuevo baño o cocina sean tan funcionales como los imaginas, sin limitaciones.",
-      icon: (
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <CogIcon className="w-8 h-8" />
-        </div>
-      ),
-    },
-    {
       title: "Prueba de Estanqueidad y Certificación",
       description: "Antes de tapar, realizamos una prueba de presión certificada. Te entregamos una instalación 100% fiable, garantizada por escrito y lista para décadas de uso sin preocupaciones.",
       icon: (
@@ -129,15 +122,6 @@ export default async function FontaneriaPage() {
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <HomeIcon className="w-8 h-8" />
-        </div>
-      ),
-    },
-    {
-      title: "Revalorización Real de tu Vivienda",
-      description: "Una instalación de fontanería y calefacción nueva y certificada es uno de los argumentos más sólidos en la venta o alquiler de una propiedad. Aumenta su valor de tasación.",
-      icon: (
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <ChartBarIcon className="w-8 h-8" />
         </div>
       ),
     },
@@ -212,18 +196,17 @@ export default async function FontaneriaPage() {
   return (
     <>
       <Hero
-        title="Servicio de Fontanería para tu Reforma Integral"
+        title="Servicio de Fontanería"
         titleLines={[
-          "Servicio de Fontanería",
-          "para tu Reforma Integral",
-          "en Barcelona y Vallès"
+          "Servicio de",
+          "Fontanería"
         ]}
-        subtitle="Instalaciones de agua sanitaria (fría y caliente), desagües y calefacción completamente nuevas. Garantizamos cero fugas y una presión óptima para tu confort en Barcelona y el Vallès Occidental."
+        subtitle="Renovamos por completo la instalación de fontanería de tu hogar con materiales duraderos y soluciones eficientes. Garantizamos instalaciones sin fugas y presión óptima para tu confort en Barcelona y el Vallès Occidental."
         primaryCTA={{
-          text: "Solicita Presupuesto de Fontanería",
+          text: "Solicitar Presupuesto",
           href: "/contacto"
         }}
-        backgroundImage="/images/hero-bg.webp"
+        backgroundImage="/images/fontaneria.webp"
       />
       <FeatureGrid
         title="Instalaciones de Fontanería Hechas para Durar"
@@ -279,27 +262,151 @@ export default async function FontaneriaPage() {
         columns={4}
       />
       <FeatureGrid
-        title="Una Instalación de Fontanería Nueva para tu Tranquilidad Futura"
+        title={
+          <>
+            Una Instalación de Fontanería Nueva
+            <br />
+            para tu Tranquilidad Futura
+          </>
+        }
         subtitle="No nos limitamos a cambiar tuberías. Diseñamos e instalamos una red de fontanería completamente nueva, eficiente y adaptada a tu estilo de vida, utilizando los mejores materiales del mercado."
         features={solutions}
-        columns={4}
+        columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
       />
       <FeatureGrid
-        title="Invierte en Fontanería, Gana en Calidad de Vida"
+        title={
+          <>
+            Invierte en Fontanería,
+            <br />
+            Gana en Calidad de Vida
+          </>
+        }
         subtitle="Renovar la instalación de fontanería no es un gasto, es una inversión directa en el confort, la salud y el valor de tu hogar. Disfruta de beneficios tangibles desde el primer día."
         features={benefits}
-        columns={4}
+        columns={3}
       />
       <FeatureGrid
-        title="Servicios Integrales de Fontanería para tu Reforma"
+        title={
+          <>
+            Servicios Integrales de Fontanería
+            <br />
+            para tu Reforma
+          </>
+        }
         subtitle="Desde la infraestructura básica hasta los detalles finales, cubrimos todas las áreas de la fontanería, calefacción y saneamiento para ofrecerte una solución completa y coordinada."
         features={services}
         columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <TestimonialsCarousel
+        title="La Tranquilidad de Saber que Todo Funciona Bien"
+        subtitle="Nuestros clientes no solo valoran la calidad de los materiales, sino la tranquilidad que les aporta una instalación bien hecha. Su confianza es nuestro mejor aval."
+        testimonials={[
+          {
+            text: "Vivíamos con el miedo de que el fregadero se atascara cada semana. Revisaron toda la red de desagüe y corrigieron pendientes y diámetros. Desde entonces, ni olores ni burbujas. Se nota cuando alguien sabe lo que hace.",
+            initials: "RV",
+            name: "Raúl V.",
+            location: "Badalona"
+          },
+          {
+            text: "En invierno el salón era un congelador y el pasillo un horno. Irina vino, midió cada estancia y nos recomendó el circuito adecuado. Instalaron radiadores nuevos y ahora la temperatura se reparte por igual. ¡Parece otra casa!",
+            initials: "GP",
+            name: "Gemma P.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Tenía la lavadora conectada a medias y siempre perdía unas gotas. Con Reformix revisaron todo, pusieron llaves de corte nuevas y dejaron el mueble sin un tubo a la vista. Por fin una cocina ordenada… y seca.",
+            initials: "LC",
+            name: "Laura C.",
+            location: "Terrassa"
+          },
+          {
+            text: "Nos animamos a instalar aerotermia y fue la mejor decisión. El agua caliente sale al instante, la casa se mantiene templada y el consumo ha bajado bastante. Además, el equipo apenas se oye. Muy recomendable.",
+            initials: "JT",
+            name: "Jordi T.",
+            location: "Castelldefels"
+          },
+          {
+            text: "Las tuberías eran de cobre antiguo y el agua apenas salía. Los técnicos las cambiaron sin romper media casa y el cambio se nota desde el primer día. La presión es constante y el agua sale limpia, sin ese sabor metálico de antes.",
+            initials: "NS",
+            name: "Núria S.",
+            location: "Barcelona (Poble-sec)"
+          }
+        ]}
+      />
+      <FeatureGrid
+        title={
+          <>
+            Tu Nueva Fontanería en 6 Pasos:
+            <br />
+            Seguridad y Precisión
+          </>
+        }
+        subtitle="Hemos diseñado un proceso de trabajo que garantiza la máxima calidad en cada etapa, desde el diseño inicial hasta la certificación final. Así trabajamos para asegurar tu total tranquilidad."
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
+        features={[
+          {
+            title: "Diseño y Planificación del Circuito",
+            description: "Analizamos tus necesidades (número de baños, tipo de grifería, calefacción) y diseñamos sobre plano la distribución óptima de las tuberías y desagües.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-1.webp" alt="Paso 1" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+          {
+            title: "Desmontaje de la Instalación Antigua",
+            description: "Retiramos con cuidado toda la instalación existente, desde las tuberías de plomo o hierro hasta los sanitarios y radiadores viejos, gestionando los residuos.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-2.webp" alt="Paso 2" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+          {
+            title: "Ejecución de Rozas e Instalación",
+            description: "Realizamos las rozas (regatas) necesarias con precisión y montamos toda la nueva red de tuberías de agua y desagües, así como los circuitos de calefacción.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-3.webp" alt="Paso 3" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+          {
+            title: "Prueba de Estanqueidad (Presión)",
+            description: "Antes de cerrar las paredes, llenamos el circuito de agua a una presión superior a la normal durante 24 horas. Es nuestra garantía de que no hay ni una sola fuga.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-4.webp" alt="Paso 4" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+          {
+            title: "Albañilería y Acabados",
+            description: "Una vez superada la prueba, nuestros albañiles tapan las rozas y preparan las paredes y suelos para los acabados finales (alicatado, pintura).",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-5.webp" alt="Paso 5" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+          {
+            title: "Instalación de Sanitarios y Grifería",
+            description: "Con los acabados listos, procedemos al montaje final de todos los sanitarios, platos de ducha, muebles de baño, radiadores y griferías, realizando las últimas comprobaciones.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-24 h-24 rounded-lg overflow-hidden">
+                <Image src="/images/fontaneria-paso-6.webp" alt="Paso 6" width={96} height={96} className="w-full h-full object-cover" />
+              </div>
+            ),
+          },
+        ]}
+        columns={3}
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Es realmente necesario cambiar toda la fontanería si solo reformo el baño?",
             answer: "Si tu vivienda tiene más de 20-25 años, es muy recomendable. Las tuberías antiguas (hierro, plomo) se degradan y pueden causar fugas graves que arruinarían tu reforma nueva. Cambiar todo a la vez es más seguro y, a la larga, más económico que reparar una fuga tras otra."
@@ -324,8 +431,33 @@ export default async function FontaneriaPage() {
             question: "¿La instalación de calefacción por radiadores está incluida?",
             answer: "Sí, forma parte de nuestros servicios de fontanería. Diseñamos e instalamos el circuito completo de calefacción y la colocación de los radiadores. Si estás pensando en sistemas más eficientes como la aerotermia, también podemos asesorarte e instalarlo."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Servicio de Fontanería",
+          description: "Renovamos por completo la instalación de fontanería de tu hogar con materiales duraderos y soluciones eficientes. Garantizamos instalaciones sin fugas y presión óptima.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Plumbing Installation',
+          url: '/fontaneria',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Servicios Técnicos', url: '/servicios-tecnicos' },
+          { name: 'Fontanería', url: '/fontaneria' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn titleLines={["Preguntas Frecuentes sobre", "Fontanería"]} items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {
@@ -378,9 +510,9 @@ export default async function FontaneriaPage() {
         buttonText="Pedir Presupuesto Detallado"
         buttonHref="/contacto"
         features={[
-          "Presupuesto sin compromiso",
-          "Asesoramiento técnico incluido",
-          "Garantía por escrito"
+          "Asesoramiento inicial gratuito",
+          "Visita y medición sin coste",
+          "Presupuesto detallado y cerrado"
         ]}
       />
     </>

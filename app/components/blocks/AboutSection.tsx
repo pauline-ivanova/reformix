@@ -7,17 +7,18 @@ interface AboutSectionProps {
 
 export default function AboutSection({ logoPath, text }: AboutSectionProps) {
   return (
-    <section className="relative py-20 bg-brand-primary text-white overflow-hidden z-10">
+    <section className="relative py-20 bg-brand-primary text-white overflow-hidden z-10 border-0 outline-none m-0 p-0">
       {/* Top Divider - White Triangle filling Top-Right */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10">
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-10 border-0 outline-none m-0 p-0">
         <svg 
           data-name="Layer 1" 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
-          className="relative block w-[calc(100%+1.3px)] h-[60px]"
+          className="relative block w-full h-[60px] border-0 outline-none"
+          style={{ display: 'block', margin: 0, padding: 0 }}
         >
-          <path d="M0,0 L1200,0 L1200,120 Z" fill="#ffffff" />
+          <path d="M0,0 L1200,0 L1200,120 Z" fill="#ffffff" stroke="none" />
         </svg>
       </div>
 
@@ -45,15 +46,16 @@ export default function AboutSection({ logoPath, text }: AboutSectionProps) {
       </div>
 
       {/* Bottom Divider - White Triangle filling Bottom-Left */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-10 border-0 outline-none m-0 p-0" style={{ bottom: '-1px' }}>
         <svg 
           data-name="Layer 1" 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1200 120" 
           preserveAspectRatio="none" 
-          className="relative block w-[calc(100%+1.3px)] h-[60px]"
+          className="relative block w-full h-[60px] border-0 outline-none"
+          style={{ display: 'block', margin: 0, padding: 0, border: 'none', outline: 'none', verticalAlign: 'bottom' }}
         >
-          <path d="M0,0 L0,120 L1200,120 Z" fill="#ffffff" />
+          <path d="M0,0 L0,120 L1200,120 Z" fill="#ffffff" stroke="none" strokeWidth="0" vectorEffect="non-scaling-stroke" />
         </svg>
       </div>
     </section>

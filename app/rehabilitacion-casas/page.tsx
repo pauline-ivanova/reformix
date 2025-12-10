@@ -6,6 +6,8 @@ import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -17,13 +19,16 @@ import {
   WrenchScrewdriverIcon,
   PaintBrushIcon,
   KeyIcon,
+  MagnifyingGlassCircleIcon,
+  DocumentTextIcon,
+  ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Rehabilitación Integral de Casas en Barcelona | Reformix",
+  title: "Rehabilitación de Casas en Barcelona | Reformix",
   description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Rehabilitación Integral de Casas en Barcelona | Reformix",
+    title: "Rehabilitación de Casas en Barcelona | Reformix",
     description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
     url: "https://reformix.barcelona/rehabilitacion-casas",
     pagePath: "/rehabilitacion-casas",
@@ -131,6 +136,63 @@ export default async function RehabilitacionCasasPage() {
     },
   ];
 
+  const processSteps = [
+    {
+      title: "Visita y Diagnóstico Estructural",
+      description: "Nuestra primera visita es clave. Un técnico evalúa el estado real de la estructura, la cubierta y la fachada para detectar posibles problemas y definir el alcance real de la intervención.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <MagnifyingGlassCircleIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Estudio Técnico y Presupuesto",
+      description: "Con el diagnóstico, elaboramos una memoria técnica detallada y un presupuesto cerrado que contempla todas las actuaciones necesarias, desde la cimentación hasta los acabados.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <DocumentTextIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Gestión de Licencia de Obra",
+      description: "La rehabilitación suele requerir una licencia de obra mayor. Nos encargamos de preparar y presentar el proyecto técnico en el ayuntamiento, gestionando todo el proceso.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ClipboardDocumentCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Actuaciones Estructurales y Envolvente",
+      description: "Esta es la fase crítica. Reforzamos la estructura, reparamos la cubierta y aplicamos el sistema de aislamiento SATE en la fachada para garantizar la seguridad y eficiencia.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <BuildingOfficeIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Instalaciones y Acabados Interiores",
+      description: "Una vez asegurado el “esqueleto”, renovamos todas las instalaciones y procedemos con los acabados interiores, dando forma a tu nuevo hogar.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <PaintBrushIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Certificación Final y Entrega",
+      description: "Al finalizar, gestionamos el Certificado Final de Obra, te entregamos toda la documentación, las llaves y la garantía por escrito de los trabajos realizados.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <KeyIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
       <Hero
@@ -145,13 +207,12 @@ export default async function RehabilitacionCasasPage() {
           text: "Evaluar mi Proyecto",
           href: "/contacto"
         }}
-        backgroundImage="/images/hero-bg.webp"
+        backgroundImage="/images/rehabilitacion-integral-de-casas-en-barcelona.webp"
       />
       <FeatureGrid
-        title="La Tranquilidad de una Rehabilitación Profesional"
-        subtitle="Nuestro enfoque técnico y equipo propio nos permiten gestionar proyectos complejos, asegurando resultados de alta calidad que perduran en el tiempo."
         features={features}
         columns={4}
+        disableFeatureHeadings
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
@@ -205,6 +266,8 @@ export default async function RehabilitacionCasasPage() {
         subtitle="Rehabilitar una casa es devolverle su seguridad, su eficiencia y su belleza original. Nuestro trabajo se enfoca en tres pilares fundamentales que garantizan una intervención completa y duradera."
         features={solutions}
         columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
       />
       <FeatureGrid
         title="Más que una Reforma: una Inversión en Seguridad y Futuro"
@@ -212,10 +275,59 @@ export default async function RehabilitacionCasasPage() {
         features={benefits}
         columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <FeatureGrid
+        title="Un Proceso Técnico para una Rehabilitación Segura"
+        subtitle="La rehabilitación de una casa requiere un rigor técnico superior al de una reforma convencional. Nuestro proceso de 6 pasos está diseñado para garantizar la seguridad estructural, la eficiencia y el cumplimiento normativo de tu proyecto."
+        features={processSteps}
+        columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
+      />
+      <TestimonialsCarousel 
+        testimonials={[
+          {
+            text: "Nuestra casa, en los alrededores de Sabadell, necesitaba una rehabilitación integral y con Reformix todo salió rodado. El proyecto fue claro desde el principio y los resultados hablan por sí solos.",
+            initials: "JR",
+            name: "Jordi R.",
+            location: "Sabadell"
+          },
+          {
+            text: "Queríamos recuperar la casa familiar en una urbanización cerca de Terrassa y ha quedado espectacular. Respetaron la estructura y la esencia, pero ahora es luminosa y práctica.",
+            initials: "EM",
+            name: "Elisenda M.",
+            location: "Terrassa"
+          },
+          {
+            text: "La casa, en una zona residencial de Cerdanyola, llevaba años sin actualizarse y ahora parece nueva. Todo quedó bien acabado y se nota la calidad en cada detalle.",
+            initials: "DS",
+            name: "Daniel S.",
+            location: "Cerdanyola del Vallès"
+          },
+          {
+            text: "Vivimos en una casa a las afueras de Sant Cugat y la rehabilitación fue mucho más fácil de lo que pensábamos. Irina estuvo muy atenta y gracias a ella el proceso fue tranquilo.",
+            initials: "SR",
+            name: "Sílvia R.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Hicimos la rehabilitación con Reformix en nuestra casa bajo la montaña de Montgat, muy cerca de Badalona. Cumplieron plazos y el resultado fue incluso mejor de lo que esperábamos.",
+            initials: "PL",
+            name: "Pau L.",
+            location: "Badalona"
+          },
+          {
+            text: "Rehabilitamos nuestra casa en una urbanización a las afueras de Barcelona y el cambio ha sido increíble. Mantuvieron los detalles originales pero ahora todo es moderno y cómodo.",
+            initials: "MF",
+            name: "Marta F.",
+            location: "Barcelona"
+          }
+        ]}
+        title="Propietarios que Han Recuperado su Hogar"
+        subtitle='Rehabilitar una casa es devolverle la vida. Nos enorgullece compartir la opinión de clientes que, como tú, decidieron dar el paso y ahora disfrutan de un hogar más seguro, eficiente y confortable.'
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Cuánto puede costar la rehabilitación de una casa de 150m2?",
             answer: "Es muy variable, ya que depende del estado de la estructura y la calidad de los acabados. Como referencia, un proyecto de rehabilitación integral suele partir de los 800€/m². Una visita técnica es imprescindible para dar un presupuesto cerrado."
@@ -240,8 +352,33 @@ export default async function RehabilitacionCasasPage() {
             question: "¿Cuál es la diferencia entre \"reforma\" y \"rehabilitación\"?",
             answer: "Una reforma se centra en el interior y la estética (cambiar cocina, baños, suelos). Una rehabilitación es más profunda: actúa sobre la \"piel\" y el \"esqueleto\" de la casa (fachada, tejado, estructura) para mejorar su seguridad, habitabilidad y eficiencia energética."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Rehabilitación Integral de Casas en Barcelona | Reformix",
+          description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'House Rehabilitation',
+          url: '/rehabilitacion-casas',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas Integrales', url: '/reformas-integrales' },
+          { name: 'Rehabilitación de Casas', url: '/rehabilitacion-casas' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {

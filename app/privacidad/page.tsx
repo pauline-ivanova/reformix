@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Política de privacidad y protección de datos de Reformix Barcelona. Información sobre cómo recopilamos, usamos y protegemos tus datos personales.',
   ...generateStandardMetadata({
     title: 'Política de Privacidad | Reformix Barcelona',
-    description: 'Política de privacidad y protección de datos de Reformix Barcelona.',
+    description: 'Política de privacidad y protección de datos de Reformix Barcelona. Información sobre cómo recopilamos, usamos y protegemos tus datos personales.',
     url: pageUrl,
     pagePath: '/privacidad',
     robots: { index: true, follow: true },

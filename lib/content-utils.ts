@@ -102,3 +102,248 @@ export function parseContentFileName(filename: string): {
   };
 }
 
+/**
+ * Gets all static pages from the app directory
+ * Excludes dynamic routes, API routes, sitemap routes, and content pages
+ */
+export interface StaticPage {
+  slug: string;
+  lastModified: Date;
+  changeFrequency: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+  priority: number;
+  title?: string;
+}
+
+export function getAllStaticPages(appDir: string = 'app'): StaticPage[] {
+  try {
+    const directory = path.join(process.cwd(), appDir);
+    
+    if (!fs.existsSync(directory)) {
+      return [];
+    }
+
+    const staticPages: StaticPage[] = [];
+    const contentFiles = getAllContentFiles();
+    const contentSlugs = new Set(
+      contentFiles
+        .map(file => {
+          const parsed = parseContentFileName(file.slug);
+          return parsed ? parsed.slug : null;
+        })
+        .filter((slug): slug is string => slug !== null)
+    );
+
+    // Directories to exclude
+    const excludeDirs = [
+      'api',
+      'components',
+      '[slug]',
+      'sitemap',
+      'sitemap_index.xml',
+      'sitemap-reformas-integrales.xml',
+      'sitemap-reformas-estancia.xml',
+      'sitemap-servicios-tecnicos.xml',
+      'sitemap-legal.xml',
+      'sitemap.xml',
+      'site-map',
+      '_next',
+    ];
+
+    const scanDirectory = (dir: string, baseSlug: string = ''): void => {
+      const items = fs.readdirSync(dir, { withFileTypes: true });
+
+      for (const item of items) {
+        // Skip hidden files and directories
+        if (item.name.startsWith('.')) {
+          continue;
+        }
+
+        // Skip excluded directories
+        if (excludeDirs.includes(item.name)) {
+          continue;
+        }
+
+        const fullPath = path.join(dir, item.name);
+
+        if (item.isDirectory()) {
+          // Recursively scan subdirectories
+          const newSlug = baseSlug ? `${baseSlug}/${item.name}` : item.name;
+          scanDirectory(fullPath, newSlug);
+        } else if (item.name === 'page.tsx' || item.name === 'page.js') {
+          // Found a page file
+          const slug = baseSlug || '';
+          
+          // Skip if it's a content page (handled by [slug] route)
+          if (contentSlugs.has(slug)) {
+            continue;
+          }
+
+          // Skip root page (homepage is in reformas-integrales sitemap)
+          if (!slug) {
+            continue;
+          }
+
+          // Get file modification date
+          let lastModified: Date;
+          try {
+            const stats = fs.statSync(fullPath);
+            lastModified = stats.mtime;
+          } catch {
+            lastModified = new Date();
+          }
+
+          // Determine priority and change frequency based on page type
+          const { priority, changeFrequency, title } = getPageMetadata(slug);
+
+          staticPages.push({
+            slug,
+            lastModified,
+            changeFrequency,
+            priority,
+            title,
+          });
+        }
+      }
+    };
+
+    scanDirectory(directory);
+
+    // Sort by slug for consistent ordering
+    return staticPages.sort((a, b) => a.slug.localeCompare(b.slug));
+  } catch (error) {
+    console.error(`Error scanning static pages from ${appDir}:`, error);
+    return [];
+  }
+}
+
+/**
+ * Determines metadata (priority, changeFrequency, title) for a static page based on its slug
+ */
+function getPageMetadata(slug: string): {
+  priority: number;
+  changeFrequency: StaticPage['changeFrequency'];
+  title: string;
+} {
+  // Legal pages - low priority, yearly updates
+  if (['privacidad', 'aviso-legal', 'cookies'].includes(slug)) {
+    return {
+      priority: 0.4,
+      changeFrequency: 'yearly',
+      title: formatPageTitle(slug),
+    };
+  }
+
+  // Contact page - high priority, monthly updates
+  if (slug === 'contacto') {
+    return {
+      priority: 0.8,
+      changeFrequency: 'monthly',
+      title: 'Contacto',
+    };
+  }
+
+  // Default for other static pages
+  return {
+    priority: 0.6,
+    changeFrequency: 'monthly',
+    title: formatPageTitle(slug),
+  };
+}
+
+/**
+ * Formats a slug into a readable title
+ */
+function formatPageTitle(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+/**
+ * Gets only legal/informational pages for the legal sitemap
+ * Excludes pages that belong to other categories (services, commercial, etc.)
+ */
+export function getLegalPages(appDir: string = 'app'): StaticPage[] {
+  const allStaticPages = getAllStaticPages(appDir);
+  
+  // Pages that belong to other sitemaps - exclude them
+  const REFORMAS_COMERCIALES_SLUGS = new Set([
+    'reformas-comerciales',
+    'reformas-oficinas',
+    'locales-comerciales-retail',
+    'restaurantes-bares',
+    'clinicas-centros-sanitarios',
+    'gimnasios-centros-deportivos',
+    'hoteles-alojamientos',
+  ]);
+  
+  const SERVICIOS_TECNICOS_SLUGS = new Set([
+    'servicios-tecnicos',
+    'aislamiento-termico-acustico',
+    'pladur',
+    'carpinteria',
+    'fontaneria',
+    'electricidad',
+    'pintura-interior',
+    'albanileria',
+    'calefaccion-climatizacion',
+    'impermeabilizaciones',
+  ]);
+  
+  // Reformas Integrales pages (category 01)
+  const REFORMAS_INTEGRALES_SLUGS = new Set([
+    'reformas-integrales',
+    'reformas-integrales-pisos',
+    'rehabilitacion-casas',
+    'interiorismo-colaboracion',
+  ]);
+  
+  // Reformas por Estancia pages (category 02)
+  const REFORMAS_ESTANCIA_SLUGS = new Set([
+    'reformas-por-estancia',
+    'reformas-cocinas',
+    'reformas-banos',
+    'reformas-salones',
+    'reformas-habitaciones',
+    'reformas-terrazas-balcones',
+    'reformas-recibidores',
+  ]);
+  
+  // Get content file slugs to exclude pages that are handled by content files
+  const contentFiles = getAllContentFiles();
+  const contentSlugs = new Set(
+    contentFiles
+      .map(file => {
+        const parsed = parseContentFileName(file.slug);
+        return parsed ? parsed.slug : null;
+      })
+      .filter((slug): slug is string => slug !== null)
+  );
+  
+  // Filter to keep only legal/informational pages
+  return allStaticPages.filter(page => {
+    // Exclude pages from other categories
+    if (REFORMAS_COMERCIALES_SLUGS.has(page.slug)) {
+      return false;
+    }
+    if (SERVICIOS_TECNICOS_SLUGS.has(page.slug)) {
+      return false;
+    }
+    if (REFORMAS_INTEGRALES_SLUGS.has(page.slug)) {
+      return false;
+    }
+    if (REFORMAS_ESTANCIA_SLUGS.has(page.slug)) {
+      return false;
+    }
+    if (contentSlugs.has(page.slug)) {
+      return false;
+    }
+    
+    // Include only legal/informational pages
+    // Legal pages: privacidad, aviso-legal, cookies
+    // Informational pages: contacto, and any other pages that don't belong to other categories
+    return true;
+  });
+}
+

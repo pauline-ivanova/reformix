@@ -52,11 +52,13 @@ Toda página de servicio (ej. "Reforma de Cocina") debe seguir esta estructura l
 
 ### 5. Fórmulas para Metadatos (Title y Description)
 
-*   **Title (45-55 caracteres):** `[Servicio Principal] en [Geo Principal] y [Geo Secundario] | Reformix`
-    *   *Ejemplo:* `Reforma de Cocina en Barcelona y Sabadell | Reformix`
+**IMPORTANTE:** La longitud se cuenta **incluyendo todos los espacios** entre palabras.
+
+*   **Title (45-55 caracteres, incluyendo espacios):** `[Servicio Principal] en [Geo Principal] y [Geo Secundario] | Reformix`
+    *   *Ejemplo:* `Reforma de Cocina en Barcelona y Sabadell | Reformix` (52 caracteres con espacios)
     *   **Nota:** Si la frase `[Servicio] en [Geo] y [Geo]` ya ocupa ~50-55 caracteres, se puede omitir el nombre de la marca para mayor claridad. Google suele añadirlo automáticamente.
-*   **Meta Description (hasta 150 caracteres):** `[Verbo de transformación] tu [estancia] en [Geo]. Disfruta de un [beneficio 1], [beneficio 2] y [beneficio 3]. ¡Pide presupuesto!`
-    *   *Ejemplo:* `Transforma tu cocina en Barcelona y Vallès. Disfruta de un diseño a medida, presupuesto cerrado y garantía por escrito. ¡Pide presupuesto!`
+*   **Meta Description (hasta 150 caracteres, incluyendo espacios):** `[Verbo de transformación] tu [estancia] en [Geo]. Disfruta de un [beneficio 1], [beneficio 2] y [beneficio 3]. ¡Pide presupuesto!`
+    *   *Ejemplo:* `Transforma tu cocina en Barcelona y Vallès. Disfruta de un diseño a medida, presupuesto cerrado y garantía por escrito. ¡Pide presupuesto!` (143 caracteres con espacios)
 
 ---
 

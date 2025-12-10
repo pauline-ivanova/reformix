@@ -1,11 +1,12 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -154,7 +155,7 @@ export default async function CarpinteriaPage() {
           text: "Solicitar Presupuesto",
           href: "/contacto"
         }}
-        backgroundImage="/images/hero-bg.webp"
+        backgroundImage="/images/carpinteria-en-barcelona.webp"
       />
       <FeatureGrid
         title="Precisión y Calidad en Cada Detalle"
@@ -167,7 +168,13 @@ export default async function CarpinteriaPage() {
         text="Nuestros carpinteros en Barcelona y el Vallès Occidental son artesanos con años de experiencia en la integración de soluciones de madera en proyectos de reforma. Entendemos que la carpintería no es un elemento aislado, sino el toque final que une y da coherencia a todo el espacio. Por eso, planificamos nuestro trabajo en perfecta sintonía con el resto de oficios, garantizando un resultado estético y funcional."
       />
       <FeatureGrid
-        title="Carpintería para Reformas: el Detalle que Define el Éxito"
+        title={
+          <>
+            Carpintería para Reformas:
+            <br />
+            el Detalle que Define el Éxito
+          </>
+        }
         subtitle="Puedes tener paredes perfectas y una distribución ideal, pero una puerta mal ajustada o un rodapié con huecos darán un aspecto descuidado a toda tu inversión. Estos son los errores que marcan la diferencia."
         features={[
           {
@@ -214,17 +221,130 @@ export default async function CarpinteriaPage() {
         subtitle="Integramos la madera en tu proyecto para crear espacios más bellos, organizados y funcionales."
         features={solutions}
         columns={4}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
       />
       <FeatureGrid
-        title="Invierte en Carpintería: Aumenta el Valor y Confort de tu Hogar"
+        title={
+          <>
+            Invierte en Carpintería:
+            <br />
+            Aumenta el Valor y Confort
+            <br />
+            de tu Hogar
+          </>
+        }
         subtitle="Una carpintería de calidad no es un gasto, es una inversión en el futuro de tu vivienda. Transforma la estética, multiplica la funcionalidad y aumenta su valor de mercado de forma tangible."
         features={benefits}
         columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-brand-text-heading">
+            Tu Vivienda, Más Eficiente
+            <br />
+            en 6 Pasos
+          </h2>
+          <p className="text-lg text-center text-brand-text-body mb-16 max-w-3xl mx-auto">
+            Un proceso técnico y riguroso para garantizar la máxima efectividad del aislamiento.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Diagnóstico y Propuesta",
+                description:
+                  "Visitamos tu vivienda, escuchamos tus problemas (ruido, frío, calor) y, si es necesario, usamos una cámara térmica para detectar puentes térmicos. Te proponemos la mejor solución.",
+              },
+              {
+                title: "Elección del Material y Presupuesto",
+                description:
+                  "Te explicamos las ventajas de cada tipo de aislante para tu caso y te entregamos un presupuesto cerrado y detallado.",
+              },
+              {
+                title: "Planificación de los Trabajos",
+                description:
+                  "Organizamos la intervención para realizarla en el menor tiempo posible y con las mínimas molestias, protegiendo el mobiliario y las zonas de paso.",
+              },
+              {
+                title: "Instalación Profesional",
+                description:
+                  "Nuestro equipo cualificado instala el sistema de aislamiento (trasdosados, falsos techos, SATE) siguiendo estrictamente las especificaciones del fabricante.",
+              },
+              {
+                title: "Acabados y Limpieza",
+                description:
+                  "Dejamos las paredes y techos perfectamente acabados (listos para pintar o pintados) y realizamos una limpieza completa de la zona de trabajo.",
+              },
+              {
+                title: "Verificación y Garantía",
+                description:
+                  "Comprobamos la correcta ejecución (sellados, encuentros y posibles puentes térmicos), resolvemos ajustes finales y te entregamos la garantía por escrito.",
+              },
+            ].map((step, index) => (
+              <div key={index} className="bg-gray-50 rounded-lg p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-lg">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-brand-text-heading">
+                      {step.title}
+                    </h3>
+                    <p className="text-brand-text-body leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <TestimonialsCarousel
+        title="Nuestros Clientes lo Confirman: los Detalles Importan"
+        subtitle="La diferencia entre una reforma buena y una excelente está en los acabados. Lee por qué nuestros clientes en Barcelona y el Vallès Occidental destacan la precisión y el cuidado de nuestro equipo de carpintería."
+        testimonials={[
+          {
+            text: "Con Reformix cambiamos los frentes de armario por diseños modernos y funcionales. La diferencia se nota cada día.",
+            initials: "DM",
+            name: "David M.",
+            location: "Barcelona (Eixample)"
+          },
+          {
+            text: "Queríamos aprovechar un rincón del dormitorio y nos hicieron un armario a medida. Encajó perfecto y solucionó el problema de espacio.",
+            initials: "CS",
+            name: "Clara S.",
+            location: "Terrassa"
+          },
+          {
+            text: "Irina nos ayudó a elegir las maderas y tonos. Ahora tenemos puertas elegantes que combinan con todo el interior.",
+            initials: "AT",
+            name: "Albert T.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Nos instalaron estanterías de madera en el salón y el resultado es práctico y decorativo al mismo tiempo.",
+            initials: "MV",
+            name: "Marta V.",
+            location: "Barcelona (Gràcia)"
+          },
+          {
+            text: "El cambio de los armarios fue rápido y sin complicaciones. El piso parece mucho más ordenado y luminoso.",
+            initials: "JP",
+            name: "Jordi P.",
+            location: "Cerdanyola del Vallès"
+          },
+          {
+            text: "Nos instalaron nuevas puertas y rodapiés en todo el piso. El acabado es impecable y le dio un aire totalmente renovado.",
+            initials: "LG",
+            name: "Laura G.",
+            location: "Sabadell"
+          },
+        ]}
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Qué tipo de trabajos de carpintería realizáis?",
             answer: "Nos especializamos en carpintería integrada en la obra: fabricación e instalación de puertas de paso, armarios empotrados, vestidores, estanterías de Pladur o madera, y revestimientos decorativos. No fabricamos muebles exentos como mesas o sillas."
@@ -249,8 +369,33 @@ export default async function CarpinteriaPage() {
             question: "¿La instalación de parquet incluye el rodapié?",
             answer: "Sí, siempre. Un buen suelo no está completo sin un rodapié bien instalado. El presupuesto siempre incluye ambas partidas."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Servicios de Carpintería para Reformas en Barcelona",
+          description: "Instalación de puertas de paso, armarios empotrados, rodapiés y panelados en Barcelona y Vallès Occidental. Acabados perfectos para tu reforma.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Carpentry Services',
+          url: '/carpinteria',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Servicios Técnicos', url: '/servicios-tecnicos' },
+          { name: 'Carpintería', url: '/carpinteria' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn titleLines={["Preguntas Frecuentes", "sobre Carpintería en Reformas"]} items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {
@@ -298,14 +443,20 @@ export default async function CarpinteriaPage() {
         ]}
       />
       <CTA
-        title="Da el Toque Final a tu Reforma con Carpintería de Calidad"
+        title={
+          <>
+            Da el Toque Final a tu Reforma
+            <br />
+            con Carpintería de Calidad
+          </>
+        }
         description="Desde puertas y armarios hasta soluciones a medida, nuestro equipo de carpinteros en Barcelona y el Vallès está listo para materializar tus ideas. Solicita un presupuesto sin compromiso y asegura acabados perfectos."
         buttonText="Solicitar Presupuesto Ahora"
         buttonHref="/contacto"
         features={[
-          "Visita y asesoramiento inicial gratis",
-          "Presupuesto 100% cerrado",
-          "Garantía por escrito"
+          "Asesoramiento inicial gratuito",
+          "Visita y medición sin coste",
+          "Presupuesto detallado y cerrado"
         ]}
       />
     </>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Aviso legal de Reformix Barcelona. Información sobre la empresa, condiciones de uso del sitio web y responsabilidades.',
   ...generateStandardMetadata({
     title: 'Aviso Legal | Reformix Barcelona',
-    description: 'Aviso legal de Reformix Barcelona.',
+    description: 'Aviso legal de Reformix Barcelona. Información sobre la empresa, condiciones de uso del sitio web y responsabilidades.',
     url: pageUrl,
     pagePath: '/aviso-legal',
     robots: { index: true, follow: true },

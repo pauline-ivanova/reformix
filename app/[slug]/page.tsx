@@ -53,6 +53,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description,
     url: pageUrl,
     pagePath: `/${params.slug}`,
+    image: contentFile.metadata.image || '/images/hero-bg.webp', // Use page-specific image if available
     keywords: contentFile.metadata.keywords || [],
   });
 

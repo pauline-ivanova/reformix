@@ -1,70 +1,103 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function CompanySection() {
   const [offset, setOffset] = useState(1000); // Initial offset (off-screen or far right)
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      
-      // Get the section element to calculate its position
-      const section = document.querySelector('[data-company-section]') as HTMLElement;
-      if (!section) {
-        setOffset(windowWidth / 1.5);
-        return;
-      }
-      
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      
-      // Calculate when section enters viewport
-      const viewportTop = scrollY;
-      const viewportBottom = scrollY + windowHeight;
-      const sectionBottom = sectionTop + sectionHeight;
-      
-      // Animation triggers when section is in viewport
-      const startOffset = windowWidth / 1.5;
-      
-      // Start animation when section top enters viewport
-      // End animation when section is halfway through viewport
-      const animationStart = sectionTop - windowHeight;
-      const animationEnd = sectionTop + sectionHeight / 3;
-      const scrollRange = animationEnd - animationStart;
-      
-      if (scrollY < animationStart) {
-        // Before animation starts
-        setOffset(startOffset);
-      } else if (scrollY > animationEnd) {
-        // After animation ends
-        setOffset(0);
-      } else {
-        // During animation
-        const progress = (scrollY - animationStart) / scrollRange;
-        const clampedProgress = Math.max(0, Math.min(1, progress));
-        const currentOffset = startOffset * (1 - clampedProgress);
-        setOffset(currentOffset);
-      }
-    };
+    // Use Intersection Observer to only start animation when section is visible
+    // This reduces initial JavaScript execution and TBT
+    if (!sectionRef.current) return;
 
-    // Initial calculation
-    handleScroll();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    
+    observer.observe(sectionRef.current);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
     };
   }, []);
 
+  useEffect(() => {
+    // Only set up scroll listener when section is visible
+    if (!isVisible) return;
+
+    let ticking = false;
+    let rafId: number | null = null;
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const windowWidth = window.innerWidth;
+          const windowHeight = window.innerHeight;
+          
+          const section = sectionRef.current;
+          if (!section) {
+            ticking = false;
+            return;
+          }
+          
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          
+          // Animation triggers when section is in viewport
+          const startOffset = windowWidth / 1.5;
+          const animationStart = sectionTop - windowHeight;
+          const animationEnd = sectionTop + sectionHeight / 3;
+          const scrollRange = animationEnd - animationStart;
+          
+          if (scrollY < animationStart) {
+            setOffset(startOffset);
+          } else if (scrollY > animationEnd) {
+            setOffset(0);
+          } else {
+            const progress = (scrollY - animationStart) / scrollRange;
+            const clampedProgress = Math.max(0, Math.min(1, progress));
+            const currentOffset = startOffset * (1 - clampedProgress);
+            setOffset(currentOffset);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Initial calculation - defer with setTimeout to not block initial render
+    setTimeout(() => {
+      handleScroll();
+    }, 0);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    
+    return () => {
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [isVisible]);
+
   return (
     <section 
+      ref={sectionRef}
       data-company-section
       className="relative py-20 bg-brand-primary text-white overflow-hidden z-10"
     >
@@ -98,7 +131,7 @@ export default function CompanySection() {
                 width={1200}
                 height={300}
                 className="w-full h-auto opacity-90"
-                priority
+                loading="lazy"
               />
             </div>
           </div>

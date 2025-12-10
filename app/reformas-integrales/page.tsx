@@ -7,6 +7,8 @@ import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -19,6 +21,7 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/solid';
 
+
 export const metadata: Metadata = {
   title: "Reformas Integrales en Barcelona y Vallès Occidental",
   description: "Reformas Integrales en Barcelona y Vallès Occidental. Proyectos llave en mano con garantía y presupuesto cerrado. ¡Pide tu presupuesto!",
@@ -27,6 +30,7 @@ export const metadata: Metadata = {
     description: "Reformas Integrales en Barcelona y Vallès Occidental. Proyectos llave en mano con garantía y presupuesto cerrado. ¡Pide tu presupuesto!",
     url: "https://reformix.barcelona/reformas-integrales",
     pagePath: "/reformas-integrales",
+    image: "/images/reformas-integrales.webp", // Page-specific image if available, falls back to hero-bg.webp
     keywords: ["reformas integrales", "reforma integral Barcelona", "reforma integral llave en mano", "rehabilitación casas", "reforma integral pisos"],
   }),
 };
@@ -82,7 +86,7 @@ export default async function ReformasIntegralesPage() {
         "Optimización de luz natural",
         "Diseño funcional y moderno"
       ],
-      image: "/images/reforma-integral-salon.webp",
+      image: "/images/reformas-integrales-de-pisos-en-barcelona.webp",
       imageAlt: "Reforma integral de piso en Barcelona",
       ctaText: "Saber más",
       ctaHref: "/reformas-integrales-pisos"
@@ -97,8 +101,8 @@ export default async function ReformasIntegralesPage() {
         "Integración de espacios",
         "Refuerzo de estructuras"
       ],
-      image: "/images/reforma-integral-salon.webp",
-      imageAlt: "Rehabilitación de casa en Vallès Occidental",
+      image: "/images/rehabilitacion-integral-de-casas-en-barcelona.webp",
+      imageAlt: "Rehabilitación integral de casa en Barcelona",
       ctaText: "Ver proyectos",
       ctaHref: "/rehabilitacion-casas"
     },
@@ -112,8 +116,8 @@ export default async function ReformasIntegralesPage() {
         "Un único interlocutor",
         "Control total y sin preocupaciones"
       ],
-      image: "/images/reforma-oficinas.webp",
-      imageAlt: "Proyecto llave en mano de reforma integral",
+      image: "/images/reformas-integrales-en-barcelona.webp",
+      imageAlt: "Proyecto llave en mano de reforma integral en Barcelona",
       ctaText: "Ver proceso",
       ctaHref: "/contacto"
     }
@@ -133,12 +137,12 @@ export default async function ReformasIntegralesPage() {
           text: "Pedir presupuesto para mi reforma",
           href: "/contacto"
         }}
-        backgroundImage="/images/reforma-integral-salon.webp"
+        backgroundImage="/images/reformas-integrales-en-barcelona.webp"
       />
       <FeatureGrid
-        title="La Tranquilidad de un Proyecto bien Gestionado"
         features={features}
         columns={4}
+        disableFeatureHeadings
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
@@ -182,11 +186,55 @@ export default async function ReformasIntegralesPage() {
           },
         ]}
         columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-24"
       />
       <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <TestimonialsCarousel 
+        testimonials={[
+          {
+            text: "El piso era muy antiguo y oscuro. Después de la reforma integral ahora tenemos mucha más luz y espacio. Lo mejor es que no tuvimos que preocuparnos por nada.",
+            initials: "MR",
+            name: "Miguel R.",
+            location: "Sabadell"
+          },
+          {
+            text: "Nuestra casa necesitaba una reforma completa y teníamos miedo de los plazos. Gracias a Irina, que estuvo pendiente en todo momento, fue más fácil de lo que pensábamos. Cumplieron los tiempos y ahora la casa combina lo clásico con lo moderno.",
+            initials: "JP",
+            name: "Júlia P.",
+            location: "Terrassa"
+          },
+          {
+            text: "La casa llevaba años sin tocarse. Hicieron una rehabilitación total y quedó como nueva. Lo que más nos sorprendió fue lo limpios que trabajaron.",
+            initials: "AT",
+            name: "Albert T.",
+            location: "Cerdanyola del Vallès"
+          },
+          {
+            text: "Elegimos la opción llave en mano porque no teníamos tiempo para estar encima de la obra. Fue un acierto: se ocuparon de todo y el piso quedó listo para entrar a vivir sin complicaciones.",
+            initials: "SG",
+            name: "Sílvia G.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Abrimos un local en Badalona y necesitábamos rapidez. Reformix nos ofreció un proyecto llave en mano y funcionó perfecto. Irina nos explicó cada fase y nos dio mucha tranquilidad. Entregaron en fecha y los clientes notaron el cambio desde el primer día.",
+            initials: "DM",
+            name: "David M.",
+            location: "Badalona"
+          },
+          {
+            text: "Queríamos modernizar el piso y no sabíamos por dónde empezar. En Reformix nos dieron ideas y nos acompañaron en todo el proceso. Ahora la cocina y el salón parecen otro lugar.",
+            initials: "CS",
+            name: "Clara S.",
+            location: "Barcelona"
+          }
+        ]}
+        title="Nuestros Clientes Tienen la Palabra"
+        subtitle='Detrás de cada proyecto de éxito y de cada foto del "después", hay una familia que ha depositado su confianza en nosotros. Su tranquilidad durante el proceso y su satisfacción con el resultado final es la verdadera medida de nuestro trabajo. Estas son algunas de sus palabras.'
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Cuánto tarda una reforma integral de un piso de 90m²?",
             answer: "Aunque cada proyecto es único, de media, una reforma integral de un piso de estas características suele durar entre 3 y 4 meses, dependiendo de la complejidad y los acabados."
@@ -211,8 +259,32 @@ export default async function ReformasIntegralesPage() {
             question: "¿Cómo funciona la elección de materiales (suelos, azulejos, etc.)?",
             answer: "Nosotros te asesoramos y te acompañamos. Te presentamos un catálogo de nuestros proveedores de confianza, с которыми часто получаем лучшие цены. Sin embargo, la decisión final es siempre tuya. Si prefieres comprar los materiales por tu cuenta, nos adaptamos sin problema, asegurándonos de que cumplen con la calidad necesaria para la garantía."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Reformas Integrales en Barcelona y Vallès Occidental",
+          description: "Reformas integrales llave en mano en Barcelona y Vallès Occidental. Proyectos completos con garantía y presupuesto cerrado.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Full Home Remodeling',
+          url: '/reformas-integrales',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas Integrales', url: '/reformas-integrales' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {

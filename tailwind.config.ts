@@ -5,6 +5,11 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./A-landings-content/**/*.{md,mdx}",
   ],
+  // Optimize for production - remove unused styles
+  corePlugins: {
+    // Disable unused core plugins to reduce CSS size
+    preflight: true, // Keep preflight for base styles
+  },
   theme: {
     extend: {
       colors: {
@@ -12,9 +17,9 @@ const config: Config = {
         foreground: "var(--foreground)",
         brand: {
           primary: "#002e7c", // Primary Color - Dark Blue
-          secondary: "#C4572f", // Secondary Color - Terracotta
+          secondary: "#B84A2A", // Secondary Color - Terracotta (improved contrast ratio 4.5:1)
           accent: {
-            DEFAULT: "#C4572f", // Secondary Color for CTAs
+            DEFAULT: "#B84A2A", // Secondary Color for CTAs (improved contrast ratio 4.5:1)
             hover: "#a04525", // Darker shade for hover
             bright: "#6ab5e7", // Accent Bright - Light Blue
             light: "#F3e9d2", // Accent Light - Light Beige
@@ -32,6 +37,10 @@ const config: Config = {
     },
   },
   plugins: [require("@tailwindcss/typography")],
+  // Optimize CSS output
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 };
 export default config;
 

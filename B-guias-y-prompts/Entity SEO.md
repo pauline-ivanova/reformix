@@ -147,8 +147,10 @@
 
 # 7) Мета: Title/H1/Description/URL
 
-* **Title (главной):** *Reformas en Sabadell (Vallès) | Empresa de Reformas con Equipo Propio*
-* **Meta description:** *Empresa de reformas en Sabadell y Barcelona. Reformas integrales y por estancia con **presupuestos cerrados** y **garantía por escrito**. Pide tu presupuesto sin compromiso.*
+**Важно:** Длина Title и Description считается **включая все пробелы** между словами.
+
+* **Title (главной, 45-55 символов с пробелами):** *Reformas en Sabadell (Vallès) | Empresa de Reformas con Equipo Propio*
+* **Meta description (до 150 символов с пробелами):** *Empresa de reformas en Sabadell y Barcelona. Reformas integrales y por estancia con **presupuestos cerrados** y **garantía por escrito**. Pide tu presupuesto sin compromiso.*
 * **URL:** `https://…/` (главная), последующие — по шаблону, см. перелинковку.
 
 ---

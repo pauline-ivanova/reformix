@@ -129,7 +129,7 @@ ${routes.map(entry => `  <url>
       font-size: 14px;
     }
     .nav-breadcrumb a {
-      color: #C4572f;
+      color: #B84A2A;
       text-decoration: none;
     }
     .nav-breadcrumb a:hover {

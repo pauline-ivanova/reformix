@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 interface Testimonial {
@@ -10,60 +10,81 @@ interface Testimonial {
   location: string;
 }
 
-const testimonials: Testimonial[] = [
+const defaultTestimonials: Testimonial[] = [
   {
-    text: "Reformaron nuestra cocina y ahora tiene luz, espacio y es mucho más práctica. Hasta cocinar se ha vuelto un placer.",
-    initials: "LG",
-    name: "Laura G.",
-    location: "Sabadell"
+    text: "Lo que más valoramos fue la seriedad con los plazos. El proyecto se entregó en fecha y pudimos inaugurar el espacio sin retrasos. La coordinación con nuestro equipo fue muy ágil.",
+    initials: "DO",
+    name: "Daniel O.",
+    location: "Director de coworking, Barcelona"
   },
   {
-    text: "Nos hicieron el aislamiento y el cambio se nota muchísimo. Ya no entra ruido de la calle y la casa mantiene mejor la temperatura.",
-    initials: "MP",
-    name: "Marta P.",
-    location: "Barberà del Vallès"
+    text: "Como interiorista, es fundamental trabajar con un equipo que entienda la importancia de los detalles. Con Reformix tuve la tranquilidad de que mis ideas se llevaron a la realidad tal como las había planteado.",
+    initials: "ML",
+    name: "Marta L.",
+    location: "Interiorista, Barcelona"
   },
   {
-    text: "Encargamos la reforma completa de nuestro local y cumplieron los plazos al detalle. El espacio quedó justo como lo imaginamos y pudimos abrir a tiempo. Nuestros clientes lo notaron desde el primer día.",
-    initials: "DL",
-    name: "David L.",
-    location: "Sabadell"
+    text: "Encargamos a Reformix la ejecución de nuestro nuevo espacio de oficinas en Barcelona. Se ocuparon de toda la obra y el resultado fue un entorno funcional y representativo de la marca.",
+    initials: "RP",
+    name: "Raúl P.",
+    location: "Responsable de proyectos, empresa tecnológica, Barcelona"
   },
   {
-    text: "Reformamos todo el piso con ellos y la experiencia fue muy buena. Se ocuparon de licencias y materiales, y nosotros solo tuvimos que decidir acabados. El piso parece nuevo.",
-    initials: "AR",
-    name: "Ana R.",
-    location: "Sabadell"
+    text: "Necesitábamos una reforma integral rápida para abrir el restaurante en la fecha prevista. Reformix coordinó el proyecto de interiorismo de forma impecable y el local quedó espectacular.",
+    initials: "JP",
+    name: "Javier P.",
+    location: "Propietario de restaurante, Barcelona"
   },
   {
-    text: "Queríamos abrir el salón al pasillo y ahora el espacio parece el doble de grande. Un cambio total en la casa.",
-    initials: "JT",
-    name: "Jordi T.",
-    location: "Terrassa"
+    text: "Trabajar con Reformix en la ejecución del interiorismo de nuestra oficina fue una experiencia fluida. Irina estuvo pendiente de la comunicación en todo momento y eso nos dio mucha confianza.",
+    initials: "AM",
+    name: "Ana M.",
+    location: "Agencia de marketing, Sabadell"
   },
   {
-    text: "La reforma del baño fue rápida y sin molestias. Todo quedó moderno y muy funcional. Nos sorprendió lo limpios que fueron trabajando.",
-    initials: "MV",
-    name: "Marc V.",
-    location: "Cerdanyola"
-  },
-  {
-    text: "Necesitábamos modernizar la oficina y la transformación ha sido enorme. Ahora tenemos un espacio cómodo y práctico que el equipo agradece cada día.",
-    initials: "SM",
-    name: "Sílvia M.",
-    location: "Sant Cugat"
+    text: "Colaboramos con Reformix en un proyecto de interiorismo en el Eixample y la experiencia fue excelente. Respetaron cada detalle del diseño y los acabados quedaron impecables.",
+    initials: "CS",
+    name: "Clara S.",
+    location: "Arquitecta, Barcelona"
   }
 ];
 
-const ITEMS_PER_PAGE = 3;
+interface TestimonialsCarouselProps {
+  testimonials?: Testimonial[];
+  title?: string | React.ReactNode;
+  subtitle?: string;
+  paddingClassName?: string;
+}
 
-export default function TestimonialsCarousel() {
+export default function TestimonialsCarousel({ 
+  testimonials = defaultTestimonials,
+  title = "Opiniones Reales de Nuestras Reformas",
+  subtitle = "La confianza que depositan en nosotros nuestros clientes de Sabadell, Terrassa y toda la comarca del Vallès Occidental es nuestra mejor carta de presentación. Aquí puedes leer algunas de sus experiencias.",
+  paddingClassName = "py-20",
+}: TestimonialsCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const totalPages = Math.ceil(testimonials.length / ITEMS_PER_PAGE);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
+
+  // Adapt items per page to viewport (phones:1, tablets:2, desktop:3)
+  useEffect(() => {
+    const computeItems = () => {
+      const width = typeof window !== 'undefined' ? window.innerWidth : 0;
+      if (width < 768) return 1;
+      if (width < 1024) return 2;
+      return 3;
+    };
+
+    const handleResize = () => setItemsPerPage(computeItems());
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const totalPages = Math.ceil(testimonials.length / itemsPerPage);
   const currentTestimonials = testimonials.slice(
-    currentIndex * ITEMS_PER_PAGE,
-    (currentIndex + 1) * ITEMS_PER_PAGE
+    currentIndex * itemsPerPage,
+    (currentIndex + 1) * itemsPerPage
   );
 
   const goToPrevious = () => {
@@ -79,14 +100,14 @@ export default function TestimonialsCarousel() {
   };
 
   return (
-    <section className="py-20 bg-white relative z-20">
+    <section className={`${paddingClassName} bg-white relative z-20`}>
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-text-heading mb-6">
-            Opiniones Reales de Nuestras Reformas
+            {title}
           </h2>
           <p className="text-brand-text-body text-lg leading-relaxed">
-            La confianza que depositan en nosotros nuestros clientes de Sabadell, Terrassa y toda la comarca del Vallès Occidental es nuestra mejor carta de presentación. Aquí puedes leer algunas de sus experiencias.
+            {subtitle}
           </p>
         </div>
 

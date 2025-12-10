@@ -1,11 +1,12 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -15,6 +16,12 @@ import {
   HomeIcon,
   SparklesIcon,
   UserGroupIcon,
+  PuzzlePieceIcon,
+  ArrowsPointingOutIcon,
+  Cog6ToothIcon,
+  ArchiveBoxIcon,
+  ClipboardDocumentCheckIcon,
+  ShieldCheckIcon,
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
@@ -132,6 +139,63 @@ export default async function ReformasIntegralesPisosPage() {
     },
   ];
 
+  const processSteps = [
+    {
+      title: "Contacto y Visita Inicial",
+      description: "Todo empieza contigo. Escuchamos tu idea, visitamos el piso para medir y evaluar el espacio, y resolvemos tus primeras dudas.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <UserGroupIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Diseño y Presupuesto Cerrado",
+      description: "Plasmamos tus ideas en una propuesta de diseño y te entregamos un presupuesto cerrado. Sabrás exactamente qué esperar, sin sorpresas.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ClipboardDocumentCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Planificación y Gestión de Permisos",
+      description: "Nos encargamos de toda la burocracia, desde los permisos de obra hasta la comunicación con la comunidad de vecinos. Creamos un calendario de trabajo detallado.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ShieldCheckIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Demolición y Albañilería",
+      description: "Preparamos el espacio, eliminando tabiques y elementos antiguos. Levantamos la nueva distribución, creando la base para tu nuevo hogar.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <ArrowsPointingOutIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Instalaciones y Acabados",
+      description: "Renovamos las instalaciones (luz, agua) y aplicamos los acabados que has elegido: suelos, alicatados, pintura...",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <SparklesIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+    {
+      title: "Entrega y Garantía",
+      description: "Realizamos una limpieza profesional completa y te entregamos las llaves de tu piso, listo para disfrutar. Tu inversión queda protegida por nuestra garantía por escrito.",
+      icon: (
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+          <KeyIcon className="w-8 h-8" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
       <Hero
@@ -146,11 +210,12 @@ export default async function ReformasIntegralesPisosPage() {
           text: "Solicitar Presupuesto",
           href: "/contacto"
         }}
-        backgroundImage="/images/reforma-integral-salon.webp"
+        backgroundImage="/images/reformas-integrales-de-pisos-en-barcelona.webp"
       />
       <FeatureGrid
         features={features}
         columns={4}
+        disableFeatureHeadings
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
@@ -162,43 +227,113 @@ export default async function ReformasIntegralesPisosPage() {
         features={[
           {
             title: "Distribuciones oscuras y fragmentadas",
-            description: "Creamos espacios luminosos y abiertos que mejoran la calidad de vida.",
-            icon: null,
+            description: "Distribuciones oscuras y fragmentadas.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <PuzzlePieceIcon className="w-8 h-8" />
+              </div>
+            ),
           },
           {
             title: "Cocinas pequeñas y cerradas",
-            description: "Abrimos cocinas al salón, creando espacios modernos y funcionales.",
-            icon: null,
+            description: "Cocinas pequeñas y cerradas, aisladas del salón.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <ArrowsPointingOutIcon className="w-8 h-8" />
+              </div>
+            ),
           },
           {
-            title: "Instalaciones obsoletas",
-            description: "Renovamos completamente las instalaciones para mayor seguridad y eficiencia.",
-            icon: null,
+            title: "Instalaciones eléctricas y de fontanería obsoletas",
+            description: "Instalaciones eléctricas y de fontanería obsoletas.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Cog6ToothIcon className="w-8 h-8" />
+              </div>
+            ),
           },
           {
             title: "Falta de almacenamiento",
-            description: "Diseñamos soluciones de almacenaje a medida para aprovechar cada rincón.",
-            icon: null,
+            description: "Falta de espacio de almacenamiento.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <ArchiveBoxIcon className="w-8 h-8" />
+              </div>
+            ),
           },
         ]}
         columns={4}
+        paddingClassName="py-20 md:py-24"
       />
       <FeatureGrid
         title="Nuestras Soluciones para la Reforma de tu Piso"
         subtitle="Afortunadamente, cada uno de estos problemas tiene una solución técnica y de diseño. Nuestro enfoque se centra en tres áreas clave para transformar por completo tu piso y adaptarlo a tus necesidades."
         features={solutions}
         columns={3}
+        backgroundClassName="bg-brand-accent-neutral/60"
+        paddingClassName="py-20 md:py-24"
       />
       <FeatureGrid
         title="Una Inversión en tu Calidad de Vida y en tu Patrimonio"
         subtitle="Una reforma bien planificada no solo mejora tu día a día, sino que también protege y aumenta el valor de tu piso. Estos son los beneficios directos que obtendrás con nuestro enfoque."
         features={benefits}
         columns={3}
+        paddingClassName="py-20 md:py-24"
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <FeatureGrid
+        title="Tu Reforma de Piso: Proceso y Tranquilidad"
+        subtitle="Hemos perfeccionado un proceso de 6 pasos que gestiona la comunicación y los permisos para minimizar las molestias y asegurar tu paz mental."
+        features={processSteps}
+        columns={3}
+        backgroundClassName="bg-brand-accent-neutral/60"
+        paddingClassName="py-20 md:py-24"
+      />
+      <TestimonialsCarousel 
+        testimonials={[
+          {
+            text: "Lo que más nos gustó fue la claridad con el presupuesto. Con Reformix todo fue muy fácil, sin sustos ni sorpresas.",
+            initials: "MG",
+            name: "Marc G.",
+            location: "Sabadell"
+          },
+          {
+            text: "Con la nueva distribución y la cocina abierta, el piso parece otro. Mucho más luminoso y con sensación de espacio.",
+            initials: "NP",
+            name: "Núria P.",
+            location: "Terrassa"
+          },
+          {
+            text: "Organizaron la obra muy bien y casi no nos enteramos de las molestias. El resultado final nos encantó.",
+            initials: "JD",
+            name: "Javier D.",
+            location: "Cerdanyola del Vallès"
+          },
+          {
+            text: "Nos ayudaron a elegir los materiales y se nota. El piso tiene un aire moderno y al mismo tiempo se siente sólido y de calidad.",
+            initials: "SR",
+            name: "Sonia R.",
+            location: "Barcelona"
+          },
+          {
+            text: "Irina estuvo pendiente en todo momento y nos iba informando de cada paso. Eso nos dio confianza y el piso quedó justo como lo queríamos.",
+            initials: "AV",
+            name: "Albert V.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "Nos dieron un calendario desde el primer día y lo cumplieron. El piso quedó nuevo y pudimos mudarnos justo cuando lo habíamos planeado.",
+            initials: "LC",
+            name: "Laura C.",
+            location: "Barcelona"
+          }
+        ]}
+        title="Clientes Satisfechos con la Reforma de su Piso"
+        subtitle='Detrás de cada proyecto de reforma, hay una historia de transformación. Estas son las palabras de clientes que confiaron en nosotros para renovar su piso y ahora disfrutan del resultado.'
+        paddingClassName="py-24 md:py-28"
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Cuánto se tarda en reformar un piso de 80m²?",
             answer: "Aunque cada proyecto es único, una reforma integral de un piso de 80m² suele durar entre 3 y 4 meses. Este plazo nos permite realizar cada fase sin prisas, asegurando la máxima calidad en los acabados."
@@ -221,10 +356,35 @@ export default async function ReformasIntegralesPisosPage() {
           },
           {
             question: "¿Qué soluciones recomendáis para el aislamiento acústico con los vecinos?",
-            answer: "Para mejorar el aislamiento acústico, utilizamos soluciones modernas como la instalación de trasdosados con placas de yeso laminado (tipo Pladur) y aislante acústico en paredes. Para los suelos, instalamos láminas anti-impacto bajo el pavimento, reduciendo la transmisión de ruidos."
+            answer: "Te asesoramos y te acompañamos presentándote un catálogo de proveedores de confianza con los que a menudo conseguimos mejores precios. Si prefieres comprar los materiales por tu cuenta, nos adaptamos sin problema, asegurándonos de que cumplen con la calidad necesaria para la garantía."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Reformas Integrales de Pisos en Barcelona | Reformix",
+          description: "Transformamos tu piso en Barcelona y Vallès. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Complete Apartment Remodeling',
+          url: '/reformas-integrales-pisos',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas Integrales', url: '/reformas-integrales' },
+          { name: 'Reformas Integrales de Pisos', url: '/reformas-integrales-pisos' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {

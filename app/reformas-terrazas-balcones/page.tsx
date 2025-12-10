@@ -1,13 +1,15 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
+import Image from "next/image";
 import {
   ShieldCheckIcon,
   WrenchScrewdriverIcon,
@@ -16,14 +18,16 @@ import {
   HomeIcon,
   ChartBarIcon,
   SunIcon as BeachIcon,
+  ExclamationTriangleIcon,
+  Square3Stack3DIcon,
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
   title: "Reformas de Terrazas y Balcones en Barcelona",
-  description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès Occidental. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos.",
+  description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Terrazas y Balcones en Barcelona",
-    description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès Occidental. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos.",
+    description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
     url: "https://reformix.barcelona/reformas-terrazas-balcones",
     pagePath: "/reformas-terrazas-balcones",
     keywords: ["reforma terraza Barcelona", "reforma balcón Barcelona", "impermeabilización terraza", "cerramientos terraza"],
@@ -144,20 +148,26 @@ export default async function ReformasTerrazasBalconesPage() {
           text: "Descubre su Potencial",
           href: "/contacto"
         }}
-        backgroundImage="/images/hero-bg.webp"
+        backgroundImage="/images/reformas-de-terrazas.webp"
       />
       <FeatureGrid
-        title="La Tranquilidad de un Espacio Exterior Seguro y Duradero"
-        subtitle="La exposición al clima exige un enfoque técnico impecable. Nuestra promesa es un trabajo bien hecho que perdure en el tiempo."
+        title=""
+        subtitle=""
         features={features}
         columns={4}
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
-        text="En Reformix Barcelona, con sede en Sabadell, abordamos la reforma de terrazas y balcones en Barcelona y el Vallès Occidental desde un punto de vista técnico y estético. Nuestro equipo propio se encarga de todo: desde asegurar una correcta impermeabilización hasta la elección de materiales que soporten las inclemencias del tiempo, garantizando un espacio exterior tan bonito como funcional."
+        text="En Reformix, con sede en Sabadell, abordamos la reforma de terrazas y balcones en Barcelona y el Vallès Occidental desde un punto de vista técnico y estético. Nuestro equipo propio se encarga de todo: desde asegurar una correcta impermeabilización hasta la elección de materiales que soporten las inclemencias del tiempo, garantizando un espacio exterior tan bonito como funcional."
       />
       <FeatureGrid
-        title="¿Tu Terraza o Balcón Está Desaprovechado o Deteriorado?"
+        title={
+          <>
+            ¿Tu Terraza o Balcón Está
+            <br />
+            Desaprovechado o Deteriorado?
+          </>
+        }
         subtitle="El paso del tiempo y la falta de mantenimiento pueden convertir un espacio con gran potencial en una zona inútil o incluso problemática. Estos son los signos de que tu terraza necesita una reforma."
         features={[
           {
@@ -165,7 +175,7 @@ export default async function ReformasTerrazasBalconesPage() {
             description: "El problema más grave. Un suelo agrietado o una mala impermeabilización pueden causar daños estructurales a tu vivienda y a los vecinos.",
             icon: (
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-                <ShieldCheckIcon className="w-8 h-8" />
+                <ExclamationTriangleIcon className="w-8 h-8" />
               </div>
             ),
           },
@@ -174,7 +184,7 @@ export default async function ReformasTerrazasBalconesPage() {
             description: "Baldosas sueltas, rotas o con juntas en mal estado que dan un aspecto descuidado y son peligrosas.",
             icon: (
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-                <WrenchScrewdriverIcon className="w-8 h-8" />
+                <Square3Stack3DIcon className="w-8 h-8" />
               </div>
             ),
           },
@@ -200,21 +210,151 @@ export default async function ReformasTerrazasBalconesPage() {
         columns={4}
       />
       <FeatureGrid
-        title="Soluciones Técnicas y de Diseño para tu Terraza"
+        title={
+          <>
+            Soluciones Técnicas y de Diseño
+            <br />
+            para tu Terraza
+          </>
+        }
         subtitle="Atacamos los problemas de raíz y transformamos tu terraza en un espacio seguro, funcional y con mucho estilo."
         features={solutions}
         columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
       />
       <FeatureGrid
-        title="Gana un Nuevo Espacio para Disfrutar en tu Hogar"
+        title={
+          <>
+            Gana un Nuevo Espacio
+            <br />
+            para Disfrutar en tu Hogar
+          </>
+        }
         subtitle="Una terraza bien reformada no es solo una mejora estética, es añadir metros útiles y de calidad a tu vivienda."
         features={benefits}
         columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <FeatureGrid
+        title={
+          <>
+            Tu Nueva Terraza en 6 Pasos,
+            <br />
+            con Garantía Profesional
+          </>
+        }
+        subtitle="Un proceso riguroso que asegura un resultado estético, seguro y duradero."
+        features={[
+          {
+            title: "Inspección Técnica y Presupuesto",
+            description: "Visitamos tu terraza o balcón para evaluar su estado (especialmente pendientes y desagües) y te damos un presupuesto detallado.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/1.webp" alt="Paso 1" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Diseño y Selección de Materiales",
+            description: "Te proponemos una distribución y te asesoramos en la elección de materiales de exterior que se adapten al clima y a tu estilo.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/2.webp" alt="Paso 2" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Gestión de Permisos (si aplica)",
+            description: "Si la obra lo requiere (por ejemplo, para cambiar barandillas o instalar cerramientos), gestionamos los permisos necesarios.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/3.webp" alt="Paso 3" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Preparación e Impermeabilización",
+            description: "Retiramos el pavimento existente, reparamos la base, creamos las pendientes correctas y aplicamos el sistema de impermeabilización.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/4.webp" alt="Paso 4" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Instalación de Pavimentos y Acabados",
+            description: "Colocamos el nuevo suelo, instalamos barandillas, puntos de luz, tomas de agua y otros elementos de albañilería o carpintería.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/5.webp" alt="Paso 5" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Limpieza y Entrega Final",
+            description: "Dejamos el espacio completamente limpio y listo para que empieces a disfrutarlo, con la garantía de un trabajo bien hecho.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
+                <Image src="/images/6.webp" alt="Paso 6" width={64} height={64} className="w-16 h-16 object-contain" />
+              </div>
+            ),
+          },
+        ]}
+        columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
+      />
+      <TestimonialsCarousel
+        title={
+          <>
+            Clientes que ya Disfrutan
+            <br />
+            de su Nuevo Espacio Exterior
+          </>
+        }
+        subtitle="Su experiencia tras confiar en nosotros para la reforma de su terraza o balcón."
+        testimonials={[
+          {
+            text: "Con Reformix convertimos un balcón pequeño en un espacio acogedor con mucho encanto. Ahora lo disfrutamos incluso en invierno.",
+            initials: "JT",
+            name: "Jordi T.",
+            location: "Sant Cugat del Vallès"
+          },
+          {
+            text: "La terraza ganó luz y comodidad. Es increíble cómo un espacio exterior bien diseñado cambia toda la casa.",
+            initials: "MS",
+            name: "Marta S.",
+            location: "Badalona"
+          },
+          {
+            text: "Queríamos algo práctico y fácil de mantener. Irina nos ayudó con las elecciones y el resultado fue una terraza moderna y funcional.",
+            initials: "SG",
+            name: "Sergio G.",
+            location: "Hospitalet de Llobregat"
+          },
+          {
+            text: "Ahora usamos el balcón como un rincón para leer y desconectar. Un cambio sencillo pero que marca la diferencia.",
+            initials: "CR",
+            name: "Clara R.",
+            location: "Terrassa"
+          },
+          {
+            text: "La terraza antes era solo un espacio vacío. Tras la reforma se ha convertido en el lugar perfecto para invitar a amigos.",
+            initials: "AP",
+            name: "Albert P.",
+            location: "Viladecans"
+          },
+          {
+            text: "Nuestra terraza apenas la usábamos. Tras la reforma es el lugar favorito de la familia, perfecto para desayunar y relajarnos.",
+            initials: "LM",
+            name: "Laia M.",
+            location: "Barcelona (Poblenou)"
+          },
+        ]}
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Necesito permiso de la comunidad para reformar mi terraza?",
             answer: "Para cambios estéticos como el suelo, normalmente no. Para elementos que afecten a la fachada, como barandillas o cerramientos, sí es necesario y te ayudamos a gestionarlo."
@@ -239,8 +379,33 @@ export default async function ReformasTerrazasBalconesPage() {
             question: "¿Puedo instalar una barbacoa o un punto de agua?",
             answer: "Sí, durante la reforma podemos dejar preparadas las tomas de agua, desagües y enchufes necesarios para instalar una pequeña cocina exterior o zona de barbacoa."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Reformas de Terrazas y Balcones en Barcelona",
+          description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès Occidental. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Terrace and Balcony Remodeling',
+          url: '/reformas-terrazas-balcones',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas por Estancia', url: '/reformas-por-estancia' },
+          { name: 'Reformas de Terrazas y Balcones', url: '/reformas-terrazas-balcones' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {
@@ -288,14 +453,20 @@ export default async function ReformasTerrazasBalconesPage() {
         ]}
       />
       <CTA
-        title="¿Listo para convertir tu terraza en el mejor lugar de tu casa?"
+        title={
+          <>
+            ¿Listo para convertir tu terraza
+            <br />
+            en el mejor lugar de tu casa?
+          </>
+        }
         description="Contacta con nosotros. Evaluamos tu espacio y te damos un presupuesto detallado para la reforma de tu terraza o balcón en Barcelona y el Vallès Occidental."
         buttonText="Pide tu Presupuesto Ahora"
         buttonHref="/contacto"
         features={[
-          "Visita y asesoramiento inicial gratis",
-          "Presupuesto 100% cerrado",
-          "Garantía por escrito"
+          "Asesoramiento inicial gratuito",
+          "Visita y medición sin coste",
+          "Presupuesto detallado y cerrado"
         ]}
       />
     </>

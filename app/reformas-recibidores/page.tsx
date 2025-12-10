@@ -1,11 +1,13 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import AboutSection from "@/app/components/blocks/AboutSection";
-import WhyChooseUs from "@/app/components/blocks/WhyChooseUs";
 import TestimonialsCarousel from "@/app/components/blocks/TestimonialsCarousel";
 import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
+import JsonLd from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import Image from "next/image";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -16,14 +18,18 @@ import {
   HomeIcon,
   SparklesIcon,
   ChartBarIcon,
+  WrenchScrewdriverIcon,
+  DocumentCheckIcon,
+  PencilSquareIcon,
+  ClipboardDocumentCheckIcon,
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
   title: "Reformas de Recibidores en Barcelona con Estilo",
-  description: "Expertos en reformas de recibidores en Barcelona y Vallès Occidental. Creamos una primera impresión impactante y optimizamos el almacenaje.",
+  description: "Expertos en reformas de recibidores en Barcelona y Vallès. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Recibidores en Barcelona con Estilo",
-    description: "Expertos en reformas de recibidores en Barcelona y Vallès Occidental. Creamos una primera impresión impactante y optimizamos el almacenaje.",
+    description: "Expertos en reformas de recibidores en Barcelona y Vallès. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
     url: "https://reformix.barcelona/reformas-recibidores",
     pagePath: "/reformas-recibidores",
     keywords: ["reforma recibidor Barcelona", "reforma entrada Barcelona", "armarios pladur recibidor", "diseño recibidor"],
@@ -144,20 +150,26 @@ export default async function ReformasRecibidoresPage() {
           text: "Optimiza tu Recibidor",
           href: "/contacto"
         }}
-        backgroundImage="/images/hero-bg.webp"
+        backgroundImage="/images/reforma-de-recibidores-en-barcelona.webp"
       />
       <FeatureGrid
-        title="La Entrada a tu Hogar, en Manos Expertas"
-        subtitle="Nos aseguramos de que cada elemento de tu recibidor sea práctico, duradero y estéticamente impecable."
+        title=""
+        subtitle=""
         features={features}
         columns={4}
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
-        text="En Reformix Barcelona somos especialistas en la reforma de recibidores y zonas de paso en Barcelona y el Vallès Occidental. Nuestro enfoque combina el diseño de interiores con soluciones constructivas como el pladur para crear armarios de obra y optimizar cada metro cuadrado, transformando la entrada de tu casa en un espacio tan práctico como acogedor."
+        text="En Reformix somos especialistas en la reforma de recibidores y zonas de paso. Nuestro enfoque combina el diseño de interiores con soluciones constructivas como el pladur para crear armarios de obra y optimizar cada metro cuadrado, transformando la entrada de tu casa en un espacio tan práctico como acogedor."
       />
       <FeatureGrid
-        title="¿Tu Recibidor es Oscuro, Pequeño y Siempre Desordenado?"
+        title={
+          <>
+            ¿Tu Recibidor es Oscuro, Pequeño
+            <br />
+            y Siempre Desordenado?
+          </>
+        }
         subtitle="La entrada de casa es la primera que sufre la falta de espacio y de soluciones de almacenaje. Identificamos los problemas más comunes que impiden tener un recibidor funcional y acogedor."
         features={[
           {
@@ -200,21 +212,145 @@ export default async function ReformasRecibidoresPage() {
         columns={4}
       />
       <FeatureGrid
-        title="Soluciones de Obra para un Recibidor Funcional y Elegante"
+        title={
+          <>
+            Soluciones de Obra para un Recibidor
+            <br />
+            Funcional y Elegante
+          </>
+        }
         subtitle="Aplicamos soluciones constructivas y de diseño para transformar radicalmente la funcionalidad y estética de tu entrada."
         features={solutions}
         columns={3}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
       />
       <FeatureGrid
-        title="La Bienvenida a Casa que Siempre Has Querido"
+        title={
+          <>
+            La Bienvenida a Casa
+            <br />
+            que Siempre Has Querido
+          </>
+        }
         subtitle="Más que un espacio de paso, un recibidor bien reformado mejora la organización de toda la casa y eleva su categoría."
         features={benefits}
         columns={3}
       />
-      <WhyChooseUs />
-      <TestimonialsCarousel />
-      <FAQTwoColumn
-        items={[
+      <FeatureGrid
+        title={
+          <>
+            Tu Nuevo Recibidor
+            <br />
+            en 6 Pasos Sencillos
+          </>
+        }
+        subtitle="Un proceso planificado al detalle para una reforma rápida, eficiente y sin sorpresas."
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
+        features={[
+          {
+            title: "Análisis del Espacio y Necesidades",
+            description: "Nos cuentas qué necesitas: más almacenaje, más luz, mejor distribución. Medimos y evaluamos el potencial de tu entrada.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/1.webp" alt="Paso 1" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Propuesta de Diseño y Presupuesto",
+            description: "Te presentamos un diseño con la distribución de los muebles de obra, puntos de luz y acabados, junto a un presupuesto cerrado.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/2.webp" alt="Paso 2" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Elección de Materiales",
+            description: "Te ayudamos a elegir el suelo, los colores y el tipo de iluminación que mejor se adapten al estilo de tu hogar y al uso diario.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/3.webp" alt="Paso 3" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Planificación de los Trabajos",
+            description: "Organizamos la intervención de nuestro equipo (pladur, electricistas, pintores) para minimizar el tiempo de obra.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/4.webp" alt="Paso 4" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Ejecución y Acabados",
+            description: "Construimos las soluciones de pladur, instalamos la iluminación, renovamos el suelo y cuidamos hasta el último detalle de los acabados.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/5.webp" alt="Paso 5" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+          {
+            title: "Entrega Final",
+            description: "Dejamos tu nuevo recibidor perfectamente limpio y listo para organizar, con la garantía de un trabajo profesional.",
+            icon: (
+              <div className="inline-flex items-center justify-center w-16 h-16">
+                <Image src="/images/6.webp" alt="Paso 6" width={64} height={64} className="w-full h-full object-contain" />
+              </div>
+            ),
+          },
+        ]}
+        columns={3}
+      />
+      <TestimonialsCarousel
+        testimonials={[
+          {
+            text: "Queríamos que la entrada fuera más acogedora. Reformix lo consiguió con una solución práctica y elegante.",
+            initials: "DP",
+            name: "Daniel P.",
+            location: "Sabadell"
+          },
+          {
+            text: "Irina nos ayudó a escoger un diseño que combina almacenaje y estética. Ahora la entrada es funcional y bonita.",
+            initials: "CM",
+            name: "Clara M.",
+            location: "Barcelona (Sants)"
+          },
+          {
+            text: "Antes la entrada era estrecha y oscura. Tras la reforma, parece más amplia y luminosa, da gusto llegar a casa.",
+            initials: "MT",
+            name: "Marc T.",
+            location: "Ripollet"
+          },
+          {
+            text: "El nuevo diseño nos permite aprovechar cada rincón. Ahora todo tiene su sitio y el espacio se siente ordenado.",
+            initials: "AG",
+            name: "Ana G.",
+            location: "Sant Joan Despí"
+          },
+          {
+            text: "Lo que más nos gusta es la primera impresión al entrar. La entrada transmite orden y armonía desde el primer momento.",
+            initials: "JV",
+            name: "Jordi V.",
+            location: "Terrassa"
+          },
+          {
+            text: "Nuestra entrada siempre estaba llena de cosas. Con los armarios a medida ahora tenemos orden y espacio para todo.",
+            initials: "LS",
+            name: "Laura S.",
+            location: "Montgat"
+          },
+        ]}
+        title="Clientes que Ahora Aman la Entrada de su Casa"
+        subtitle="Su experiencia tras reformar con nosotros el primer espacio que ven al llegar a casa."
+      />
+      {(() => {
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const faqs = [
           {
             question: "¿Son resistentes los muebles de pladur?",
             answer: "Sí, totalmente. Utilizamos placas de pladur de alta dureza y refuerzos interiores que los hacen tan sólidos como un mueble tradicional, con la ventaja de una integración perfecta."
@@ -239,8 +375,33 @@ export default async function ReformasRecibidoresPage() {
             question: "¿Qué hacéis con el cuadro de luces si está a la vista?",
             answer: "Es un problema muy común. La solución más elegante es integrarlo dentro de uno de los nuevos armarios de pladur o crear un cubreradiador a medida que también lo oculte."
           }
-        ]}
-      />
+        ];
+        const faqSchema = generateFAQSchema(faqs);
+        const serviceSchema = generateServiceSchema({
+          name: "Reformas de Recibidores en Barcelona con Estilo",
+          description: "Expertos en reformas de recibidores en Barcelona y Vallès Occidental. Creamos una primera impresión impactante y optimizamos el almacenaje.",
+          provider: {
+            '@type': 'HomeAndConstructionBusiness',
+            name: 'Reformix Barcelona',
+          },
+          serviceType: 'Entryway Remodeling',
+          url: '/reformas-recibidores',
+        });
+        const breadcrumbSchema = generateBreadcrumbSchema([
+          { name: 'Inicio', url: '/' },
+          { name: 'Reformas por Estancia', url: '/reformas-por-estancia' },
+          { name: 'Reformas de Recibidores', url: '/reformas-recibidores' },
+        ]);
+        
+        return (
+          <>
+            {faqSchema && <JsonLd data={faqSchema} />}
+            {serviceSchema && <JsonLd data={serviceSchema} />}
+            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <FAQTwoColumn titleLines={["Dudas Frecuentes", "sobre la Reforma de tu Recibidor"]} items={faqs} />
+          </>
+        );
+      })()}
       <ServiceAreas
         areas={[
           {
@@ -293,9 +454,9 @@ export default async function ReformasRecibidoresPage() {
         buttonText="Solicita tu Presupuesto"
         buttonHref="/contacto"
         features={[
-          "Visita y asesoramiento inicial gratis",
-          "Presupuesto 100% cerrado",
-          "Garantía por escrito"
+          "Asesoramiento inicial gratuito",
+          "Visita y medición sin coste",
+          "Presupuesto detallado y cerrado"
         ]}
       />
     </>

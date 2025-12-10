@@ -115,24 +115,24 @@ body {
 
 /* Hero H1 with minimum 3 lines */
 .hero-h1-min-3-lines {
-  min-height: calc(2.25rem * 1.2 * 3); /* base: text-4xl (2.25rem) * line-height (1.2) * 3 lines */
+  min-height: calc(2.25rem * 1.2 * 3);
 }
 
 @media (min-width: 768px) {
   .hero-h1-min-3-lines {
-    min-height: calc(3rem * 1.2 * 3); /* md: text-5xl (3rem) */
+    min-height: calc(3rem * 1.2 * 3);
   }
 }
 
 @media (min-width: 1024px) {
   .hero-h1-min-3-lines {
-    min-height: calc(3.75rem * 1.2 * 3); /* lg: text-6xl (3.75rem) */
+    min-height: calc(3.75rem * 1.2 * 3);
   }
 }
 
 @media (min-width: 1280px) {
   .hero-h1-min-3-lines {
-    min-height: calc(4.5rem * 1.2 * 3); /* xl: text-7xl (4.5rem) */
+    min-height: calc(4.5rem * 1.2 * 3);
   }
 }
 

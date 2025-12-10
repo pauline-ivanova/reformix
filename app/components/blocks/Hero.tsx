@@ -18,6 +18,7 @@ interface HeroProps {
     href: string;
   };
   backgroundImage?: string;
+  overlayOpacity?: 'default' | 'strong' | 'stronger'; // Control overlay darkness
 }
 
 export default function Hero({
@@ -28,72 +29,81 @@ export default function Hero({
   primaryCTA,
   secondaryCTA,
   backgroundImage,
+  overlayOpacity = 'default',
 }: HeroProps) {
-  const [offset, setOffset] = useState(1000); // Initial offset (off-screen or far right)
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Calculate offset based on scroll
-      // We want the image to move from Right to Center.
-      // Start: Offset > 0. End: Offset = 0.
-      // Trigger over first 400px of scroll?
-      const scrollY = window.scrollY;
-      const windowWidth = window.innerWidth;
-      
-      // Start position: Start from the right side.
-      // Let's say initially it's shifted by 50% of screen width
-      const startOffset = windowWidth / 1.5; 
-      
-      // Animation duration (in scroll pixels)
-      const duration = 400;
-      
-      // Calculate progress (0 to 1)
-      const progress = Math.min(scrollY / duration, 1);
-      
-      // Current offset: linearly interpolate from startOffset to 0
-      const currentOffset = startOffset * (1 - progress);
-      
-      setOffset(currentOffset);
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
     };
-
-    // Initial calculation
-    handleScroll();
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
     
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
   }, []);
+
+  // Process title to keep prepositions (de, en) and conjunction (y) with following words
+  const processTitle = (text: string) => {
+    return text.replace(/\b(de|en|y)\s+(\w+)/gi, (match, preposition, word) => {
+      return `${preposition}\u00A0${word}`;
+    });
+  };
+
+  // Process line to keep prepositions with non-breaking spaces
+  const processLine = (line: string) => {
+    return line.replace(/\b(de|en|y)\s+/gi, (match, preposition) => {
+      return `${preposition}\u00A0`;
+    });
+  };
 
   return (
     <section 
       className="relative min-h-[800px] md:min-h-[850px] flex items-center text-white overflow-hidden"
       style={backgroundImage ? {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        background: 'linear-gradient(135deg, #002e7c 0%, #1a4a9c 100%)',
       } : {
         background: 'linear-gradient(135deg, #002e7c 0%, #1a4a9c 100%)',
       }}
     >
-      {/* Animated Background Image */}
+      {/* Optimized background image - Next.js Image for better optimization */}
+      {backgroundImage && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            priority
+            fetchPriority="high"
+            quality={85}
+            className="object-cover"
+            sizes="100vw"
+            style={{
+              objectPosition: 'center',
+            }}
+          />
+          <div className={`absolute inset-0 bg-gradient-to-b z-0 ${
+            overlayOpacity === 'stronger'
+              ? 'from-black/75 to-black/65'
+              : overlayOpacity === 'strong' 
+              ? 'from-black/60 to-black/50' 
+              : 'from-black/50 to-black/40'
+          }`} />
+        </div>
+      )}
+      {/* Bottom background logo */}
       <div 
-        className="absolute bottom-12 md:bottom-8 left-1/2 w-full max-w-[1200px] pointer-events-none z-0 transition-transform duration-75 ease-out"
-        style={{
-          transform: `translateX(calc(-50% + ${offset}px))`,
-          willChange: 'transform'
-        }}
+        className="absolute bottom-12 md:bottom-8 left-1/2 w-full max-w-[1200px] pointer-events-none z-0 -translate-x-1/2"
       >
         <Image
           src="/images/REFORMIX-2.png"
           alt="Reformix"
-          width={1200}
-          height={300}
+          width={800}
+          height={200}
           className="w-full h-auto opacity-90"
-          priority
+          loading="lazy"
+          quality={70}
+          sizes="(max-width: 800px) 100vw, 800px"
         />
       </div>
 
@@ -101,33 +111,25 @@ export default function Hero({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Title */}
           <div className="overflow-hidden">
-            {/* Mobile: flexible wrapping */}
-            <h1 className="lg:hidden text-4xl md:text-5xl font-bold leading-[1.2] mb-6 max-w-[90vw] md:max-w-2xl">
-              {(() => {
-                // Process title to keep prepositions (de, en) and conjunction (y) with following words
-                const processedTitle = title.replace(/\b(de|en|y)\s+(\w+)/gi, (match, preposition, word) => {
-                  return `${preposition}\u00A0${word}`;
-                });
-                return processedTitle;
-              })()}
-            </h1>
-            {/* Desktop: fixed 3 lines */}
-            <h1 className="hidden lg:block text-5xl xl:text-6xl font-bold leading-[1.2] mb-6 max-w-full">
+            {/* Single h1 that adapts for mobile/desktop - only one version in DOM at a time */}
+            <h1 className="text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-[1.2] mb-6 max-w-[90vw] md:max-w-2xl lg:max-w-full">
               {titleLines ? (
-                titleLines.map((line, index) => {
-                  // Process line to keep prepositions (de, en) and conjunction (y) with following words using non-breaking spaces
-                  const processedLine = line.replace(/\b(de|en|y)\s+/gi, (match, preposition) => {
-                    return `${preposition}\u00A0`;
-                  });
-                  
-                  return (
-                    <span key={index} className="block overflow-wrap-anywhere">
-                      {processedLine}
-                    </span>
-                  );
-                })
+                isDesktop ? (
+                  // Desktop: fixed 3 lines
+                  <>
+                    {titleLines.map((line, index) => (
+                      <span key={index} className="block overflow-wrap-anywhere">
+                        {processLine(line)}
+                      </span>
+                    ))}
+                  </>
+                ) : (
+                  // Mobile: show as single line with processing
+                  <>{processTitle(title)}</>
+                )
               ) : (
-                title
+                // No titleLines: show title (processed on mobile, as-is on desktop)
+                <>{isDesktop ? title : processTitle(title)}</>
               )}
             </h1>
           </div>

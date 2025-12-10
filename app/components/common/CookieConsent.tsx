@@ -127,8 +127,9 @@ export default function CookieConsent() {
                   <Link 
                     href="/cookies" 
                     className="text-brand-accent hover:underline font-medium"
+                    aria-label="Más información sobre cookies"
                   >
-                    Más información
+                    Más información sobre cookies
                   </Link>
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
