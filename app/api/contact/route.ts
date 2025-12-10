@@ -6,6 +6,83 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY) 
   : null;
 
+// Telegram Bot configuration
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+/**
+ * Send notification to Telegram
+ */
+async function sendTelegramNotification(data: {
+  name: string;
+  email: string;
+  phone: string;
+  service?: string;
+  message: string;
+}) {
+  console.log('Attempting to send Telegram notification...');
+  console.log('TELEGRAM_BOT_TOKEN exists:', !!TELEGRAM_BOT_TOKEN);
+  console.log('TELEGRAM_CHAT_ID exists:', !!TELEGRAM_CHAT_ID);
+  
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    console.warn('Telegram credentials not configured. Telegram notification not sent.');
+    console.warn('TELEGRAM_BOT_TOKEN:', TELEGRAM_BOT_TOKEN ? 'SET' : 'MISSING');
+    console.warn('TELEGRAM_CHAT_ID:', TELEGRAM_CHAT_ID ? 'SET' : 'MISSING');
+    return;
+  }
+
+  try {
+    // Escape special Markdown characters to avoid parsing errors
+    const escapeMarkdown = (text: string) => {
+      return text.replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
+    };
+
+    const telegramMessage = `
+🔔 *Nuevo contacto desde reformix.barcelona*
+
+👤 *Nombre:* ${escapeMarkdown(data.name)}
+📧 *Email:* ${escapeMarkdown(data.email)}
+📱 *Teléfono:* ${escapeMarkdown(data.phone)}
+${data.service ? `🔧 *Servicio:* ${escapeMarkdown(data.service)}` : ''}
+
+💬 *Mensaje:*
+${escapeMarkdown(data.message)}
+
+⏰ *Fecha:* ${escapeMarkdown(new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}
+    `.trim();
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    console.log('Sending to Telegram API:', url.replace(TELEGRAM_BOT_TOKEN, 'TOKEN_HIDDEN'));
+    console.log('Chat ID:', TELEGRAM_CHAT_ID);
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: telegramMessage,
+        parse_mode: 'Markdown',
+      }),
+    });
+
+    const responseData = await response.json();
+    
+    if (!response.ok) {
+      console.error('Telegram API error:', response.status, responseData);
+      throw new Error(`Telegram API error: ${response.status} - ${JSON.stringify(responseData)}`);
+    }
+
+    console.log('Telegram notification sent successfully:', responseData);
+  } catch (error: any) {
+    console.error('Error sending Telegram notification:', error);
+    console.error('Error details:', error.message);
+    // Don't throw - we don't want to fail the entire request if Telegram fails
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -90,6 +167,17 @@ export async function POST(request: NextRequest) {
       service,
       message,
       timestamp: new Date().toISOString(),
+    });
+
+    // Send Telegram notification (non-blocking)
+    sendTelegramNotification({
+      name,
+      email,
+      phone,
+      service,
+      message,
+    }).catch((error) => {
+      console.error('Failed to send Telegram notification:', error);
     });
 
     // Send email notification to both addresses
