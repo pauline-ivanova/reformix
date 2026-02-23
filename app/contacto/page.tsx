@@ -77,9 +77,10 @@ export default function ContactPage() {
                       className="text-brand-text-body hover:text-brand-accent"
                     >
                       Carrer de Concepción Arenal, 100<br />
-                      08204 Sabadell, Barcelona<br />
-                      <span className="text-sm text-brand-text-body/70">Servimos a Barcelona y toda la comarca</span>
+                      08204 Sabadell, Barcelona
                     </a>
+                    <br />
+                    <span className="text-sm text-brand-text-body/70">Servimos a Barcelona y toda la comarca</span>
                   </div>
                 </div>
               </div>
