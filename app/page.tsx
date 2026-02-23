@@ -4,7 +4,7 @@ import HeroPreload from "@/app/components/common/HeroPreload";
 import JsonLd from "@/app/components/common/JsonLd";
 import { generateFAQSchema, generateReviewSchema } from "@/app/components/common/JsonLd";
 import dynamic from 'next/dynamic';
-import { defaultTestimonials } from "@/app/components/blocks/TestimonialsCarousel";
+import { defaultTestimonials } from "@/app/components/blocks/testimonials-data";
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
 import { 
