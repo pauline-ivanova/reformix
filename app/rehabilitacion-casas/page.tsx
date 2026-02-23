@@ -156,8 +156,8 @@ export default async function RehabilitacionCasasPage() {
       ),
     },
     {
-      title: "Gestión de Licencia de Obra",
-      description: "La rehabilitación suele requerir una licencia de obra mayor. Nos encargamos de preparar y presentar el proyecto técnico en el ayuntamiento, gestionando todo el proceso.",
+      title: "Proyecto Técnico",
+      description: "Preparamos toda la documentación técnica necesaria para la ejecución de la obra, asegurando que cumple con la normativa vigente.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <ClipboardDocumentCheckIcon className="w-8 h-8" />
@@ -338,11 +338,7 @@ export default async function RehabilitacionCasasPage() {
           },
           {
             question: "¿Cuánto tiempo se tarda en rehabilitar una casa?",
-            answer: "Un proyecto de rehabilitación integral es complejo. Dependiendo del tamaño y el alcance de los trabajos estructurales, puede durar entre 6 y 10 meses. La fase de obtención de la licencia de obra mayor también influye en los plazos totales."
-          },
-          {
-            question: "¿Gestionáis la licencia de obra mayor?",
-            answer: "Sí, por supuesto. Nos encargamos de todo el proceso: preparamos el proyecto técnico necesario, lo presentamos en el ayuntamiento correspondiente y hacemos seguimiento hasta su aprobación. Tú no te preocupas por la burocracia."
+            answer: "Un proyecto de rehabilitación integral es complejo. Dependiendo del tamaño y el alcance de los trabajos estructurales, puede durar entre 6 y 10 meses. La complejidad técnica del proyecto también influye en los plazos totales."
           },
           {
             question: "¿Qué pasa si encontráis problemas estructurales inesperados durante la obra?",

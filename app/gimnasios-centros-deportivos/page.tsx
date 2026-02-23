@@ -174,10 +174,6 @@ export default async function GimnasiosCentrosDeportivosPage() {
             answer: "Depende del alcance de la reforma. Podemos planificar por fases para minimizar el tiempo de cierre, trabajando en horarios que permitan mantener cierta actividad. Evaluamos cada caso específico para encontrar la mejor solución."
           },
           {
-            question: "¿Gestionáis la licencia de actividad?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, licencias de actividad, comunicaciones al ayuntamiento y cualquier certificación requerida para tu centro deportivo."
-          },
-          {
             question: "¿Qué sistemas de ventilación instalan?",
             answer: "Instalamos sistemas de ventilación adecuados para espacios con alta ocupación y actividad física, que aseguran una buena calidad del aire y cumplen con la normativa de salubridad."
           },

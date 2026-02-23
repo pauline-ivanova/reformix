@@ -258,11 +258,7 @@ export default async function HomePage() {
           },
           {
             question: "¿Qué incluye exactamente un servicio \"llave en mano\"?",
-            answer: "Para nosotros, \"llave en mano\" significa que nos encargamos de absolutamente todo: desde el diseño inicial y las licencias, pasando por la coordinación de todos los gremios, hasta la limpieza final profesional. Tu única tarea es entrar a disfrutar de tu nuevo espacio."
-          },
-          {
-            question: "¿Gestionáis las licencias de obra en Barcelona y Sabadell?",
-            answer: "Sí. Nos encargamos de asesorarte y gestionar las licencias de obra (\"assabentat\") tanto en Sabadell como en Barcelona, para que no te preocupes por el papeleo."
+            answer: "Para nosotros, \"llave en mano\" significa que nos encargamos de absolutamente todo: desde el diseño inicial y la planificación, pasando por la coordinación de todos los gremios, hasta la limpieza final profesional. Tu única tarea es entrar a disfrutar de tu nuevo espacio."
           },
           {
             question: "¿Puedo vivir en casa durante una reforma de cocina?",

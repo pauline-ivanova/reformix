@@ -174,10 +174,6 @@ export default async function LocalesComercialesRetailPage() {
             answer: "Los locales comerciales deben cumplir normativas de accesibilidad, seguridad contra incendios, eficiencia energética, seguridad laboral y requisitos específicos según el tipo de actividad (alimentación, textil, etc.). Nos encargamos de asegurar el cumplimiento de todas ellas."
           },
           {
-            question: "¿Gestionáis la licencia de apertura?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, licencias de apertura, comunicaciones al ayuntamiento y cualquier certificación requerida para tu actividad comercial."
-          },
-          {
             question: "¿Pueden trabajar de noche o fines de semana para no interrumpir las ventas?",
             answer: "Sí, podemos adaptarnos a horarios flexibles para minimizar la interrupción de tu actividad. Trabajamos en horarios nocturnos, fines de semana o por fases según las necesidades específicas de tu negocio."
           },

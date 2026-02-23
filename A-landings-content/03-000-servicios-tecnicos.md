@@ -137,7 +137,6 @@ Desde Sabadell coordinamos todas las disciplinas técnicas de reforma en Barcelo
   2) ¿Cómo garantizáis los plazos? | Respuesta: Mediante un calendario de obra detallado que define la intervención de cada especialista. Realizamos un seguimiento diario para anticipar y resolver cualquier imprevisto, asegurando el cumplimiento de la fecha de entrega acordada.
   3) ¿Qué garantías ofrecéis? | Respuesta: Ofrecemos una garantía completa por escrito que cubre tanto la mano de obra de nuestros equipos como los materiales que instalamos, conforme a la normativa vigente. Tu tranquilidad es nuestra prioridad.
   4) ¿Podéis coordinar solo una parte de la obra? | Respuesta: Por supuesto. Aunque nuestra especialidad es la coordinación integral, podemos encargarnos de un conjunto específico de trabajos (por ejemplo, toda la fontanería y electricidad) y coordinarnos con tu arquitecto o jefe de obra.
-  5) ¿Gestionáis licencias y permisos? | Respuesta: Sí. Si tu reforma requiere de una licencia de obra menor o una comunicación al ayuntamiento, nuestro equipo técnico puede gestionar toda la documentación para que no tengas que preocuparte por el papeleo.
   6) ¿Cómo se gestionan los cambios durante la obra? | Respuesta: Cualquier cambio se gestiona de forma transparente. Antes de realizarlo, te presentamos un anexo al presupuesto que detalla el nuevo trabajo, su coste y cómo afecta al plazo final. Solo procedemos con tu aprobación por escrito.
 
 ---

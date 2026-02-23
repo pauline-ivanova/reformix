@@ -48,7 +48,7 @@ export default async function ReformasIntegralesPage() {
     },
     {
       title: 'Proyectos "Llave en Mano"',
-      description: "Ofrecemos una gestión integral de tu reforma. Nos encargamos de todo, desde la demolición y licencias hasta la limpieza final, para que tú solo tengas que entrar a disfrutar.",
+      description: "Ofrecemos una gestión integral de tu reforma. Nos encargamos de todo, desde la demolición y planificación hasta la limpieza final, para que tú solo tengas que entrar a disfrutar.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <KeyIcon className="w-8 h-8" />
@@ -109,7 +109,7 @@ export default async function ReformasIntegralesPage() {
     {
       title: 'Proyectos "Llave en Mano"',
       subtitle: "— Tu Tranquilidad es Nuestra Prioridad",
-      description: 'Tu tranquilidad es nuestra prioridad. Gestionamos tu reforma de principio a fin: diseño, licencias, ejecución y limpieza. Un único interlocutor para un control total y cero preocupaciones.',
+      description: 'Tu tranquilidad es nuestra prioridad. Gestionamos tu reforma de principio a fin: diseño, ejecución y limpieza. Un único interlocutor para un control total y cero preocupaciones.',
       services: [
         "Gestión completa del proyecto",
         "Coordinación de todos los gremios",
@@ -250,10 +250,6 @@ export default async function ReformasIntegralesPage() {
           {
             question: "¿El presupuesto es cerrado o pueden haber costes extra?",
             answer: "Sí, todos nuestros presupuestos para reformas integrales son cerrados y detallados. Salvo que tú decidas hacer cambios durante la obra, el precio acordado es el precio final. Sin sorpresas."
-          },
-          {
-            question: "¿Quién se encarga de los permisos de obra?",
-            answer: "Nosotros nos encargamos de todo el proceso. Analizamos qué tipo de licencia necesita tu reforma (comunicado de obras, licencia de obras mayores, etc.) y gestionamos toda la documentación con el ayuntamiento correspondiente, ya sea en Barcelona, Sabadell o cualquier otro municipio. Tú no tienes que preocuparte por el papeleo."
           },
           {
             question: "¿Cómo funciona la elección de materiales (suelos, azulejos, etc.)?",

@@ -174,10 +174,6 @@ export default async function RestaurantesBaresPage() {
             answer: "Depende del alcance de la reforma. Una reforma completa puede requerir 8-12 semanas, pero podemos planificar por fases o trabajar en horarios que permitan mantener cierta actividad. Evaluamos cada caso específico."
           },
           {
-            question: "¿Gestionáis la licencia de actividad y apertura?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, licencias de actividad hostelería, comunicaciones al ayuntamiento y cualquier certificación requerida para tu establecimiento."
-          },
-          {
             question: "¿Qué materiales utilizáis para cocinas y zonas de preparación?",
             answer: "Utilizamos materiales específicos para hostelería: revestimientos cerámicos o de resina impermeables, sistemas de ventilación adecuados, suelos antideslizantes y fáciles de limpiar, y todo según normativa de seguridad alimentaria."
           },

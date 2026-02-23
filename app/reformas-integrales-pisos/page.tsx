@@ -67,7 +67,7 @@ export default async function ReformasIntegralesPisosPage() {
     },
     {
       title: 'Gestión "Llave en Mano"',
-      description: "Nos encargamos de todo, desde los permisos de obra hasta la limpieza final, para que no te preocupes por nada.",
+      description: "Nos encargamos de todo, desde la planificación inicial hasta la limpieza final, para que no te preocupes por nada.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <KeyIcon className="w-8 h-8" />
@@ -159,8 +159,8 @@ export default async function ReformasIntegralesPisosPage() {
       ),
     },
     {
-      title: "Planificación y Gestión de Permisos",
-      description: "Nos encargamos de toda la burocracia, desde los permisos de obra hasta la comunicación con la comunidad de vecinos. Creamos un calendario de trabajo detallado.",
+      title: "Planificación Detallada",
+      description: "Nos encargamos de toda la planificación, coordinando cada fase de la obra y la comunicación con la comunidad de vecinos.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <ShieldCheckIcon className="w-8 h-8" />
@@ -340,7 +340,7 @@ export default async function ReformasIntegralesPisosPage() {
           },
           {
             question: "¿Necesito pedir permiso a la comunidad de vecinos?",
-            answer: "Formalmente, solo necesitas comunicar el inicio de las obras al presidente o administrador. Nosotros nos encargamos de esta comunicación y de gestionar la licencia de obra menor en el ayuntamiento para tu total tranquilidad."
+            answer: "Formalmente, solo necesitas comunicar el inicio de las obras al presidente o administrador. Nosotros nos encargamos de esta comunicación para tu total tranquilidad."
           },
           {
             question: "¿Cómo minimizáis las molestias a los vecinos?",

@@ -186,12 +186,7 @@ export default async function ReformasOficinasPage() {
           {
             question: "¿Qué garantías ofrecéis?",
             answer: "Ofrecemos garantía por escrito que cubre tanto la mano de obra como los materiales instalados, conforme a la normativa vigente. Además, proporcionamos toda la documentación técnica y certificaciones necesarias para tu actividad."
-          },
-          {
-            question: "¿Gestionáis las licencias y permisos necesarios?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, comunicaciones al ayuntamiento, certificados de instalaciones y cualquier trámite administrativo requerido para tu tipo de actividad."
-          }
-        ];
+          }        ];
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
           name: "Reformas de Oficinas en Barcelona y Vallès Occidental",

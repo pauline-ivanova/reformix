@@ -181,8 +181,8 @@ export default async function InteriorismoColaboracionPage() {
             answer: "Trabajamos con presupuesto cerrado sobre mediciones y proyecto ejecutivo. Si aparece un imprevisto no contemplado (vicio oculto), lo documentamos, proponemos opciones con coste/impacto y no ejecutamos nada sin tu aprobación por escrito."
           },
           {
-            question: "¿Quién gestiona licencias, permisos y coordinaciones con la comunidad?",
-            answer: "Podemos asumir la gestión administrativa (licencias, ocupación de vía pública) y la coordinación con la comunidad si lo necesitas, manteniéndote informado. Si prefieres hacerlo tú o tu estudio, nos integramos en vuestro flujo."
+            question: "¿Quién gestiona las coordinaciones con la comunidad?",
+            answer: "Podemos asumir la coordinación con la comunidad si lo necesitas, manteniéndote informado. Si prefieres hacerlo tú o tu estudio, nos integramos en vuestro flujo."
           },
           {
             question: "¿Cómo garantizáis la fidelidad al diseño en obra?",

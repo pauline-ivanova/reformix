@@ -64,7 +64,7 @@ ${escapeMarkdown(data.message)}
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: telegramMessage,
-        parse_mode: 'Markdown',
+        parse_mode: 'MarkdownV2',
       }),
     });
 

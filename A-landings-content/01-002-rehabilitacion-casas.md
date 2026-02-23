@@ -139,8 +139,8 @@
     `Nuestra primera visita es clave. Un técnico evalúa el estado real de la estructura, la cubierta y la fachada para detectar posibles problemas y definir el alcance real de la intervención.`
 *   **Paso 2: `Estudio Técnico y Presupuesto`** (Icon: `file-signature`)
     `Con el diagnóstico, elaboramos una memoria técnica detallada y un presupuesto cerrado que contempla todas las actuaciones necesarias, desde la cimentación hasta los acabados.`
-*   **Paso 3: `Gestión de Licencia de Obra Mayor`** (Icon: `gavel`)
-    `La rehabilitación suele requerir una licencia de obra mayor. Nos encargamos de preparar y presentar el proyecto técnico en el ayuntamiento, gestionando todo el proceso.`
+*   **Paso 3: `Proyecto Técnico`** (Icon: `gavel`)
+    `Preparamos toda la documentación técnica necesaria para la ejecución de la obra, asegurando que cumple con la normativa vigente.`
 *   **Paso 4: `Actuaciones Estructurales y Envolvente`** (Icon: `trowel-bricks`)
     `Esta es la fase crítica. Reforzamos la estructura, reparamos la cubierta y aplicamos el sistema de aislamiento SATE en la fachada para garantizar la seguridad y eficiencia.`
 *   **Paso 5: `Instalaciones y Acabados Interiores`** (Icon: `paint-roller`)
@@ -160,9 +160,7 @@
 *   **Pregunta 2:** `¿Qué es el sistema SATE y por qué es tan importante?`
     *   **Respuesta:** `El SATE (Sistema de Aislamiento Térmico por el Exterior) consiste en aplicar un "abrigo" aislante a toda la fachada. Es la solución más eficaz para eliminar puentes térmicos, reducir drásticamente el gasto en energía y solucionar problemas de condensación.`
 *   **Pregunta 3:** `¿Cuánto tiempo se tarda en rehabilitar una casa?`
-    *   **Respuesta:** `Un proyecto de rehabilitación integral es complejo. Dependiendo del tamaño y el alcance de los trabajos estructurales, puede durar entre 6 y 10 meses. La fase de obtención de la licencia de obra mayor también influye en los plazos totales.`
-*   **Pregunta 4:** `¿Gestionáis la licencia de obra mayor?`
-    *   **Respuesta:** `Sí, por supuesto. Nos encargamos de todo el proceso: preparamos el proyecto técnico necesario, lo presentamos en el ayuntamiento correspondiente y hacemos seguimiento hasta su aprobación. Tú no te preocupas por la burocracia.`
+    *   **Respuesta:** `Un proyecto de rehabilitación integral es complejo. Dependiendo del tamaño y el alcance de los trabajos estructurales, puede durar entre 6 y 10 meses. La complejidad técnica del proyecto también influye en los plazos totales.`
 *   **Pregunta 5:** `¿Qué pasa si encontráis problemas estructurales inesperados durante la obra?`
     *   **Respuesta:** `Nuestra fase de diagnóstico inicial está diseñada para minimizar las sorpresas. Si aun así aparece un imprevisto, te informamos de inmediato, te explicamos las posibles soluciones técnicas y te presentamos un anexo al presupuesto para tu aprobación antes de actuar. La transparencia es total.`
 *   **Pregunta 6:** `¿Cuál es la diferencia entre "reforma" y "rehabilitación"?`

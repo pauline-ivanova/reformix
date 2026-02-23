@@ -156,8 +156,8 @@
 
 *   **¿El presupuesto es realmente cerrado? ¿Qué pasa con los imprevistos?**
     `Trabajamos con presupuesto cerrado sobre mediciones y proyecto ejecutivo. Si aparece un imprevisto no contemplado (vicio oculto), lo documentamos, proponemos opciones con coste/impacto y no ejecutamos nada sin tu aprobación por escrito.`
-*   **¿Quién gestiona licencias, permisos y coordinaciones con la comunidad?**
-    `Podemos asumir la gestión administrativa (licencias, ocupación de vía pública) y la coordinación con la comunidad si lo necesitas, manteniéndote informado. Si prefieres hacerlo tú o tu estudio, nos integramos en vuestro flujo.`
+*   **¿Quién gestiona las coordinaciones con la comunidad?**
+    `Podemos asumir la coordinación con la comunidad si lo necesitas, manteniéndote informado. Si prefieres hacerlo tú o tu estudio, nos integramos en vuestro flujo.`
 *   **¿Cómo garantizáis la fidelidad al diseño en obra?**
     `El jefe de obra es tu interlocutor único. Validamos hitos críticos (alineaciones, encuentros, acabados) contigo antes de ejecutar. Cualquier desviación se consulta y se aprueba previamente.`
 *   **¿Podemos trabajar en marca blanca y con confidencialidad?**

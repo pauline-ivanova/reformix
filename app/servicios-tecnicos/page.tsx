@@ -78,14 +78,14 @@ export default async function ServiciosTecnicosPage() {
 
   const services = [
     {
-      title: "Aislamiento Térmico y Acústico",
+      title: "Alicatado y Solados",
       subtitle: "",
-      description: "Aislamiento térmico y acústico en Barcelona con materiales de alta eficiencia energética. Instalamos soluciones para mejorar el confort y reducir las facturas energéticas.",
+      description: "Servicio de alicatado y colocación de suelos en Barcelona. Expertos en cerámica, porcelánico y piedra. Acabados nivelados y duraderos.",
       services: [],
-      image: "/images/aislamiento-termico-en-barcelona.webp",
-      imageAlt: "Aislamiento térmico y acústico en Barcelona",
+      image: "/images/alicatado-y-solados.png",
+      imageAlt: "Alicatado y Solados en Barcelona",
       ctaText: "Ver Servicio",
-      ctaHref: "/aislamiento-termico-acustico"
+      ctaHref: "/alicatado"
     },
     {
       title: "Pladur y Falsos Techos",
@@ -98,14 +98,34 @@ export default async function ServiciosTecnicosPage() {
       ctaHref: "/pladur"
     },
     {
-      title: "Carpintería",
+      title: "Ventanas y Aluminio",
       subtitle: "",
-      description: "Servicio de carpintería en Barcelona: fabricación e instalación de muebles y puertas a medida. Instalación de puertas, frentes de armario y rodapiés con ajustes precisos.",
+      description: "Instalación de ventanas de aluminio y PVC. Mejora el aislamiento térmico y acústico de tu hogar con soluciones eficientes.",
       services: [],
-      image: "/images/carpinteria-en-barcelona.webp",
-      imageAlt: "Servicio de carpintería en Barcelona",
+      image: "/images/ventanas-aluminio.png",
+      imageAlt: "Ventanas y Aluminio en Barcelona",
       ctaText: "Ver Servicio",
-      ctaHref: "/carpinteria"
+      ctaHref: "/ventanas"
+    },
+    {
+      title: "Pintura Interior",
+      subtitle: "",
+      description: "Alisamos paredes y aplicamos pintura para un acabado impecable y duradero.",
+      services: [],
+      image: "/images/pintura-interior.webp",
+      imageAlt: "Servicio de pintura interior",
+      ctaText: "Ver Servicio",
+      ctaHref: "/pintura-interior"
+    },
+    {
+      title: "Aislamiento Térmico y Acústico",
+      subtitle: "",
+      description: "Aislamiento térmico y acústico en Barcelona con materiales de alta eficiencia energética. Instalamos soluciones para mejorar el confort y reducir las facturas energéticas.",
+      services: [],
+      image: "/images/aislamiento-termico-en-barcelona.webp",
+      imageAlt: "Aislamiento térmico y acústico en Barcelona",
+      ctaText: "Ver Servicio",
+      ctaHref: "/aislamiento-termico-acustico"
     },
     {
       title: "Fontanería",
@@ -128,14 +148,24 @@ export default async function ServiciosTecnicosPage() {
       ctaHref: "/electricidad"
     },
     {
-      title: "Pintura Interior",
+      title: "Calefacción y Climatización",
       subtitle: "",
-      description: "Alisamos paredes y aplicamos pintura para un acabado impecable y duradero.",
+      description: "Instalamos sistemas eficientes de climatización para tu confort todo el año.",
       services: [],
-      image: "/images/pintura-interior.webp",
-      imageAlt: "Servicio de pintura interior",
+      image: "/images/calefaccion.webp",
+      imageAlt: "Servicio de calefacción y climatización",
       ctaText: "Ver Servicio",
-      ctaHref: "/pintura-interior"
+      ctaHref: "/calefaccion-climatizacion"
+    },
+    {
+      title: "Carpintería",
+      subtitle: "",
+      description: "Servicio de carpintería en Barcelona: fabricación e instalación de muebles y puertas a medida. Instalación de puertas, frentes de armario y rodapiés con ajustes precisos.",
+      services: [],
+      image: "/images/carpinteria-en-barcelona.webp",
+      imageAlt: "Servicio de carpintería en Barcelona",
+      ctaText: "Ver Servicio",
+      ctaHref: "/carpinteria"
     },
     {
       title: "Albañilería",
@@ -148,16 +178,6 @@ export default async function ServiciosTecnicosPage() {
       ctaHref: "/albanileria"
     },
     {
-      title: "Calefacción y Climatización",
-      subtitle: "",
-      description: "Instalamos sistemas eficientes de climatización para tu confort todo el año.",
-      services: [],
-      image: "/images/calefaccion.webp",
-      imageAlt: "Servicio de calefacción y climatización",
-      ctaText: "Ver Servicio",
-      ctaHref: "/calefaccion-climatizacion"
-    },
-    {
       title: "Impermeabilizaciones",
       subtitle: "",
       description: "Aplicamos soluciones técnicas contra humedades en terrazas, cubiertas y baños.",
@@ -166,6 +186,16 @@ export default async function ServiciosTecnicosPage() {
       imageAlt: "Servicio de impermeabilizaciones",
       ctaText: "Ver Servicio",
       ctaHref: "/impermeabilizaciones"
+    },
+    {
+      title: "Montaje de Muebles y Cocinas",
+      subtitle: "",
+      description: "Servicio profesional de montaje de cocinas y muebles (Ikea, Leroy Merlin, Obramat). Instalación rápida y a medida.",
+      services: [],
+      image: "/images/montaje-muebles-cocinas.png",
+      imageAlt: "Montaje de Muebles y Cocinas",
+      ctaText: "Ver Servicio",
+      ctaHref: "/montaje-muebles-cocinas"
     }
   ];
 
@@ -397,10 +427,6 @@ export default async function ServiciosTecnicosPage() {
           {
             question: "¿Podéis coordinar solo una parte de la obra?",
             answer: "Por supuesto. Aunque nuestra especialidad es la coordinación integral, podemos encargarnos de un conjunto específico de trabajos (por ejemplo, toda la fontanería y electricidad) y coordinarnos con tu arquitecto o jefe de obra."
-          },
-          {
-            question: "¿Gestionáis licencias y permisos?",
-            answer: "Sí. Si tu reforma requiere de una licencia de obra menor o una comunicación al ayuntamiento, nuestro equipo técnico puede gestionar toda la documentación para que no tengas que preocuparte por el papeleo."
           },
           {
             question: "¿Cómo se gestionan los cambios durante la obra?",

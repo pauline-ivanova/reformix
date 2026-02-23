@@ -75,7 +75,7 @@ export default async function PinturaInteriorPage() {
   const solutions = [
     {
       title: "Pintura de Paredes y Techos",
-      description: "Aplicamos pinturas plásticas, lavables o mate según tus preferencias, con técnicas de rodillo y brocha para un acabado uniforme y profesional.",
+      description: "Aplicamos pinturas plásticas, lavables, brillante o mate según tus preferencias, con técnicas de rodillo y brocha para un acabado uniforme y profesional.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
           <PaintBrushIcon className="w-8 h-8" />

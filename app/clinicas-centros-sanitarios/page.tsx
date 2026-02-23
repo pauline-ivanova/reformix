@@ -174,10 +174,6 @@ export default async function ClinicasCentrosSanitariosPage() {
             answer: "Depende del alcance de la reforma. Podemos planificar por fases para minimizar el tiempo de cierre, trabajando en horarios que permitan mantener cierta actividad. Evaluamos cada caso específico para encontrar la mejor solución."
           },
           {
-            question: "¿Gestionáis la licencia de actividad sanitaria?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, licencias de actividad sanitaria, comunicaciones al ayuntamiento y cualquier certificación requerida para tu centro."
-          },
-          {
             question: "¿Qué materiales utilizáis para zonas sanitarias?",
             answer: "Utilizamos materiales específicos para entornos sanitarios: revestimientos impermeables y fáciles de desinfectar, suelos antideslizantes, sistemas de ventilación adecuados y todo según normativa de seguridad sanitaria."
           },

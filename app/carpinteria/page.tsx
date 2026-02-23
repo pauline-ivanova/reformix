@@ -18,6 +18,8 @@ import {
   ChartBarIcon,
   EyeIcon,
   ArchiveBoxIcon,
+  ArrowLeftOnRectangleIcon,
+  Squares2X2Icon,
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
@@ -78,7 +80,7 @@ export default async function CarpinteriaPage() {
       description: "Montamos puertas abatibles o correderas, asegurando un ajuste perfecto y un funcionamiento suave.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <HomeIcon className="w-8 h-8" />
+          <ArrowLeftOnRectangleIcon className="w-8 h-8" />
         </div>
       ),
     },
@@ -96,7 +98,7 @@ export default async function CarpinteriaPage() {
       description: "Colocamos suelos laminados o de madera y rematamos con rodapiés de alta calidad para un acabado perfecto.",
       icon: (
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary">
-          <HomeIcon className="w-8 h-8" />
+          <Squares2X2Icon className="w-8 h-8" />
         </div>
       ),
     },
@@ -158,10 +160,12 @@ export default async function CarpinteriaPage() {
         backgroundImage="/images/carpinteria-en-barcelona.webp"
       />
       <FeatureGrid
-        title="Precisión y Calidad en Cada Detalle"
-        subtitle="Nuestro compromiso se basa en la exactitud de las mediciones, la calidad de los materiales y una coordinación impecable."
-        features={features}
+        title="Soluciones de Carpintería para tu Reforma"
+        subtitle="Integramos la madera en tu proyecto para crear espacios más bellos, organizados y funcionales."
+        features={solutions}
         columns={4}
+        backgroundClassName="bg-gray-50"
+        paddingClassName="py-20"
       />
       <AboutSection
         logoPath="/images/reformix-logo-vertical-white.png"
@@ -217,12 +221,10 @@ export default async function CarpinteriaPage() {
         columns={4}
       />
       <FeatureGrid
-        title="Soluciones de Carpintería para tu Reforma"
-        subtitle="Integramos la madera en tu proyecto para crear espacios más bellos, organizados y funcionales."
-        features={solutions}
+        title="Precisión y Calidad en Cada Detalle"
+        subtitle="Nuestro compromiso se basa en la exactitud de las mediciones, la calidad de los materiales y una coordinación impecable."
+        features={features}
         columns={4}
-        backgroundClassName="bg-gray-50"
-        paddingClassName="py-20"
       />
       <FeatureGrid
         title={
@@ -462,4 +464,3 @@ export default async function CarpinteriaPage() {
     </>
   );
 }
-

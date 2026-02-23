@@ -178,10 +178,6 @@ export default async function HotelesAlojamientosPage() {
             answer: "Depende del alcance de la renovación. Una habitación individual puede reformarse en 1-2 semanas, mientras que una renovación completa del establecimiento puede requerir varios meses. Trabajamos por fases para minimizar el impacto."
           },
           {
-            question: "¿Gestionáis las licencias y permisos necesarios?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, comunicaciones al ayuntamiento, certificados de instalaciones y cualquier trámite administrativo requerido para tu establecimiento hotelero."
-          },
-          {
             question: "¿Qué materiales utilizáis para habitaciones hoteleras?",
             answer: "Utilizamos materiales de calidad hotelera: resistentes al uso intensivo, fáciles de limpiar y mantener, y que cumplen con los estándares del sector. Todo adaptado a tu categoría y presupuesto."
           },

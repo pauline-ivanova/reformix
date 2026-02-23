@@ -274,10 +274,6 @@ export default async function ReformasComercialesPage() {
             answer: "Depende del tamaño y complejidad del proyecto. Una reforma de oficina pequeña puede durar 4-6 semanas, mientras que proyectos más complejos como restaurantes o clínicas pueden requerir 8-12 semanas. Te proporcionamos un calendario detallado desde el inicio."
           },
           {
-            question: "¿Gestionáis las licencias y permisos necesarios?",
-            answer: "Sí, gestionamos toda la documentación necesaria: licencias de obra, comunicaciones al ayuntamiento, certificados de instalaciones y cualquier trámite administrativo requerido para tu tipo de actividad comercial."
-          },
-          {
             question: "¿Qué garantías ofrecéis?",
             answer: "Ofrecemos garantía por escrito que cubre tanto la mano de obra como los materiales instalados, conforme a la normativa vigente. Además, proporcionamos toda la documentación técnica y certificaciones necesarias para tu actividad."
           },
