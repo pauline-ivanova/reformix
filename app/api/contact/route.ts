@@ -34,7 +34,10 @@ async function sendTelegramNotification(data: {
   try {
     // Escape special Markdown characters to avoid parsing errors
     const escapeMarkdown = (text: string) => {
-      return text.replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
+      // Escape backslashes first, then other special characters
+      return text
+        .replace(/\\/g, '\\\\')
+        .replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
     };
 
     const telegramMessage = `
@@ -169,16 +172,18 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
-    // Send Telegram notification (non-blocking)
-    sendTelegramNotification({
-      name,
-      email,
-      phone,
-      service,
-      message,
-    }).catch((error) => {
+    // Send Telegram notification
+    try {
+      await sendTelegramNotification({
+        name,
+        email,
+        phone,
+        service,
+        message,
+      });
+    } catch (error) {
       console.error('Failed to send Telegram notification:', error);
-    });
+    }
 
     // Send email notification to both addresses
     const emailSubject = `Nuevo contacto desde la web: ${name}`;
