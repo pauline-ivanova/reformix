@@ -32,26 +32,18 @@ async function sendTelegramNotification(data: {
   }
 
   try {
-    // Escape special Markdown characters to avoid parsing errors
-    const escapeMarkdown = (text: string) => {
-      // Escape backslashes first, then other special characters
-      return text
-        .replace(/\\/g, '\\\\')
-        .replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
-    };
-
     const telegramMessage = `
-🔔 *Nuevo contacto desde reformix.barcelona*
+🔔 Nuevo contacto desde reformix.barcelona
 
-👤 *Nombre:* ${escapeMarkdown(data.name)}
-📧 *Email:* ${escapeMarkdown(data.email)}
-📱 *Teléfono:* ${escapeMarkdown(data.phone)}
-${data.service ? `🔧 *Servicio:* ${escapeMarkdown(data.service)}` : ''}
+👤 Nombre: ${data.name}
+📧 Email: ${data.email}
+📱 Teléfono: ${data.phone}
+${data.service ? `🔧 Servicio: ${data.service}` : ''}
 
-💬 *Mensaje:*
-${escapeMarkdown(data.message)}
+💬 Mensaje:
+${data.message}
 
-⏰ *Fecha:* ${escapeMarkdown(new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }))}
+⏰ Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
     `.trim();
 
     const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
@@ -67,7 +59,7 @@ ${escapeMarkdown(data.message)}
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: telegramMessage,
-        parse_mode: 'MarkdownV2',
+        // Removed MarkdownV2 to avoid parsing errors
       }),
     });
 
