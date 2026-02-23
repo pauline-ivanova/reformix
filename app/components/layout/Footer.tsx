@@ -66,6 +66,7 @@ const navigation = {
       { name: 'Albañilería', href: '/albanileria' },
       { name: 'Calefacción y Climatización', href: '/calefaccion-climatizacion' },
       { name: 'Impermeabilizaciones', href: '/impermeabilizaciones' },
+      { name: 'Montaje de Muebles y Cocinas', href: '/montaje-muebles-cocinas' },
     ],
   },
   reformasComerciales: {
@@ -333,11 +334,11 @@ export default function Footer() {
                 </li>
                 <li>
                   <a 
-                    href="mailto:info@reformix.barcelona" 
+                    href="mailto:reformix.barcelona@gmail.com" 
                     className="flex items-start gap-3 text-sm leading-6 text-gray-300 hover:text-white transition-colors duration-200 group"
                   >
                     <EnvelopeIcon className="h-5 w-5 flex-shrink-0 mt-0.5 text-white group-hover:scale-110 transition-transform" />
-                    <span className="break-all">info@reformix.barcelona</span>
+                    <span className="break-all">reformix.barcelona@gmail.com</span>
                   </a>
                 </li>
               </ul>

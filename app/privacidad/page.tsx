@@ -111,7 +111,7 @@ export default function PrivacyPolicyPage() {
             <li><strong>Forma jurídica:</strong> Autónoma (Empresario Individual)</li>
             <li><strong>Marca comercial:</strong> Reformix Barcelona</li>
             <li><strong>Dirección:</strong> Carrer de Concepción Arenal, 100, 08204 Sabadell, Barcelona, España</li>
-            <li><strong>Email de contacto:</strong> <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">info@reformix.barcelona</a></li>
+            <li><strong>Email de contacto:</strong> <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a></li>
           </ul>
           <p className="mt-4">
             Para cualquier consulta relacionada con el tratamiento de tus datos personales, puedes contactarnos en la dirección de correo electrónico indicada.
@@ -157,8 +157,8 @@ export default function PrivacyPolicyPage() {
           </ul>
           <p className="mt-4">
             Para ejercer estos derechos, puedes contactarnos en:{' '}
-            <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">
-              info@reformix.barcelona
+            <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">
+              reformix.barcelona@gmail.com
             </a>
           </p>
         </section>
@@ -189,7 +189,7 @@ export default function PrivacyPolicyPage() {
             puedes contactarnos:
           </p>
           <ul>
-            <li><strong>Email:</strong> <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">info@reformix.barcelona</a></li>
+            <li><strong>Email:</strong> <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a></li>
             <li><strong>Dirección:</strong> Carrer de Concepción Arenal, 100, 08204 Sabadell, Barcelona, España</li>
             <li><strong>Titular:</strong> Irina Smirniakova (NIE: Y6639851H)</li>
           </ul>

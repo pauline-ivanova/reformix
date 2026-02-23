@@ -53,7 +53,7 @@ export default function LegalNoticePage() {
             <li><strong>Marca comercial:</strong> Reformix Barcelona</li>
             <li><strong>Actividad:</strong> Reformas y rehabilitación</li>
             <li><strong>Domicilio:</strong> Carrer de Concepción Arenal, 100, 08204 Sabadell, Barcelona, España</li>
-            <li><strong>Email:</strong> <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">info@reformix.barcelona</a></li>
+            <li><strong>Email:</strong> <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a></li>
             <li><strong>Sitio web:</strong> <a href={baseUrl} className="text-brand-accent hover:underline">{baseUrl}</a></li>
           </ul>
         </section>

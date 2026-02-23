@@ -61,8 +61,8 @@ export default function ContactPage() {
                   <EnvelopeIcon className="w-6 h-6 text-brand-accent flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-brand-text-heading mb-1">Email</h3>
-                    <a href="mailto:info@reformix.barcelona" className="text-brand-text-body hover:text-brand-accent">
-                      info@reformix.barcelona
+                    <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-text-body hover:text-brand-accent">
+                      reformix.barcelona@gmail.com
                     </a>
                   </div>
                 </div>

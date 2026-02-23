@@ -203,8 +203,8 @@ export async function POST(request: NextRequest) {
       </div>
     `;
 
-    // Send email to both addresses
-    const recipients = ['info@reformix.barcelona', 'reformix.barcelona@gmail.com'];
+    // Send email to admin
+    const recipients = ['reformix.barcelona@gmail.com'];
     
     // Only send email if Resend is configured
     if (resend) {

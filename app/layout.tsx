@@ -76,7 +76,7 @@ export default function RootLayout({
     description: 'Empresa de reformas en Barcelona y Vallès Occidental con más de 10 años de experiencia.',
     contactPoint: {
       contactType: 'Customer Service',
-      email: 'info@reformix.barcelona',
+      email: 'reformix.barcelona@gmail.com',
     },
     slogan: 'Reformas con confianza, resultados con garantía',
     knowsAbout: [
@@ -117,7 +117,7 @@ export default function RootLayout({
     url: baseUrl,
     description: 'Empresa de reformas en Barcelona y Vallès Occidental con más de 10 años de experiencia.',
     telephone: '+34 642 029 572',
-    email: 'info@reformix.barcelona',
+    email: 'reformix.barcelona@gmail.com',
     priceRange: '€€',
     logo: '/reformix-logo.svg',
     image: '/images/hero-bg.webp',

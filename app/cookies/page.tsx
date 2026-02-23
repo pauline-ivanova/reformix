@@ -117,7 +117,7 @@ export default function CookiesPolicyPage() {
           </p>
           <p>
             Puedes retirar tu consentimiento en cualquier momento eliminando las cookies de tu navegador o 
-            contactándonos a través de <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">info@reformix.barcelona</a>.
+            contactándonos a través de <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a>.
           </p>
         </section>
 
@@ -134,8 +134,8 @@ export default function CookiesPolicyPage() {
           <h2 className="text-2xl font-semibold mb-4 text-brand-text-heading">Contacto</h2>
           <p>
             Si tienes preguntas sobre nuestra Política de Cookies, puedes contactarnos en:{' '}
-            <a href="mailto:info@reformix.barcelona" className="text-brand-accent hover:underline">
-              info@reformix.barcelona
+            <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">
+              reformix.barcelona@gmail.com
             </a>
           </p>
         </section>
