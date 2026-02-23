@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Pladur y Falsos Techos en Barcelona y Vallès",
     description: "Especialistas en pladur y falsos techos en Barcelona y Vallès. Creamos distribuciones y soluciones decorativas con acabados de alta calidad. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/pladur",
+    url: "https://www.reformix.barcelona/pladur",
     pagePath: "/pladur",
     keywords: ["pladur Barcelona", "falsos techos Barcelona", "instalación pladur", "tabiques pladur", "techos desmontables"],
   }),
@@ -274,7 +274,7 @@ export default async function PladurPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto se tarda en instalar un tabique de pladur?",

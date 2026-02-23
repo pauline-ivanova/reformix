@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas Comerciales en Barcelona y Vallès",
     description: "Reformas comerciales en Barcelona y Vallès. Oficinas, locales, restaurantes y clínicas con cumplimiento normativo y presupuesto cerrado. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-comerciales",
+    url: "https://www.reformix.barcelona/reformas-comerciales",
     pagePath: "/reformas-comerciales",
     keywords: ["reformas comerciales", "reforma oficinas Barcelona", "reforma locales comerciales", "retail fit-out Barcelona", "reforma restaurantes Barcelona", "reforma clínicas Barcelona"],
   }),
@@ -259,7 +259,7 @@ export default async function ReformasComercialesPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Puedo seguir operando durante la reforma?",

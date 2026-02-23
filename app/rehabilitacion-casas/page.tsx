@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Rehabilitación de Casas en Barcelona | Reformix",
     description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/rehabilitacion-casas",
+    url: "https://www.reformix.barcelona/rehabilitacion-casas",
     pagePath: "/rehabilitacion-casas",
     keywords: ["rehabilitación casas", "rehabilitación Barcelona", "rehabilitación integral", "rehabilitación chalets", "SATE Barcelona"],
   }),
@@ -326,7 +326,7 @@ export default async function RehabilitacionCasasPage() {
         subtitle='Rehabilitar una casa es devolverle la vida. Nos enorgullece compartir la opinión de clientes que, como tú, decidieron dar el paso y ahora disfrutan de un hogar más seguro, eficiente y confortable.'
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto puede costar la rehabilitación de una casa de 150m2?",

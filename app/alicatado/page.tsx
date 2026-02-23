@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Alicatado y Solados en Barcelona y Vallès | Reformix",
     description: "Servicio de alicatado y colocación de suelos en Barcelona. Expertos en cerámica, porcelánico y piedra. Acabados nivelados y duraderos. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/alicatado",
+    url: "https://www.reformix.barcelona/alicatado",
     pagePath: "/alicatado",
     keywords: ["alicatado barcelona", "solados barcelona", "colocación cerámica", "reformar baño azulejos", "precio m2 alicatado"],
   }),
@@ -277,7 +277,7 @@ export default async function AlicatadoPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué tipo de azulejo es mejor para el baño?",

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Salones en Barcelona: Espacios con Estilo",
     description: "Especialistas en reformas de salones en Barcelona y Vallès. Optimizamos espacio, luz y diseño para crear el salón de tus sueños. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-salones",
+    url: "https://www.reformix.barcelona/reformas-salones",
     pagePath: "/reformas-salones",
     keywords: ["reforma salón Barcelona", "reforma salón Vallès", "diseño salón Barcelona", "reforma salón llave en mano"],
   }),
@@ -382,7 +382,7 @@ export default async function ReformasSalonesPage() {
         paddingClassName="py-20"
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Es buena idea unir el salón con la cocina?",

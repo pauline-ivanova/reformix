@@ -10,7 +10,7 @@ interface Testimonial {
   location: string;
 }
 
-const defaultTestimonials: Testimonial[] = [
+export const defaultTestimonials: Testimonial[] = [
   {
     text: "Lo que más valoramos fue la seriedad con los plazos. El proyecto se entregó en fecha y pudimos inaugurar el espacio sin retrasos. La coordinación con nuestro equipo fue muy ágil.",
     initials: "DO",

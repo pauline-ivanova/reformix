@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Impermeabilizaciones en Barcelona y Vallès Occidental",
     description: "Aplicamos soluciones técnicas contra humedades en terrazas, cubiertas y baños en Barcelona y Vallès Occidental. Protección garantizada contra filtraciones.",
-    url: "https://reformix.barcelona/impermeabilizaciones",
+    url: "https://www.reformix.barcelona/impermeabilizaciones",
     pagePath: "/impermeabilizaciones",
     keywords: ["impermeabilización Barcelona", "impermeabilización terrazas", "impermeabilización cubiertas", "protección humedades", "telas asfálticas"],
   }),
@@ -275,7 +275,7 @@ export default async function ImpermeabilizacionesPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué sistemas de impermeabilización utilizáis?",

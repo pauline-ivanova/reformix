@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Habitaciones en Barcelona y Vallès",
     description: "Expertos en reformas de habitaciones en Barcelona y Vallès. Creamos espacios para el descanso, optimizando almacenaje, luz y aislamiento. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-habitaciones",
+    url: "https://www.reformix.barcelona/reformas-habitaciones",
     pagePath: "/reformas-habitaciones",
     keywords: ["reforma habitación Barcelona", "reforma habitación Vallès", "diseño habitación Barcelona", "armarios a medida"],
   }),
@@ -344,7 +344,7 @@ export default async function ReformasHabitacionesPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto cuesta hacer un armario empotrado a medida?",

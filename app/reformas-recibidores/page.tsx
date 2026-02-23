@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Recibidores en Barcelona con Estilo",
     description: "Expertos en reformas de recibidores en Barcelona y Vallès. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-recibidores",
+    url: "https://www.reformix.barcelona/reformas-recibidores",
     pagePath: "/reformas-recibidores",
     keywords: ["reforma recibidor Barcelona", "reforma entrada Barcelona", "armarios pladur recibidor", "diseño recibidor"],
   }),
@@ -349,7 +349,7 @@ export default async function ReformasRecibidoresPage() {
         subtitle="Su experiencia tras reformar con nosotros el primer espacio que ven al llegar a casa."
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Son resistentes los muebles de pladur?",

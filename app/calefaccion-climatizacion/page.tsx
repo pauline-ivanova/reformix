@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Calefacción y Climatización en Barcelona y Vallès Occidental",
     description: "Instalamos sistemas eficientes de calefacción y climatización en Barcelona y Vallès Occidental. Confort todo el año con sistemas modernos y eficientes.",
-    url: "https://reformix.barcelona/calefaccion-climatizacion",
+    url: "https://www.reformix.barcelona/calefaccion-climatizacion",
     pagePath: "/calefaccion-climatizacion",
     keywords: ["calefacción Barcelona", "climatización Barcelona", "aerotermia Barcelona", "calefacción radiadores", "aire acondicionado Barcelona"],
   }),
@@ -263,7 +263,7 @@ export default async function CalefaccionClimatizacionPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué sistema de calefacción es más eficiente?",

@@ -18,6 +18,7 @@ interface HeroProps {
     href: string;
   };
   backgroundImage?: string;
+  imageAlt?: string;
   overlayOpacity?: 'default' | 'strong' | 'stronger'; // Control overlay darkness
 }
 
@@ -29,6 +30,7 @@ export default function Hero({
   primaryCTA,
   secondaryCTA,
   backgroundImage,
+  imageAlt,
   overlayOpacity = 'default',
 }: HeroProps) {
   const [isDesktop, setIsDesktop] = useState(false);
@@ -71,7 +73,7 @@ export default function Hero({
         <div className="absolute inset-0 z-0">
           <Image
             src={backgroundImage}
-            alt=""
+            alt={imageAlt || title}
             fill
             priority
             fetchPriority="high"

@@ -14,10 +14,8 @@ function formatDate(date: Date): string {
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
 
-function formatDate(date: Date): string {
-  const protocol = request.headers.get('x-forwarded-proto') || 'http';
-  const host = request.headers.get('host') || 'localhost:3000';
-  const baseUrl = `${protocol}://${host}`;
+export async function GET(request: NextRequest) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
   const pages = getReformasComercialesPages();
 

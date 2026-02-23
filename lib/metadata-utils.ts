@@ -77,7 +77,7 @@ export function generateStandardMetadata(options: StandardMetadataOptions): Part
   } = options;
 
   const keywordsString = keywords.length > 0 ? keywords.join(', ') : '';
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   
   // Default OG image - use hero-bg.webp as fallback
   const ogImage = image || `${baseUrl}/images/hero-bg.webp`;

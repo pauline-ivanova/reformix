@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Clínicas en Barcelona y Vallès",
     description: "Especialistas en reformas de clínicas y centros sanitarios en Barcelona y Vallès. Cumplimiento normativa higiene y seguridad sanitaria. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/clinicas-centros-sanitarios",
+    url: "https://www.reformix.barcelona/clinicas-centros-sanitarios",
     pagePath: "/clinicas-centros-sanitarios",
     keywords: ["reforma clínicas Barcelona", "reforma centros sanitarios Barcelona", "diseño clínicas Barcelona", "normativa sanitaria Barcelona"],
   }),
@@ -163,7 +163,7 @@ export default async function ClinicasCentrosSanitariosPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué normativas sanitarias debemos cumplir?",

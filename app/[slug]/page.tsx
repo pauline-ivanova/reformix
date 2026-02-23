@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   const pageUrl = `${baseUrl}/${params.slug}`;
 
   const title = contentFile.metadata.title || 'Reformix Barcelona';

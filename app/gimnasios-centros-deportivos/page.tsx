@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Gimnasios en Barcelona y Vallès",
     description: "Especialistas en reformas de gimnasios y centros deportivos en Barcelona y Vallès. Instalaciones resistentes y funcionales. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/gimnasios-centros-deportivos",
+    url: "https://www.reformix.barcelona/gimnasios-centros-deportivos",
     pagePath: "/gimnasios-centros-deportivos",
     keywords: ["reforma gimnasios Barcelona", "reforma centros deportivos Barcelona", "diseño gimnasios Barcelona", "instalaciones deportivas Barcelona"],
   }),
@@ -163,7 +163,7 @@ export default async function GimnasiosCentrosDeportivosPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué materiales son más adecuados para un gimnasio?",

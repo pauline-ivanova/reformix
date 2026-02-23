@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Terrazas y Balcones en Barcelona",
     description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-terrazas-balcones",
+    url: "https://www.reformix.barcelona/reformas-terrazas-balcones",
     pagePath: "/reformas-terrazas-balcones",
     keywords: ["reforma terraza Barcelona", "reforma balcón Barcelona", "impermeabilización terraza", "cerramientos terraza"],
   }),
@@ -353,7 +353,7 @@ export default async function ReformasTerrazasBalconesPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Necesito permiso de la comunidad para reformar mi terraza?",

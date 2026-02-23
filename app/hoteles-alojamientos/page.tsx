@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Hoteles en Barcelona y Vallès",
     description: "Especialistas en reformas de hoteles y alojamientos en Barcelona y Vallès. Renovación de espacios hoteleros que mejora la experiencia de huéspedes. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/hoteles-alojamientos",
+    url: "https://www.reformix.barcelona/hoteles-alojamientos",
     pagePath: "/hoteles-alojamientos",
     keywords: ["reforma hoteles Barcelona", "reforma alojamientos Barcelona", "diseño hoteles Barcelona", "renovación hoteles Barcelona"],
   }),
@@ -163,7 +163,7 @@ export default async function HotelesAlojamientosPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Es posible reformar el hotel sin cerrarlo completamente?",

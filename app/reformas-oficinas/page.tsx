@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Oficinas en Barcelona y Vallès",
     description: "Especialistas en reformas de oficinas en Barcelona y Vallès. Espacios de trabajo modernos y funcionales que mejoran la productividad. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/reformas-oficinas",
+    url: "https://www.reformix.barcelona/reformas-oficinas",
     pagePath: "/reformas-oficinas",
     keywords: ["reforma oficinas Barcelona", "reforma oficinas Vallès", "diseño oficinas Barcelona", "reforma espacios trabajo"],
   }),
@@ -165,7 +165,7 @@ export default async function ReformasOficinasPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Podemos seguir trabajando durante la reforma?",

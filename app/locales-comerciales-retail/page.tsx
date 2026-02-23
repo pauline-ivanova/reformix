@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Locales Comerciales en Barcelona",
     description: "Retail fit-out completo en Barcelona y Vallès. Reformas de locales comerciales desde la estructura hasta el diseño interior. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/locales-comerciales-retail",
+    url: "https://www.reformix.barcelona/locales-comerciales-retail",
     pagePath: "/locales-comerciales-retail",
     keywords: ["reforma locales comerciales Barcelona", "retail fit-out Barcelona", "reforma tiendas Barcelona", "diseño locales comerciales"],
   }),
@@ -163,7 +163,7 @@ export default async function LocalesComercialesRetailPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto tiempo estará cerrado el local durante la reforma?",

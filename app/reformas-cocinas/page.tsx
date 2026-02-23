@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reforma de Cocinas en Barcelona y Vallès Occidental",
     description: "Especialistas en reformas de cocinas en Barcelona y Vallès. Diseños funcionales, presupuesto cerrado y plazos garantizados. ¡Pide tu visita!",
-    url: "https://reformix.barcelona/reformas-cocinas",
+    url: "https://www.reformix.barcelona/reformas-cocinas",
     pagePath: "/reformas-cocinas",
     keywords: ["reforma cocina Barcelona", "reforma cocina Vallès", "diseño cocina Barcelona", "reforma cocina llave en mano"],
   }),
@@ -320,7 +320,7 @@ export default async function ReformasCocinasPage() {
         paddingClassName="py-20"
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
           name: "Reforma de Cocinas en Barcelona y Vallès Occidental",

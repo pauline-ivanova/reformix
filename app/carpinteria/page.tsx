@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Servicios de Carpintería para Reformas en Barcelona",
     description: "Instalación de puertas de paso, armarios empotrados, rodapiés y panelados en Barcelona y Vallès Occidental. Acabados perfectos para tu reforma.",
-    url: "https://reformix.barcelona/carpinteria",
+    url: "https://www.reformix.barcelona/carpinteria",
     pagePath: "/carpinteria",
     keywords: ["carpintería para reformas", "carpintería Barcelona", "armarios a medida", "puertas Barcelona"],
   }),
@@ -345,7 +345,7 @@ export default async function CarpinteriaPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué tipo de trabajos de carpintería realizáis?",

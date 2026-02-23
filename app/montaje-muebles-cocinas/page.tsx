@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Montaje de Cocinas y Muebles en Barcelona (Ikea, Leroy Merlin)",
     description: "Servicio profesional de montaje de cocinas y muebles (Ikea, Leroy Merlin, Obramat) en Barcelona. Instalación rápida, segura y a medida.",
-    url: "https://reformix.barcelona/montaje-muebles-cocinas",
+    url: "https://www.reformix.barcelona/montaje-muebles-cocinas",
     pagePath: "/montaje-muebles-cocinas",
     keywords: ["montaje de cocinas Barcelona", "montaje muebles Ikea Barcelona", "montador muebles Leroy Merlin", "instalación cocinas Barcelona", "montaje muebles Obramat"],
   }),
@@ -265,7 +265,7 @@ export default async function MontajeMueblesCocinasPage() {
       <TestimonialsCarousel />
       
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Montáis cocinas de Ikea compradas por mi cuenta?",

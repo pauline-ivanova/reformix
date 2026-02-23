@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas por Estancia en Barcelona y Vallès Occidental",
     description: "Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía. Solicita tu visita gratis.",
-    url: "https://reformix.barcelona/reformas-por-estancia",
+    url: "https://www.reformix.barcelona/reformas-por-estancia",
     pagePath: "/reformas-por-estancia",
     keywords: ["reformas por estancia", "reforma cocina Barcelona", "reforma baño Barcelona", "reforma salón Barcelona", "reforma habitación Barcelona"],
   }),
@@ -249,7 +249,7 @@ export default async function ReformasPorEstanciaPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Puedo seguir viviendo en casa durante la reforma?",

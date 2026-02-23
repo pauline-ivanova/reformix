@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Aislamiento Térmico y Acústico en Barcelona",
     description: "Expertos en aislamiento térmico y acústico en Barcelona y Vallès Occidental. Mejora el confort, reduce el ruido y ahorra en tus facturas de energía.",
-    url: "https://reformix.barcelona/aislamiento-termico-acustico",
+    url: "https://www.reformix.barcelona/aislamiento-termico-acustico",
     pagePath: "/aislamiento-termico-acustico",
     keywords: ["aislamiento termico Barcelona", "aislamiento acustico Barcelona", "SATE Barcelona", "aislamiento vivienda"],
   }),
@@ -392,7 +392,7 @@ export default async function AislamientoTermicoAcusticoPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Se pierde mucho espacio al aislar por el interior?",

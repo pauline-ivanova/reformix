@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas Integrales en Barcelona y Vallès Occidental",
     description: "Reformas Integrales en Barcelona y Vallès Occidental. Proyectos llave en mano con garantía y presupuesto cerrado. ¡Pide tu presupuesto!",
-    url: "https://reformix.barcelona/reformas-integrales",
+    url: "https://www.reformix.barcelona/reformas-integrales",
     pagePath: "/reformas-integrales",
     image: "/images/reformas-integrales.webp", // Page-specific image if available, falls back to hero-bg.webp
     keywords: ["reformas integrales", "reforma integral Barcelona", "reforma integral llave en mano", "rehabilitación casas", "reforma integral pisos"],
@@ -233,7 +233,7 @@ export default async function ReformasIntegralesPage() {
         subtitle='Detrás de cada proyecto de éxito y de cada foto del "después", hay una familia que ha depositado su confianza en nosotros. Su tranquilidad durante el proceso y su satisfacción con el resultado final es la verdadera medida de nuestro trabajo. Estas son algunas de sus palabras.'
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto tarda una reforma integral de un piso de 90m²?",

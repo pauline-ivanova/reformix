@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Interiorismo en Barcelona y Vallès | Reformix",
     description: "Ejecutamos proyectos de interiorismo en colaboración con arquitectos y diseñadores en Barcelona y Vallès. Tu visión, ejecutada a la perfección. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/interiorismo-colaboracion",
+    url: "https://www.reformix.barcelona/interiorismo-colaboracion",
     pagePath: "/interiorismo-colaboracion",
     keywords: ["proyectos interiorismo Barcelona", "ejecución interiorismo", "colaboración arquitectos", "ejecución proyectos diseño"],
   }),
@@ -174,7 +174,7 @@ export default async function InteriorismoColaboracionPage() {
       <WhyChooseUs />
       <TestimonialsCarousel />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿El presupuesto es realmente cerrado? ¿Qué pasa con los imprevistos?",

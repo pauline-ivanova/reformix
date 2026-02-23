@@ -157,7 +157,7 @@ export function generateLocalBusinessSchema({
   streetAddress?: string;
   postalCode?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   const logoUrl = logo ? (logo.startsWith('http') ? logo : `${baseUrl}${logo.startsWith('/') ? '' : '/'}${logo}`) : `${baseUrl}/reformix-logo.svg`;
   const imageUrl = image ? (image.startsWith('http') ? image : `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`) : `${baseUrl}/images/hero-bg.webp`;
 
@@ -256,7 +256,7 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
  * Generate BreadcrumbList schema
  */
 export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   
   return {
     '@context': 'https://schema.org',
@@ -291,7 +291,7 @@ export function generateServiceSchema({
   serviceType?: string;
   url?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   
   // Обязательные города: Barcelona и Sabadell (всегда должны быть первыми)
   const requiredCities = [
@@ -420,7 +420,7 @@ export function generateImageObjectSchema({
   width?: number;
   height?: number;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   const imageUrl = url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
 
   return {
@@ -453,7 +453,7 @@ export function generateOfferSchema({
   validFrom?: string;
   url?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
   
   const schema: any = {
     '@context': 'https://schema.org',
@@ -501,7 +501,7 @@ export function generateOfferCatalogSchema({
     url: string;
   }>;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
   return {
     '@context': 'https://schema.org',

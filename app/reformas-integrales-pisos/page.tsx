@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas Integrales de Pisos en Barcelona | Reformix",
     description: "Transformamos tu piso en Barcelona y Vallès. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía. ¡Pide tu visita!",
-    url: "https://reformix.barcelona/reformas-integrales-pisos",
+    url: "https://www.reformix.barcelona/reformas-integrales-pisos",
     pagePath: "/reformas-integrales-pisos",
     keywords: ["reformas integrales pisos", "reforma piso Barcelona", "reforma integral llave en mano", "rehabilitación pisos"],
   }),
@@ -332,7 +332,7 @@ export default async function ReformasIntegralesPisosPage() {
         paddingClassName="py-24 md:py-28"
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto se tarda en reformar un piso de 80m²?",

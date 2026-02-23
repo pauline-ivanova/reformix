@@ -2,8 +2,9 @@ import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
 import HeroPreload from "@/app/components/common/HeroPreload";
 import JsonLd from "@/app/components/common/JsonLd";
-import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import { generateFAQSchema, generateReviewSchema } from "@/app/components/common/JsonLd";
 import dynamic from 'next/dynamic';
+import { defaultTestimonials } from "@/app/components/blocks/TestimonialsCarousel";
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
 import { 
@@ -13,7 +14,7 @@ import {
   reformasComercialesPageData as reformasComercialesData
 } from '@/lib/page-data';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
 export const metadata: Metadata = {
   title: "Reformas en Barcelona y Vallès Occidental | Reformix",
@@ -245,7 +246,23 @@ export default async function HomePage() {
       />
       <CompanySection />
       <WhyChooseUs />
-      <TestimonialsCarousel />
+      <TestimonialsCarousel testimonials={defaultTestimonials} />
+      {(() => {
+        const reviewSchema = generateReviewSchema({
+          reviews: defaultTestimonials.map(t => ({
+            author: t.name,
+            reviewBody: t.text,
+            ratingValue: 5
+          })),
+          aggregateRating: {
+            ratingValue: 5,
+            ratingCount: defaultTestimonials.length,
+            bestRating: 5,
+            worstRating: 1
+          }
+        });
+        return reviewSchema && <JsonLd data={reviewSchema} />;
+      })()}
       {(() => {
         const faqs = [
           {

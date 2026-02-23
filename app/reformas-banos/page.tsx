@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Reformas de Baños en Barcelona y Vallès Occidental",
     description: "Especialistas en reformas de baños en Barcelona y Vallès. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía. ¡Infórmate!",
-    url: "https://reformix.barcelona/reformas-banos",
+    url: "https://www.reformix.barcelona/reformas-banos",
     pagePath: "/reformas-banos",
     keywords: ["reforma baño Barcelona", "reforma baño Vallès", "diseño baño Barcelona", "reforma baño llave en mano"],
   }),
@@ -297,7 +297,7 @@ export default async function ReformasBanosPage() {
         paddingClassName="py-20"
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Cuánto tiempo se tarda en reformar un baño?",

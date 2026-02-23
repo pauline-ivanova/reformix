@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Electricidad para Reformas en Barcelona | Reformix",
     description: "Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/electricidad",
+    url: "https://www.reformix.barcelona/electricidad",
     pagePath: "/electricidad",
     keywords: ["electricista reformas Barcelona", "instalación eléctrica Barcelona", "boletín eléctrico", "electricidad reformas"],
   }),
@@ -433,7 +433,7 @@ export default async function ElectricidadPage() {
         </div>
       </section>
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Es obligatorio cambiar la instalación eléctrica en una reforma integral?",

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Servicios de Albañilería en Barcelona y Vallès Occidental",
     description: "Especialistas en albañilería para reformas en Barcelona y Vallès Occidental. Revestimientos, solados y pequeñas obras con acabados de calidad.",
-    url: "https://reformix.barcelona/albanileria",
+    url: "https://www.reformix.barcelona/albanileria",
     pagePath: "/albanileria",
     keywords: ["albañilería Barcelona", "revestimientos Barcelona", "solados Barcelona", "obras albañilería", "reforma albañilería"],
   }),
@@ -275,7 +275,7 @@ export default async function AlbanileriaPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué trabajos de albañilería realizáis?",

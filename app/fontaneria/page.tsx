@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Fontanería en Barcelona y Vallès Occidental | Reformix",
     description: "Renovamos la instalación de fontanería en Barcelona y Vallès. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/fontaneria",
+    url: "https://www.reformix.barcelona/fontaneria",
     pagePath: "/fontaneria",
     keywords: ["servicios fontanería reformas", "fontanería Barcelona", "instalación fontanería", "renovación tuberías"],
   }),
@@ -405,7 +405,7 @@ export default async function FontaneriaPage() {
         columns={3}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Es realmente necesario cambiar toda la fontanería si solo reformo el baño?",

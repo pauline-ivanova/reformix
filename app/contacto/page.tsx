@@ -3,7 +3,7 @@ import { generateStandardMetadata } from '@/lib/metadata-utils';
 import ContactForm from '@/app/components/forms/ContactForm';
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
 export const metadata: Metadata = {
   title: 'Contacto | Reformix Barcelona',

@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ...generateStandardMetadata({
     title: "Pintura para Reformas en Barcelona y Vallès",
     description: "Servicio de pintura para reformas en Barcelona y Vallès. Acabados impecables y duraderos. Protegemos muebles y suelos. ¡Pide presupuesto!",
-    url: "https://reformix.barcelona/pintura-interior",
+    url: "https://www.reformix.barcelona/pintura-interior",
     pagePath: "/pintura-interior",
     keywords: ["pintura interior reformas", "pintura Barcelona", "pintura vivienda", "acabados pintura"],
   }),
@@ -275,7 +275,7 @@ export default async function PinturaInteriorPage() {
         ]}
       />
       {(() => {
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reformix.barcelona';
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
         const faqs = [
           {
             question: "¿Qué tipo de pintura es mejor para interiores?",

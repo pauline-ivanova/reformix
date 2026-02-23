@@ -15,9 +15,7 @@ function formatDate(date: Date): string {
 }
 
 export async function GET(request: NextRequest) {
-  const protocol = request.headers.get('x-forwarded-proto') || 'http';
-  const host = request.headers.get('host') || 'localhost:3000';
-  const baseUrl = `${protocol}://${host}`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
   // Get only legal/informational pages (excludes services and commercial pages)
   const staticPages = getLegalPages();
