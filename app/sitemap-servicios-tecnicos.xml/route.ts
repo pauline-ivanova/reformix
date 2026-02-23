@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContentFiles, parseContentFileName } from '@/lib/content-utils';
+import { getAllContentFiles, parseContentFileName, SERVICIOS_TECNICOS_SLUGS } from '@/lib/content-utils';
 import fs from 'fs';
 import path from 'path';
 
@@ -24,23 +24,6 @@ function formatDate(date: Date): string {
   const tzSign = tzOffset >= 0 ? '+' : '-';
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
-
-/**
- * Known servicios técnicos pages (based on servicios-tecnicos hub page)
- * This includes all pages that are part of servicios técnicos category
- */
-const SERVICIOS_TECNICOS_SLUGS = new Set([
-  'servicios-tecnicos', // Hub page
-  'aislamiento-termico-acustico',
-  'pladur',
-  'carpinteria',
-  'fontaneria',
-  'electricidad',
-  'pintura-interior',
-  'albanileria',
-  'calefaccion-climatizacion',
-  'impermeabilizaciones',
-]);
 
 /**
  * Gets all static pages from app/ that are servicios técnicos pages

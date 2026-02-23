@@ -261,54 +261,68 @@ function formatPageTitle(slug: string): string {
 }
 
 /**
+ * Known reformas comerciales pages
+ * This includes the hub page and all subpages
+ */
+export const REFORMAS_COMERCIALES_SLUGS = new Set([
+  'reformas-comerciales',
+  'reformas-oficinas',
+  'locales-comerciales-retail',
+  'restaurantes-bares',
+  'clinicas-centros-sanitarios',
+  'gimnasios-centros-deportivos',
+  'hoteles-alojamientos',
+]);
+
+/**
+ * Known servicios técnicos pages
+ * This includes all pages that are part of servicios técnicos category
+ */
+export const SERVICIOS_TECNICOS_SLUGS = new Set([
+  'servicios-tecnicos',
+  'aislamiento-termico-acustico',
+  'pladur',
+  'carpinteria',
+  'fontaneria',
+  'electricidad',
+  'pintura-interior',
+  'albanileria',
+  'calefaccion-climatizacion',
+  'impermeabilizaciones',
+  'alicatado',
+  'montaje-muebles-cocinas',
+  'ventanas',
+]);
+
+/**
+ * Reformas Integrales pages (category 01)
+ */
+export const REFORMAS_INTEGRALES_SLUGS = new Set([
+  'reformas-integrales',
+  'reformas-integrales-pisos',
+  'rehabilitacion-casas',
+  'interiorismo-colaboracion',
+]);
+
+/**
+ * Reformas por Estancia pages (category 02)
+ */
+export const REFORMAS_ESTANCIA_SLUGS = new Set([
+  'reformas-por-estancia',
+  'reformas-cocinas',
+  'reformas-banos',
+  'reformas-salones',
+  'reformas-habitaciones',
+  'reformas-terrazas-balcones',
+  'reformas-recibidores',
+]);
+
+/**
  * Gets only legal/informational pages for the legal sitemap
  * Excludes pages that belong to other categories (services, commercial, etc.)
  */
 export function getLegalPages(appDir: string = 'app'): StaticPage[] {
   const allStaticPages = getAllStaticPages(appDir);
-  
-  // Pages that belong to other sitemaps - exclude them
-  const REFORMAS_COMERCIALES_SLUGS = new Set([
-    'reformas-comerciales',
-    'reformas-oficinas',
-    'locales-comerciales-retail',
-    'restaurantes-bares',
-    'clinicas-centros-sanitarios',
-    'gimnasios-centros-deportivos',
-    'hoteles-alojamientos',
-  ]);
-  
-  const SERVICIOS_TECNICOS_SLUGS = new Set([
-    'servicios-tecnicos',
-    'aislamiento-termico-acustico',
-    'pladur',
-    'carpinteria',
-    'fontaneria',
-    'electricidad',
-    'pintura-interior',
-    'albanileria',
-    'calefaccion-climatizacion',
-    'impermeabilizaciones',
-  ]);
-  
-  // Reformas Integrales pages (category 01)
-  const REFORMAS_INTEGRALES_SLUGS = new Set([
-    'reformas-integrales',
-    'reformas-integrales-pisos',
-    'rehabilitacion-casas',
-    'interiorismo-colaboracion',
-  ]);
-  
-  // Reformas por Estancia pages (category 02)
-  const REFORMAS_ESTANCIA_SLUGS = new Set([
-    'reformas-por-estancia',
-    'reformas-cocinas',
-    'reformas-banos',
-    'reformas-salones',
-    'reformas-habitaciones',
-    'reformas-terrazas-balcones',
-    'reformas-recibidores',
-  ]);
   
   // Get content file slugs to exclude pages that are handled by content files
   const contentFiles = getAllContentFiles();

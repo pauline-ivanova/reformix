@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { REFORMAS_COMERCIALES_SLUGS } from '@/lib/content-utils';
 import fs from 'fs';
 import path from 'path';
 
@@ -23,20 +24,6 @@ function formatDate(date: Date): string {
   const tzSign = tzOffset >= 0 ? '+' : '-';
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
-
-/**
- * Known reformas comerciales pages
- * This includes the hub page and all subpages
- */
-const REFORMAS_COMERCIALES_SLUGS = new Set([
-  'reformas-comerciales', // Hub page
-  'reformas-oficinas',
-  'locales-comerciales-retail',
-  'restaurantes-bares',
-  'clinicas-centros-sanitarios',
-  'gimnasios-centros-deportivos',
-  'hoteles-alojamientos',
-]);
 
 /**
  * Gets all static pages from app/ that are reformas comerciales pages

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContentFiles, parseContentFileName, getLegalPages } from '@/lib/content-utils';
+import { getAllContentFiles, parseContentFileName, getLegalPages, REFORMAS_COMERCIALES_SLUGS } from '@/lib/content-utils';
 import fs from 'fs';
 import path from 'path';
 
@@ -38,20 +38,9 @@ function countReformasComercialesPages(): number {
     return 0;
   }
   
-  // Known reformas comerciales sublandings
-  const reformasComercialesSlugs = [
-    'reformas-comerciales', // Hub page
-    'reformas-oficinas',
-    'locales-comerciales-retail',
-    'restaurantes-bares',
-    'clinicas-centros-sanitarios',
-    'gimnasios-centros-deportivos',
-    'hoteles-alojamientos',
-  ];
-  
   // Count pages in each reformas comerciales directory
   let count = 0;
-  for (const slug of reformasComercialesSlugs) {
+  for (const slug of Array.from(REFORMAS_COMERCIALES_SLUGS)) {
     const dir = path.join(appDir, slug);
     if (fs.existsSync(dir)) {
       const pagePath = path.join(dir, 'page.tsx');
