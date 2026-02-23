@@ -119,7 +119,7 @@ export default async function ReformasOficinasPage() {
           text: "Solicitar Presupuesto",
           href: "/contacto"
         }}
-        backgroundImage="/images/reformas-de-oficinas.png"
+        backgroundImage="/images/reforma-oficinas.webp"
         overlayOpacity="strong"
       />
       <FeatureGrid

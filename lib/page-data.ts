@@ -22,7 +22,7 @@ export const reformasComercialesPageData = {
 };
 
 export const reformasOficinasPageData = {
-  image: "/images/reformas-de-oficinas.png",
+  image: "/images/reforma-oficinas.webp",
   imageAlt: "Oficina moderna tras reforma en Barcelona",
 };
 

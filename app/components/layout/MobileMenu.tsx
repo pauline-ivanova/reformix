@@ -52,6 +52,8 @@ export default function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, navigati
               <img
                 src="/reformix-logo.svg"
                 alt="Reformix Barcelona"
+                width={100}
+                height={32}
                 className="h-8 w-auto"
               />
             </Link>
