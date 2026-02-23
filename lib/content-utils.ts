@@ -318,46 +318,139 @@ export const REFORMAS_ESTANCIA_SLUGS = new Set([
 ]);
 
 /**
+ * Legal and Informational pages
+ */
+export const LEGAL_SLUGS = new Set([
+  'aviso-legal',
+  'privacidad',
+  'cookies',
+  'contacto',
+]);
+
+/**
+ * Gets pages for Reformas Comerciales based on known slugs
+ */
+export function getReformasComercialesPages(): StaticPage[] {
+  // Use known slugs instead of scanning directory to be safe in production
+  return Array.from(REFORMAS_COMERCIALES_SLUGS).map(slug => ({
+    slug,
+    lastModified: new Date(), // We could try to get real date but new Date() is safer fallback
+    changeFrequency: 'monthly',
+    priority: slug === 'reformas-comerciales' ? 0.8 : 0.7,
+    title: formatPageTitle(slug),
+  }));
+}
+
+/**
+ * Gets pages for Servicios Técnicos based on known slugs
+ * Merges with content files if any (though slugs list covers them)
+ */
+export function getServiciosTecnicosPages(): StaticPage[] {
+  const contentFiles = getAllContentFiles();
+  const pages: StaticPage[] = [];
+  const addedSlugs = new Set<string>();
+
+  // Add from known slugs list (prioritized)
+  Array.from(SERVICIOS_TECNICOS_SLUGS).forEach(slug => {
+    pages.push({
+      slug,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: slug === 'servicios-tecnicos' ? 0.8 : 0.7,
+      title: formatPageTitle(slug),
+    });
+    addedSlugs.add(slug);
+  });
+
+  // Add any content files in category 03 that aren't in the list
+  contentFiles.forEach(file => {
+    const parsed = parseContentFileName(file.slug);
+    if (parsed && parsed.category === '03' && !addedSlugs.has(parsed.slug)) {
+      pages.push({
+        slug: parsed.slug,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+        title: file.metadata.title,
+      });
+      addedSlugs.add(parsed.slug);
+    }
+  });
+
+  return pages;
+}
+
+/**
+ * Gets pages for Reformas Integrales
+ * Mainly from content files category 01
+ */
+export function getReformasIntegralesPages(): StaticPage[] {
+  const contentFiles = getAllContentFiles();
+  const pages: StaticPage[] = [];
+  
+  // Add homepage (implicitly part of this section)
+  pages.push({
+      slug: '', // Represents homepage
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1.0,
+      title: 'Inicio'
+  });
+
+  contentFiles.forEach(file => {
+    const parsed = parseContentFileName(file.slug);
+    if (parsed && parsed.category === '01') {
+      pages.push({
+        slug: parsed.slug,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+        title: file.metadata.title,
+      });
+    }
+  });
+  
+  return pages;
+}
+
+/**
+ * Gets pages for Reformas por Estancia
+ * Mainly from content files category 02
+ */
+export function getReformasEstanciaPages(): StaticPage[] {
+  const contentFiles = getAllContentFiles();
+  const pages: StaticPage[] = [];
+  
+  contentFiles.forEach(file => {
+    const parsed = parseContentFileName(file.slug);
+    if (parsed && parsed.category === '02') {
+      pages.push({
+        slug: parsed.slug,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.7,
+        title: file.metadata.title,
+      });
+    }
+  });
+  
+  return pages;
+}
+
+/**
  * Gets only legal/informational pages for the legal sitemap
- * Excludes pages that belong to other categories (services, commercial, etc.)
  */
 export function getLegalPages(appDir: string = 'app'): StaticPage[] {
-  const allStaticPages = getAllStaticPages(appDir);
-  
-  // Get content file slugs to exclude pages that are handled by content files
-  const contentFiles = getAllContentFiles();
-  const contentSlugs = new Set(
-    contentFiles
-      .map(file => {
-        const parsed = parseContentFileName(file.slug);
-        return parsed ? parsed.slug : null;
-      })
-      .filter((slug): slug is string => slug !== null)
-  );
-  
-  // Filter to keep only legal/informational pages
-  return allStaticPages.filter(page => {
-    // Exclude pages from other categories
-    if (REFORMAS_COMERCIALES_SLUGS.has(page.slug)) {
-      return false;
-    }
-    if (SERVICIOS_TECNICOS_SLUGS.has(page.slug)) {
-      return false;
-    }
-    if (REFORMAS_INTEGRALES_SLUGS.has(page.slug)) {
-      return false;
-    }
-    if (REFORMAS_ESTANCIA_SLUGS.has(page.slug)) {
-      return false;
-    }
-    if (contentSlugs.has(page.slug)) {
-      return false;
-    }
-    
-    // Include only legal/informational pages
-    // Legal pages: privacidad, aviso-legal, cookies
-    // Informational pages: contacto, and any other pages that don't belong to other categories
-    return true;
+  // Use known slugs instead of scanning
+  return Array.from(LEGAL_SLUGS).map(slug => {
+    const { priority, changeFrequency, title } = getPageMetadata(slug);
+    return {
+      slug,
+      lastModified: new Date(),
+      changeFrequency,
+      priority,
+      title: title || formatPageTitle(slug),
+    };
   });
 }
 

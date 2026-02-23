@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContentFiles, parseContentFileName, getLegalPages, REFORMAS_COMERCIALES_SLUGS } from '@/lib/content-utils';
+import { 
+  getReformasIntegralesPages, 
+  getReformasEstanciaPages, 
+  getServiciosTecnicosPages, 
+  getReformasComercialesPages, 
+  getLegalPages 
+} from '@/lib/content-utils';
 import fs from 'fs';
 import path from 'path';
 
@@ -16,57 +22,18 @@ function formatDate(date: Date): string {
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
 
-function countPagesByCategory(contentFiles: ReturnType<typeof getAllContentFiles>, category: string): number {
-  if (category === '01') {
-    // Reformas Integrales includes homepage + category 01 pages
-    const category01Count = contentFiles.filter((file) => {
-      const parsed = parseContentFileName(file.slug);
-      return parsed && parsed.category === '01';
-    }).length;
-    return 1 + category01Count; // +1 for homepage
-  }
-  
-  return contentFiles.filter((file) => {
-    const parsed = parseContentFileName(file.slug);
-    return parsed && parsed.category === category;
-  }).length;
-}
-
-function countReformasComercialesPages(): number {
-  const appDir = path.join(process.cwd(), 'app');
-  if (!fs.existsSync(appDir)) {
-    return 0;
-  }
-  
-  // Count pages in each reformas comerciales directory
-  let count = 0;
-  for (const slug of Array.from(REFORMAS_COMERCIALES_SLUGS)) {
-    const dir = path.join(appDir, slug);
-    if (fs.existsSync(dir)) {
-      const pagePath = path.join(dir, 'page.tsx');
-      const pagePathJs = path.join(dir, 'page.js');
-      if (fs.existsSync(pagePath) || fs.existsSync(pagePathJs)) {
-        count++;
-      }
-    }
-  }
-  
-  return count;
-}
-
 export async function GET(request: NextRequest) {
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   const host = request.headers.get('host') || 'localhost:3000';
   const baseUrl = `${protocol}://${host}`;
   const now = new Date();
-  const contentFiles = getAllContentFiles();
   
-  // Count pages in each category
-  const reformasIntegralesCount = countPagesByCategory(contentFiles, '01');
-  const reformasEstanciaCount = countPagesByCategory(contentFiles, '02');
-  const serviciosTecnicosCount = countPagesByCategory(contentFiles, '03');
-  const reformasComercialesCount = countReformasComercialesPages();
-  const staticPagesCount = getLegalPages().length; // Count only legal/informational pages
+  // Count pages in each category using shared logic
+  const reformasIntegralesCount = getReformasIntegralesPages().length;
+  const reformasEstanciaCount = getReformasEstanciaPages().length;
+  const serviciosTecnicosCount = getServiciosTecnicosPages().length;
+  const reformasComercialesCount = getReformasComercialesPages().length;
+  const staticPagesCount = getLegalPages().length;
   
   const totalPages = reformasIntegralesCount + reformasEstanciaCount + serviciosTecnicosCount + reformasComercialesCount + staticPagesCount;
   

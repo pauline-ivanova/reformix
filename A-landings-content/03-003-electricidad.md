@@ -1,12 +1,7 @@
 ---
-### **SEO Meta**
-
-- **Title:** Electricidad para Reformas en Barcelona y Vallès | Reformix
-- **Meta Description:** Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad. Pide presupuesto.
-- **Keyphrase:** electricista reformas barcelona
-- **H1:** Servicio de Electricidad para Reformas
-- **URL:** /servicios/electricidad-reformas-barcelona
-
+title: "Electricidad para Reformas en Barcelona y Vallès | Reformix"
+description: "Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad. Pide presupuesto."
+slug: "electricidad"
 ---
 ### **Bloque 1: Hero Section**
 

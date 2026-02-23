@@ -1,16 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { REFORMAS_COMERCIALES_SLUGS } from '@/lib/content-utils';
-import fs from 'fs';
-import path from 'path';
-
-function getFileModDate(filePath: string): Date {
-  try {
-    const stats = fs.statSync(filePath);
-    return stats.mtime;
-  } catch {
-    return new Date();
-  }
-}
+import { getReformasComercialesPages } from '@/lib/content-utils';
 
 function formatDate(date: Date): string {
   const year = date.getFullYear();
@@ -25,142 +14,22 @@ function formatDate(date: Date): string {
   return `${year}-${month}-${day} ${hours}:${minutes} ${tzSign}${tzHours}:${tzMinutes}`;
 }
 
-/**
- * Gets all static pages from app/ that are reformas comerciales pages
- */
-function getReformasComercialesStaticPages(): Array<{
-  slug: string;
-  lastModified: Date;
-  title?: string;
-}> {
-  const staticPages: Array<{
-    slug: string;
-    lastModified: Date;
-    title?: string;
-  }> = [];
-  
-  const appDir = path.join(process.cwd(), 'app');
-
-  // Directories to exclude
-  const excludeDirs = [
-    'api',
-    'components',
-    '[slug]',
-    'sitemap',
-    'sitemap_index.xml',
-    'sitemap-reformas-integrales.xml',
-    'sitemap-reformas-estancia.xml',
-    'sitemap-servicios-tecnicos.xml',
-    'sitemap-reformas-comerciales.xml',
-    'sitemap-legal.xml',
-    'sitemap.xml',
-    'site-map',
-    '_next',
-  ];
-
-  function scanDirectory(dir: string, baseSlug: string = ''): void {
-    if (!fs.existsSync(dir)) {
-      return;
-    }
-
-    const items = fs.readdirSync(dir, { withFileTypes: true });
-
-    for (const item of items) {
-      // Skip hidden files and directories
-      if (item.name.startsWith('.')) {
-        continue;
-      }
-
-      // Skip excluded directories
-      if (excludeDirs.includes(item.name)) {
-        continue;
-      }
-
-      const fullPath = path.join(dir, item.name);
-
-      if (item.isDirectory()) {
-        // Recursively scan subdirectories
-        const newSlug = baseSlug ? `${baseSlug}/${item.name}` : item.name;
-        scanDirectory(fullPath, newSlug);
-      } else if (item.name === 'page.tsx' || item.name === 'page.js') {
-        // Found a page file
-        const slug = baseSlug || '';
-        
-        // Include if it's a known reformas comerciales page
-        if (slug && REFORMAS_COMERCIALES_SLUGS.has(slug)) {
-          // Get file modification date
-          let lastModified: Date;
-          try {
-            const stats = fs.statSync(fullPath);
-            lastModified = stats.mtime;
-          } catch {
-            lastModified = new Date();
-          }
-
-          staticPages.push({
-            slug,
-            lastModified,
-            title: slug.split('-').map(word => 
-              word.charAt(0).toUpperCase() + word.slice(1)
-            ).join(' '),
-          });
-        }
-      }
-    }
-  }
-
-  scanDirectory(appDir);
-  return staticPages;
-}
-
-export async function GET(request: NextRequest) {
+function formatDate(date: Date): string {
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   const host = request.headers.get('host') || 'localhost:3000';
   const baseUrl = `${protocol}://${host}`;
 
-  const routes: Array<{
-    url: string;
-    lastModified: Date;
-    changeFrequency: string;
-    priority: number;
-    title?: string;
-  }> = [];
+  const pages = getReformasComercialesPages();
 
-  // Get all static pages from app/ that are reformas comerciales
-  const staticPages = getReformasComercialesStaticPages();
-  const addedSlugs = new Set<string>();
-
-  // First, add the hub page (reformas-comerciales) if it exists
-  const hubPage = staticPages.find(p => p.slug === 'reformas-comerciales');
-  if (hubPage) {
-    routes.push({
-      url: `${baseUrl}/${hubPage.slug}`,
-      lastModified: hubPage.lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.8, // Hub page has slightly higher priority
-      title: hubPage.title || 'Reformas Comerciales',
-    });
-    addedSlugs.add('reformas-comerciales');
-  }
-
-  // Then, add all other static pages from app/
-  staticPages.forEach(staticPage => {
-    // Skip hub page (already added)
-    if (staticPage.slug === 'reformas-comerciales') {
-      return;
-    }
-
-    routes.push({
-      url: `${baseUrl}/${staticPage.slug}`,
-      lastModified: staticPage.lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-      title: staticPage.title || staticPage.slug.split('-').map(word => 
-        word.charAt(0).toUpperCase() + word.slice(1)
-      ).join(' '),
-    });
-    addedSlugs.add(staticPage.slug);
-  });
+  const routes = pages.map(page => ({
+    url: `${baseUrl}/${page.slug}`,
+    lastModified: page.lastModified,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+    title: page.title || page.slug.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' '),
+  }));
 
   // Check if request wants XML (for search engines)
   const acceptHeader = request.headers.get('accept') || '';

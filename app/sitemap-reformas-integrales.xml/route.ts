@@ -1,16 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllContentFiles, parseContentFileName } from '@/lib/content-utils';
-import fs from 'fs';
-import path from 'path';
-
-function getFileModDate(filePath: string): Date {
-  try {
-    const stats = fs.statSync(filePath);
-    return stats.mtime;
-  } catch {
-    return new Date();
-  }
-}
+import { getReformasIntegralesPages } from '@/lib/content-utils';
 
 function formatDate(date: Date): string {
   const year = date.getFullYear();
@@ -29,44 +18,18 @@ export async function GET(request: NextRequest) {
   const protocol = request.headers.get('x-forwarded-proto') || 'http';
   const host = request.headers.get('host') || 'localhost:3000';
   const baseUrl = `${protocol}://${host}`;
-  const contentFiles = getAllContentFiles();
-  const contentDirectory = path.join(process.cwd(), 'A-landings-content');
 
-  const routes: Array<{
-    url: string;
-    lastModified: Date;
-    changeFrequency: string;
-    priority: number;
-    title?: string;
-  }> = [];
+  const pages = getReformasIntegralesPages();
 
-  // Add homepage
-  routes.push({
-    url: baseUrl,
-    lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 1.0,
-    title: 'Inicio',
-  });
-
-  // Add category 01 pages (Reformas Integrales)
-  contentFiles.forEach((file) => {
-    const parsed = parseContentFileName(file.slug);
-    
-    if (parsed && parsed.category === '01') {
-      const slug = parsed.slug;
-      const filePath = path.join(contentDirectory, `${file.slug}.md`);
-      routes.push({
-        url: `${baseUrl}/${slug}`,
-        lastModified: getFileModDate(filePath),
-        changeFrequency: 'monthly',
-        priority: 0.8,
-        title: file.metadata.title || slug.split('-').map(word => 
-          word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' '),
-      });
-    }
-  });
+  const routes = pages.map(page => ({
+    url: page.slug ? `${baseUrl}/${page.slug}` : baseUrl,
+    lastModified: page.lastModified,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+    title: page.title || page.slug.split('-').map(word => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' '),
+  }));
 
   // Check if request wants XML (for search engines)
   const acceptHeader = request.headers.get('accept') || '';

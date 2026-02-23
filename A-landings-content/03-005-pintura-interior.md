@@ -1,8 +1,7 @@
 ---
-- **Keyphrase:** `pintura interior para reformas`
-- **Title:** `Servicio de Pintura para Reformas en Barcelona | Acabados Perfectos`
-- **Meta Description:** `Nuestro servicio de pintura para reformas en Barcelona garantiza acabados impecables y duraderos. Protegemos tus muebles y suelos. Pide presupuesto.`
-- **URL Slug:** `/servicios-reformas/pintura-barcelona`
+title: "Servicio de Pintura para Reformas en Barcelona | Acabados Perfectos"
+description: "Nuestro servicio de pintura para reformas en Barcelona garantiza acabados impecables y duraderos. Protegemos tus muebles y suelos. Pide presupuesto."
+slug: "pintura-interior"
 ---
 ### **Bloque 1: Hero**
 
