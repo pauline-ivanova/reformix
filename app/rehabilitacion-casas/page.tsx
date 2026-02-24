@@ -208,6 +208,7 @@ export default async function RehabilitacionCasasPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/rehabilitacion-integral-de-casas-en-barcelona.webp"
+        imageAlt="Rehabilitación integral de casa unifamiliar en Barcelona"
       />
       <FeatureGrid
         features={features}

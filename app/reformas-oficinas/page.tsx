@@ -120,6 +120,7 @@ export default async function ReformasOficinasPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reforma-oficinas.webp"
+        imageAlt="Oficina moderna y funcional tras reforma integral"
         overlayOpacity="strong"
       />
       <FeatureGrid

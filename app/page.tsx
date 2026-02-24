@@ -168,6 +168,7 @@ export default async function HomePage() {
           href: "/contacto"
         }}
         backgroundImage="/images/hero-bg.webp"
+        imageAlt="Reforma integral de vivienda en Barcelona con acabados de alta calidad"
       />
       <FeatureGrid
         features={features}

@@ -158,6 +158,7 @@ export default async function CarpinteriaPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/carpinteria-en-barcelona.webp"
+        imageAlt="Trabajos de carpintería a medida e instalación de puertas"
       />
       <FeatureGrid
         title="Soluciones de Carpintería para tu Reforma"

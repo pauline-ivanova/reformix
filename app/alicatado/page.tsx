@@ -146,6 +146,7 @@ export default async function AlicatadoPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/alicatado-y-solados.png"
+        imageAlt="Colocación de alicatado y solados cerámicos de alta calidad"
         overlayOpacity="stronger"
       />
       <FeatureGrid

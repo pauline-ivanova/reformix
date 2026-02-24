@@ -151,6 +151,7 @@ export default async function CalefaccionClimatizacionPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/calefaccion.webp"
+        imageAlt="Instalación de sistema de calefacción y climatización eficiente"
         overlayOpacity="stronger"
       />
       <FeatureGrid

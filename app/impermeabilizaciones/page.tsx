@@ -151,6 +151,7 @@ export default async function ImpermeabilizacionesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/impermeabilizaciones.webp"
+        imageAlt="Trabajos de impermeabilización profesional en cubierta"
         overlayOpacity="stronger"
       />
       <FeatureGrid

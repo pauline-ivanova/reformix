@@ -118,6 +118,7 @@ export default async function ClinicasCentrosSanitariosPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/clinica.webp"
+        imageAlt="Clínica dental reformada con diseño moderno y funcional"
         overlayOpacity="strong"
       />
       <FeatureGrid

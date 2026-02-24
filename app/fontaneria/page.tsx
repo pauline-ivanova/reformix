@@ -207,6 +207,7 @@ export default async function FontaneriaPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/fontaneria.webp"
+        imageAlt="Instalación de fontanería profesional en baño o cocina"
       />
       <FeatureGrid
         title="Instalaciones de Fontanería Hechas para Durar"

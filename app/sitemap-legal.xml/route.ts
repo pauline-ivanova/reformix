@@ -64,6 +64,7 @@ ${pages.map(entry => `  <url>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="${baseUrl}/sitemap-legal.xml">
   <title>Sitemap - Información y Legal | Reformix Barcelona</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }

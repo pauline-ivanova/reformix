@@ -162,6 +162,7 @@ export default async function ReformasComercialesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reforma-oficinas.webp"
+        imageAlt="Reforma de oficina moderna y funcional en Barcelona"
         overlayOpacity="strong"
       />
       <FeatureGrid

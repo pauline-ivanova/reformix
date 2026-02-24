@@ -118,6 +118,7 @@ export default async function GimnasiosCentrosDeportivosPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/centros-deportivos.webp"
+        imageAlt="Instalaciones deportivas modernas y equipadas tras reforma integral"
         overlayOpacity="strong"
       />
       <FeatureGrid

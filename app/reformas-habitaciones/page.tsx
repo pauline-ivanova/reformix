@@ -147,6 +147,7 @@ export default async function ReformasHabitacionesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-de-habitaciones-en-barcelona.webp"
+        imageAlt="Dormitorio principal reformado con diseño moderno y acogedor"
       />
       <FeatureGrid
         features={features}

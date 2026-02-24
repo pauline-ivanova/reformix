@@ -118,6 +118,7 @@ export default async function RestaurantesBaresPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/bar.webp"
+        imageAlt="Restaurante reformado con ambiente acogedor y diseño actual"
         overlayOpacity="strong"
       />
       <FeatureGrid

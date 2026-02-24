@@ -153,6 +153,7 @@ export default async function AislamientoTermicoAcusticoPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/aislamiento-termico-en-barcelona.webp"
+        imageAlt="Instalación de aislamiento térmico y acústico en vivienda"
       />
       <FeatureGrid
         title={

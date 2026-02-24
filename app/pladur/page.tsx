@@ -151,6 +151,7 @@ export default async function PladurPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/pladur.webp"
+        imageAlt="Instalación de tabiques y falsos techos de pladur"
       />
       <FeatureGrid
         title="Precisión y Calidad en Cada Instalación"

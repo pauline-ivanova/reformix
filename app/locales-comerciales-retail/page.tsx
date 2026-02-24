@@ -118,6 +118,7 @@ export default async function LocalesComercialesRetailPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/retail.webp"
+        imageAlt="Local comercial reformado con diseño moderno y funcional"
         overlayOpacity="strong"
       />
       <FeatureGrid

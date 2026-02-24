@@ -6,10 +6,10 @@ import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
 export const metadata: Metadata = {
-  title: 'Contacto | Reformix Barcelona',
+  title: 'Contacto y Presupuesto | Reformix Barcelona',
   description: 'Contacta con Reformix Barcelona para solicitar un presupuesto gratuito. Estamos en Sabadell, Vallès Occidental. Teléfono: +34 642 029 572.',
   ...generateStandardMetadata({
-    title: 'Contacto | Reformix Barcelona',
+    title: 'Contacto y Presupuesto | Reformix Barcelona',
     description: 'Contacta con Reformix Barcelona para solicitar un presupuesto gratuito. Estamos en Sabadell, Vallès Occidental. Teléfono: +34 642 029 572.',
     url: `${baseUrl}/contacto`,
     pagePath: '/contacto',

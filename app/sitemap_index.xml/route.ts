@@ -101,6 +101,7 @@ ${sitemaps.map(sitemap => `  <sitemap>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="${baseUrl}/sitemap_index.xml">
   <title>Índice de Sitemap XML - Reformix Barcelona</title>
   <style>
     * {

@@ -30,10 +30,10 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Montaje de Cocinas y Muebles en Barcelona (Ikea, Leroy Merlin)",
+  title: "Montaje de Cocinas y Muebles en Barcelona | Reformix",
   description: "Servicio profesional de montaje de cocinas y muebles (Ikea, Leroy Merlin, Obramat) en Barcelona. Instalación rápida, segura y a medida.",
   ...generateStandardMetadata({
-    title: "Montaje de Cocinas y Muebles en Barcelona (Ikea, Leroy Merlin)",
+    title: "Montaje de Cocinas y Muebles en Barcelona | Reformix",
     description: "Servicio profesional de montaje de cocinas y muebles (Ikea, Leroy Merlin, Obramat) en Barcelona. Instalación rápida, segura y a medida.",
     url: "https://www.reformix.barcelona/montaje-muebles-cocinas",
     pagePath: "/montaje-muebles-cocinas",
@@ -153,6 +153,7 @@ export default async function MontajeMueblesCocinasPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/montaje-muebles-cocinas.png"
+        imageAlt="Montaje profesional de muebles de cocina y armarios"
         overlayOpacity="strong"
       />
       <FeatureGrid

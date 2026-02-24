@@ -154,6 +154,7 @@ export default async function ReformasPorEstanciaPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reforma-cocina-moderna.webp"
+        imageAlt="Cocina moderna reformada con isla y acabados en blanco"
       />
       <FeatureGrid
         features={features}

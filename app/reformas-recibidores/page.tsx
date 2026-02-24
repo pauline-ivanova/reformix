@@ -151,6 +151,7 @@ export default async function ReformasRecibidoresPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reforma-de-recibidores-en-barcelona.webp"
+        imageAlt="Recibidor moderno y luminoso tras reforma integral"
       />
       <FeatureGrid
         title=""

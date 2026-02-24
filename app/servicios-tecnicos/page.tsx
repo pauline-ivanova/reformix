@@ -214,6 +214,7 @@ export default async function ServiciosTecnicosPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/servicios-tecnicos.webp"
+        imageAlt="Equipo de servicios técnicos realizando reforma integral"
         overlayOpacity="strong"
       />
       <FeatureGrid

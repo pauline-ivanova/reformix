@@ -216,6 +216,7 @@ export default async function ReformasBanosPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-de-banos-en-barcelona.webp"
+        imageAlt="Baño reformado con diseño moderno y sanitarios de calidad"
       />
       <FeatureGrid
         title={

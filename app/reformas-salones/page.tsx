@@ -250,6 +250,7 @@ export default async function ReformasSalonesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-salones.webp"
+        imageAlt="Salón moderno y luminoso tras reforma integral"
       />
       <FeatureGrid
         title={

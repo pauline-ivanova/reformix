@@ -149,6 +149,7 @@ export default async function ReformasTerrazasBalconesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-de-terrazas.webp"
+        imageAlt="Terraza reformada con suelo de madera y zona de relax"
       />
       <FeatureGrid
         title=""

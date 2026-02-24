@@ -228,6 +228,7 @@ export default async function ElectricidadPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/servicio-de-electricidad.webp"
+        imageAlt="Instalación eléctrica profesional y segura en vivienda"
         overlayOpacity="strong"
       />
       <FeatureGrid

@@ -147,6 +147,7 @@ export default async function InteriorismoColaboracionPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/proyectos-de-interiorismo.webp"
+        imageAlt="Ejecución de proyecto de interiorismo de alta calidad"
       />
       <FeatureGrid
         features={features}

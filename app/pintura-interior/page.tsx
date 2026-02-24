@@ -145,6 +145,7 @@ export default async function PinturaInteriorPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/pintura-interior.webp"
+        imageAlt="Servicio de pintura interior profesional con acabados impecables"
         overlayOpacity="stronger"
       />
       <FeatureGrid

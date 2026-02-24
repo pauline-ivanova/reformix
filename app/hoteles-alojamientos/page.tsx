@@ -118,6 +118,7 @@ export default async function HotelesAlojamientosPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/hotel.webp"
+        imageAlt="Habitación de hotel reformada con diseño elegante y confortable"
         overlayOpacity="strong"
       />
       <FeatureGrid

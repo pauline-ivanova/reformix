@@ -157,6 +157,7 @@ export default async function VentanasPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/ventanas-aluminio.png"
+        imageAlt="Instalación de ventanas de aluminio con rotura de puente térmico"
         overlayOpacity="stronger"
       />
       <FeatureGrid

@@ -151,6 +151,7 @@ export default async function AlbanileriaPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/albanileria.webp"
+        imageAlt="Trabajos de albañilería profesional en reforma de vivienda"
         overlayOpacity="stronger"
       />
       <FeatureGrid

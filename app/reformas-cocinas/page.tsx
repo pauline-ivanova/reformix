@@ -224,6 +224,7 @@ export default async function ReformasCocinasPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-cocinas.webp"
+        imageAlt="Cocina moderna reformada con isla central y acabados premium"
       />
       <FeatureGrid
         title={

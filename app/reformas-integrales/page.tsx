@@ -138,6 +138,7 @@ export default async function ReformasIntegralesPage() {
           href: "/contacto"
         }}
         backgroundImage="/images/reformas-integrales-en-barcelona.webp"
+        imageAlt="Reforma integral de piso en Barcelona con acabados de alta calidad"
       />
       <FeatureGrid
         features={features}
