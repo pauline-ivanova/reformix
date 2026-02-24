@@ -18,10 +18,10 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcel
 
 export const metadata: Metadata = {
   title: "Reformas en Barcelona y Vallès Occidental | Reformix",
-  description: "Empresa de reformas en Barcelona y Vallès Occidental. Reformas integrales y por estancia con presupuestos cerrados y garantía por escrito. ¡Pide presupuesto!",
+  description: "Reformas integrales y por estancia en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
   ...generateStandardMetadata({
     title: "Reformas en Barcelona y Vallès Occidental | Reformix",
-    description: "Empresa de reformas en Barcelona y Vallès Occidental. Reformas integrales y por estancia con presupuestos cerrados y garantía por escrito. ¡Pide presupuesto!",
+    description: "Reformas integrales y por estancia en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
     url: baseUrl,
     pagePath: '/',
     image: '/images/hero-bg.webp', // Hero image for social sharing

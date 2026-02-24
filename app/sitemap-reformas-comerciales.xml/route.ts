@@ -171,7 +171,7 @@ ${routes.map(entry => `  <url>
 </head>
 <body>
   <div class="header">
-    <img src="${baseUrl}/images/reformix-logo-vertical-white.png" alt="Reformix Barcelona" class="header-logo">
+    <img src="${baseUrl}/images/reformix-logo-vertical-white.png" alt="Reformix Barcelona" width="100" height="150" class="header-logo">
     <h1>Sitemap - Reformas Comerciales</h1>
   </div>
   

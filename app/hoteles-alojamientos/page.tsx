@@ -23,10 +23,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Hoteles en Barcelona y Vallès",
-  description: "Especialistas en reformas de hoteles y alojamientos en Barcelona y Vallès. Renovación de espacios hoteleros que mejora la experiencia de huéspedes. ¡Pide presupuesto!",
+  description: "Reformas de hoteles y alojamientos en Barcelona. Renovación por fases, normativa. Mejora la experiencia del huésped. ¡Presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Hoteles en Barcelona y Vallès",
-    description: "Especialistas en reformas de hoteles y alojamientos en Barcelona y Vallès. Renovación de espacios hoteleros que mejora la experiencia de huéspedes. ¡Pide presupuesto!",
+    description: "Reformas de hoteles y alojamientos en Barcelona. Renovación por fases, normativa. Mejora la experiencia del huésped. ¡Presupuesto!",
     url: "https://www.reformix.barcelona/hoteles-alojamientos",
     pagePath: "/hoteles-alojamientos",
     keywords: ["reforma hoteles Barcelona", "reforma alojamientos Barcelona", "diseño hoteles Barcelona", "renovación hoteles Barcelona"],

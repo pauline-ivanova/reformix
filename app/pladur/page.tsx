@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Pladur y Falsos Techos en Barcelona y Vallès",
-  description: "Especialistas en pladur y falsos techos en Barcelona y Vallès. Creamos distribuciones y soluciones decorativas con acabados de alta calidad. ¡Pide presupuesto!",
+  description: "Pladur y falsos techos en Barcelona. Tabiques, techos desmontables, distribuciones. Acabados profesionales. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Pladur y Falsos Techos en Barcelona y Vallès",
-    description: "Especialistas en pladur y falsos techos en Barcelona y Vallès. Creamos distribuciones y soluciones decorativas con acabados de alta calidad. ¡Pide presupuesto!",
+    description: "Pladur y falsos techos en Barcelona. Tabiques, techos desmontables, distribuciones. Acabados profesionales. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/pladur",
     pagePath: "/pladur",
     keywords: ["pladur Barcelona", "falsos techos Barcelona", "instalación pladur", "tabiques pladur", "techos desmontables"],

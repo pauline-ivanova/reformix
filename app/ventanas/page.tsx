@@ -24,10 +24,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Ventanas y Aluminio en Barcelona | Reformix",
-  description: "Instalación de ventanas de aluminio y PVC en Barcelona. Mejora el aislamiento térmico y acústico de tu hogar. Eficiencia energética garantizada. ¡Pide presupuesto!",
+  description: "Ventanas de aluminio y PVC en Barcelona. Aislamiento térmico y acústico. Eficiencia energética. Garantía por escrito. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Ventanas y Aluminio en Barcelona | Reformix",
-    description: "Instalación de ventanas de aluminio y PVC en Barcelona. Mejora el aislamiento térmico y acústico de tu hogar. Eficiencia energética garantizada. ¡Pide presupuesto!",
+    description: "Ventanas de aluminio y PVC en Barcelona. Aislamiento térmico y acústico. Eficiencia energética. Garantía por escrito. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/ventanas",
     pagePath: "/ventanas",
     keywords: ["ventanas barcelona", "aluminio barcelona", "ventanas pvc barcelona", "cambiar ventanas precio", "aislamiento ventanas"],

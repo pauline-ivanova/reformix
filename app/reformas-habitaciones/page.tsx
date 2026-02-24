@@ -22,10 +22,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Habitaciones en Barcelona y Vallès",
-  description: "Expertos en reformas de habitaciones en Barcelona y Vallès. Creamos espacios para el descanso, optimizando almacenaje, luz y aislamiento. ¡Pide presupuesto!",
+  description: "Reformas de habitaciones en Barcelona. Armarios a medida, aislamiento acústico, acabados de calidad. ¡Pide presupuesto gratis!",
   ...generateStandardMetadata({
     title: "Reformas de Habitaciones en Barcelona y Vallès",
-    description: "Expertos en reformas de habitaciones en Barcelona y Vallès. Creamos espacios para el descanso, optimizando almacenaje, luz y aislamiento. ¡Pide presupuesto!",
+    description: "Reformas de habitaciones en Barcelona. Armarios a medida, aislamiento acústico, acabados de calidad. ¡Pide presupuesto gratis!",
     url: "https://www.reformix.barcelona/reformas-habitaciones",
     pagePath: "/reformas-habitaciones",
     keywords: ["reforma habitación Barcelona", "reforma habitación Vallès", "diseño habitación Barcelona", "armarios a medida"],

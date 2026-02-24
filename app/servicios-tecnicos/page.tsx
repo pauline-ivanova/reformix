@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Servicios Técnicos en Barcelona y Vallès | Reformix",
-  description: "Servicios técnicos de reforma en Barcelona y Vallès. Equipo propio: aislamiento, pladur, carpintería, fontanería, electricidad y pintura. ¡Pide presupuesto!",
+  description: "Servicios técnicos de reforma en Barcelona: aislamiento, pladur, fontanería, electricidad, pintura. Equipo propio. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Servicios Técnicos en Barcelona y Vallès | Reformix",
-    description: "Servicios técnicos de reforma en Barcelona y Vallès. Equipo propio: aislamiento, pladur, carpintería, fontanería, electricidad y pintura. ¡Pide presupuesto!",
+    description: "Servicios técnicos de reforma en Barcelona: aislamiento, pladur, fontanería, electricidad, pintura. Equipo propio. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/servicios-tecnicos",
     pagePath: "/servicios-tecnicos",
     keywords: ["servicios técnicos de reforma", "aislamiento Barcelona", "carpintería Barcelona", "fontanería Barcelona", "electricidad Barcelona", "pintura Barcelona"],

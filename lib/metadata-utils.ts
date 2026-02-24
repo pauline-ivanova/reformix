@@ -101,6 +101,7 @@ export function generateStandardMetadata(options: StandardMetadataOptions): Part
   if (robots.noimageindex) robotsParts.push('noimageindex');
 
   const metadata: Partial<Metadata> = {
+    description,
     robots: robotsParts.join(', '),
     other: {
       'keywords': keywordsString,

@@ -29,10 +29,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Electricidad para Reformas en Barcelona | Reformix",
-  description: "Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad. ¡Pide presupuesto!",
+  description: "Electricistas para reformas en Barcelona. Instalación según normativa, boletín eléctrico. Garantía por escrito. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Electricidad para Reformas en Barcelona | Reformix",
-    description: "Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad. ¡Pide presupuesto!",
+    description: "Electricistas para reformas en Barcelona. Instalación según normativa, boletín eléctrico. Garantía por escrito. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/electricidad",
     pagePath: "/electricidad",
     keywords: ["electricista reformas Barcelona", "instalación eléctrica Barcelona", "boletín eléctrico", "electricidad reformas"],
