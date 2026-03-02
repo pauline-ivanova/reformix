@@ -121,9 +121,135 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com;",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com;",
           },
         ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      // Legacy slug variants -> current slugs
+      {
+        source: '/reformas-de-cocinas',
+        destination: '/reformas-cocinas',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-cocinas/',
+        destination: '/reformas-cocinas',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-banos',
+        destination: '/reformas-banos',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-banos/',
+        destination: '/reformas-banos',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-salones',
+        destination: '/reformas-salones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-salones/',
+        destination: '/reformas-salones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-salon',
+        destination: '/reformas-salones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-terrazas',
+        destination: '/reformas-terrazas-balcones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-terrazas',
+        destination: '/reformas-terrazas-balcones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-terrazas/',
+        destination: '/reformas-terrazas-balcones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-habitaciones',
+        destination: '/reformas-habitaciones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-habitaciones/',
+        destination: '/reformas-habitaciones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-dormitorios',
+        destination: '/reformas-habitaciones',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-recibidores',
+        destination: '/reformas-recibidores',
+        permanent: true,
+      },
+      {
+        source: '/reformas-de-recibidores/',
+        destination: '/reformas-recibidores',
+        permanent: true,
+      },
+      {
+        source: '/reformas-integrales-de-pisos',
+        destination: '/reformas-integrales-pisos',
+        permanent: true,
+      },
+      {
+        source: '/reformas-integrales-de-pisos/',
+        destination: '/reformas-integrales-pisos',
+        permanent: true,
+      },
+      {
+        source: '/rehabilitacion-integral-de-casas',
+        destination: '/rehabilitacion-casas',
+        permanent: true,
+      },
+      {
+        source: '/rehabilitacion-integral-de-casas/',
+        destination: '/rehabilitacion-casas',
+        permanent: true,
+      },
+      {
+        source: '/servicios-tecnicos-de-reforma',
+        destination: '/servicios-tecnicos',
+        permanent: true,
+      },
+      {
+        source: '/servicios-tecnicos-de-reforma/',
+        destination: '/servicios-tecnicos',
+        permanent: true,
+      },
+      {
+        source: '/aislamiento-termico-y-acustico',
+        destination: '/aislamiento-termico-acustico',
+        permanent: true,
+      },
+      {
+        source: '/proyectos-de-interiorismo',
+        destination: '/interiorismo-colaboracion',
+        permanent: true,
+      },
+      {
+        source: '/proyectos-de-interiorismo/',
+        destination: '/interiorismo-colaboracion',
+        permanent: true,
       },
     ];
   },
