@@ -28,7 +28,7 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for each page
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   const contentFiles = getAllContentFiles();
   const contentFile = contentFiles.find(file => {
     const parsed = parseContentFileName(file.slug);
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+export default async function ServicePage({ params }: any) {
   const contentFiles = getAllContentFiles();
   const contentFile = contentFiles.find(file => {
     const parsed = parseContentFileName(file.slug);

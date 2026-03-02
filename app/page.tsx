@@ -40,49 +40,40 @@ export const metadata: Metadata = {
 
 // AboutSection is below fold - defer JS loading to reduce TBT and improve TTI
 const AboutSection = dynamic(() => import("@/app/components/blocks/AboutSection"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-20 bg-brand-primary" />, // Placeholder to prevent layout shift
 });
 
 // ServicesSection is below fold - defer JS loading to reduce TBT and improve TTI
 const ServicesSection = dynamic(() => import("@/app/components/blocks/ServicesSection"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 // Below-fold components - defer JS loading to improve Time to Interactive
 const ProcessSection = dynamic(() => import("@/app/components/blocks/ProcessSection"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 const CompanySection = dynamic(() => import("@/app/components/blocks/CompanySection"), {
-  ssr: false, // Client component with heavy JS, defer loading
   loading: () => <div className="py-20 bg-brand-primary" />, // Placeholder
 });
 
 const WhyChooseUs = dynamic(() => import("@/app/components/blocks/WhyChooseUs"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 const TestimonialsCarousel = dynamic(() => import("@/app/components/blocks/TestimonialsCarousel"), {
-  ssr: false, // Carousel with JS, defer loading
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 const FAQTwoColumn = dynamic(() => import("@/app/components/blocks/FAQTwoColumn"), {
-  ssr: false, // Interactive component, defer loading
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 const ServiceAreas = dynamic(() => import("@/app/components/blocks/ServiceAreas"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-16" />, // Placeholder
 });
 
 const ContactSection = dynamic(() => import("@/app/components/blocks/ContactSection"), {
-  ssr: false, // Defer to reduce initial JS bundle
   loading: () => <div className="py-16" />, // Placeholder
 });
 

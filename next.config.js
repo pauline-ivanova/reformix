@@ -21,7 +21,6 @@ const nextConfig = {
     esmExternals: true,
   },
   compress: true,
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
@@ -31,7 +30,6 @@ const nextConfig = {
   reactStrictMode: true,
   // Optimize production builds
   productionBrowserSourceMaps: true, // Enable source maps for better debugging
-  optimizeFonts: true,
   // Target modern browsers to reduce legacy JavaScript polyfills
   // This reduces bundle size by not including unnecessary polyfills
   webpack: (config, { dev, isServer }) => {
