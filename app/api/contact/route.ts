@@ -81,7 +81,65 @@ ${data.message}
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, message, service } = body;
+    const { name, email, phone, message, service, turnstileToken } = body;
+
+    // Verify Cloudflare Turnstile token if configured
+    const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY;
+    if (turnstileSecretKey) {
+      if (!turnstileToken || typeof turnstileToken !== 'string') {
+        return NextResponse.json(
+          { error: 'La verificación de seguridad ha fallado. Por favor, inténtalo de nuevo.' },
+          { status: 400 }
+        );
+      }
+
+      try {
+        const ip =
+          request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+          // @ts-expect-error ip is available at runtime in Next.js
+          (request as any).ip ||
+          undefined;
+
+        const verifyResponse = await fetch(
+          'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+              secret: turnstileSecretKey,
+              response: turnstileToken,
+              ...(ip ? { remoteip: ip } : {}),
+            }).toString(),
+          }
+        );
+
+        const verifyData: any = await verifyResponse.json();
+
+        if (!verifyData.success) {
+          console.error('Turnstile verification failed:', verifyData);
+          return NextResponse.json(
+            {
+              error:
+                'La verificación de seguridad ha fallado. Por favor, inténtalo de nuevo.',
+            },
+            { status: 400 }
+          );
+        }
+      } catch (verificationError) {
+        console.error('Error verifying Turnstile token:', verificationError);
+        return NextResponse.json(
+          {
+            error:
+              'Hubo un problema con la verificación de seguridad. Por favor, inténtalo de nuevo.',
+          },
+          { status: 400 }
+        );
+      }
+    } else {
+      console.warn('TURNSTILE_SECRET_KEY not configured. Skipping Turnstile verification.');
+    }
 
     // Basic validation
     if (!name || !email || !phone || !message) {

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect, useRef } from 'react';
 
 interface ContactFormProps {
   service?: string;
@@ -33,6 +33,57 @@ export default function ContactForm({ service }: ContactFormProps) {
     phone?: boolean;
     message?: boolean;
   }>({});
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileError, setTurnstileError] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement | null>(null);
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  useEffect(() => {
+    if (!turnstileSiteKey) return;
+    if (typeof window === 'undefined') return;
+    if (!turnstileRef.current) return;
+
+    const renderTurnstile = () => {
+      try {
+        const turnstile = (window as any).turnstile;
+        if (turnstile && turnstileRef.current) {
+          turnstile.render(turnstileRef.current, {
+            sitekey: turnstileSiteKey,
+            callback: (token: string) => {
+              setTurnstileToken(token);
+              setTurnstileError(null);
+            },
+          });
+        }
+      } catch (error) {
+        console.error('Error rendering Turnstile widget:', error);
+      }
+    };
+
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      'script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]'
+    );
+
+    if (existingScript) {
+      if ((window as any).turnstile) {
+        renderTurnstile();
+      } else {
+        existingScript.addEventListener('load', renderTurnstile, { once: true });
+      }
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    script.defer = true;
+    script.onload = renderTurnstile;
+    document.body.appendChild(script);
+
+    return () => {
+      script.onload = null;
+    };
+  }, [turnstileSiteKey]);
 
   const validateName = (name: string): string | undefined => {
     if (!name.trim()) {
@@ -242,6 +293,17 @@ export default function ContactForm({ service }: ContactFormProps) {
       return;
     }
 
+    // Ensure Turnstile verification is completed
+    if (turnstileSiteKey && !turnstileToken) {
+      const securityMessage = 'Por favor, completa la verificación de seguridad.';
+      setTurnstileError(securityMessage);
+      setSubmitStatus({
+        type: 'error',
+        message: securityMessage,
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: '' });
 
@@ -251,7 +313,10 @@ export default function ContactForm({ service }: ContactFormProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          turnstileToken,
+        }),
       });
 
       const data = await response.json();
@@ -272,6 +337,15 @@ export default function ContactForm({ service }: ContactFormProps) {
         setPrivacyConsent(false);
         setErrors({});
         setTouched({});
+        setTurnstileToken(null);
+        try {
+          const turnstile = (window as any).turnstile;
+          if (turnstile) {
+            turnstile.reset();
+          }
+        } catch (error) {
+          console.error('Error resetting Turnstile widget:', error);
+        }
       } else {
         setSubmitStatus({
           type: 'error',
@@ -464,6 +538,15 @@ export default function ContactForm({ service }: ContactFormProps) {
           )}
         </div>
       </div>
+
+      {turnstileSiteKey && (
+        <div>
+          <div ref={turnstileRef} className="cf-challenge" />
+          {turnstileError && (
+            <p className="mt-1 text-sm text-red-600">{turnstileError}</p>
+          )}
+        </div>
+      )}
 
       <button
         type="submit"
