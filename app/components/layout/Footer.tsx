@@ -406,7 +406,7 @@ export default function Footer() {
                     Desarrollado por
                   </p>
                   <a 
-                    href="https://qwantix.agency" 
+                    href="https://qwantix.agency/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center sm:justify-end gap-1.5 text-gray-300 hover:text-white transition-all duration-300 font-medium group/link"

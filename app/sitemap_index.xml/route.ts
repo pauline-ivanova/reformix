@@ -72,7 +72,7 @@ export async function GET(request: NextRequest) {
   // Check if request wants XML (for search engines)
   const acceptHeader = request.headers.get('accept') || '';
   const userAgent = request.headers.get('user-agent') || '';
-  const isSearchEngine = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver/i.test(userAgent);
+  const isSearchEngine = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver|ahrefsbot|semrushbot|mj12bot|dotbot|rogerbot|screaming|seo|crawler|spider/i.test(userAgent);
   const explicitlyWantsXML = request.nextUrl.searchParams.get('format') === 'xml' ||
                              (acceptHeader.includes('application/xml') && !acceptHeader.includes('text/html')) ||
                              (acceptHeader.includes('text/xml') && !acceptHeader.includes('text/html'));

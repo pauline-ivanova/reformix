@@ -71,7 +71,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-brand-text-heading mb-1">Ubicación</h3>
                     <a 
-                      href="https://maps.app.goo.gl/2TjHRrrd7Bw7eSdPA"
+                      href="https://www.google.com/maps/place/Reformas+IriSmile/@41.52645,2.12016,15z/data=!4m6!3m5!1s0x12a4957449e543b3:0xaf29167c9c57be09!8m2!3d41.52645!4d2.12016"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-brand-text-body hover:text-brand-accent"
