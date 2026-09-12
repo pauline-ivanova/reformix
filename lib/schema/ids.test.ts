@@ -19,4 +19,9 @@ const provider = providerLocalBusinessRef()
 assert.equal(provider['@id'], schemaLocalBusinessId())
 assert.equal(absoluteSchemaUrl('/contacto'), 'https://www.reformix.barcelona/contacto')
 
+const prev = process.env.NEXT_PUBLIC_SITE_URL
+process.env.NEXT_PUBLIC_SITE_URL = 'https://www.reformix.barcelona/\r\n'
+assert.equal(absoluteSchemaUrl('/contacto'), 'https://www.reformix.barcelona/contacto')
+process.env.NEXT_PUBLIC_SITE_URL = prev
+
 console.log('schema ids tests: ok')

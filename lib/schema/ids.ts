@@ -4,14 +4,15 @@
  * Canon: docs/schema-contracts.md · docs/ops-stack.md Phase E
  */
 
-export const DEFAULT_SITE_URL = 'https://www.reformix.barcelona'
+import { DEFAULT_SITE_URL, getSiteUrl } from '../site-url.ts'
+
+export { DEFAULT_SITE_URL }
 export const BRAND_NAME = 'Reformix Barcelona'
 export const BRAND_EMAIL = 'reformix.barcelona@gmail.com'
 export const BRAND_PHONE = '+34 642 029 572'
 
 export function schemaBaseUrl(): string {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITE_URL
-  return raw.replace(/\/$/, '')
+  return getSiteUrl()
 }
 
 export function absoluteSchemaUrl(pathOrUrl: string): string {

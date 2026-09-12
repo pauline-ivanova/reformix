@@ -246,12 +246,6 @@ export default async function HomePage() {
             reviewBody: t.text,
             ratingValue: 5
           })),
-          aggregateRating: {
-            ratingValue: 5,
-            ratingCount: defaultTestimonials.length,
-            bestRating: 5,
-            worstRating: 1
-          }
         });
         return reviewSchema && <JsonLd data={reviewSchema} />;
       })()}

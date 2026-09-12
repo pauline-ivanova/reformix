@@ -1,8 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import { getSiteUrl } from '@/lib/site-url';
 
-export async function GET(request: NextRequest) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-
-  // Redirect to sitemap_index.xml
-  return NextResponse.redirect(`${baseUrl}/sitemap_index.xml`, 301);
+export async function GET() {
+  return NextResponse.redirect(`${getSiteUrl()}/sitemap_index.xml`, 301);
 }

@@ -27,7 +27,7 @@ Entity-граф + контракт по типу страницы. Не densest 
 | Страница | Must | Builder |
 |----------|------|---------|
 | Layout (все) | Organization · LocalBusiness · WebSite | `app/layout.tsx` + `JsonLd.tsx` |
-| Home | FAQ · Review (visible testimonials) | `app/page.tsx` |
+| Home | FAQ · Review (visible testimonials, `itemReviewed` → LocalBusiness; no self-serving AggregateRating) | `app/page.tsx` |
 | Hub (`/reformas-integrales`, `/reformas-por-estancia`, `/servicios-tecnicos`, `/reformas-comerciales`) | CollectionPage · ItemList · FAQ · Breadcrumb | `lib/schema/utility-pages.ts` |
 | Spoke service | Service · FAQ · Breadcrumb (`provider` → `/#localbusiness`) | `generateServiceSchema` |
 | Contacto | ContactPage · ContactPoint · Breadcrumb | `buildContactPageJsonLd` |
@@ -37,8 +37,10 @@ Entity-граф + контракт по типу страницы. Не densest 
 
 - FAQ / Review не из UI
 - Полный LocalBusiness / Organization на каждой странице без `@id`
+- Self-serving `AggregateRating` на LocalBusiness (Google rich results fail)
 - Fake SearchAction (`/?s=…`) без реального поиска
 - Авто-правка MD ссылок без review
+- HTML negotiation на `*.xml` sitemap routes (всегда XML)
 
 ## Tests
 

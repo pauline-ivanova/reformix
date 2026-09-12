@@ -128,6 +128,14 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Apex → www (permanent). Disable Vercel "Redirect to www" on the apex
+      // domain so this runs instead of the platform 307 Temporary Redirect.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'reformix.barcelona' }],
+        destination: 'https://www.reformix.barcelona/:path*',
+        permanent: true,
+      },
       // Legacy slug variants -> current slugs
       {
         source: '/reformas-de-cocinas',

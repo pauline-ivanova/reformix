@@ -143,9 +143,11 @@ export function getAllStaticPages(appDir: string = 'app'): StaticPage[] {
       'sitemap-reformas-integrales.xml',
       'sitemap-reformas-estancia.xml',
       'sitemap-servicios-tecnicos.xml',
+      'sitemap-reformas-comerciales.xml',
       'sitemap-legal.xml',
       'sitemap.xml',
       'site-map',
+      'sentry-smoke',
       '_next',
     ];
 
@@ -381,60 +383,43 @@ export function getServiciosTecnicosPages(): StaticPage[] {
 }
 
 /**
- * Gets pages for Reformas Integrales
- * Mainly from content files category 01
+ * Gets pages for Reformas Integrales (homepage + known hub/spoke slugs)
  */
 export function getReformasIntegralesPages(): StaticPage[] {
-  const contentFiles = getAllContentFiles();
-  const pages: StaticPage[] = [];
-  
-  // Add homepage (implicitly part of this section)
-  pages.push({
-      slug: '', // Represents homepage
+  const pages: StaticPage[] = [
+    {
+      slug: '',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1.0,
-      title: 'Inicio'
+      title: 'Inicio',
+    },
+  ];
+
+  Array.from(REFORMAS_INTEGRALES_SLUGS).forEach((slug) => {
+    pages.push({
+      slug,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: slug === 'reformas-integrales' ? 0.8 : 0.7,
+      title: formatPageTitle(slug),
+    });
   });
 
-  contentFiles.forEach(file => {
-    const parsed = parseContentFileName(file.slug);
-    if (parsed && parsed.category === '01') {
-      pages.push({
-        slug: parsed.slug,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.8,
-        title: file.metadata.title,
-      });
-    }
-  });
-  
   return pages;
 }
 
 /**
- * Gets pages for Reformas por Estancia
- * Mainly from content files category 02
+ * Gets pages for Reformas por Estancia from known hub/spoke slugs
  */
 export function getReformasEstanciaPages(): StaticPage[] {
-  const contentFiles = getAllContentFiles();
-  const pages: StaticPage[] = [];
-  
-  contentFiles.forEach(file => {
-    const parsed = parseContentFileName(file.slug);
-    if (parsed && parsed.category === '02') {
-      pages.push({
-        slug: parsed.slug,
-        lastModified: new Date(),
-        changeFrequency: 'monthly',
-        priority: 0.7,
-        title: file.metadata.title,
-      });
-    }
-  });
-  
-  return pages;
+  return Array.from(REFORMAS_ESTANCIA_SLUGS).map((slug) => ({
+    slug,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: slug === 'reformas-por-estancia' ? 0.8 : 0.7,
+    title: formatPageTitle(slug),
+  }));
 }
 
 /**

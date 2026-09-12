@@ -3,6 +3,7 @@
  */
 
 import type { Metadata } from 'next';
+import { getSiteUrl } from '@/lib/site-url';
 
 /**
  * Truncates text to a maximum length, ensuring it ends at a word boundary.
@@ -77,7 +78,7 @@ export function generateStandardMetadata(options: StandardMetadataOptions): Part
   } = options;
 
   const keywordsString = keywords.length > 0 ? keywords.join(', ') : '';
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
+  const baseUrl = getSiteUrl();
   
   // Default OG image - use hero-bg.webp as fallback
   const ogImage = image || `${baseUrl}/images/hero-bg.webp`;
