@@ -8,7 +8,8 @@ import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
 import JsonLd from "@/app/components/common/JsonLd";
-import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import { buildCollectionPageJsonLd } from "@/lib/schema/utility-pages";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -278,26 +279,21 @@ export default async function ReformasPorEstanciaPage() {
           }
         ];
         const faqSchema = generateFAQSchema(faqs);
-        const serviceSchema = generateServiceSchema({
-          name: "Reformas por Estancia en Barcelona y Vallès Occidental",
-          description: "Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía.",
-          provider: {
-            '@type': 'HomeAndConstructionBusiness',
-            name: 'Reformix Barcelona',
-          },
-          serviceType: 'Room-by-Room Remodeling',
-          url: '/reformas-por-estancia',
+        const collectionSchema = buildCollectionPageJsonLd({
+          pagePath: '/reformas-por-estancia',
+          title: 'Reformas por Estancia en Barcelona y Vallès Occidental',
+          description:
+            'Reformas por estancia en Barcelona y Vallès Occidental. Cocina, baño y salón con presupuesto cerrado y garantía.',
+          listName: 'Reformas por estancia',
+          items: services
+            .filter((s) => s.ctaHref && s.ctaHref !== '/contacto')
+            .map((s) => ({ name: s.title, url: s.ctaHref })),
         });
-        const breadcrumbSchema = generateBreadcrumbSchema([
-          { name: 'Inicio', url: '/' },
-          { name: 'Reformas por Estancia', url: '/reformas-por-estancia' },
-        ]);
         
         return (
           <>
             {faqSchema && <JsonLd data={faqSchema} />}
-            {serviceSchema && <JsonLd data={serviceSchema} />}
-            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <JsonLd data={collectionSchema} />
             <FAQTwoColumn titleLines={["Preguntas Frecuentes", "sobre Reformas por Estancia"]} items={faqs} />
           </>
         );

@@ -28,6 +28,13 @@ yarn-error.log*
 .env*.local
 .env
 
+# GSC / SEO research dumps (local snapshots — do not commit)
+docs/seo/research/
+
+# Service account keys
+secrets/*
+!secrets/.gitkeep
+
 # vercel
 .vercel
 

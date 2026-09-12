@@ -1,11 +1,14 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import Header from "@/app/components/layout/Header";
-import JsonLd, { generateOrganizationSchema, generateWebSiteSchema, generateLocalBusinessSchema, generateBreadcrumbSchema, generateServiceSchema, generateFAQSchema } from "@/app/components/common/JsonLd";
+import JsonLd, { generateOrganizationSchema, generateWebSiteSchema, generateLocalBusinessSchema } from "@/app/components/common/JsonLd";
 import GlobalActivityIndicator from "@/app/components/common/GlobalActivityIndicator";
 import DeferredComponents from "@/app/components/layout/DeferredComponents";
+import CloudflareWebAnalytics from "@/app/components/analytics/CloudflareWebAnalytics";
+import GaPageViews from "@/app/components/analytics/GaPageViews";
 
 // Dynamic imports for non-critical components - defer JS loading
 import dynamic from 'next/dynamic';
@@ -103,14 +106,6 @@ export default function RootLayout({
     name: 'Reformix Barcelona',
     url: baseUrl,
     description: 'Empresa de reformas en Barcelona y Vallès Occidental.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${baseUrl}/?s={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   });
 
   const localBusinessSchema = generateLocalBusinessSchema({
@@ -138,6 +133,10 @@ export default function RootLayout({
         <Footer />
         {/* Defer non-critical components to reduce TBT */}
         <DeferredComponents />
+        <Suspense fallback={null}>
+          <GaPageViews />
+        </Suspense>
+        <CloudflareWebAnalytics />
         {/* Global work indicator so users see when scripts are running */}
         <GlobalActivityIndicator />
       </body>

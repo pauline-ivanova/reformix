@@ -1,6 +1,11 @@
 'use client'
 
 import { useState, FormEvent, useEffect, useRef } from 'react';
+import {
+  trackFormError,
+  trackFormStart,
+  trackFormSubmit,
+} from '@/lib/ga4';
 
 interface ContactFormProps {
   service?: string;
@@ -36,7 +41,14 @@ export default function ContactForm({ service }: ContactFormProps) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileError, setTurnstileError] = useState<string | null>(null);
   const turnstileRef = useRef<HTMLDivElement | null>(null);
+  const formStartedRef = useRef(false);
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  const markFormStarted = () => {
+    if (formStartedRef.current) return;
+    formStartedRef.current = true;
+    trackFormStart({ service: formData.service || service });
+  };
 
   useEffect(() => {
     if (!turnstileSiteKey) return;
@@ -177,6 +189,7 @@ export default function ContactForm({ service }: ContactFormProps) {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
+    markFormStarted();
     const { name, value } = e.target;
     
     // Format phone number on change
@@ -220,6 +233,7 @@ export default function ContactForm({ service }: ContactFormProps) {
   const handleBlur = (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    markFormStarted();
     const { name, value } = e.target;
     setTouched({
       ...touched,
@@ -284,8 +298,11 @@ export default function ContactForm({ service }: ContactFormProps) {
 
     setErrors(newErrors);
 
+    const serviceDim = formData.service || service || undefined;
+
     // If there are any errors, stop submission
     if (nameError || emailError || phoneError || messageError || privacyError) {
+      trackFormError({ service: serviceDim, errorType: 'validation' });
       setSubmitStatus({
         type: 'error',
         message: 'Por favor, corrige los errores en el formulario.',
@@ -296,6 +313,7 @@ export default function ContactForm({ service }: ContactFormProps) {
     // Ensure Turnstile verification is completed
     if (turnstileSiteKey && !turnstileToken) {
       const securityMessage = 'Por favor, completa la verificación de seguridad.';
+      trackFormError({ service: serviceDim, errorType: 'turnstile' });
       setTurnstileError(securityMessage);
       setSubmitStatus({
         type: 'error',
@@ -322,6 +340,7 @@ export default function ContactForm({ service }: ContactFormProps) {
       const data = await response.json();
 
       if (response.ok) {
+        trackFormSubmit({ service: serviceDim });
         setSubmitStatus({
           type: 'success',
           message: data.message || '¡Gracias! Te contactaremos pronto.',
@@ -338,6 +357,7 @@ export default function ContactForm({ service }: ContactFormProps) {
         setErrors({});
         setTouched({});
         setTurnstileToken(null);
+        formStartedRef.current = false;
         try {
           const turnstile = (window as any).turnstile;
           if (turnstile) {
@@ -347,12 +367,14 @@ export default function ContactForm({ service }: ContactFormProps) {
           console.error('Error resetting Turnstile widget:', error);
         }
       } else {
+        trackFormError({ service: serviceDim, errorType: 'api' });
         setSubmitStatus({
           type: 'error',
           message: data.error || 'Hubo un error al enviar el formulario.',
         });
       }
     } catch (error) {
+      trackFormError({ service: serviceDim, errorType: 'network' });
       setSubmitStatus({
         type: 'error',
         message: 'Hubo un error de conexión. Por favor, inténtalo de nuevo.',
@@ -507,6 +529,7 @@ export default function ContactForm({ service }: ContactFormProps) {
           required
           checked={privacyConsent}
           onChange={(e) => {
+            markFormStarted();
             setPrivacyConsent(e.target.checked);
             if (errors.privacy) {
               setErrors({

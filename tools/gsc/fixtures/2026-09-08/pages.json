@@ -1,0 +1,25 @@
+{
+  "site": "https://www.reformix.barcelona/",
+  "dimension": "page",
+  "startDate": "2026-08-08",
+  "endDate": "2026-09-04",
+  "days": 28,
+  "rowCount": 2,
+  "exportedAt": "2026-09-08T12:00:00.000Z",
+  "rows": [
+    {
+      "page": "https://www.reformix.barcelona/",
+      "clicks": 20,
+      "impressions": 800,
+      "ctr": 0.025,
+      "position": 8.2
+    },
+    {
+      "page": "https://www.reformix.barcelona/reformas-cocinas",
+      "clicks": 20,
+      "impressions": 400,
+      "ctr": 0.05,
+      "position": 18.0
+    }
+  ]
+}

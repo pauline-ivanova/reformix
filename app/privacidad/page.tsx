@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
+import JsonLd from '@/app/components/common/JsonLd';
+import { buildLegalPageJsonLd } from '@/lib/schema/utility-pages';
 import { ShieldCheckIcon, InformationCircleIcon, LockClosedIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
@@ -24,8 +26,17 @@ export default function PrivacyPolicyPage() {
     month: 'long', 
     day: 'numeric' 
   });
+  const legalSchema = buildLegalPageJsonLd({
+    pagePath: '/privacidad',
+    title: 'Política de Privacidad',
+    description:
+      'Política de privacidad y protección de datos de Reformix Barcelona. Información sobre cómo recopilamos, usamos y protegemos tus datos personales.',
+    dateModified: currentDate.toISOString().slice(0, 10),
+  });
 
   return (
+    <>
+    <JsonLd data={legalSchema} />
     <div className="container mx-auto px-4 py-16 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-brand-text-heading">
@@ -84,6 +95,7 @@ export default function PrivacyPolicyPage() {
             <li>Mejorar nuestro sitio web y la experiencia del usuario</li>
             <li>Enviar comunicaciones relacionadas con nuestros servicios (solo si has dado tu consentimiento)</li>
             <li>Cumplir con obligaciones legales y regulatorias</li>
+            <li>Detectar y corregir errores técnicos del sitio (monitorización con Sentry, sin grabación de sesión)</li>
           </ul>
         </section>
 
@@ -95,7 +107,9 @@ export default function PrivacyPolicyPage() {
           <ul>
             <li><strong>Consentimiento:</strong> Cuando nos has dado tu consentimiento explícito (art. 6.1.a RGPD)</li>
             <li><strong>Ejecución de contrato:</strong> Para cumplir con nuestras obligaciones contractuales (art. 6.1.b RGPD)</li>
-            <li><strong>Interés legítimo:</strong> Para mejorar nuestros servicios y comunicarnos contigo (art. 6.1.f RGPD)</li>
+            <li><strong>Interés legítimo:</strong> Para mejorar nuestros servicios, comunicarnos contigo y
+              garantizar la seguridad y disponibilidad del sitio mediante monitorización técnica de errores
+              (Sentry, sin Session Replay) (art. 6.1.f RGPD)</li>
             <li><strong>Obligación legal:</strong> Para cumplir con requisitos legales aplicables (art. 6.1.c RGPD)</li>
           </ul>
         </section>
@@ -124,7 +138,9 @@ export default function PrivacyPolicyPage() {
             No vendemos ni alquilamos tus datos personales a terceros. Podemos compartir información con:
           </p>
           <ul>
-            <li><strong>Proveedores de servicios:</strong> Proveedores que nos ayudan a operar nuestro negocio (hosting, email, etc.)</li>
+            <li><strong>Proveedores de servicios:</strong> hosting (Vercel), email transaccional (Resend), alertas (Telegram), protección anti-bots (Cloudflare Turnstile), monitorización de errores (Sentry, UE, sin Session Replay)</li>
+            <li><strong>Analítica (solo con consentimiento):</strong> Google Analytics 4, Microsoft Clarity</li>
+            <li><strong>Medición técnica sin cookies de identificación:</strong> Cloudflare Web Analytics</li>
             <li><strong>Autoridades legales:</strong> Cuando sea requerido por ley o para proteger nuestros derechos</li>
           </ul>
         </section>
@@ -196,6 +212,7 @@ export default function PrivacyPolicyPage() {
         </section>
       </div>
     </div>
+    </>
   );
 }
 

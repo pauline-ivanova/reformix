@@ -3,6 +3,7 @@
 import { Fragment } from 'react'
 import Link from 'next/link'
 import { Dialog, Transition } from '@headlessui/react'
+import CtaLink from '@/app/components/analytics/CtaLink'
 // Inline SVG icon to avoid loading @heroicons/react bundle
 const XMarkIcon = ({ className }: { className?: string }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -100,14 +101,15 @@ export default function MobileMenu({ mobileMenuOpen, setMobileMenuOpen, navigati
             ))}
           </div>
           <div className="mt-8 pt-6 border-t border-gray-200">
-            <Link
+            <CtaLink
               href="/contacto"
+              ctaId="mobile_presupuesto"
               className="group relative rounded-lg bg-brand-primary px-6 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg w-full block text-center transition-all duration-200 overflow-hidden"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="relative z-10">Presupuesto Gratis</span>
               <span className="absolute inset-0 bg-gradient-to-r from-brand-accent to-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
-            </Link>
+            </CtaLink>
           </div>
         </Dialog.Panel>
       </Transition.Child>

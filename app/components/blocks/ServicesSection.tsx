@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import CtaLink from '@/app/components/analytics/CtaLink';
 
 interface Service {
   title: string;
@@ -134,12 +134,13 @@ export default function ServicesSection({
                 )}
                 
                 {/* CTA Button */}
-                <Link
+                <CtaLink
                   href={service.ctaHref}
+                  ctaId="services_card"
                   className="inline-block bg-brand-primary text-white px-6 py-3 rounded-md font-semibold text-center hover:opacity-90 transition-opacity mt-auto"
                 >
                   {service.ctaText}
-                </Link>
+                </CtaLink>
               </div>
             </div>
           ))}

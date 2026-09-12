@@ -7,7 +7,8 @@ import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
 import JsonLd from "@/app/components/common/JsonLd";
-import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import { buildCollectionPageJsonLd } from "@/lib/schema/utility-pages";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import { 
@@ -284,26 +285,21 @@ export default async function ReformasComercialesPage() {
           }
         ];
         const faqSchema = generateFAQSchema(faqs);
-        const serviceSchema = generateServiceSchema({
-          name: "Reformas Comerciales en Barcelona y Vallès Occidental",
-          description: "Reformas comerciales en Barcelona y Vallès Occidental. Oficinas, locales, restaurantes y clínicas con cumplimiento normativo y presupuesto cerrado.",
-          provider: {
-            '@type': 'HomeAndConstructionBusiness',
-            name: 'Reformix Barcelona',
-          },
-          serviceType: 'Commercial Remodeling',
-          url: '/reformas-comerciales',
+        const collectionSchema = buildCollectionPageJsonLd({
+          pagePath: '/reformas-comerciales',
+          title: 'Reformas Comerciales en Barcelona y Vallès Occidental',
+          description:
+            'Reformas comerciales en Barcelona y Vallès Occidental. Oficinas, locales, restaurantes y clínicas con cumplimiento normativo y presupuesto cerrado.',
+          listName: 'Soluciones comerciales',
+          items: services
+            .filter((s) => s.ctaHref && s.ctaHref !== '/contacto')
+            .map((s) => ({ name: s.title, url: s.ctaHref })),
         });
-        const breadcrumbSchema = generateBreadcrumbSchema([
-          { name: 'Inicio', url: '/' },
-          { name: 'Reformas Comerciales', url: '/reformas-comerciales' },
-        ]);
         
         return (
           <>
             {faqSchema && <JsonLd data={faqSchema} />}
-            {serviceSchema && <JsonLd data={serviceSchema} />}
-            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <JsonLd data={collectionSchema} />
             <FAQTwoColumn titleLines={["Preguntas Frecuentes", "sobre Reformas Comerciales"]} items={faqs} />
           </>
         );

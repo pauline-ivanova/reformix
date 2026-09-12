@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
+import JsonLd from '@/app/components/common/JsonLd';
+import { buildLegalPageJsonLd } from '@/lib/schema/utility-pages';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
@@ -24,8 +26,17 @@ export default function CookiesPolicyPage() {
     month: 'long', 
     day: 'numeric' 
   });
+  const legalSchema = buildLegalPageJsonLd({
+    pagePath: '/cookies',
+    title: 'Política de Cookies',
+    description:
+      'Política de cookies de Reformix Barcelona. Información sobre el uso de cookies en nuestro sitio web.',
+    dateModified: currentDate.toISOString().slice(0, 10),
+  });
 
   return (
+    <>
+    <JsonLd data={legalSchema} />
     <div className="container mx-auto px-4 py-16 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-brand-text-heading">
@@ -63,28 +74,49 @@ export default function CookiesPolicyPage() {
           <ul>
             <li><strong>Cookies de sesión:</strong> Mantienen la sesión del usuario activa</li>
             <li><strong>Cookies de seguridad:</strong> Detectan intentos de acceso no autorizado</li>
+            <li><strong>Monitorización de errores (Sentry):</strong> detección técnica de fallos del sitio
+              (sin grabación de sesión). Base: interés legítimo / necesidad técnica de seguridad y disponibilidad
+              (art. 6.1.f RGPD). Sin cookies de marketing ni analítica de comportamiento.</li>
           </ul>
 
           <h3 className="text-xl font-semibold mb-3 text-brand-text-heading mt-6">Cookies de Análisis</h3>
           <p>
-            Estas cookies nos ayudan a entender cómo los visitantes interactúan con nuestro sitio web, 
-            proporcionándonos información sobre las áreas visitadas, el tiempo de permanencia, etc. 
-            Esta información nos ayuda a mejorar el funcionamiento del sitio web.
+            Solo se activan si das tu consentimiento en el banner. Nos ayudan a entender el uso del sitio
+            (páginas visitadas, tiempo de permanencia, mapas de calor). Pueden incluir:
           </p>
+          <ul>
+            <li><strong>Google Analytics 4</strong> — medición de visitas y eventos (si está configurado)</li>
+            <li><strong>Microsoft Clarity</strong> — mapas de calor y grabaciones de sesión anonimizadas (si está configurado)</li>
+          </ul>
 
           <h3 className="text-xl font-semibold mb-3 text-brand-text-heading mt-6">Cookies de Preferencias</h3>
           <p>
             Estas cookies permiten que el sitio web recuerde información que cambia la forma en que el sitio 
             se comporta o se ve, como tu idioma preferido o la región en la que te encuentras.
           </p>
+
+          <h3 className="text-xl font-semibold mb-3 text-brand-text-heading mt-6">Cookies de Marketing</h3>
+          <p>
+            Solo con consentimiento explícito. Permiten medir campañas publicitarias (p. ej. Meta Pixel)
+            cuando estén activadas.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4 text-brand-text-heading">Medición sin cookies</h2>
+          <p>
+            Podemos usar <strong>Cloudflare Web Analytics</strong>, una medición de rendimiento (RUM)
+            sin cookies de identificación, en paralelo a la analítica basada en consentimiento.
+          </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-brand-text-heading">Cookies de Terceros</h2>
           <p>
-            Algunas cookies son colocadas por servicios de terceros que aparecen en nuestras páginas. 
-            No controlamos el establecimiento de estas cookies, por lo que te recomendamos que consultes 
-            los sitios web de terceros para obtener más información sobre sus cookies y cómo gestionarlas.
+            Algunas cookies las colocan servicios de terceros (Google, Microsoft, Cloudflare, Meta)
+            solo tras tu consentimiento (salvo cookies/tecnologías técnicas necesarias como Turnstile
+            en el formulario o la monitorización de errores con Sentry).
+            Consulta las políticas de esos proveedores para más detalle.
           </p>
         </section>
 
@@ -112,12 +144,13 @@ export default function CookiesPolicyPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-brand-text-heading">Consentimiento</h2>
           <p>
-            Al continuar navegando por nuestro sitio web después de haber sido informado sobre el uso de cookies, 
-            entendemos que aceptas el uso de cookies de acuerdo con esta política.
+            Las cookies no esenciales (análisis, preferencias, marketing) solo se activan si las aceptas
+            en el banner o en la configuración. Seguir navegando o cerrar el banner no equivale a aceptarlas.
           </p>
           <p>
-            Puedes retirar tu consentimiento en cualquier momento eliminando las cookies de tu navegador o 
-            contactándonos a través de <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a>.
+            Puedes retirar o cambiar tu consentimiento en cualquier momento con el enlace
+            «Configuración de cookies» en el pie de página, o contactándonos en{' '}
+            <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a>.
           </p>
         </section>
 
@@ -141,6 +174,7 @@ export default function CookiesPolicyPage() {
         </section>
       </div>
     </div>
+    </>
   );
 }
 

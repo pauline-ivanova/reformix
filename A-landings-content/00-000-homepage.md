@@ -1,3 +1,10 @@
+---
+title: "Reformas en Barcelona y Vallès Occidental | Reformix"
+description: "Reformas integrales y por estancia en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!"
+slug: "homepage"
+image: "/images/hero-bg.webp"
+---
+
 # Contenido para la Página de Inicio de Reformix Barcelona (Versión SEO v2)
 
 ---

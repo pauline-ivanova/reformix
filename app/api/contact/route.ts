@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/nextjs';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
@@ -300,6 +301,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Error processing contact form:', error);
+    Sentry.captureException(error);
     return NextResponse.json(
       { error: 'Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo.' },
       { status: 500 }

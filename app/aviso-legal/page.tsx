@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
+import JsonLd from '@/app/components/common/JsonLd';
+import { buildLegalPageJsonLd } from '@/lib/schema/utility-pages';
 import { DocumentTextIcon, ScaleIcon, BuildingOfficeIcon } from '@heroicons/react/24/outline';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
@@ -24,8 +26,17 @@ export default function LegalNoticePage() {
     month: 'long', 
     day: 'numeric' 
   });
+  const legalSchema = buildLegalPageJsonLd({
+    pagePath: '/aviso-legal',
+    title: 'Aviso Legal',
+    description:
+      'Aviso legal de Reformix Barcelona. Información sobre la empresa, condiciones de uso del sitio web y responsabilidades.',
+    dateModified: currentDate.toISOString().slice(0, 10),
+  });
 
   return (
+    <>
+    <JsonLd data={legalSchema} />
     <div className="container mx-auto px-4 py-16 max-w-4xl">
       <div className="mb-8">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-brand-text-heading">
@@ -146,6 +157,7 @@ export default function LegalNoticePage() {
         </section>
       </div>
     </div>
+    </>
   );
 }
 

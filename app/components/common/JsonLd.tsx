@@ -1,3 +1,11 @@
+import {
+  absoluteSchemaUrl,
+  providerLocalBusinessRef,
+  schemaLocalBusinessId,
+  schemaOrgId,
+  schemaWebsiteId,
+} from '@/lib/schema/ids';
+
 interface JsonLdProps {
   data: object | object[];
 }
@@ -19,7 +27,7 @@ export default function JsonLd({ data }: JsonLdProps) {
 }
 
 /**
- * Generate Organization schema
+ * Generate Organization schema (full node — layout only; elsewhere use orgRef).
  */
 export function generateOrganizationSchema({
   name,
@@ -42,9 +50,10 @@ export function generateOrganizationSchema({
   slogan?: string;
   knowsAbout?: string[]; // Темы экспертизы
 }) {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': schemaOrgId(),
     name,
     url,
     description,
@@ -94,7 +103,8 @@ export function generateOrganizationSchema({
 }
 
 /**
- * Generate WebSite schema
+ * Generate WebSite schema (full node — layout only; elsewhere use websiteRef).
+ * Do not attach SearchAction until a real site search exists (ops Phase F).
  */
 export function generateWebSiteSchema({
   name,
@@ -114,12 +124,15 @@ export function generateWebSiteSchema({
     'query-input': string;
   };
 }) {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': schemaWebsiteId(),
     name,
     url,
     description,
+    inLanguage: 'es-ES',
+    publisher: { '@id': schemaOrgId() },
   };
 
   if (potentialAction) {
@@ -157,14 +170,13 @@ export function generateLocalBusinessSchema({
   streetAddress?: string;
   postalCode?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-  const logoUrl = logo ? (logo.startsWith('http') ? logo : `${baseUrl}${logo.startsWith('/') ? '' : '/'}${logo}`) : `${baseUrl}/reformix-logo.svg`;
-  const imageUrl = image ? (image.startsWith('http') ? image : `${baseUrl}${image.startsWith('/') ? '' : '/'}${image}`) : `${baseUrl}/images/hero-bg.webp`;
+  const logoUrl = logo ? absoluteSchemaUrl(logo) : absoluteSchemaUrl('/reformix-logo.svg');
+  const imageUrl = image ? absoluteSchemaUrl(image) : absoluteSchemaUrl('/images/hero-bg.webp');
 
   return {
     '@context': 'https://schema.org',
     '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
-    '@id': url,
+    '@id': schemaLocalBusinessId(),
     name,
     alternateName: 'Empresa de reformas en Sabadell',
     url,
@@ -227,6 +239,7 @@ export function generateLocalBusinessSchema({
       areaServed: 'ES',
       availableLanguage: ['Spanish', 'Catalan'],
     },
+    parentOrganization: { '@id': schemaOrgId() },
   };
 }
 
@@ -256,8 +269,6 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
  * Generate BreadcrumbList schema
  */
 export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-  
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -265,7 +276,7 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith('http') ? item.url : `${baseUrl}${item.url.startsWith('/') ? '' : '/'}${item.url}`,
+      item: absoluteSchemaUrl(item.url),
     })),
   };
 }
@@ -291,8 +302,6 @@ export function generateServiceSchema({
   serviceType?: string;
   url?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-  
   // Обязательные города: Barcelona и Sabadell (всегда должны быть первыми)
   const requiredCities = [
     {
@@ -326,14 +335,15 @@ export function generateServiceSchema({
     ];
   }
   
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name,
     description,
     provider: {
+      ...providerLocalBusinessRef(),
       ...provider,
-      '@id': baseUrl,
+      '@id': schemaLocalBusinessId(),
     },
     areaServed: finalAreaServed,
   };
@@ -343,7 +353,9 @@ export function generateServiceSchema({
   }
 
   if (url) {
-    schema.url = url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+    const abs = absoluteSchemaUrl(url);
+    schema.url = abs;
+    schema['@id'] = `${abs}#service`;
   }
 
   return schema;
@@ -370,9 +382,10 @@ export function generateReviewSchema({
     ratingCount: number;
   };
 }) {
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
+    '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
+    '@id': schemaLocalBusinessId(),
   };
 
   if (aggregateRating) {
@@ -420,8 +433,7 @@ export function generateImageObjectSchema({
   width?: number;
   height?: number;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-  const imageUrl = url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+  const imageUrl = absoluteSchemaUrl(url);
 
   return {
     '@context': 'https://schema.org',
@@ -453,9 +465,7 @@ export function generateOfferSchema({
   validFrom?: string;
   url?: string;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-  
-  const schema: any = {
+  const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Offer',
     name,
@@ -479,7 +489,7 @@ export function generateOfferSchema({
   }
 
   if (url) {
-    schema.url = url.startsWith('http') ? url : `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`;
+    schema.url = absoluteSchemaUrl(url);
   }
 
   return schema;
@@ -501,8 +511,6 @@ export function generateOfferCatalogSchema({
     url: string;
   }>;
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
-
   return {
     '@context': 'https://schema.org',
     '@type': 'OfferCatalog',
@@ -516,7 +524,8 @@ export function generateOfferCatalogSchema({
         '@type': 'Service',
         name: service.name,
         description: service.description,
-        url: service.url.startsWith('http') ? service.url : `${baseUrl}${service.url.startsWith('/') ? '' : '/'}${service.url}`,
+        url: absoluteSchemaUrl(service.url),
+        provider: { '@id': schemaLocalBusinessId() },
       },
     })),
   };

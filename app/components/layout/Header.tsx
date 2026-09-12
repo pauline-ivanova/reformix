@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import CtaLink from '@/app/components/analytics/CtaLink'
 
 // Inline SVG icons to avoid loading @heroicons/react bundle
 const Bars3Icon = ({ className }: { className?: string }) => (
@@ -162,13 +163,14 @@ export default function Header() {
           {shouldLoadDesktopMenu && <DesktopMenu navigation={navigation} />}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:ml-6 lg:flex-shrink-0">
-          <Link
+          <CtaLink
             href="/contacto"
+            ctaId="header_presupuesto"
             className="group relative rounded-lg bg-brand-primary px-4 py-2.5 xl:px-6 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:bg-brand-primary/95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary transition-all duration-200 overflow-hidden whitespace-nowrap"
           >
             <span className="relative z-10">Presupuesto Gratis</span>
             <span className="absolute inset-0 bg-gradient-to-r from-brand-accent to-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
-          </Link>
+          </CtaLink>
         </div>
       </nav>
       {mobileMenuOpen && (

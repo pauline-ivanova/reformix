@@ -69,9 +69,10 @@
   - Для малых компаний не обязательно
   - Если компания крупная или обрабатывает много данных, может потребоваться
 
-- [ ] **Аналитика**
-  - Если планируется использовать Google Analytics, нужно инициализировать только после согласия
-  - Код для этого уже подготовлен в `CookieConsent.tsx` (строки 71-74)
+- [x] **Аналитика**
+  - Google Analytics 4 / Microsoft Clarity инициализируются только после согласия (`lib/cookie-consent.ts`)
+  - Cloudflare Web Analytics — cookieless RUM (без analytics consent)
+  - Sentry — мониторинг ошибок (EU, без Session Replay); técnica / interés legítimo, не analytics consent
 
 ## 🎯 Итоговый статус
 

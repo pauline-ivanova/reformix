@@ -7,7 +7,8 @@ import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
 import JsonLd from "@/app/components/common/JsonLd";
-import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import { buildCollectionPageJsonLd } from "@/lib/schema/utility-pages";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import Image from "next/image";
@@ -435,26 +436,21 @@ export default async function ServiciosTecnicosPage() {
           }
         ];
         const faqSchema = generateFAQSchema(faqs);
-        const serviceSchema = generateServiceSchema({
-          name: "Servicios Técnicos de Reforma en Barcelona y Vallès Occidental",
-          description: "Servicios técnicos de reforma en Barcelona y Vallès Occidental. Equipo propio: aislamiento, pladur, carpintería, fontanería, electricidad y pintura.",
-          provider: {
-            '@type': 'HomeAndConstructionBusiness',
-            name: 'Reformix Barcelona',
-          },
-          serviceType: 'Construction Technical Services',
-          url: '/servicios-tecnicos',
+        const collectionSchema = buildCollectionPageJsonLd({
+          pagePath: '/servicios-tecnicos',
+          title: 'Servicios Técnicos de Reforma en Barcelona y Vallès Occidental',
+          description:
+            'Servicios técnicos de reforma en Barcelona y Vallès Occidental. Equipo propio: aislamiento, pladur, carpintería, fontanería, electricidad y pintura.',
+          listName: 'Servicios técnicos',
+          items: services
+            .filter((s) => s.ctaHref && s.ctaHref !== '/contacto')
+            .map((s) => ({ name: s.title, url: s.ctaHref })),
         });
-        const breadcrumbSchema = generateBreadcrumbSchema([
-          { name: 'Inicio', url: '/' },
-          { name: 'Servicios Técnicos', url: '/servicios-tecnicos' },
-        ]);
         
         return (
           <>
             {faqSchema && <JsonLd data={faqSchema} />}
-            {serviceSchema && <JsonLd data={serviceSchema} />}
-            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <JsonLd data={collectionSchema} />
             <FAQTwoColumn titleLines={["Preguntas Frecuentes"]} items={faqs} />
           </>
         );

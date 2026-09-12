@@ -1,0 +1,51 @@
+name: Content Validate
+
+# Landing MD integrity (A-landings-content) + public image refs from content/heroes.
+# Failures should block merge when this check is required (⏸ private free without Pro).
+# Also runs via npm prebuild on Vercel. Canon: docs/ops-stack.md Phase C
+
+on:
+  pull_request:
+    paths:
+      - "A-landings-content/**"
+      - "app/**"
+      - "public/images/**"
+      - "tools/content/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/content-validate.yml"
+  push:
+    branches: [main]
+    paths:
+      - "A-landings-content/**"
+      - "app/**"
+      - "public/images/**"
+      - "tools/content/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/content-validate.yml"
+  workflow_dispatch:
+
+jobs:
+  content:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate content
+        run: npm run content:validate
+
+      - name: Unit tests (content validate)
+        run: node --test tools/content/validate-lib.test.mjs

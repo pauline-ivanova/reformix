@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import CtaLink from '@/app/components/analytics/CtaLink';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 interface ProcessStep {
@@ -105,12 +105,13 @@ export default function ProcessSection({
                     {step.description}
                   </p>
                   {step.ctaButton && (
-                    <Link
+                    <CtaLink
                       href={step.ctaButton.href}
+                      ctaId="process_mobile"
                       className="inline-block bg-[#002e7c] text-white font-bold py-2 px-6 transition-colors text-sm border-2 border-white hover:bg-white hover:text-[#002e7c]"
                     >
                       {step.ctaButton.text}
-                    </Link>
+                    </CtaLink>
                   )}
                 </div>
               ) : (
@@ -154,13 +155,14 @@ export default function ProcessSection({
               </p>
               
               {steps[0].ctaButton && (
-                <Link
+                <CtaLink
                   href={steps[0].ctaButton.href}
+                  ctaId="process_desktop"
                   className="inline-flex items-center gap-2 bg-[#002e7c] hover:bg-brand-primary/90 text-white font-bold py-3 px-8 transition-colors text-sm uppercase tracking-wider"
                 >
                   {steps[0].ctaButton.text}
                   <ArrowRightIcon className="w-5 h-5" />
-                </Link>
+                </CtaLink>
               )}
             </div>
 

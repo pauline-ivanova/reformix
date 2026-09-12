@@ -1,0 +1,83 @@
+# IndexNow Submit
+
+# After landing content changes land on main, optionally wait for Vercel
+# production and notify IndexNow. Start with workflow_dispatch dry-run.
+# Docs: docs/ops-stack.md · Phase A
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "A-landings-content/**"
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "Git base ref (empty = HEAD~1)"
+        required: false
+        default: ""
+        type: string
+      dry_run:
+        description: "Dry run (no IndexNow POST)"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
+      wait:
+        description: "Wait for production URL before submit"
+        required: false
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Resolve git range
+        id: range
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.since }}" ]; then
+            BEFORE="${{ inputs.since }}"
+          elif [ "${{ github.event_name }}" = "push" ] && [ -n "${{ github.event.before }}" ] && [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            BEFORE="${{ github.event.before }}"
+          else
+            BEFORE="HEAD~1"
+          fi
+          AFTER="${{ github.sha }}"
+          echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
+          echo "after=$AFTER" >> "$GITHUB_OUTPUT"
+          echo "Range: $BEFORE ... $AFTER"
+
+      - name: Submit IndexNow
+        env:
+          NEXT_PUBLIC_SITE_URL: https://www.reformix.barcelona
+        shell: bash
+        run: |
+          ARGS=(--since "${{ steps.range.outputs.before }}" --to "${{ steps.range.outputs.after }}")
+          # Live IndexNow POST after Bing WMT verified (Phase A).
+          # workflow_dispatch: dry_run=true → --preview; wait only on live POST.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ "${{ inputs.dry_run }}" = "true" ]; then
+              ARGS+=(--preview)
+            elif [ "${{ inputs.wait }}" = "true" ]; then
+              ARGS+=(--wait)
+            fi
+          fi
+          node tools/seo/indexnow-submit.mjs "${ARGS[@]}"

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import CtaLink from '@/app/components/analytics/CtaLink';
 
 interface CTAProps {
   title: string | React.ReactNode;
@@ -38,12 +38,13 @@ export default function CTA({
           </div>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link
+            <CtaLink
               href={buttonHref}
+              ctaId="section_cta"
               className="w-full sm:w-auto bg-brand-primary text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity text-center"
             >
               {buttonText}
-            </Link>
+            </CtaLink>
           </div>
           
           {features && features.length > 0 && (

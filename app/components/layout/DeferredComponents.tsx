@@ -3,10 +3,14 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
-// Defer CookieConsent and ScrollToTop until after page is interactive
 const CookieConsent = dynamic(() => import("@/app/components/common/CookieConsent"), {
   ssr: false,
 });
+
+const CookieTagsBootstrap = dynamic(
+  () => import("@/app/components/common/CookieTagsBootstrap"),
+  { ssr: false }
+);
 
 const ScrollToTop = dynamic(() => import("@/app/components/common/ScrollToTop"), {
   ssr: false,
@@ -16,12 +20,9 @@ export default function DeferredComponents() {
   const [shouldLoad, setShouldLoad] = useState(false);
 
   useEffect(() => {
-    // Wait for page to be interactive before loading these components
-    // This reduces TBT by not blocking the main thread
     if (typeof window !== 'undefined') {
-      // Use requestIdleCallback if available, otherwise setTimeout
       if ('requestIdleCallback' in window) {
-        (window as any).requestIdleCallback(() => {
+        (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback(() => {
           setShouldLoad(true);
         }, { timeout: 2000 });
       } else {
@@ -36,9 +37,9 @@ export default function DeferredComponents() {
 
   return (
     <>
+      <CookieTagsBootstrap />
       <CookieConsent />
       <ScrollToTop />
     </>
   );
 }
-

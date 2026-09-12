@@ -8,7 +8,8 @@ import FAQTwoColumn from "@/app/components/blocks/FAQTwoColumn";
 import ServiceAreas from "@/app/components/blocks/ServiceAreas";
 import CTA from "@/app/components/blocks/CTA";
 import JsonLd from "@/app/components/common/JsonLd";
-import { generateFAQSchema, generateServiceSchema, generateBreadcrumbSchema } from "@/app/components/common/JsonLd";
+import { generateFAQSchema } from "@/app/components/common/JsonLd";
+import { buildCollectionPageJsonLd } from "@/lib/schema/utility-pages";
 import { Metadata } from "next";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
 import {
@@ -258,26 +259,21 @@ export default async function ReformasIntegralesPage() {
           }
         ];
         const faqSchema = generateFAQSchema(faqs);
-        const serviceSchema = generateServiceSchema({
-          name: "Reformas Integrales en Barcelona y Vallès Occidental",
-          description: "Reformas integrales llave en mano en Barcelona y Vallès Occidental. Proyectos completos con garantía y presupuesto cerrado.",
-          provider: {
-            '@type': 'HomeAndConstructionBusiness',
-            name: 'Reformix Barcelona',
-          },
-          serviceType: 'Full Home Remodeling',
-          url: '/reformas-integrales',
+        const collectionSchema = buildCollectionPageJsonLd({
+          pagePath: '/reformas-integrales',
+          title: 'Reformas Integrales en Barcelona y Vallès Occidental',
+          description:
+            'Reformas integrales llave en mano en Barcelona y Vallès Occidental. Proyectos completos con garantía y presupuesto cerrado.',
+          listName: 'Soluciones de reformas integrales',
+          items: services
+            .filter((s) => s.ctaHref && s.ctaHref !== '/contacto')
+            .map((s) => ({ name: s.title, url: s.ctaHref })),
         });
-        const breadcrumbSchema = generateBreadcrumbSchema([
-          { name: 'Inicio', url: '/' },
-          { name: 'Reformas Integrales', url: '/reformas-integrales' },
-        ]);
-        
+
         return (
           <>
             {faqSchema && <JsonLd data={faqSchema} />}
-            {serviceSchema && <JsonLd data={serviceSchema} />}
-            {breadcrumbSchema && <JsonLd data={breadcrumbSchema} />}
+            <JsonLd data={collectionSchema} />
             <FAQTwoColumn items={faqs} />
           </>
         );

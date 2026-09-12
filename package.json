@@ -4,13 +4,28 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run content:validate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "node --experimental-strip-types --test lib/ga4-params.test.ts && node --experimental-strip-types lib/schema/ids.test.ts && node --test tools/content/validate-lib.test.mjs && node tools/gsc/lib.test.mjs && node tools/seo/suggest-internal-links.test.mjs",
+    "content:validate": "node tools/content/validate.mjs",
+    "schema:test": "node --experimental-strip-types lib/schema/ids.test.ts",
+    "gsc:sites": "node --env-file=.env tools/gsc/export.mjs sites",
+    "gsc:pages": "node --env-file=.env tools/gsc/export.mjs pages",
+    "gsc:queries": "node --env-file=.env tools/gsc/export.mjs queries",
+    "gsc:snapshot": "node --env-file=.env tools/gsc/export.mjs snapshot",
+    "gsc:decay": "node tools/gsc/decay.mjs",
+    "gsc:test": "node tools/gsc/lib.test.mjs",
+    "seo:suggest-links": "node tools/seo/suggest-internal-links.mjs",
+    "seo:suggest-links:test": "node tools/seo/suggest-internal-links.test.mjs",
+    "indexnow:submit": "node tools/seo/indexnow-submit.mjs",
+    "indexnow:preview": "node tools/seo/indexnow-submit.mjs --preview"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@heroicons/react": "^2.2.0",
+    "@sentry/nextjs": "^10.74.0",
     "critters": "^0.0.23",
     "gray-matter": "^4.0.3",
     "next": "15.5.12",
@@ -30,6 +45,7 @@
     "autoprefixer": "^10.4.19",
     "eslint": "^9.0.0",
     "eslint-config-next": "15.5.12",
+    "googleapis": "^161.0.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"

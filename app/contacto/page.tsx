@@ -1,6 +1,8 @@
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
 import ContactForm from '@/app/components/forms/ContactForm';
+import JsonLd from '@/app/components/common/JsonLd';
+import { buildContactPageJsonLd } from '@/lib/schema/utility-pages';
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
@@ -18,8 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const contactSchema = buildContactPageJsonLd({
+    description:
+      'Contacta con Reformix Barcelona para solicitar un presupuesto gratuito. Estamos en Sabadell, Vallès Occidental. Teléfono: +34 642 029 572.',
+  });
+
   return (
     <>
+      <JsonLd data={contactSchema} />
       <div className="container mx-auto px-4 py-16 max-w-7xl">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { PhoneIcon, MapPinIcon, CheckIcon } from '@heroicons/react/24/outline';
+import CtaLink from '@/app/components/analytics/CtaLink';
 
 export default function ContactSection() {
   return (
@@ -14,12 +14,13 @@ export default function ContactSection() {
             <p className="text-lg mb-8 text-white/90 leading-relaxed">
               Es el momento de dar el primer paso. Cuéntanos tu idea y te prepararemos un presupuesto a medida, detallado y sin compromiso. Verás qué fácil es empezar a dar forma a tu reforma cuando tienes un equipo de confianza que te escucha.
             </p>
-            <Link 
+            <CtaLink
               href="/contacto#form"
+              ctaId="contact_section"
               className="inline-block bg-white text-brand-primary px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors border-2 border-white"
             >
               Pedir mi presupuesto ahora
-            </Link>
+            </CtaLink>
             <div className="mt-10 space-y-4">
               <div className="flex items-start gap-3">
                 <CheckIcon className="w-6 h-6 text-white flex-shrink-0 mt-1" />

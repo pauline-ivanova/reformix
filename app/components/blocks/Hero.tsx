@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import CtaLink from '@/app/components/analytics/CtaLink';
 
 interface HeroProps {
   title: string;
@@ -150,20 +150,22 @@ export default function Hero({
             )}
             <div className="flex flex-col sm:flex-row gap-4">
               {primaryCTA && (
-                <Link
+                <CtaLink
                   href={primaryCTA.href}
+                  ctaId="hero_primary"
                   className="inline-block rounded-md bg-brand-primary hover:opacity-90 px-8 py-4 text-base md:text-lg font-semibold text-white shadow-lg transition-colors text-center"
                 >
                   {primaryCTA.text}
-                </Link>
+                </CtaLink>
               )}
               {secondaryCTA && (
-                <Link
+                <CtaLink
                   href={secondaryCTA.href}
+                  ctaId="hero_secondary"
                   className="inline-block rounded-md bg-white/10 backdrop-blur-sm px-8 py-4 text-base md:text-lg font-semibold text-white border-2 border-white/30 hover:bg-white/20 transition-colors text-center"
                 >
                   {secondaryCTA.text}
-                </Link>
+                </CtaLink>
               )}
             </div>
           </div>
