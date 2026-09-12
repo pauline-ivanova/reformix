@@ -257,10 +257,15 @@ const nextConfig = {
 
 const { withSentryConfig } = require('@sentry/nextjs/config');
 
+// Trim: Vercel/dashboard pastes sometimes leave trailing \r\n and break sentry-cli.
+const sentryOrg = process.env.SENTRY_ORG?.trim();
+const sentryProject = process.env.SENTRY_PROJECT?.trim();
+const sentryAuthToken = process.env.SENTRY_AUTH_TOKEN?.trim();
+
 module.exports = withSentryConfig(nextConfig, {
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-  authToken: process.env.SENTRY_AUTH_TOKEN,
+  org: sentryOrg,
+  project: sentryProject,
+  authToken: sentryAuthToken,
   silent: !process.env.CI,
   widenClientFileUpload: true,
   tunnelRoute: '/monitoring',
