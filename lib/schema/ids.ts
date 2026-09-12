@@ -4,7 +4,7 @@
  * Canon: docs/schema-contracts.md · docs/ops-stack.md Phase E
  */
 
-import { DEFAULT_SITE_URL, getSiteUrl } from '../site-url.ts'
+import { DEFAULT_SITE_URL, getSiteUrl } from '../site-url'
 
 export { DEFAULT_SITE_URL }
 export const BRAND_NAME = 'Reformix Barcelona'

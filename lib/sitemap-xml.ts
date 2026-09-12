@@ -1,5 +1,5 @@
-import type { StaticPage } from './content-utils.ts';
-import { getSiteUrl } from './site-url.ts';
+import type { StaticPage } from './content-utils';
+import { getSiteUrl } from './site-url';
 
 export type SitemapIndexEntry = {
   loc: string;
