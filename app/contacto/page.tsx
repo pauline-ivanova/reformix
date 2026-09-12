@@ -4,6 +4,7 @@ import ContactForm from '@/app/components/forms/ContactForm';
 import JsonLd from '@/app/components/common/JsonLd';
 import { buildContactPageJsonLd } from '@/lib/schema/utility-pages';
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { BrandEmail } from '@/app/components/common/BrandEmail';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
@@ -69,9 +70,7 @@ export default function ContactPage() {
                   <EnvelopeIcon className="w-6 h-6 text-brand-accent flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-brand-text-heading mb-1">Email</h3>
-                    <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-text-body hover:text-brand-accent">
-                      reformix.barcelona@gmail.com
-                    </a>
+                    <BrandEmail className="text-brand-text-body hover:text-brand-accent" />
                   </div>
                 </div>
                 <div className="flex items-start gap-4">

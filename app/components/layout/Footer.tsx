@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { openCookieSettings } from '@/lib/cookie-utils'
+import { BrandEmail } from '@/app/components/common/BrandEmail'
 
 // Inline SVG icons to avoid loading @heroicons/react bundle
 const EnvelopeIcon = ({ className }: { className?: string }) => (
@@ -333,13 +334,10 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a 
-                    href="mailto:reformix.barcelona@gmail.com" 
-                    className="flex items-start gap-3 text-xs leading-6 text-gray-300 hover:text-white transition-colors duration-200 group"
-                  >
+                  <BrandEmail className="flex items-start gap-3 text-xs leading-6 text-gray-300 hover:text-white transition-colors duration-200 group">
                     <EnvelopeIcon className="h-5 w-5 flex-shrink-0 mt-0.5 text-white group-hover:scale-110 transition-transform" />
                     <span className="break-all">reformix.barcelona@gmail.com</span>
-                  </a>
+                  </BrandEmail>
                 </li>
               </ul>
 

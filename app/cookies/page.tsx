@@ -3,6 +3,7 @@ import { generateStandardMetadata } from '@/lib/metadata-utils';
 import JsonLd from '@/app/components/common/JsonLd';
 import { buildLegalPageJsonLd } from '@/lib/schema/utility-pages';
 import { InformationCircleIcon } from '@heroicons/react/24/outline';
+import { BrandEmail } from '@/app/components/common/BrandEmail';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 const pageUrl = `${baseUrl}/cookies`;
@@ -150,7 +151,7 @@ export default function CookiesPolicyPage() {
           <p>
             Puedes retirar o cambiar tu consentimiento en cualquier momento con el enlace
             «Configuración de cookies» en el pie de página, o contactándonos en{' '}
-            <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">reformix.barcelona@gmail.com</a>.
+            <BrandEmail className="text-brand-accent hover:underline" />.
           </p>
         </section>
 
@@ -167,9 +168,7 @@ export default function CookiesPolicyPage() {
           <h2 className="text-2xl font-semibold mb-4 text-brand-text-heading">Contacto</h2>
           <p>
             Si tienes preguntas sobre nuestra Política de Cookies, puedes contactarnos en:{' '}
-            <a href="mailto:reformix.barcelona@gmail.com" className="text-brand-accent hover:underline">
-              reformix.barcelona@gmail.com
-            </a>
+            <BrandEmail className="text-brand-accent hover:underline" />
           </p>
         </section>
       </div>
