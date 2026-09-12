@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/nextjs'
 import { NextRequest, NextResponse } from 'next/server'
-import { isSentrySmokeAllowed } from '@/lib/sentry/shared'
+import { isSentryEnabled, isSentrySmokeAllowed } from '@/lib/sentry/shared'
 
 /**
  * Non-prod smoke for Sentry (server).
@@ -15,7 +15,8 @@ export async function GET() {
 
   return NextResponse.json({
     ok: true,
-    enabled: Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN),
+    enabled: isSentryEnabled(),
+    dsnConfigured: Boolean(process.env.NEXT_PUBLIC_SENTRY_DSN?.trim()),
     vercelEnv: process.env.VERCEL_ENV ?? null,
     nodeEnv: process.env.NODE_ENV,
     usage: {
@@ -34,7 +35,11 @@ export async function POST(request: NextRequest) {
   const side = request.nextUrl.searchParams.get('side') ?? 'capture'
 
   if (side === 'server') {
-    throw new Error('Reformix Sentry smoke: intentional server error')
+    // Explicit capture+flush: onRequestError alone is easy to miss in next dev.
+    const err = new Error('Reformix Sentry smoke: intentional server error')
+    Sentry.captureException(err)
+    await Sentry.flush(2000)
+    throw err
   }
 
   const err = new Error('Reformix Sentry smoke: intentional captureException')

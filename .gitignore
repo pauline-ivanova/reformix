@@ -42,3 +42,6 @@ secrets/*
 *.tsbuildinfo
 next-env.d.ts
 
+
+.next-dev-3010.log
+.next-dev-3010.err.log

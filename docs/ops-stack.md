@@ -80,7 +80,7 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 - [x] Org/project Sentry · **EU** · `reformix-barcelona` / `reformix-barcelona` · без Session Replay в SDK
 - [x] Next.js SDK: client + server/edge + `instrumentation` + `global-error` · tunnel `/monitoring`
 - [x] Env: `NEXT_PUBLIC_SENTRY_DSN` · `SENTRY_ORG` · `SENTRY_PROJECT` · `SENTRY_AUTH_TOKEN` (Vercel Prod/Preview/Dev + `.env.local`)
-- [x] Smoke: local capture → issue `REFORMIX-BARCELONA-1` · prod `/sentry-smoke` **404** · client page OK
+- [x] Smoke: local capture → issue `REFORMIX-BARCELONA-1` · client needs `NEXT_PUBLIC_SENTRY_ENABLE_DEV` · prod `/sentry-smoke` **404** · source maps OK
 - [x] Privacy/cookies: техника / interés legítimo — тексты обновлены
 - [x] Filters: `development` off by default; extension / NetworkError noise
 - [ ] Опц.: Sentry MCP + GitHub code mapping *(owner)*

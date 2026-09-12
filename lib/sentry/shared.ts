@@ -10,13 +10,21 @@ export function getSentryDsn(): string | undefined {
   return dsn || undefined
 }
 
-/** Local `next dev` off unless SENTRY_ENABLE_DEV=true. Preview/prod on when DSN set. */
+/**
+ * Local `next dev` off unless explicitly enabled.
+ * Client bundles only see `NEXT_PUBLIC_*` — use that (or both) for browser smoke.
+ * Server also accepts `SENTRY_ENABLE_DEV`. Preview/prod: on when DSN is set.
+ */
+export function isSentryDevCaptureEnabled(): boolean {
+  return (
+    process.env.SENTRY_ENABLE_DEV === 'true' ||
+    process.env.NEXT_PUBLIC_SENTRY_ENABLE_DEV === 'true'
+  )
+}
+
 export function isSentryEnabled(): boolean {
   if (!getSentryDsn()) return false
-  if (
-    process.env.NODE_ENV === 'development' &&
-    process.env.SENTRY_ENABLE_DEV !== 'true'
-  ) {
+  if (process.env.NODE_ENV === 'development' && !isSentryDevCaptureEnabled()) {
     return false
   }
   return true

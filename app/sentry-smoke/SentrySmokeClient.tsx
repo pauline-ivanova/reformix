@@ -17,10 +17,11 @@ export default function SentrySmokeClient() {
         <button
           type="button"
           className="rounded-md bg-brand-primary px-4 py-2 font-semibold text-white"
-          onClick={() => {
+          onClick={async () => {
             Sentry.captureException(
               new Error('Reformix Sentry smoke: intentional client error'),
             )
+            await Sentry.flush(2000)
             setStatus('captureException enviado — revisa Issues en Sentry')
           }}
         >

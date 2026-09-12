@@ -25,7 +25,9 @@
 | `SENTRY_PROJECT` | same |
 | `SENTRY_AUTH_TOKEN` | same (sensitive) |
 
-Redeploy prod выполнен 2026-09-12. Локально: `.env.local` + `SENTRY_ENABLE_DEV=true` для smoke.
+Redeploy prod выполнен 2026-09-12. Локально для полного smoke (server **и** client):
+`SENTRY_ENABLE_DEV=true` + `NEXT_PUBLIC_SENTRY_ENABLE_DEV=true` (+ DSN).
+Без `NEXT_PUBLIC_*` клиентский SDK в `next dev` остаётся выключен (env не попадает в browser bundle).
 
 ## IDs (зафиксировано 2026-09-12)
 
@@ -41,11 +43,14 @@ Redeploy prod выполнен 2026-09-12. Локально: `.env.local` + `SEN
 
 После preview/prod deploy с DSN:
 
-- [x] Local (SENTRY_ENABLE_DEV + DSN): `GET /api/sentry-smoke` → `{ ok: true, enabled: true }`
+- [x] Local (`SENTRY_ENABLE_DEV` + `NEXT_PUBLIC_SENTRY_ENABLE_DEV` + DSN): `GET /api/sentry-smoke` → `{ ok: true, enabled: true }`
 - [x] Local: `POST /api/sentry-smoke?side=capture` → issue **REFORMIX-BARCELONA-1** (`Reformix Sentry smoke: intentional captureException`)
-- [x] Local: `/sentry-smoke` → client captureException OK
+- [x] Local: `POST /api/sentry-smoke?side=server` → issue с `intentional server error` (capture+flush+throw)
+- [x] Local: `/sentry-smoke` → client `captureException` + `flush` OK (`intentional client error`)
 - [x] Production: `/api/sentry-smoke` и `/sentry-smoke` → **404**
-- [ ] Preview Vercel Authentication блокирует curl/MCP share URL — smoke через Preview UI / local; source maps на prod build с `SENTRY_AUTH_TOKEN` (verify в issue stack при prod error)
+- [x] Source maps: prod build upload OK; stack в issue показывает `app/api/sentry-smoke/route.ts`
+- [ ] Preview Vercel Authentication блокирует curl/MCP share URL — smoke через Preview UI / local
+- [ ] Опц.: отдельный Sentry token со scope чтения Issues (`event:read` / `project:read`) для CLI-проверок — текущий `org:ci` только releases/sourcemaps
 
 Tunnel: `/monitoring` в `next.config` (prod/preview builds).
 
