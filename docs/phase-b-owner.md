@@ -49,8 +49,8 @@ Redeploy prod выполнен 2026-09-12. Локально для полног�
 - [x] Local: `/sentry-smoke` → client `captureException` + `flush` OK (`intentional client error`)
 - [x] Production: `/api/sentry-smoke` и `/sentry-smoke` → **404**
 - [x] Source maps: prod build upload OK; stack в issue показывает `app/api/sentry-smoke/route.ts`
+- [x] Personal token `cursor-issues-read` (`event:read` + `project:read`) → `.env.local` `SENTRY_READ_TOKEN` (не Vercel; для `sentry-cli issues list`)
 - [ ] Preview Vercel Authentication блокирует curl/MCP share URL — smoke через Preview UI / local
-- [ ] Опц.: отдельный Sentry token со scope чтения Issues (`event:read` / `project:read`) для CLI-проверок — текущий `org:ci` только releases/sourcemaps
 
 Tunnel: `/monitoring` в `next.config` (prod/preview builds).
 
