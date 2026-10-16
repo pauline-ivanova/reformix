@@ -1,13 +1,13 @@
 name: Content Validate
 
-# Landing MD integrity (A-landings-content) + public image refs from content/heroes.
+# Landing MD integrity (content/landings) + public image refs from content/heroes.
 # Failures should block merge when this check is required (⏸ private free without Pro).
 # Also runs via npm prebuild on Vercel. Canon: docs/ops-stack.md Phase C
 
 on:
   pull_request:
     paths:
-      - "A-landings-content/**"
+      - "content/landings/**"
       - "app/**"
       - "public/images/**"
       - "tools/content/**"
@@ -17,7 +17,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "A-landings-content/**"
+      - "content/landings/**"
       - "app/**"
       - "public/images/**"
       - "tools/content/**"

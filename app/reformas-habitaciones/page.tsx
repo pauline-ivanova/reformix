@@ -21,14 +21,14 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Reformas de Habitaciones en Barcelona y Vallès",
+  title: "Reformas de Habitaciones en Barcelona y Vallès Occidental",
   description: "Reformas de habitaciones en Barcelona. Armarios a medida, aislamiento acústico, acabados de calidad. ¡Pide presupuesto gratis!",
   ...generateStandardMetadata({
-    title: "Reformas de Habitaciones en Barcelona y Vallès",
+    title: "Reformas de Habitaciones en Barcelona y Vallès Occidental",
     description: "Reformas de habitaciones en Barcelona. Armarios a medida, aislamiento acústico, acabados de calidad. ¡Pide presupuesto gratis!",
     url: "https://www.reformix.barcelona/reformas-habitaciones",
     pagePath: "/reformas-habitaciones",
-    keywords: ["reforma habitación Barcelona", "reforma habitación Vallès", "diseño habitación Barcelona", "armarios a medida"],
+    keywords: ["reforma habitación Barcelona", "reforma habitación Vallès Occidental", "diseño habitación Barcelona", "armarios a medida"],
   }),
 };
 

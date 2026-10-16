@@ -10,7 +10,7 @@ import {
 
 describe('parseContentFileName', () => {
   it('parses NN-NNN-slug.md', () => {
-    assert.deepEqual(parseContentFileName('A-landings-content/02-001-reformas-cocinas.md'), {
+    assert.deepEqual(parseContentFileName('content/landings/02-001-reformas-cocinas.md'), {
       category: '02',
       order: '001',
       slug: 'reformas-cocinas',
@@ -82,7 +82,7 @@ describe('validateLandingFile', () => {
   it('errors on missing title/sections', () => {
     const { findings } = validateLandingFile(
       process.cwd(),
-      'A-landings-content/99-999-demo.md',
+      'content/landings/99-999-demo.md',
       '# Empty\n',
     )
     const messages = findings.filter((f) => f.severity === 'error').map((f) => f.message)
@@ -103,7 +103,7 @@ CTA presupuesto
 `
     const { findings } = validateLandingFile(
       process.cwd(),
-      'A-landings-content/09-001-demo-landing.md',
+      'content/landings/09-001-demo-landing.md',
       raw,
     )
     assert.deepEqual(

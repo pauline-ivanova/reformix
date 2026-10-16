@@ -21,11 +21,11 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Pintura para Reformas en Barcelona y Vallès",
-  description: "Servicio de pintura para reformas en Barcelona y Vallès. Acabados impecables y duraderos. Protegemos muebles y suelos. ¡Pide presupuesto!",
+  title: "Pintura para Reformas en Barcelona y Vallès Occidental",
+  description: "Servicio de pintura para reformas en Barcelona y Vallès Occidental. Acabados impecables y duraderos. Protegemos muebles y suelos. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Pintura para Reformas en Barcelona y Vallès",
-    description: "Servicio de pintura para reformas en Barcelona y Vallès. Acabados impecables y duraderos. Protegemos muebles y suelos. ¡Pide presupuesto!",
+    title: "Pintura para Reformas en Barcelona y Vallès Occidental",
+    description: "Servicio de pintura para reformas en Barcelona y Vallès Occidental. Acabados impecables y duraderos. Protegemos muebles y suelos. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/pintura-interior",
     pagePath: "/pintura-interior",
     keywords: ["pintura interior reformas", "pintura Barcelona", "pintura vivienda", "acabados pintura"],

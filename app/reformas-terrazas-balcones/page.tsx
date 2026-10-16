@@ -24,10 +24,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Terrazas y Balcones en Barcelona",
-  description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
+  description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès Occidental. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Terrazas y Balcones en Barcelona",
-    description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
+    description: "Expertos en reformas de terrazas y balcones en Barcelona y Vallès Occidental. Creamos tu oasis urbano: impermeabilización, suelos y cerramientos. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/reformas-terrazas-balcones",
     pagePath: "/reformas-terrazas-balcones",
     keywords: ["reforma terraza Barcelona", "reforma balcón Barcelona", "impermeabilización terraza", "cerramientos terraza"],

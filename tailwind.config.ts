@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./A-landings-content/**/*.{md,mdx}",
+    "./content/landings/**/*.{md,mdx}",
   ],
   // Optimize for production - remove unused styles
   corePlugins: {

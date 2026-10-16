@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { defaultTestimonials } from "@/app/components/blocks/testimonials-data";
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
+import { getAllProyectos } from '@/lib/proyectos-data';
 import { 
   reformasIntegralesPageData as reformasIntegralesData,
   reformasPorEstanciaPageData as reformasPorEstanciaData,
@@ -18,10 +19,10 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcel
 
 export const metadata: Metadata = {
   title: "Reformas en Barcelona y Vallès Occidental | Reformix",
-  description: "Reformas integrales y por estancia en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
+  description: "Reformas integrales y por estancia en Barcelona y Vallès Occidental. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
   ...generateStandardMetadata({
     title: "Reformas en Barcelona y Vallès Occidental | Reformix",
-    description: "Reformas integrales y por estancia en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
+    description: "Reformas integrales y por estancia en Barcelona y Vallès Occidental. Presupuestos cerrados y garantía por escrito. ¡Pide presupuesto gratis!",
     url: baseUrl,
     pagePath: '/',
     image: '/images/hero-bg.webp', // Hero image for social sharing
@@ -58,6 +59,10 @@ const CompanySection = dynamic(() => import("@/app/components/blocks/CompanySect
 });
 
 const WhyChooseUs = dynamic(() => import("@/app/components/blocks/WhyChooseUs"), {
+  loading: () => <div className="py-16" />, // Placeholder
+});
+
+const ProjectsTeaser = dynamic(() => import("@/app/components/blocks/ProjectsTeaser"), {
   loading: () => <div className="py-16" />, // Placeholder
 });
 
@@ -104,6 +109,8 @@ const ShieldIcon = () => (
 );
 
 export default async function HomePage() {
+  const featuredProjects = getAllProyectos();
+
   const features = [
     {
       title: "Control Total de tu Inversión",
@@ -238,6 +245,13 @@ export default async function HomePage() {
       />
       <CompanySection />
       <WhyChooseUs />
+      <ProjectsTeaser
+        projects={featuredProjects}
+        title="Proyectos de reformas en Barcelona y Vallès Occidental"
+        subtitle="Obras reales documentadas: rehabilitación, acabados y reformas por estancia."
+        ctaText="Ver todos los proyectos"
+        ctaHref="/proyectos"
+      />
       <TestimonialsCarousel testimonials={defaultTestimonials} />
       {(() => {
         const reviewSchema = generateReviewSchema({
@@ -256,16 +270,20 @@ export default async function HomePage() {
             answer: "El precio varía según los metros y calidades, pero para darte transparencia, en Reformix Barcelona siempre ofrecemos presupuestos cerrados con un desglose completo por partidas."
           },
           {
+            question: "¿Cuánto tarda una reforma integral en Barcelona o Vallès Occidental?",
+            answer: "Depende de los metros y del alcance, pero una reforma integral de piso suele situarse entre 8 y 16 semanas. En la visita técnica te damos un calendario realista por fases y nos comprometemos a cumplirlo."
+          },
+          {
             question: "¿En qué no debería ahorrar para que una reforma dure años?",
             answer: "Nuestra recomendación como profesionales es no ahorrar nunca en lo que no se ve: las instalaciones de fontanería y electricidad. Un acabado (como la pintura o un grifo) es fácil de cambiar, pero una instalación interna de mala calidad puede causar problemas muy caros en el futuro."
           },
           {
-            question: "¿Qué incluye exactamente un servicio \"llave en mano\"?",
-            answer: "Para nosotros, \"llave en mano\" significa que nos encargamos de absolutamente todo: desde el diseño inicial y la planificación, pasando por la coordinación de todos los gremios, hasta la limpieza final profesional. Tu única tarea es entrar a disfrutar de tu nuevo espacio."
-          },
-          {
             question: "¿Puedo vivir en casa durante una reforma de cocina?",
             answer: "En reformas parciales como una cocina o un baño es posible, y siempre nos organizamos para causar las menores molestias. Para una reforma integral, lo habitual es no hacerlo."
+          },
+          {
+            question: "¿Qué incluye exactamente un servicio \"llave en mano\"?",
+            answer: "Para nosotros, \"llave en mano\" significa que nos encargamos de absolutamente todo: desde el diseño inicial y la planificación, pasando por la coordinación de todos los gremios, hasta la limpieza final profesional. Tu única tarea es entrar a disfrutar de tu nuevo espacio."
           },
           {
             question: "¿Ofrecéis garantía por escrito y servicio postventa?",

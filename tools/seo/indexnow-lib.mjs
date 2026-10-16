@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 export const ROOT = path.resolve(__dirname, '../..')
-export const CONTENT_ROOT = path.join(ROOT, 'A-landings-content')
+export const CONTENT_ROOT = path.join(ROOT, 'content/landings')
 
 /** Must match `public/<key>.txt` (ownership proof). */
 export const INDEXNOW_KEY = '30c04298c93f93b87ea68f0136d8098a'
@@ -18,7 +18,7 @@ export const INDEXNOW_ENDPOINT = 'https://api.indexnow.org/indexnow'
 
 export const DEFAULT_SITE_ORIGIN = `https://${INDEXNOW_HOST}`
 
-const CONTENT_MD_RE = /^A-landings-content\/(.+\.md)$/i
+const CONTENT_MD_RE = /^content\/landings\/(.+\.md)$/i
 
 /**
  * `01-000-reformas-integrales.md` → `/reformas-integrales`
@@ -120,7 +120,7 @@ export function gitNameStatus(fromRef, toRef) {
       '-z',
       `${fromRef}...${toRef}`,
       '--',
-      'A-landings-content',
+      'content/landings',
     ],
     { cwd: ROOT, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
   )

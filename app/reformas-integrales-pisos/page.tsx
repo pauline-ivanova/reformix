@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas Integrales de Pisos en Barcelona | Reformix",
-  description: "Transformamos tu piso en Barcelona y Vallès. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía. ¡Pide tu visita!",
+  description: "Transformamos tu piso en Barcelona y Vallès Occidental. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía. ¡Pide tu visita!",
   ...generateStandardMetadata({
     title: "Reformas Integrales de Pisos en Barcelona | Reformix",
-    description: "Transformamos tu piso en Barcelona y Vallès. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía. ¡Pide tu visita!",
+    description: "Transformamos tu piso en Barcelona y Vallès Occidental. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía. ¡Pide tu visita!",
     url: "https://www.reformix.barcelona/reformas-integrales-pisos",
     pagePath: "/reformas-integrales-pisos",
     keywords: ["reformas integrales pisos", "reforma piso Barcelona", "reforma integral llave en mano", "rehabilitación pisos"],
@@ -363,7 +363,7 @@ export default async function ReformasIntegralesPisosPage() {
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
           name: "Reformas Integrales de Pisos en Barcelona | Reformix",
-          description: "Transformamos tu piso en Barcelona y Vallès. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía.",
+          description: "Transformamos tu piso en Barcelona y Vallès Occidental. Maximizamos el espacio y la luz con un diseño funcional, presupuesto cerrado y garantía.",
           provider: {
             '@type': 'HomeAndConstructionBusiness',
             name: 'Reformix Barcelona',

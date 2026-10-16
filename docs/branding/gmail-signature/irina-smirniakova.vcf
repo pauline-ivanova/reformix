@@ -1,0 +1,15 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Irina Smirniakova
+N:Smirniakova;Irina;;;
+ORG:Reformix
+TITLE:Reformas y rehabilitación
+EMAIL;TYPE=INTERNET;TYPE=WORK:reformix.barcelona@gmail.com
+TEL;TYPE=CELL;TYPE=VOICE;TYPE=WA:+34642029572
+TEL;TYPE=WORK;TYPE=VOICE:+34642029572
+URL;TYPE=WORK:https://www.reformix.barcelona
+item1.URL:https://wa.me/34642029572
+item1.X-ABLabel:WhatsApp
+NOTE:Tu reforma\, nuestra responsabilidad. Equipo propio. Trato directo\, sin intermediarios.
+CATEGORIES:Trabajo,Reformas
+END:VCARD

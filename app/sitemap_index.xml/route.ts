@@ -10,6 +10,7 @@ export async function GET() {
     { loc: `${baseUrl}/sitemap-reformas-estancia.xml`, lastmod: now },
     { loc: `${baseUrl}/sitemap-servicios-tecnicos.xml`, lastmod: now },
     { loc: `${baseUrl}/sitemap-reformas-comerciales.xml`, lastmod: now },
+    { loc: `${baseUrl}/sitemap-proyectos.xml`, lastmod: now },
     { loc: `${baseUrl}/sitemap-legal.xml`, lastmod: now },
   ];
 

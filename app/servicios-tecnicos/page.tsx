@@ -26,10 +26,10 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Servicios Técnicos en Barcelona y Vallès | Reformix",
+  title: "Servicios Técnicos en Barcelona y Vallès Occidental | Reformix",
   description: "Servicios técnicos de reforma en Barcelona: aislamiento, pladur, fontanería, electricidad, pintura. Equipo propio. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Servicios Técnicos en Barcelona y Vallès | Reformix",
+    title: "Servicios Técnicos en Barcelona y Vallès Occidental | Reformix",
     description: "Servicios técnicos de reforma en Barcelona: aislamiento, pladur, fontanería, electricidad, pintura. Equipo propio. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/servicios-tecnicos",
     pagePath: "/servicios-tecnicos",
@@ -117,6 +117,18 @@ export default async function ServiciosTecnicosPage() {
       imageAlt: "Servicio de pintura interior",
       ctaText: "Ver Servicio",
       ctaHref: "/pintura-interior"
+    },
+    {
+      title: "Instalación de papel pintado",
+      subtitle: "",
+      description:
+        "Colocación profesional de papel pintado: revisión del soporte, remates en molduras y boiserie, presupuesto cerrado.",
+      services: [],
+      image:
+        "/images/proyectos/papel-pintado-piso-sant-gervasi-barcelona/despues-01-salon-papel-chimenea.webp",
+      imageAlt: "Instalación de papel pintado en Barcelona",
+      ctaText: "Ver Servicio",
+      ctaHref: "/instalacion-papel-pintado",
     },
     {
       title: "Aislamiento Térmico y Acústico",

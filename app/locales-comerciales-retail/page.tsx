@@ -23,10 +23,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Locales Comerciales en Barcelona",
-  description: "Retail fit-out completo en Barcelona y Vallès. Reformas de locales comerciales desde la estructura hasta el diseño interior. ¡Pide presupuesto!",
+  description: "Retail fit-out completo en Barcelona y Vallès Occidental. Reformas de locales comerciales desde la estructura hasta el diseño interior. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Locales Comerciales en Barcelona",
-    description: "Retail fit-out completo en Barcelona y Vallès. Reformas de locales comerciales desde la estructura hasta el diseño interior. ¡Pide presupuesto!",
+    description: "Retail fit-out completo en Barcelona y Vallès Occidental. Reformas de locales comerciales desde la estructura hasta el diseño interior. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/locales-comerciales-retail",
     pagePath: "/locales-comerciales-retail",
     keywords: ["reforma locales comerciales Barcelona", "retail fit-out Barcelona", "reforma tiendas Barcelona", "diseño locales comerciales"],

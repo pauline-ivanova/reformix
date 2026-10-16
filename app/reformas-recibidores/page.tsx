@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Recibidores en Barcelona con Estilo",
-  description: "Expertos en reformas de recibidores en Barcelona y Vallès. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
+  description: "Expertos en reformas de recibidores en Barcelona y Vallès Occidental. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Recibidores en Barcelona con Estilo",
-    description: "Expertos en reformas de recibidores en Barcelona y Vallès. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
+    description: "Expertos en reformas de recibidores en Barcelona y Vallès Occidental. Creamos una primera impresión impactante y optimizamos el almacenaje. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/reformas-recibidores",
     pagePath: "/reformas-recibidores",
     keywords: ["reforma recibidor Barcelona", "reforma entrada Barcelona", "armarios pladur recibidor", "diseño recibidor"],
@@ -143,7 +143,7 @@ export default async function ReformasRecibidoresPage() {
         titleLines={[
           "Reformas de Recibidores",
           "y Zonas de Paso",
-          "en Barcelona y Vallès"
+          "en Barcelona y Vallès Occidental"
         ]}
         subtitle="La primera impresión es la que cuenta. Transformamos tu recibidor en un espacio funcional, organizado y con un diseño que da la bienvenida a tu hogar."
         primaryCTA={{

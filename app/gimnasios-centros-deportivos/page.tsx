@@ -22,11 +22,11 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Reformas de Gimnasios en Barcelona y Vallès",
-  description: "Especialistas en reformas de gimnasios y centros deportivos en Barcelona y Vallès. Instalaciones resistentes y funcionales. ¡Pide presupuesto!",
+  title: "Reformas de Gimnasios en Barcelona y Vallès Occidental",
+  description: "Especialistas en reformas de gimnasios y centros deportivos en Barcelona y Vallès Occidental. Instalaciones resistentes y funcionales. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Reformas de Gimnasios en Barcelona y Vallès",
-    description: "Especialistas en reformas de gimnasios y centros deportivos en Barcelona y Vallès. Instalaciones resistentes y funcionales. ¡Pide presupuesto!",
+    title: "Reformas de Gimnasios en Barcelona y Vallès Occidental",
+    description: "Especialistas en reformas de gimnasios y centros deportivos en Barcelona y Vallès Occidental. Instalaciones resistentes y funcionales. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/gimnasios-centros-deportivos",
     pagePath: "/gimnasios-centros-deportivos",
     keywords: ["reforma gimnasios Barcelona", "reforma centros deportivos Barcelona", "diseño gimnasios Barcelona", "instalaciones deportivas Barcelona"],

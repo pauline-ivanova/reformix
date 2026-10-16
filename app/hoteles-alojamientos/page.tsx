@@ -22,10 +22,10 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Reformas de Hoteles en Barcelona y Vallès",
+  title: "Reformas de Hoteles en Barcelona y Vallès Occidental",
   description: "Reformas de hoteles y alojamientos en Barcelona. Renovación por fases, normativa. Mejora la experiencia del huésped. ¡Presupuesto!",
   ...generateStandardMetadata({
-    title: "Reformas de Hoteles en Barcelona y Vallès",
+    title: "Reformas de Hoteles en Barcelona y Vallès Occidental",
     description: "Reformas de hoteles y alojamientos en Barcelona. Renovación por fases, normativa. Mejora la experiencia del huésped. ¡Presupuesto!",
     url: "https://www.reformix.barcelona/hoteles-alojamientos",
     pagePath: "/hoteles-alojamientos",

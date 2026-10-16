@@ -1,12 +1,12 @@
 /**
- * Landing content validation helpers (A-landings-content + public image refs).
+ * Landing content validation helpers (content/landings + public image refs).
  * Canon: docs/ops-stack.md Phase C
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import matter from 'gray-matter'
 
-export const CONTENT_DIR_NAME = 'A-landings-content'
+export const CONTENT_DIR_NAME = 'content/landings'
 export const FILENAME_RE = /^(\d{2})-(\d{3})-([a-z0-9-]+)\.md$/i
 
 /** Minimum blocks every service landing must expose (flexible headings). */

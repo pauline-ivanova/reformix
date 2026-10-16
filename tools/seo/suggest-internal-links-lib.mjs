@@ -1,5 +1,5 @@
 /**
- * Pure helpers for internal-link suggestions over A-landings-content.
+ * Pure helpers for internal-link suggestions over content/landings.
  * Suggest-only — never auto-insert into Markdown.
  *
  * Hub model: NN-000-slug.md = hub for category NN; other NN-*.md = spokes.

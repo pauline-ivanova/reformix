@@ -23,10 +23,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Restaurantes y Bares en Barcelona",
-  description: "Especialistas en reformas de restaurantes y bares en Barcelona y Vallès. Cumplimiento normativa seguridad alimentaria y hostelería. ¡Pide presupuesto!",
+  description: "Especialistas en reformas de restaurantes y bares en Barcelona y Vallès Occidental. Cumplimiento normativa seguridad alimentaria y hostelería. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Restaurantes y Bares en Barcelona",
-    description: "Especialistas en reformas de restaurantes y bares en Barcelona y Vallès. Cumplimiento normativa seguridad alimentaria y hostelería. ¡Pide presupuesto!",
+    description: "Especialistas en reformas de restaurantes y bares en Barcelona y Vallès Occidental. Cumplimiento normativa seguridad alimentaria y hostelería. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/restaurantes-bares",
     pagePath: "/restaurantes-bares",
     keywords: ["reforma restaurantes Barcelona", "reforma bares Barcelona", "diseño restaurantes Barcelona", "normativa hostelería Barcelona"],

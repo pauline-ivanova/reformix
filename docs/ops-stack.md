@@ -3,7 +3,7 @@
 **Статус:** канон плана · зафиксировано **2026-09-12**  
 **Продукт:** lead-gen сайт услуг (лендинги → заявка), не product/learning  
 **Owner email (только новые SaaS):** `reformix.barcelona@gmail.com` — новые property/проекты (GA4, Clarity, Bing WMT, CF Web Analytics и т.п.). Уже работающие (Vercel, GitHub, Resend, Telegram, Turnstile) **не мигрируем**.  
-**Связано:** [`GDPR_COMPLIANCE_CHECKLIST.md`](../GDPR_COMPLIANCE_CHECKLIST.md) · [`issues/`](../issues/) · content в `A-landings-content/` · [`phase-a-owner.md`](./phase-a-owner.md) · [`phase-b-owner.md`](./phase-b-owner.md) · [`phase-e-owner.md`](./phase-e-owner.md) · [`schema-contracts.md`](./schema-contracts.md) · [`gsc-monitor.md`](./gsc-monitor.md)
+**Связано:** [`GDPR_COMPLIANCE_CHECKLIST.md`](./GDPR_COMPLIANCE_CHECKLIST.md) · [`issues/`](../issues/) · content в `content/landings/` · [`phase-a-owner.md`](./phase-a-owner.md) · [`phase-b-owner.md`](./phase-b-owner.md) · [`phase-e-owner.md`](./phase-e-owner.md) · [`schema-contracts.md`](./schema-contracts.md) · [`gsc-monitor.md`](./gsc-monitor.md)
 
 ---
 
@@ -124,7 +124,7 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 - [x] **Schema contracts** — shared `@id` Organization / LocalBusiness / WebSite; хабы CollectionPage; ContactPage; legal WebPage; Service/FAQ/Breadcrumb через `provider` `@id` ([`schema-contracts.md`](./schema-contracts.md) · `lib/schema/`)
 - [x] `gsc:snapshot` → JSON/CSV (не dashboard) — [`gsc-monitor.md`](./gsc-monitor.md) · **live** `2026-09-12` (31 pages / 588 queries)
 - [x] `gsc:decay` — deltas clicks/position (fixtures + unit tests; live decay после 2-го weekly snapshot)
-- [x] `seo:suggest-links` — suggest-only over `A-landings-content/`, без auto-insert в MD
+- [x] `seo:suggest-links` — suggest-only over `content/landings/`, без auto-insert в MD
 - [x] Owner: SA в GSC (`gsc-readonly@…`) + first live snapshot — [`phase-e-owner.md`](./phase-e-owner.md)
 - [ ] Owner rhythm: weekly `gsc:snapshot` → `gsc:decay -- --write` (после 2-го live)
 
@@ -175,8 +175,8 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 
 | Слой | Где правда |
 |------|------------|
-| Контент лендингов / Ahrefs | `A-landings-content/` · [`issues/`](../issues/) — **главный Do now** |
-| GDPR / cookies тексты | [`GDPR_COMPLIANCE_CHECKLIST.md`](../GDPR_COMPLIANCE_CHECKLIST.md) |
+| Контент лендингов / Ahrefs | `content/landings/` · [`issues/`](../issues/) — **главный Do now** |
+| GDPR / cookies тексты | [`GDPR_COMPLIANCE_CHECKLIST.md`](./GDPR_COMPLIANCE_CHECKLIST.md) |
 | **Этот файл** | новые SaaS + automation вокруг заявок и SEO; Phase A–B параллельно контенту |
 
 ---

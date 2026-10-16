@@ -62,7 +62,7 @@ npm run seo:suggest-links -- --write
 npm run seo:suggest-links:test
 ```
 
-Suggest-only over `A-landings-content/` (hub = `NN-000-*`). **Never** auto-insert into MD.
+Suggest-only over `content/landings/` (hub = `NN-000-*`). **Never** auto-insert into MD.
 
 ## Schema
 

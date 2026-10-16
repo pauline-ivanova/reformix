@@ -24,14 +24,14 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Reformas de Oficinas en Barcelona y Vallès",
-  description: "Especialistas en reformas de oficinas en Barcelona y Vallès. Espacios de trabajo modernos y funcionales que mejoran la productividad. ¡Pide presupuesto!",
+  title: "Reformas de Oficinas en Barcelona y Vallès Occidental",
+  description: "Especialistas en reformas de oficinas en Barcelona y Vallès Occidental. Espacios de trabajo modernos y funcionales que mejoran la productividad. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Reformas de Oficinas en Barcelona y Vallès",
-    description: "Especialistas en reformas de oficinas en Barcelona y Vallès. Espacios de trabajo modernos y funcionales que mejoran la productividad. ¡Pide presupuesto!",
+    title: "Reformas de Oficinas en Barcelona y Vallès Occidental",
+    description: "Especialistas en reformas de oficinas en Barcelona y Vallès Occidental. Espacios de trabajo modernos y funcionales que mejoran la productividad. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/reformas-oficinas",
     pagePath: "/reformas-oficinas",
-    keywords: ["reforma oficinas Barcelona", "reforma oficinas Vallès", "diseño oficinas Barcelona", "reforma espacios trabajo"],
+    keywords: ["reforma oficinas Barcelona", "reforma oficinas Vallès Occidental", "diseño oficinas Barcelona", "reforma espacios trabajo"],
   }),
 };
 

@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Rehabilitación de Casas en Barcelona | Reformix",
-  description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
+  description: "Rehabilitación de casas y chalets en Barcelona y Vallès Occidental. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Rehabilitación de Casas en Barcelona | Reformix",
-    description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
+    description: "Rehabilitación de casas y chalets en Barcelona y Vallès Occidental. Mejoramos la eficiencia energética y reforzamos la estructura. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/rehabilitacion-casas",
     pagePath: "/rehabilitacion-casas",
     keywords: ["rehabilitación casas", "rehabilitación Barcelona", "rehabilitación integral", "rehabilitación chalets", "SATE Barcelona"],
@@ -353,7 +353,7 @@ export default async function RehabilitacionCasasPage() {
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
           name: "Rehabilitación Integral de Casas en Barcelona | Reformix",
-          description: "Rehabilitación de casas y chalets en Barcelona y Vallès. Mejoramos la eficiencia energética y reforzamos la estructura.",
+          description: "Rehabilitación de casas y chalets en Barcelona y Vallès Occidental. Mejoramos la eficiencia energética y reforzamos la estructura.",
           provider: {
             '@type': 'HomeAndConstructionBusiness',
             name: 'Reformix Barcelona',
@@ -376,6 +376,23 @@ export default async function RehabilitacionCasasPage() {
           </>
         );
       })()}
+      <section className="py-12 md:py-16 bg-white">
+        <div className="container mx-auto px-4 max-w-3xl text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-text-heading mb-3">
+            Proyecto relacionado
+          </h2>
+          <p className="text-brand-text-body mb-6 leading-relaxed">
+            Mira cómo rehabilitamos la fachada de una casa familiar de tres plantas en Castelldefels:
+            saneado, malla anti-grietas y pintura rugosa en gris cálido.
+          </p>
+          <a
+            href="/proyectos/rehabilitacion-fachada-castelldefels-casa-familiar"
+            className="inline-flex items-center justify-center bg-brand-primary text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
+          >
+            Ver rehabilitación de fachada
+          </a>
+        </div>
+      </section>
       <ServiceAreas
         areas={[
           {

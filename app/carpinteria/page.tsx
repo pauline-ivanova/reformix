@@ -453,7 +453,7 @@ export default async function CarpinteriaPage() {
             con Carpintería de Calidad
           </>
         }
-        description="Desde puertas y armarios hasta soluciones a medida, nuestro equipo de carpinteros en Barcelona y el Vallès está listo para materializar tus ideas. Solicita un presupuesto sin compromiso y asegura acabados perfectos."
+        description="Desde puertas y armarios hasta soluciones a medida, nuestro equipo de carpinteros en Barcelona y el Vallès Occidental está listo para materializar tus ideas. Solicita un presupuesto sin compromiso y asegura acabados perfectos."
         buttonText="Solicitar Presupuesto Ahora"
         buttonHref="/contacto"
         features={[

@@ -467,8 +467,8 @@ export default async function ElectricidadPage() {
         ];
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
-          name: "Electricidad para Reformas en Barcelona y Vallès | Reformix",
-          description: "Servicios de electricidad para reformas en Barcelona y Vallès. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad.",
+          name: "Electricidad para Reformas en Barcelona y Vallès Occidental | Reformix",
+          description: "Servicios de electricidad para reformas en Barcelona y Vallès Occidental. Actualizamos tu instalación eléctrica para cumplir la normativa y mejorar la seguridad.",
           provider: {
             '@type': 'HomeAndConstructionBusiness',
             name: 'Reformix Barcelona',

@@ -8,7 +8,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "A-landings-content/**"
+      - "content/landings/**"
   workflow_dispatch:
     inputs:
       since:

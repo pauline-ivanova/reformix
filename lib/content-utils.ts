@@ -5,6 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { getProyectoSlugs } from './proyectos-data';
 
 export interface ContentMetadata {
   title?: string;
@@ -22,7 +23,7 @@ export interface ContentFile {
 /**
  * Reads a markdown file and parses frontmatter
  */
-export function getContentBySlug(slug: string, contentDir: string = 'A-landings-content'): ContentFile | null {
+export function getContentBySlug(slug: string, contentDir: string = 'content/landings'): ContentFile | null {
   try {
     const fullPath = path.join(process.cwd(), contentDir, `${slug}.md`);
     
@@ -47,7 +48,7 @@ export function getContentBySlug(slug: string, contentDir: string = 'A-landings-
 /**
  * Gets all content files from a directory
  */
-export function getAllContentFiles(contentDir: string = 'A-landings-content'): ContentFile[] {
+export function getAllContentFiles(contentDir: string = 'content/landings'): ContentFile[] {
   try {
     const directory = path.join(process.cwd(), contentDir);
     
@@ -144,10 +145,12 @@ export function getAllStaticPages(appDir: string = 'app'): StaticPage[] {
       'sitemap-reformas-estancia.xml',
       'sitemap-servicios-tecnicos.xml',
       'sitemap-reformas-comerciales.xml',
+      'sitemap-proyectos.xml',
       'sitemap-legal.xml',
       'sitemap.xml',
       'site-map',
       'sentry-smoke',
+      'proyectos',
       '_next',
     ];
 
@@ -288,6 +291,7 @@ export const SERVICIOS_TECNICOS_SLUGS = new Set([
   'fontaneria',
   'electricidad',
   'pintura-interior',
+  'instalacion-papel-pintado',
   'albanileria',
   'calefaccion-climatizacion',
   'impermeabilizaciones',
@@ -328,6 +332,11 @@ export const LEGAL_SLUGS = new Set([
   'cookies',
   'contacto',
 ]);
+
+/**
+ * Proyectos realizados (index + project slugs from data)
+ */
+export const PROYECTOS_INDEX_SLUG = 'proyectos';
 
 /**
  * Gets pages for Reformas Comerciales based on known slugs
@@ -437,5 +446,32 @@ export function getLegalPages(appDir: string = 'app'): StaticPage[] {
       title: title || formatPageTitle(slug),
     };
   });
+}
+
+/**
+ * Gets index + project detail pages for the proyectos sitemap.
+ */
+export function getProyectosPages(): StaticPage[] {
+  const pages: StaticPage[] = [
+    {
+      slug: PROYECTOS_INDEX_SLUG,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+      title: 'Proyectos',
+    },
+  ];
+
+  for (const slug of getProyectoSlugs()) {
+    pages.push({
+      slug: `${PROYECTOS_INDEX_SLUG}/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+      title: formatPageTitle(slug),
+    });
+  }
+
+  return pages;
 }
 

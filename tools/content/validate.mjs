@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Validate A-landings-content landings + public image refs used by MD/heroes.
+ * Validate content/landings landings + public image refs used by MD/heroes.
  * Usage: node tools/content/validate.mjs [--json] [--skip-app-images]
  * Canon: docs/ops-stack.md Phase C
  */

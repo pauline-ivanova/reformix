@@ -35,13 +35,13 @@ import { FaShower } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: "Reformas de Baños en Barcelona y Vallès Occidental",
-  description: "Especialistas en reformas de baños en Barcelona y Vallès. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía. ¡Infórmate!",
+  description: "Especialistas en reformas de baños en Barcelona y Vallès Occidental. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía. ¡Infórmate!",
   ...generateStandardMetadata({
     title: "Reformas de Baños en Barcelona y Vallès Occidental",
-    description: "Especialistas en reformas de baños en Barcelona y Vallès. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía. ¡Infórmate!",
+    description: "Especialistas en reformas de baños en Barcelona y Vallès Occidental. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía. ¡Infórmate!",
     url: "https://www.reformix.barcelona/reformas-banos",
     pagePath: "/reformas-banos",
-    keywords: ["reforma baño Barcelona", "reforma baño Vallès", "diseño baño Barcelona", "reforma baño llave en mano"],
+    keywords: ["reforma baño Barcelona", "reforma baño Vallès Occidental", "diseño baño Barcelona", "reforma baño llave en mano"],
   }),
 };
 
@@ -328,7 +328,7 @@ export default async function ReformasBanosPage() {
         const faqSchema = generateFAQSchema(faqs);
         const serviceSchema = generateServiceSchema({
           name: "Reformas de Baños en Barcelona y Vallès Occidental",
-          description: "Especialistas en reformas de baños en Barcelona y Vallès. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía.",
+          description: "Especialistas en reformas de baños en Barcelona y Vallès Occidental. Transforma tu baño en un oasis de relax. Presupuesto cerrado y garantía.",
           provider: {
             '@type': 'HomeAndConstructionBusiness',
             name: 'Reformix Barcelona',
@@ -399,7 +399,7 @@ export default async function ReformasBanosPage() {
       />
       <CTA
         title="¿Listo para dar el paso y renovar tu baño?"
-        description="Contacta con nosotros. Te daremos un presupuesto detallado y sin compromiso para tu reforma en Barcelona o el Vallès."
+        description="Contacta con nosotros. Te daremos un presupuesto detallado y sin compromiso para tu reforma en Barcelona o el Vallès Occidental."
         buttonText="Solicita tu Presupuesto Gratuito"
         buttonHref="/contacto"
         features={[

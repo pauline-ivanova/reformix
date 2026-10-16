@@ -22,10 +22,10 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Alicatado y Solados en Barcelona y Vallès | Reformix",
+  title: "Alicatado y Solados en Barcelona y Vallès Occidental | Reformix",
   description: "Servicio de alicatado y colocación de suelos en Barcelona. Expertos en cerámica, porcelánico y piedra. Acabados nivelados y duraderos. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Alicatado y Solados en Barcelona y Vallès | Reformix",
+    title: "Alicatado y Solados en Barcelona y Vallès Occidental | Reformix",
     description: "Servicio de alicatado y colocación de suelos en Barcelona. Expertos en cerámica, porcelánico y piedra. Acabados nivelados y duraderos. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/alicatado",
     pagePath: "/alicatado",
@@ -237,7 +237,7 @@ export default async function AlicatadoPage() {
       />
       <TestimonialsCarousel
         title="Opiniones de Nuestros Clientes"
-        subtitle="La satisfacción de nuestros clientes en Barcelona y el Vallès es nuestra mejor garantía. Descubre lo que dicen sobre nuestros trabajos de alicatado."
+        subtitle="La satisfacción de nuestros clientes en Barcelona y el Vallès Occidental es nuestra mejor garantía. Descubre lo que dicen sobre nuestros trabajos de alicatado."
         testimonials={[
           {
             text: "Tenía miedo de poner rectificado en el baño porque se notan mucho los fallos, pero quedó perfecto. Las juntas son mínimas y las esquinas están impecables.",

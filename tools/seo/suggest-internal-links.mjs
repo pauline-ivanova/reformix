@@ -1,5 +1,5 @@
 /**
- * Suggest internal links for A-landings-content (suggest-only — never writes MD).
+ * Suggest internal links for content/landings (suggest-only — never writes MD).
  *
  * Usage:
  *   node tools/seo/suggest-internal-links.mjs
@@ -77,7 +77,7 @@ async function main() {
 
   const docs = await loadDocuments()
   if (docs.length === 0) {
-    console.error('No A-landings-content/*.md files found')
+    console.error('No content/landings/*.md files found')
     process.exit(1)
   }
 

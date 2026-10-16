@@ -1,48 +1,50 @@
-# Reformix Barcelona - Next.js Website
+# Reformix Barcelona — Next.js Website
 
-Современный сайт для компании Reformix Barcelona, построенный на Next.js 14 и развернутый на Vercel.
+Сайт компании Reformix Barcelona на Next.js (App Router), TypeScript, Tailwind CSS. Деплой на Vercel.
 
 ## Технологии
 
-- **Next.js 14** - React фреймворк с App Router
-- **TypeScript** - Типизированный JavaScript
-- **Tailwind CSS** - Utility-first CSS фреймворк
-- **Markdown** - Контент хранится в Markdown файлах
-- **Vercel** - Хостинг и деплой
+- **Next.js 15** — App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **Markdown** — контент лендингов и проектов
+- **Vercel** — хостинг
 
 ## Структура проекта
 
 ```
 reformix.barcelona/
-├── A-landings-content/     # Markdown файлы с контентом страниц
-├── app/                    # Next.js App Router
-│   ├── components/        # React компоненты
-│   │   └── layout/        # Header, Footer
-│   ├── layout.tsx         # Корневой layout
-│   └── page.tsx           # Главная страница
-├── lib/                    # Утилиты
-│   ├── content-utils.ts   # Функции для работы с Markdown
-│   └── metadata-utils.ts # SEO метаданные
-└── public/                 # Статические файлы
+├── app/                      # Next.js App Router (страницы, API, layout)
+│   ├── components/           # UI: layout, blocks, analytics, forms, common
+│   ├── api/                  # API routes
+│   └── proyectos/            # Каталог и карточки проектов
+├── content/
+│   ├── landings/             # Markdown лендингов (NN-OOO-slug.md)
+│   └── proyectos/            # Markdown проектов + исходные фото
+├── lib/                      # Утилиты: content, metadata, schema, sitemap, GA, cookies
+├── public/                   # Статика (в т.ч. public/images — картинки сайта)
+├── assets/source/            # Исходники изображений (не отдаются Next напрямую)
+├── docs/                     # Операционные заметки, GDPR, фазы
+│   └── guides/               # Промпты и гайды по контенту/SEO
+├── tools/                    # CLI: content validate, GSC, IndexNow, link suggestions
+├── scripts/                  # Вспомогательные скрипты
+└── issues/                   # Трекинг контентных/SEO задач
 ```
 
 ## Установка и запуск
 
-1. Установите зависимости:
 ```bash
 npm install
-```
-
-2. Запустите dev-сервер:
-```bash
 npm run dev
 ```
 
-3. Откройте [http://localhost:3000](http://localhost:3000) в браузере
+Откройте [http://localhost:3000](http://localhost:3000).
 
 ## Контент
 
-Контент страниц хранится в папке `A-landings-content/` в формате Markdown. Каждый файл должен иметь frontmatter с метаданными:
+### Лендинги
+
+Файлы в `content/landings/` с именем `NN-OOO-slug.md` и YAML frontmatter:
 
 ```markdown
 ---
@@ -53,28 +55,29 @@ description: "Описание для SEO"
 # Контент страницы
 ```
 
-## Разработка
+Часть URL обслуживается через `app/[slug]` (markdown), часть — через явные `app/<slug>/page.tsx` с блоками. Новые лендинги предпочтительно добавлять в markdown + динамический роут, если хватает шаблона.
 
-### Добавление новой страницы
+### Проекты
 
-1. Создайте Markdown файл в `A-landings-content/`
-2. Создайте соответствующую страницу в `app/` используя динамические роуты
-3. Используйте `getContentBySlug()` из `lib/content-utils.ts` для чтения контента
+Markdown в `content/proyectos/`, изображения — в `content/proyectos/IMG/` (и копии/оптимизации в `public/` по необходимости). Loader: `lib/proyectos-data.ts`.
 
-### Компоненты
+## Полезные команды
 
-Компоненты находятся в `app/components/`:
-- `layout/` - Header, Footer
-- `blocks/` - Блоки контента (Hero, CTA, FAQ и т.д.)
-
-## Деплой
-
-Проект настроен для автоматического деплоя на Vercel. Просто подключите репозиторий к Vercel, и каждый push в main ветку будет автоматически деплоиться.
+```bash
+npm run content:validate   # проверка MD лендингов и ссылок на /images
+npm test                   # unit-тесты lib + tools
+npm run seo:suggest-links  # предложения внутренних ссылок (только отчёт)
+npm run indexnow:preview   # превью URL для IndexNow
+```
 
 ## SEO
 
-- Автоматическая генерация метатегов
-- Sitemap.xml (в разработке)
-- Robots.txt (в разработке)
-- JSON-LD разметка (в разработке)
+- Метатеги через `lib/metadata-utils.ts`
+- Sitemap-ы: `app/sitemap*.xml/`
+- `robots.ts`
+- JSON-LD в компонентах schema
+- IndexNow workflow (см. `docs/ops-stack.md`)
 
+## Деплой
+
+Push в `main` → автоматический деплой на Vercel. `prebuild` запускает `content:validate`.

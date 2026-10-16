@@ -30,6 +30,8 @@ Entity-граф + контракт по типу страницы. Не densest 
 | Home | FAQ · Review (visible testimonials, `itemReviewed` → LocalBusiness; no self-serving AggregateRating) | `app/page.tsx` |
 | Hub (`/reformas-integrales`, `/reformas-por-estancia`, `/servicios-tecnicos`, `/reformas-comerciales`) | CollectionPage · ItemList · FAQ · Breadcrumb | `lib/schema/utility-pages.ts` |
 | Spoke service | Service · FAQ · Breadcrumb (`provider` → `/#localbusiness`) | `generateServiceSchema` |
+| Proyectos index (`/proyectos`) | CollectionPage · ItemList · Breadcrumb | `buildProyectosIndexJsonLd` |
+| Proyecto (`/proyectos/[slug]`) | Article · Breadcrumb · FAQ (si visible) | `buildProyectoArticleJsonLd` + `generateFAQSchema` |
 | Contacto | ContactPage · ContactPoint · Breadcrumb | `buildContactPageJsonLd` |
 | Legal (`/aviso-legal`, `/privacidad`, `/cookies`) | WebPage · about Org · Breadcrumb | `buildLegalPageJsonLd` |
 

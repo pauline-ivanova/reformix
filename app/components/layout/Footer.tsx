@@ -64,6 +64,7 @@ const navigation = {
       { name: 'Fontanería', href: '/fontaneria' },
       { name: 'Electricidad', href: '/electricidad' },
       { name: 'Pintura Interior', href: '/pintura-interior' },
+      { name: 'Instalación de papel pintado', href: '/instalacion-papel-pintado' },
       { name: 'Albañilería', href: '/albanileria' },
       { name: 'Calefacción y Climatización', href: '/calefaccion-climatizacion' },
       { name: 'Impermeabilizaciones', href: '/impermeabilizaciones' },
@@ -340,6 +341,16 @@ export default function Footer() {
                   </BrandEmail>
                 </li>
               </ul>
+
+              {/* Proyectos — section-level link, same weight as Legal */}
+              <div className="mt-8">
+                <Link
+                  href="/proyectos"
+                  className="text-base font-bold leading-6 text-white hover:text-brand-accent transition-colors"
+                >
+                  Proyectos realizados
+                </Link>
+              </div>
 
               {/* Legal Section - Collapsible */}
               <div className="mt-8">

@@ -12,27 +12,31 @@ const Bars3Icon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-const HomeIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+/** Llave en mano — reforma integral completa */
+const KeyIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
   </svg>
 )
 
+/** Cuadrícula de estancias — cocina, baño, salón… */
+const Squares2X2Icon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+  </svg>
+)
+
+/** Oficios e instalaciones técnicas */
 const WrenchScrewdriverIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655-5.653a2.548 2.548 0 00-4.005 4.005l4.655 5.653m0 0l3.59-3.59m0 0a2.548 2.548 0 004.005-4.005m-4.005 4.005V9.75" />
   </svg>
 )
 
-const HomeModernIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 3.75l-1.5.545M18.75 3l-1.5.545m0 3.75l-1.5.545M9.75 9l-1.5.545M10.5 7.5l-1.5.545M4.5 21h9M3.75 9H7.5m-1.5 3h6m-6 3h6m-3-9v3m0 0v3m0-3h3m-3 0h3" />
-  </svg>
-)
-
-const BuildingOfficeIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.75 21h16.5M4.5 3h15m-15 18v-8.25c0-.621.504-1.125 1.125-1.125h12.75c.621 0 1.125.504 1.125 1.125V21M4.5 3v8.25m0-8.25H3m1.5 0h15m-15 0v8.25m0-8.25H3m13.5 0v8.25m0-8.25h-3m3 0h3m-9 0v8.25m0-8.25h-1.5m1.5 0h1.5" />
+/** Local / retail / negocio */
+const BuildingStorefrontIcon = ({ className }: { className?: string }) => (
+  <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 004.501-.189.75.75 0 01.926-.53 3 3 0 004.5 0 .75.75 0 01.926.53A3 3 0 0018.75 9.35M3.75 9.349V4.875c0-.621.504-1.125 1.125-1.125H9.75v2.25c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3.75h4.875c.621 0 1.125.504 1.125 1.125v4.599" />
   </svg>
 )
 
@@ -50,7 +54,7 @@ const navigation = [
   { 
     name: 'Reformas Integrales', 
     href: '/reformas-integrales',
-    icon: HomeModernIcon,
+    icon: KeyIcon,
     subservices: [
       { name: 'Reformas Integrales de Pisos', href: '/reformas-integrales-pisos' },
       { name: 'Rehabilitación de Casas', href: '/rehabilitacion-casas' },
@@ -60,7 +64,7 @@ const navigation = [
   { 
     name: 'Reformas por Estancia', 
     href: '/reformas-por-estancia',
-    icon: HomeIcon,
+    icon: Squares2X2Icon,
     subservices: [
       { name: 'Reformas de Cocinas', href: '/reformas-cocinas' },
       { name: 'Reformas de Baños', href: '/reformas-banos' },
@@ -79,6 +83,7 @@ const navigation = [
       { name: 'Pladur y Falsos Techos', href: '/pladur' },
       { name: 'Ventanas y Aluminio', href: '/ventanas' },
       { name: 'Pintura Interior', href: '/pintura-interior' },
+      { name: 'Instalación de papel pintado', href: '/instalacion-papel-pintado' },
       { name: 'Aislamiento Térmico y Acústico', href: '/aislamiento-termico-acustico' },
       { name: 'Fontanería', href: '/fontaneria' },
       { name: 'Electricidad', href: '/electricidad' },
@@ -92,7 +97,7 @@ const navigation = [
   { 
     name: 'Reformas Comerciales', 
     href: '/reformas-comerciales',
-    icon: BuildingOfficeIcon,
+    icon: BuildingStorefrontIcon,
     subservices: [
       { name: 'Reformas de Oficinas', href: '/reformas-oficinas' },
       { name: 'Locales Comerciales y Retail', href: '/locales-comerciales-retail' },
@@ -162,7 +167,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:gap-x-10 lg:flex-shrink-0">
           {shouldLoadDesktopMenu && <DesktopMenu navigation={navigation} />}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:ml-6 lg:flex-shrink-0">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:ml-6 lg:flex-shrink-0 lg:items-center">
           <CtaLink
             href="/contacto"
             ctaId="header_presupuesto"

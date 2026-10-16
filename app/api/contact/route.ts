@@ -1,6 +1,10 @@
 import * as Sentry from '@sentry/nextjs';
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import {
+  buildContactEmailSubject,
+  resolveServiceLabel,
+} from '@/lib/contact-email';
 
 // Initialize Resend only if API key is provided
 const resend = process.env.RESEND_API_KEY 
@@ -235,8 +239,9 @@ export async function POST(request: NextRequest) {
       console.error('Failed to send Telegram notification:', error);
     }
 
-    // Send email notification to both addresses
-    const emailSubject = `Nuevo contacto desde la web: ${name}`;
+    // Send email notification (subject is client-friendly when replying via Reply-To)
+    const serviceLabel = resolveServiceLabel(service);
+    const emailSubject = buildContactEmailSubject(name, service);
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #1a1a1a; border-bottom: 2px solid #d97706; padding-bottom: 10px;">
@@ -246,7 +251,7 @@ export async function POST(request: NextRequest) {
           <p style="margin: 10px 0;"><strong>Nombre:</strong> ${name}</p>
           <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
           <p style="margin: 10px 0;"><strong>Teléfono:</strong> ${phone}</p>
-          <p style="margin: 10px 0;"><strong>Servicio:</strong> ${service || 'No especificado'}</p>
+          <p style="margin: 10px 0;"><strong>Servicio:</strong> ${serviceLabel || 'No especificado'}</p>
         </div>
         <div style="margin-top: 20px; padding: 20px; background-color: #ffffff; border-left: 4px solid #d97706;">
           <h3 style="color: #1a1a1a; margin-top: 0;">Mensaje:</h3>

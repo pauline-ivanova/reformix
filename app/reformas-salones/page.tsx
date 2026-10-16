@@ -29,13 +29,13 @@ import {
 
 export const metadata: Metadata = {
   title: "Reformas de Salones en Barcelona: Espacios con Estilo",
-  description: "Especialistas en reformas de salones en Barcelona y Vallès. Optimizamos espacio, luz y diseño para crear el salón de tus sueños. ¡Pide presupuesto!",
+  description: "Especialistas en reformas de salones en Barcelona y Vallès Occidental. Optimizamos espacio, luz y diseño para crear el salón de tus sueños. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Reformas de Salones en Barcelona: Espacios con Estilo",
-    description: "Especialistas en reformas de salones en Barcelona y Vallès. Optimizamos espacio, luz y diseño para crear el salón de tus sueños. ¡Pide presupuesto!",
+    description: "Especialistas en reformas de salones en Barcelona y Vallès Occidental. Optimizamos espacio, luz y diseño para crear el salón de tus sueños. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/reformas-salones",
     pagePath: "/reformas-salones",
-    keywords: ["reforma salón Barcelona", "reforma salón Vallès", "diseño salón Barcelona", "reforma salón llave en mano"],
+    keywords: ["reforma salón Barcelona", "reforma salón Vallès Occidental", "diseño salón Barcelona", "reforma salón llave en mano"],
   }),
 };
 

@@ -21,10 +21,10 @@ import {
 } from '@heroicons/react/24/solid';
 
 export const metadata: Metadata = {
-  title: "Interiorismo en Barcelona y Vallès | Reformix",
+  title: "Interiorismo en Barcelona y Vallès Occidental | Reformix",
   description: "Ejecutamos proyectos de interiorismo con arquitectos y diseñadores en Barcelona. Tu visión, nuestra precisión. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Interiorismo en Barcelona y Vallès | Reformix",
+    title: "Interiorismo en Barcelona y Vallès Occidental | Reformix",
     description: "Ejecutamos proyectos de interiorismo con arquitectos y diseñadores en Barcelona. Tu visión, nuestra precisión. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/interiorismo-colaboracion",
     pagePath: "/interiorismo-colaboracion",

@@ -26,10 +26,10 @@ import {
 
 export const metadata: Metadata = {
   title: "Fontanería en Barcelona y Vallès Occidental | Reformix",
-  description: "Renovamos la instalación de fontanería en Barcelona y Vallès. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
+  description: "Renovamos la instalación de fontanería en Barcelona y Vallès Occidental. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
   ...generateStandardMetadata({
     title: "Fontanería en Barcelona y Vallès Occidental | Reformix",
-    description: "Renovamos la instalación de fontanería en Barcelona y Vallès. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
+    description: "Renovamos la instalación de fontanería en Barcelona y Vallès Occidental. Materiales duraderos, sin fugas y presión óptima. Presupuesto cerrado. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/fontaneria",
     pagePath: "/fontaneria",
     keywords: ["servicios fontanería reformas", "fontanería Barcelona", "instalación fontanería", "renovación tuberías"],

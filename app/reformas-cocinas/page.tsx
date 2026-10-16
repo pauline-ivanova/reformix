@@ -30,13 +30,13 @@ import {
 
 export const metadata: Metadata = {
   title: "Reforma de Cocinas en Barcelona y Vallès Occidental",
-  description: "Especialistas en reformas de cocinas en Barcelona y Vallès. Diseños funcionales, presupuesto cerrado y plazos garantizados. ¡Pide tu visita!",
+  description: "Especialistas en reformas de cocinas en Barcelona y Vallès Occidental. Diseños funcionales, presupuesto cerrado y plazos garantizados. ¡Pide tu visita!",
   ...generateStandardMetadata({
     title: "Reforma de Cocinas en Barcelona y Vallès Occidental",
-    description: "Especialistas en reformas de cocinas en Barcelona y Vallès. Diseños funcionales, presupuesto cerrado y plazos garantizados. ¡Pide tu visita!",
+    description: "Especialistas en reformas de cocinas en Barcelona y Vallès Occidental. Diseños funcionales, presupuesto cerrado y plazos garantizados. ¡Pide tu visita!",
     url: "https://www.reformix.barcelona/reformas-cocinas",
     pagePath: "/reformas-cocinas",
-    keywords: ["reforma cocina Barcelona", "reforma cocina Vallès", "diseño cocina Barcelona", "reforma cocina llave en mano"],
+    keywords: ["reforma cocina Barcelona", "reforma cocina Vallès Occidental", "diseño cocina Barcelona", "reforma cocina llave en mano"],
   }),
 };
 
@@ -234,7 +234,7 @@ export default async function ReformasCocinasPage() {
             Diseño, Calidad y Compromiso
           </>
         }
-        subtitle="Entendemos que la cocina es el corazón de tu hogar. Por eso, cada reforma que realizamos en Barcelona y el Vallès se basa en estos cuatro pilares."
+        subtitle="Entendemos que la cocina es el corazón de tu hogar. Por eso, cada reforma que realizamos en Barcelona y el Vallès Occidental se basa en estos cuatro pilares."
         features={features}
         columns={4}
       />

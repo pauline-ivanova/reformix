@@ -81,19 +81,30 @@ declare global {
   }
 }
 
+let consentDefaultsSent = false
+
+/**
+ * gtag.js only replays dataLayer items that look like Arguments (has `callee`),
+ * not plain Arrays. Rest-param stubs push Arrays → consent/config/event are ignored.
+ * Match Google's snippet: `function gtag(){ dataLayer.push(arguments) }`.
+ */
 function ensureGtag(): void {
   window.dataLayer = window.dataLayer || []
   if (!window.gtag) {
-    window.gtag = function gtag(...args: unknown[]) {
-      window.dataLayer?.push(args)
+    // Classic function (no rest params) so `arguments` is the real Arguments object.
+    window.gtag = function gtag() {
+      // eslint-disable-next-line prefer-rest-params -- gtag.js Qb() requires Arguments, not Arrays
+      window.dataLayer!.push(arguments as unknown as never)
     }
   }
 }
 
-/** Google Consent Mode v2 defaults — denied until user opts in */
+/** Google Consent Mode v2 defaults — denied until user opts in (once per page load). */
 export function initGoogleConsentDefaults(): void {
   if (typeof window === 'undefined') return
   ensureGtag()
+  if (consentDefaultsSent) return
+  consentDefaultsSent = true
   window.gtag?.('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',

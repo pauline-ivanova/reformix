@@ -22,11 +22,11 @@ import {
 
 
 export const metadata: Metadata = {
-  title: "Reformas de Clínicas en Barcelona y Vallès",
-  description: "Especialistas en reformas de clínicas y centros sanitarios en Barcelona y Vallès. Cumplimiento normativa higiene y seguridad sanitaria. ¡Pide presupuesto!",
+  title: "Reformas de Clínicas en Barcelona y Vallès Occidental",
+  description: "Especialistas en reformas de clínicas y centros sanitarios en Barcelona y Vallès Occidental. Cumplimiento normativa higiene y seguridad sanitaria. ¡Pide presupuesto!",
   ...generateStandardMetadata({
-    title: "Reformas de Clínicas en Barcelona y Vallès",
-    description: "Especialistas en reformas de clínicas y centros sanitarios en Barcelona y Vallès. Cumplimiento normativa higiene y seguridad sanitaria. ¡Pide presupuesto!",
+    title: "Reformas de Clínicas en Barcelona y Vallès Occidental",
+    description: "Especialistas en reformas de clínicas y centros sanitarios en Barcelona y Vallès Occidental. Cumplimiento normativa higiene y seguridad sanitaria. ¡Pide presupuesto!",
     url: "https://www.reformix.barcelona/clinicas-centros-sanitarios",
     pagePath: "/clinicas-centros-sanitarios",
     keywords: ["reforma clínicas Barcelona", "reforma centros sanitarios Barcelona", "diseño clínicas Barcelona", "normativa sanitaria Barcelona"],

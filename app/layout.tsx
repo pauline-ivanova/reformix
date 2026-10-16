@@ -33,8 +33,8 @@ const inter = Inter({
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
 
 const standardMetadata = generateStandardMetadata({
-  title: "Reformix Barcelona | Reformas en Barcelona y Vallès",
-  description: "Reformas integrales en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. Pide tu presupuesto sin compromiso.",
+  title: "Reformix Barcelona | Reformas en Barcelona y Vallès Occidental",
+  description: "Reformas integrales en Barcelona y Vallès Occidental. Presupuestos cerrados y garantía por escrito. Pide tu presupuesto sin compromiso.",
   url: baseUrl,
   pagePath: '/',
   image: '/images/hero-bg.webp', // Default OG image for all pages
@@ -52,8 +52,8 @@ const standardMetadata = generateStandardMetadata({
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
-  title: "Reformix Barcelona | Reformas en Barcelona y Vallès",
-  description: "Reformas integrales en Barcelona y Vallès. Presupuestos cerrados y garantía por escrito. Pide tu presupuesto sin compromiso.",
+  title: "Reformix Barcelona | Reformas en Barcelona y Vallès Occidental",
+  description: "Reformas integrales en Barcelona y Vallès Occidental. Presupuestos cerrados y garantía por escrito. Pide tu presupuesto sin compromiso.",
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
