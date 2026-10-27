@@ -122,7 +122,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <ul>
             <li><strong>Titular:</strong> Irina Smirniakova</li>
-            <li><strong>NIF/NIE:</strong> Y6639851H</li>
+            <li><strong>NIF/DNI:</strong> 61389859F</li>
             <li><strong>Forma jurídica:</strong> Autónoma (Empresario Individual)</li>
             <li><strong>Marca comercial:</strong> Reformix Barcelona</li>
             <li><strong>Dirección:</strong> Carrer de Concepción Arenal, 100, 08204 Sabadell, Barcelona, España</li>
@@ -206,7 +206,7 @@ export default function PrivacyPolicyPage() {
           <ul>
             <li><strong>Email:</strong> <BrandEmail className="text-brand-accent hover:underline" /></li>
             <li><strong>Dirección:</strong> Carrer de Concepción Arenal, 100, 08204 Sabadell, Barcelona, España</li>
-            <li><strong>Titular:</strong> Irina Smirniakova (NIE: Y6639851H)</li>
+            <li><strong>Titular:</strong> Irina Smirniakova (DNI: 61389859F)</li>
           </ul>
         </section>
       </div>

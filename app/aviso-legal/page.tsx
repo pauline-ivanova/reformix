@@ -60,7 +60,7 @@ export default function LegalNoticePage() {
           </p>
           <ul>
             <li><strong>Titular:</strong> Irina Smirniakova</li>
-            <li><strong>NIF/NIE:</strong> Y6639851H</li>
+            <li><strong>NIF/DNI:</strong> 61389859F</li>
             <li><strong>Forma jurídica:</strong> Autónoma (Empresario Individual)</li>
             <li><strong>Marca comercial:</strong> Reformix Barcelona</li>
             <li><strong>Actividad:</strong> Reformas y rehabilitación</li>
