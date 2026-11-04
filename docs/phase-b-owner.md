@@ -29,6 +29,8 @@ Redeploy prod выполнен 2026-09-12. Локально для полног�
 `SENTRY_ENABLE_DEV=true` + `NEXT_PUBLIC_SENTRY_ENABLE_DEV=true` (+ DSN).
 Без `NEXT_PUBLIC_*` клиентский SDK в `next dev` остаётся выключен (env не попадает в browser bundle).
 
+**Важно:** флаги DEV **не оставлять включёнными** в `.env.local` между сессиями — иначе Issues засоряются localhost/HMR/extensions. После smoke — закомментировать оба.
+
 ## IDs (зафиксировано 2026-09-12)
 
 | Key | Value |
@@ -58,7 +60,13 @@ Tunnel: `/monitoring` в `next.config` (prod/preview builds).
 
 Тексты `/cookies` и `/privacidad` обновлены: Sentry = техника / interés legítimo, без Session Replay.
 
-## 5. Опционально
+## 5. Hygiene (код, 2026-11-04)
+
+- [x] `beforeSend` / `ignoreErrors` / `denyUrls`: Turnstile timeouts, `M_ID`, `removeChild`, local `.next` / EPIPE noise
+- [x] ContactForm: Turnstile `error-callback` + `expired-callback` + `remove` on unmount (без uncaught в Sentry)
+- [ ] Stale Issues (A/B/5/P… — Turnstile / M_ID / PhotoIcon / local `.next`) — **resolve вручную** в UI (токены `event:read` / `org:ci` не умеют менять status; нужен `event:admin` или клик в https://reformix-barcelona.sentry.io/)
+
+## 6. Опционально
 
 - [ ] Sentry ↔ GitHub code mapping (Seer / suspect commits)
 - [ ] Sentry MCP для Cursor (по желанию)

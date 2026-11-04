@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict'
 import { afterEach, describe, it } from 'node:test'
+import type { ErrorEvent, EventHint } from '@sentry/nextjs'
 import {
   getSentryDsn,
   isSentryDevCaptureEnabled,
   isSentryEnabled,
   isSentrySmokeAllowed,
+  shouldDropEvent,
+  sentryBeforeSend,
 } from './shared.ts'
 
 const KEYS = [
@@ -36,6 +39,14 @@ function clearSentryEnv() {
   for (const key of KEYS) {
     delete process.env[key]
   }
+}
+
+function fakeEvent(
+  partial: Partial<ErrorEvent> & {
+    exception?: ErrorEvent['exception']
+  },
+): ErrorEvent {
+  return { ...partial } as ErrorEvent
 }
 
 describe('sentry shared enablement', () => {
@@ -99,5 +110,71 @@ describe('sentry shared enablement', () => {
     clearSentryEnv()
     process.env.NODE_ENV = 'development'
     assert.equal(isSentrySmokeAllowed(), true)
+  })
+})
+
+describe('sentry noise filters', () => {
+  it('drops Turnstile timeout errors', () => {
+    const event = fakeEvent({
+      exception: {
+        values: [
+          {
+            type: 'TurnstileError',
+            value: '[Cloudflare Turnstile] Error: 110600.',
+            stacktrace: {
+              frames: [{ filename: 'app:///turnstile/v0/api.js' }],
+            },
+          },
+        ],
+      },
+    })
+    assert.equal(shouldDropEvent(event), true)
+    assert.equal(sentryBeforeSend(event, {} as EventHint), null)
+  })
+
+  it('drops M_ID third-party noise', () => {
+    const event = fakeEvent({
+      exception: {
+        values: [
+          {
+            type: 'TypeError',
+            value: "Cannot read properties of undefined (reading 'M_ID')",
+          },
+        ],
+      },
+    })
+    assert.equal(shouldDropEvent(event), true)
+  })
+
+  it('drops removeChild unmount races', () => {
+    const event = fakeEvent({
+      exception: {
+        values: [
+          {
+            type: 'TypeError',
+            value: "Cannot read properties of null (reading 'removeChild')",
+          },
+        ],
+      },
+    })
+    assert.equal(shouldDropEvent(event), true)
+  })
+
+  it('keeps real app ReferenceErrors', () => {
+    const event = fakeEvent({
+      exception: {
+        values: [
+          {
+            type: 'ReferenceError',
+            value: 'PhotoIcon is not defined',
+            stacktrace: {
+              frames: [{ filename: 'app/components/layout/MobileMenu.tsx' }],
+            },
+          },
+        ],
+      },
+    })
+    assert.equal(shouldDropEvent(event), false)
+    assert.equal(sentryBeforeSend(event, {} as EventHint), event)
   })
 })

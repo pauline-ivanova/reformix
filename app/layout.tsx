@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata, Viewport } from "next";
 import { Suspense } from "react";
 import { generateStandardMetadata } from "@/lib/metadata-utils";
+import { getSiteUrl } from "@/lib/site-url";
 import Header from "@/app/components/layout/Header";
 import JsonLd, { generateOrganizationSchema, generateWebSiteSchema, generateLocalBusinessSchema } from "@/app/components/common/JsonLd";
 import GlobalActivityIndicator from "@/app/components/common/GlobalActivityIndicator";
@@ -30,7 +31,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
+const baseUrl = getSiteUrl();
 
 const standardMetadata = generateStandardMetadata({
   title: "Reformix Barcelona | Reformas en Barcelona y Vallès Occidental",

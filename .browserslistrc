@@ -1,9 +1,11 @@
-# Modern browsers only - reduces legacy JavaScript polyfills
-# This targets browsers that support ES6+ features natively
-last 2 Chrome versions
-last 2 Firefox versions
-last 2 Safari versions
-last 2 Edge versions
+# Fixed baselines — do NOT use "last 2 X versions".
+# That query makes Next.js webpack keep ~840KB of next-devtools in production
+# (vercel/next.js#89844), which tanks LCP / unused-JS.
+# Targets modern evergreen browsers that support ES2020+ natively.
+Chrome >= 111
+Firefox >= 111
+Safari >= 16.4
+Edge >= 111
+iOS >= 16.4
 not dead
 not IE 11
-

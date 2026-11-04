@@ -41,6 +41,7 @@ export default function ContactForm({ service }: ContactFormProps) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileError, setTurnstileError] = useState<string | null>(null);
   const turnstileRef = useRef<HTMLDivElement | null>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
   const formStartedRef = useRef(false);
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
@@ -50,25 +51,76 @@ export default function ContactForm({ service }: ContactFormProps) {
     trackFormStart({ service: formData.service || service });
   };
 
+  const resetTurnstileWidget = () => {
+    try {
+      const turnstile = (window as Window & { turnstile?: { reset: (id?: string) => void } }).turnstile;
+      if (!turnstile) return;
+      if (turnstileWidgetIdRef.current) turnstile.reset(turnstileWidgetIdRef.current);
+      else turnstile.reset();
+    } catch {
+      // Ignore — widget may already be gone
+    }
+  };
+
   useEffect(() => {
     if (!turnstileSiteKey) return;
     if (typeof window === 'undefined') return;
-    if (!turnstileRef.current) return;
+
+    let cancelled = false;
+    let ownedScript: HTMLScriptElement | null = null;
+
+    const removeWidget = () => {
+      try {
+        const turnstile = (window as Window & {
+          turnstile?: { remove: (id: string) => void };
+        }).turnstile;
+        if (turnstile && turnstileWidgetIdRef.current) {
+          turnstile.remove(turnstileWidgetIdRef.current);
+        }
+      } catch {
+        // Ignore unmount races
+      }
+      turnstileWidgetIdRef.current = null;
+    };
 
     const renderTurnstile = () => {
+      if (cancelled || !turnstileRef.current) return;
       try {
-        const turnstile = (window as any).turnstile;
-        if (turnstile && turnstileRef.current) {
-          turnstile.render(turnstileRef.current, {
-            sitekey: turnstileSiteKey,
-            callback: (token: string) => {
-              setTurnstileToken(token);
-              setTurnstileError(null);
-            },
-          });
-        }
+        const turnstile = (window as Window & {
+          turnstile?: {
+            render: (
+              el: HTMLElement,
+              opts: Record<string, unknown>,
+            ) => string;
+          };
+        }).turnstile;
+        if (!turnstile || turnstileWidgetIdRef.current) return;
+
+        turnstileWidgetIdRef.current = turnstile.render(turnstileRef.current, {
+          sitekey: turnstileSiteKey,
+          callback: (token: string) => {
+            setTurnstileToken(token);
+            setTurnstileError(null);
+          },
+          'expired-callback': () => {
+            setTurnstileToken(null);
+            resetTurnstileWidget();
+          },
+          'error-callback': () => {
+            // Timeouts (110600) / transient challenges — UX retry, not Sentry.
+            setTurnstileToken(null);
+            setTurnstileError(
+              'La verificación de seguridad ha caducado. Inténtalo de nuevo.',
+            );
+            resetTurnstileWidget();
+            return true; // tell Turnstile we handled it (suppress uncaught)
+          },
+        });
       } catch (error) {
         console.error('Error rendering Turnstile widget:', error);
+        setTurnstileError(
+          'No se pudo cargar la verificación de seguridad. Recarga la página.',
+        );
       }
     };
 
@@ -77,23 +129,24 @@ export default function ContactForm({ service }: ContactFormProps) {
     );
 
     if (existingScript) {
-      if ((window as any).turnstile) {
+      if ((window as Window & { turnstile?: unknown }).turnstile) {
         renderTurnstile();
       } else {
         existingScript.addEventListener('load', renderTurnstile, { once: true });
       }
-      return;
+    } else {
+      ownedScript = document.createElement('script');
+      ownedScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+      ownedScript.async = true;
+      ownedScript.defer = true;
+      ownedScript.onload = renderTurnstile;
+      document.body.appendChild(ownedScript);
     }
 
-    const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.defer = true;
-    script.onload = renderTurnstile;
-    document.body.appendChild(script);
-
     return () => {
-      script.onload = null;
+      cancelled = true;
+      if (ownedScript) ownedScript.onload = null;
+      removeWidget();
     };
   }, [turnstileSiteKey]);
 
@@ -358,14 +411,7 @@ export default function ContactForm({ service }: ContactFormProps) {
         setTouched({});
         setTurnstileToken(null);
         formStartedRef.current = false;
-        try {
-          const turnstile = (window as any).turnstile;
-          if (turnstile) {
-            turnstile.reset();
-          }
-        } catch (error) {
-          console.error('Error resetting Turnstile widget:', error);
-        }
+        resetTurnstileWidget();
       } else {
         trackFormError({ service: serviceDim, errorType: 'api' });
         setSubmitStatus({

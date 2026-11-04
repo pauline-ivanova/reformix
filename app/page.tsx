@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { defaultTestimonials } from "@/app/components/blocks/testimonials-data";
 import { Metadata } from 'next';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
+import { getSiteUrl } from '@/lib/site-url';
 import { getAllProyectos } from '@/lib/proyectos-data';
 import { 
   reformasIntegralesPageData as reformasIntegralesData,
@@ -15,7 +16,7 @@ import {
   reformasComercialesPageData as reformasComercialesData
 } from '@/lib/page-data';
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona';
+const baseUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Reformas en Barcelona y Vallès Occidental | Reformix",

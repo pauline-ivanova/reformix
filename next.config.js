@@ -28,13 +28,21 @@ const nextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
-  // Optimize production builds
-  productionBrowserSourceMaps: true, // Enable source maps for better debugging
+  // Source maps go to Sentry via withSentryConfig — do not publish .map to the CDN
+  // (public maps 404'd and failed Lighthouse valid-source-maps).
+  productionBrowserSourceMaps: false,
   // Target modern browsers to reduce legacy JavaScript polyfills
   // This reduces bundle size by not including unnecessary polyfills
-  webpack: (config, { dev, isServer }) => {
-    // Ensure JavaScript is minified in production
+  webpack: (config, { dev, isServer, webpack }) => {
+    // Belt-and-suspenders vs Next.js webpack leak of next-devtools (~840KB) into
+    // production client chunks (vercel/next.js#89844). browserslistrc also fixed.
     if (!dev && !isServer) {
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /[\\/]next[\\/]dist[\\/](next-devtools[\\/]userspace|client[\\/]dev[\\/]|client[\\/]app-link-gc)/,
+          require.resolve('./lib/webpack-empty-stub.js'),
+        ),
+      );
       config.optimization = {
         ...config.optimization,
         minimize: true,

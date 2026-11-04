@@ -41,6 +41,10 @@ export function isSentrySmokeAllowed(): boolean {
   )
 }
 
+/**
+ * Patterns for flaky third-party / browser / captcha noise.
+ * Keep specific — do not swallow real app ReferenceErrors.
+ */
 const NOISE_MESSAGE_PATTERNS = [
   /^NetworkError/i,
   /Failed to fetch/i,
@@ -55,9 +59,31 @@ const NOISE_MESSAGE_PATTERNS = [
   /moz-extension:\/\//i,
   /safari-extension:\/\//i,
   /webkit-masked-url/i,
+  // Cloudflare Turnstile: timeouts & transient challenge failures (retryable UX)
+  /TurnstileError/i,
+  /\[Cloudflare Turnstile\]/i,
+  /turnstile\/v0\/api\.js/i,
+  // Third-party / extension globals (Clarity-adjacent noise in local + some browsers)
+  /reading ['"]M_ID['"]/i,
+  // React unmount races when widgets (Turnstile/maps) tear down mid-commit
+  /reading ['"]removeChild['"]/i,
+  // Local next dev / stale build artifacts — never actionable in Sentry
+  /\.next[\\/]server[\\/]/i,
+  /EPIPE:\s*broken pipe/i,
+  /Cannot find module ['"]\.\/vendor-chunks/i,
+  /Expected clientReferenceManifest to be defined/i,
 ]
 
-function eventText(event: ErrorEvent, hint?: EventHint): string {
+/** Stack frames that identify third-party captcha / extensions. */
+const NOISE_FRAME_PATTERNS = [
+  /chrome-extension:\/\//i,
+  /moz-extension:\/\//i,
+  /safari-extension:\/\//i,
+  /turnstile\/v0\/api\.js/i,
+  /challenges\.cloudflare\.com/i,
+]
+
+export function eventText(event: ErrorEvent, hint?: EventHint): string {
   const parts: string[] = []
   if (event.message) parts.push(event.message)
   for (const ex of event.exception?.values ?? []) {
@@ -73,7 +99,7 @@ function eventText(event: ErrorEvent, hint?: EventHint): string {
   return parts.join(' ')
 }
 
-/** Drop extension / flaky network noise (RUSO-style hygiene). */
+/** Drop extension / captcha / flaky network noise (RUSO-style hygiene). */
 export function shouldDropEvent(event: ErrorEvent, hint?: EventHint): boolean {
   const text = eventText(event, hint)
   if (NOISE_MESSAGE_PATTERNS.some((re) => re.test(text))) return true
@@ -83,11 +109,7 @@ export function shouldDropEvent(event: ErrorEvent, hint?: EventHint): boolean {
   if (
     frames.some((f) => {
       const file = f.filename ?? ''
-      return (
-        file.includes('chrome-extension://') ||
-        file.includes('moz-extension://') ||
-        file.includes('safari-extension://')
-      )
+      return NOISE_FRAME_PATTERNS.some((re) => re.test(file))
     })
   ) {
     return true
@@ -104,7 +126,27 @@ export function sentryBeforeSend(
   return event
 }
 
+/** Also applied at SDK init so matching errors never enqueue. */
+export const sentryIgnoreErrors: Array<string | RegExp> = [
+  /TurnstileError/i,
+  /\[Cloudflare Turnstile\]/i,
+  /reading ['"]M_ID['"]/i,
+  /reading ['"]removeChild['"]/i,
+  /EPIPE:\s*broken pipe/i,
+  /Expected clientReferenceManifest to be defined/i,
+]
+
+export const sentryDenyUrls: Array<string | RegExp> = [
+  /turnstile\/v0\/api\.js/i,
+  /challenges\.cloudflare\.com/i,
+  /^chrome-extension:\/\//i,
+  /^moz-extension:\/\//i,
+  /^safari-extension:\/\//i,
+]
+
 export const sentryBaseOptions = {
   sendDefaultPii: false,
   tracesSampleRate: 0.1,
+  ignoreErrors: sentryIgnoreErrors,
+  denyUrls: sentryDenyUrls,
 } as const

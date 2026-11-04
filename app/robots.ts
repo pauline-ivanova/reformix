@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { getSiteUrl } from '@/lib/site-url'
 
 /**
  * AI training bots not covered by Cloudflare Managed robots.txt.
@@ -19,7 +20,9 @@ const AI_TRAINING_BOTS = [
 ] as const
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.reformix.barcelona'
+  // Must use getSiteUrl() — raw NEXT_PUBLIC_SITE_URL may contain \r\n from
+  // dashboard paste, which splits Sitemap into an invalid second line (Lighthouse).
+  const baseUrl = getSiteUrl()
 
   return {
     rules: [
