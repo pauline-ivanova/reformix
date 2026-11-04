@@ -32,7 +32,7 @@ export default function AboutSection({ logoPath, text }: AboutSectionProps) {
               width={200}
               height={300}
               className="object-contain max-h-[300px]"
-              priority
+              loading="lazy"
             />
           </div>
           

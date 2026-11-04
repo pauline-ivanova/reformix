@@ -94,8 +94,7 @@ export default function ServicesSection({
                   fill
                   className="object-cover"
                   sizes={columns === 2 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 33vw"}
-                  priority={index === 0}
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="lazy"
                 />
               </div>
               

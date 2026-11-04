@@ -1,6 +1,5 @@
 import Hero from "@/app/components/blocks/Hero";
 import FeatureGrid from "@/app/components/blocks/FeatureGrid";
-import HeroPreload from "@/app/components/common/HeroPreload";
 import JsonLd from "@/app/components/common/JsonLd";
 import { generateFAQSchema, generateReviewSchema } from "@/app/components/common/JsonLd";
 import dynamic from 'next/dynamic';
@@ -153,7 +152,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroPreload imagePath="/images/hero-bg.webp" />
       <Hero
         title="Empresa de Reformas en Barcelona y Vallès Occidental"
         titleLines={[

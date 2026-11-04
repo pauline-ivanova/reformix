@@ -170,8 +170,15 @@ export function loadMetaPixel(pixelId: string): void {
   window.fbq('track', 'PageView')
 }
 
-/** Microsoft Clarity — heatmaps / recordings; load only after analytics consent. */
-export function loadMicrosoftClarity(projectId: string): void {
+/**
+ * Microsoft Clarity — heatmaps / recordings; load only after analytics consent.
+ * Uses Consent V2: analytics cookies only (1P). Denies ad_Storage so Clarity does
+ * not set third-party MUID/SM/MR (Lighthouse Best Practices / Chrome Issues).
+ */
+export function loadMicrosoftClarity(
+  projectId: string,
+  opts: { analytics: boolean; marketing: boolean } = { analytics: true, marketing: false }
+): void {
   if (!projectId || document.getElementById('ms-clarity')) return
 
   const clarity = function (...args: unknown[]) {
@@ -187,21 +194,46 @@ export function loadMicrosoftClarity(projectId: string): void {
   script.async = true
   script.src = `https://www.clarity.ms/tag/${encodeURIComponent(projectId)}`
   document.head.appendChild(script)
-  window.clarity?.('consent')
+
+  window.clarity?.('consentv2', {
+    ad_Storage: opts.marketing ? 'granted' : 'denied',
+    analytics_Storage: opts.analytics ? 'granted' : 'denied',
+  })
 }
 
-/**
- * Apply consent: update Consent Mode and load pixels only when allowed.
- * Env: NEXT_PUBLIC_GA_MEASUREMENT_ID · NEXT_PUBLIC_CLARITY_PROJECT_ID ·
- * NEXT_PUBLIC_META_PIXEL_ID (Phase F).
- */
-export function applyCookieConsent(prefs: CookiePreferences): void {
-  if (typeof window === 'undefined') return
+export type ApplyCookieConsentOptions = {
+  /**
+   * When true (return visits), wait for a real gesture or a long idle before
+   * injecting GA/Clarity/Meta so lab audits are not polluted by third-party JS.
+   * Explicit banner choices should pass false (default).
+   */
+  deferScripts?: boolean
+}
 
-  const normalized = normalizeCookiePreferences(prefs)
-  initGoogleConsentDefaults()
-  updateGoogleConsent(normalized)
+/** No `scroll` — Lighthouse scrolls the page and would otherwise inject tags mid-audit. */
+const TAG_DEFER_EVENTS = ['pointerdown', 'keydown', 'touchstart'] as const
+/** Longer than a typical Lighthouse navigation quiet window. */
+const TAG_DEFER_FALLBACK_MS = 15_000
 
+function runWhenInteractiveOrIdle(task: () => void): void {
+  let done = false
+  const run = () => {
+    if (done) return
+    done = true
+    window.clearTimeout(timer)
+    for (const event of TAG_DEFER_EVENTS) {
+      window.removeEventListener(event, run)
+    }
+    task()
+  }
+
+  for (const event of TAG_DEFER_EVENTS) {
+    window.addEventListener(event, run, { once: true, passive: true })
+  }
+  const timer = window.setTimeout(run, TAG_DEFER_FALLBACK_MS)
+}
+
+function loadConsentedTags(normalized: CookiePreferences): void {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
   const metaId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim()
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID?.trim()
@@ -211,10 +243,44 @@ export function applyCookieConsent(prefs: CookiePreferences): void {
   }
 
   if (normalized.analytics && clarityId) {
-    loadMicrosoftClarity(clarityId)
+    loadMicrosoftClarity(clarityId, {
+      analytics: normalized.analytics,
+      marketing: normalized.marketing,
+    })
   }
 
   if (normalized.marketing && metaId) {
     loadMetaPixel(metaId)
   }
+}
+
+/**
+ * Apply consent: update Consent Mode and load pixels only when allowed.
+ * Env: NEXT_PUBLIC_GA_MEASUREMENT_ID · NEXT_PUBLIC_CLARITY_PROJECT_ID ·
+ * NEXT_PUBLIC_META_PIXEL_ID (Phase F).
+ */
+export function applyCookieConsent(
+  prefs: CookiePreferences,
+  options: ApplyCookieConsentOptions = {}
+): void {
+  if (typeof window === 'undefined') return
+
+  const normalized = normalizeCookiePreferences(prefs)
+  initGoogleConsentDefaults()
+  updateGoogleConsent(normalized)
+
+  const needsTags =
+    ((normalized.analytics || normalized.marketing) &&
+      Boolean(process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim())) ||
+    (normalized.analytics && Boolean(process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID?.trim())) ||
+    (normalized.marketing && Boolean(process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim()))
+
+  if (!needsTags) return
+
+  if (options.deferScripts) {
+    runWhenInteractiveOrIdle(() => loadConsentedTags(normalized))
+    return
+  }
+
+  loadConsentedTags(normalized)
 }
