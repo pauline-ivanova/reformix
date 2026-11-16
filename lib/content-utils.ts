@@ -151,6 +151,7 @@ export function getAllStaticPages(appDir: string = 'app'): StaticPage[] {
       'site-map',
       'sentry-smoke',
       'proyectos',
+      'alcance-proyecto',
       '_next',
     ];
 

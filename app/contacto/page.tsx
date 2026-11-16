@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { generateStandardMetadata } from '@/lib/metadata-utils';
 import ContactForm from '@/app/components/forms/ContactForm';
 import JsonLd from '@/app/components/common/JsonLd';
@@ -97,7 +98,9 @@ export default function ContactPage() {
               <h2 className="text-2xl font-semibold mb-6 text-brand-text-heading">
                 Solicita tu Presupuesto
               </h2>
-              <ContactForm />
+              <Suspense fallback={<div className="h-64 animate-pulse rounded-md bg-gray-100" />}>
+                <ContactForm />
+              </Suspense>
             </div>
           </div>
         </div>

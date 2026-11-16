@@ -1,8 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { ComponentProps, MouseEvent } from 'react'
 import { trackCtaClick } from '@/lib/ga4'
+import { withContactServiceDonor } from '@/lib/contact-services'
 
 type CtaLinkProps = ComponentProps<typeof Link> & {
   /** Stable id for breakdowns in GA4 (e.g. hero_primary, footer_cta). */
@@ -13,6 +15,7 @@ type CtaLinkProps = ComponentProps<typeof Link> & {
 
 /**
  * Next Link that fires consent-gated `cta_click` on click.
+ * Contact CTAs inherit `?service=` from the current landing (donor page).
  */
 export default function CtaLink({
   ctaId,
@@ -22,8 +25,17 @@ export default function CtaLink({
   href,
   ...rest
 }: CtaLinkProps) {
+  const pathname = usePathname() || ''
+  const resolvedHref =
+    typeof href === 'string'
+      ? withContactServiceDonor(href, pathname)
+      : href
+
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    const linkUrl = typeof href === 'string' ? href : href.pathname || String(href)
+    const linkUrl =
+      typeof resolvedHref === 'string'
+        ? resolvedHref
+        : resolvedHref.pathname || String(resolvedHref)
     const linkText =
       typeof children === 'string'
         ? children
@@ -39,7 +51,7 @@ export default function CtaLink({
   }
 
   return (
-    <Link href={href} onClick={handleClick} {...rest}>
+    <Link href={resolvedHref} onClick={handleClick} {...rest}>
       {children}
     </Link>
   )

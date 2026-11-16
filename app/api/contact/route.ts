@@ -5,6 +5,12 @@ import {
   buildContactEmailSubject,
   resolveServiceLabel,
 } from '@/lib/contact-email';
+import {
+  buildMontajeContactEmailBlock,
+  buildMontajeContactTelegramHtml,
+  shouldAttachMontajeNotify,
+} from '@/lib/contact-montaje-notify';
+import { normalizeContactService } from '@/lib/contact-services';
 
 // Initialize Resend only if API key is provided
 const resend = process.env.RESEND_API_KEY 
@@ -25,25 +31,20 @@ async function sendTelegramNotification(data: {
   service?: string;
   message: string;
 }) {
-  console.log('Attempting to send Telegram notification...');
-  console.log('TELEGRAM_BOT_TOKEN exists:', !!TELEGRAM_BOT_TOKEN);
-  console.log('TELEGRAM_CHAT_ID exists:', !!TELEGRAM_CHAT_ID);
-  
   if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
     console.warn('Telegram credentials not configured. Telegram notification not sent.');
-    console.warn('TELEGRAM_BOT_TOKEN:', TELEGRAM_BOT_TOKEN ? 'SET' : 'MISSING');
-    console.warn('TELEGRAM_CHAT_ID:', TELEGRAM_CHAT_ID ? 'SET' : 'MISSING');
     return;
   }
 
   try {
+    const serviceLabel = resolveServiceLabel(data.service);
     const telegramMessage = `
 🔔 Nuevo contacto desde reformix.barcelona
 
 👤 Nombre: ${data.name}
 📧 Email: ${data.email}
 📱 Teléfono: ${data.phone}
-${data.service ? `🔧 Servicio: ${data.service}` : ''}
+${serviceLabel ? `🔧 Servicio: ${serviceLabel}` : ''}
 
 💬 Mensaje:
 ${data.message}
@@ -51,35 +52,52 @@ ${data.message}
 ⏰ Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}
     `.trim();
 
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-    
-    console.log('Sending to Telegram API:', url.replace(TELEGRAM_BOT_TOKEN, 'TOKEN_HIDDEN'));
-    console.log('Chat ID:', TELEGRAM_CHAT_ID);
-    
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text: telegramMessage,
+        }),
       },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text: telegramMessage,
-        // Removed MarkdownV2 to avoid parsing errors
-      }),
-    });
+    );
 
-    const responseData = await response.json();
-    
     if (!response.ok) {
+      const responseData = await response.json();
       console.error('Telegram API error:', response.status, responseData);
-      throw new Error(`Telegram API error: ${response.status} - ${JSON.stringify(responseData)}`);
     }
 
-    console.log('Telegram notification sent successfully:', responseData);
-  } catch (error: any) {
-    console.error('Error sending Telegram notification:', error);
-    console.error('Error details:', error.message);
-    // Don't throw - we don't want to fail the entire request if Telegram fails
+    if (shouldAttachMontajeNotify(data.service)) {
+      const montajeHtml = buildMontajeContactTelegramHtml({
+        name: data.name,
+        phone: data.phone,
+      });
+      const montajeRes = await fetch(
+        `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: montajeHtml,
+            parse_mode: 'HTML',
+            disable_web_page_preview: true,
+          }),
+        },
+      );
+      if (!montajeRes.ok) {
+        console.error(
+          'Telegram montaje follow-up error:',
+          montajeRes.status,
+          await montajeRes.text(),
+        );
+      }
+    }
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('Error sending Telegram notification:', message);
   }
 }
 
@@ -226,22 +244,26 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
+    const normalizedService = normalizeContactService(service);
+
     // Send Telegram notification
     try {
       await sendTelegramNotification({
         name,
         email,
         phone,
-        service,
+        service: normalizedService,
         message,
       });
     } catch (error) {
       console.error('Failed to send Telegram notification:', error);
     }
 
-    // Send email notification (subject is client-friendly when replying via Reply-To)
-    const serviceLabel = resolveServiceLabel(service);
-    const emailSubject = buildContactEmailSubject(name, service);
+    const serviceLabel = resolveServiceLabel(normalizedService);
+    const emailSubject = buildContactEmailSubject(name, normalizedService);
+    const montajeBlock = shouldAttachMontajeNotify(normalizedService)
+      ? buildMontajeContactEmailBlock({ name, phone })
+      : '';
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #1a1a1a; border-bottom: 2px solid #d97706; padding-bottom: 10px;">
@@ -257,6 +279,7 @@ export async function POST(request: NextRequest) {
           <h3 style="color: #1a1a1a; margin-top: 0;">Mensaje:</h3>
           <p style="color: #4b5563; white-space: pre-wrap;">${message}</p>
         </div>
+        ${montajeBlock}
         <div style="margin-top: 20px; padding: 15px; background-color: #f3f4f6; border-radius: 8px; font-size: 12px; color: #6b7280;">
           <p style="margin: 0;">Fecha: ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</p>
         </div>

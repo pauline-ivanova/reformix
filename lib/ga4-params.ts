@@ -7,6 +7,7 @@ const NON_SERVICE_SLUGS = new Set([
   'aviso-legal',
   'sitemap',
   'api',
+  'alcance-proyecto',
 ])
 
 /** Derive GA4 `service` dim from a URL path (no query/hash). */

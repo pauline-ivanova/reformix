@@ -1,22 +1,31 @@
 'use client'
 
 import { useState, FormEvent, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   trackFormError,
   trackFormStart,
   trackFormSubmit,
 } from '@/lib/ga4';
+import {
+  CONTACT_SERVICE_GROUPS,
+  normalizeContactService,
+} from '@/lib/contact-services';
 
 interface ContactFormProps {
   service?: string;
 }
 
 export default function ContactForm({ service }: ContactFormProps) {
+  const searchParams = useSearchParams();
+  const donorService = normalizeContactService(
+    searchParams.get('service') || service || '',
+  );
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: service || '',
+    service: donorService,
     message: '',
   });
   const [privacyConsent, setPrivacyConsent] = useState(false);
@@ -44,6 +53,13 @@ export default function ContactForm({ service }: ContactFormProps) {
   const turnstileWidgetIdRef = useRef<string | null>(null);
   const formStartedRef = useRef(false);
   const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+  useEffect(() => {
+    if (!donorService) return;
+    setFormData((prev) =>
+      prev.service === donorService ? prev : { ...prev, service: donorService },
+    );
+  }, [donorService]);
 
   const markFormStarted = () => {
     if (formStartedRef.current) return;
@@ -521,11 +537,15 @@ export default function ContactForm({ service }: ContactFormProps) {
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-accent focus:border-transparent"
         >
           <option value="">Selecciona un servicio</option>
-          <option value="reforma-integral">Reforma Integral</option>
-          <option value="reforma-cocina">Reforma de Cocina</option>
-          <option value="reforma-bano">Reforma de Baño</option>
-          <option value="servicios-tecnicos">Servicios Técnicos</option>
-          <option value="otro">Otro</option>
+          {CONTACT_SERVICE_GROUPS.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.options.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </optgroup>
+          ))}
         </select>
       </div>
 

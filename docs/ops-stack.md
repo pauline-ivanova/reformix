@@ -17,7 +17,8 @@ Vercel (app / SEO / Markdown landings)
 + GitHub (CMS + CI)                                  — content validate + IndexNow
 + GA4 / Clarity (+ Meta Pixel по триггеру ads)
 + Resend + Telegram (заявки)                         — уже в коде
-+ Sentry (ошибки — следующий новый SaaS)
++ Sentry (ошибки)
++ UptimeRobot (uptime home + /contacto)
 + свои скрипты (IndexNow, GSC snapshot/decay, link suggest, content validate)
 ```
 
@@ -40,6 +41,7 @@ Ops **не** отменяет контентный приоритет (ленд�
 | UX recordings / heatmaps | **Microsoft Clarity** | ✅ consent-gated | ✅ |
 | Lead funnels | **GA4 events** | ✅ code (`cta_click` / form_*) | ✅ Key events в UI |
 | Errors | **Sentry** | ✅ EU org + DSN | ✅ без Session Replay |
+| Uptime / SSL | **UptimeRobot** | 🟢 Free live · home + `/contacto` · 5 min · Email `reformix.barcelona@gmail.com` · SSL Pro/hold (CF) | ✅ |
 | Transactional / alerts | **Resend** + **Telegram** | ✅ код | ✅ дожать env/domain |
 | SEO discovery | **GSC + Bing** + IndexNow | 🟡 GSC вероятно | ✅ + IndexNow Action |
 | SEO hygiene scripts | GSC snapshot/decay, suggest-links | ✅ | ✅ Phase E |
@@ -86,6 +88,38 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 - [ ] Опц.: Sentry MCP + GitHub code mapping *(owner)*
 
 **Готово Phase B:** EU org + DSN live + issue в Sentry + prod smoke закрыт ✅
+
+---
+
+### Phase B2 — UptimeRobot (uptime)
+
+Цель: узнать, что сайт лежит, **до** звонка клиента. Не замена Sentry (ошибки JS) и не CWV.
+
+**Аккаунт:** Free · owner `Irina Smirnyakova` / `reformix.barcelona@gmail.com` · [uptimerobot.com](https://uptimerobot.com/)  
+**Интервал:** 5 min (free). **Алерты:** Email `reformix.barcelona@gmail.com`. Telegram/Slack на Free — paid only → hold.  
+**Dashboard:** https://dashboard.uptimerobot.com/monitors
+
+#### Мониторы (канон v1 — Free)
+
+| # | Тип | URL | Ожидание | Зачем | ID |
+|---|-----|-----|----------|-------|-----|
+| 1 | HTTP(s) | `https://www.reformix.barcelona/` | 2xx | www home | `804694948` |
+| 2 | HTTP(s) | `https://www.reformix.barcelona/contacto` | 2xx | money path | `804695078` |
+
+**SSL expiry:** только на платных планах. Сертификат через **Cloudflare** (auto-renew) → SSL-монитор **не** в v1.
+
+**Не мониторить в v1:** `/api/contact` (POST + Turnstile), Preview Vercel, apex без www (канон `www`).
+
+#### Owner чеклист
+
+- [x] Sign up / login · Free · `reformix.barcelona@gmail.com` 🟢
+- [x] Monitor #1 home `https://www.reformix.barcelona/` · HTTP(s) · 5 min · Up 🟢
+- [x] Monitor #2 `/contacto` · HTTP(s) · 5 min · created 🟢 (первый check может быть Preparing ~1–5 min)
+- [x] Alert contact: Email `reformix.barcelona@gmail.com` 🟢
+- [x] Public status page — **не** создавали (hold)
+- [x] Карта стека → 🟢 · журнал 2026-11-16
+
+**Hold:** Better Stack, HetrixTools, публичный status page, UptimeRobot Pro «ради SSL», Telegram integration (paid), API key / MCP skill в репо (пока нет `/ops` портала).
 
 ---
 
@@ -195,6 +229,7 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 | 2026-09-12 | **Phase C:** `npm run content:validate` · `tools/content/validate*.mjs` · GHA `content-validate.yml` · `prebuild` gate · homepage frontmatter. Required check ⏸. |
 | 2026-09-12 | **Phase E (код + live):** schema contracts · hubs/ContactPage/legal · `gsc:*` / `seo:suggest-links` · SA `gsc-readonly@plasma-set-321616` added to GSC `sc-domain:reformix.barcelona` · live snapshot `2026-09-12` (31 pages / 588 queries). Canon [`phase-e-owner.md`](./phase-e-owner.md). Next: 2nd weekly snapshot → live decay. |
 | 2026-09-12 | **Phase B close:** Sentry org/project `reformix-barcelona` (EU) · DSN + `SENTRY_*` в Vercel · token `org:ci` · issue `REFORMIX-BARCELONA-1` · prod smoke 404 · prod redeploy. Consent: analytics off → no GA/Clarity; on → `G-960ZDYC95F` + Clarity. dataLayer: `cta_click` → `page_view` → `form_start`. `content:validate` OK. |
+| 2026-11-16 | **Phase B2 UptimeRobot 🟢 live:** Free · Irina / `reformix.barcelona@gmail.com` · monitors home + `/contacto` (5 min, Email) · status page skip · SSL Pro/hold · Telegram integration hold (paid). |
 
 ---
 
@@ -204,6 +239,7 @@ Owner-чеклист консолей: [`phase-b-owner.md`](./phase-b-owner.md).
 |-------|--------|
 | A — Baseline | ✅ done (WAF Active · NS=Cloudflare) |
 | B — Sentry | ✅ EU org + DSN + issue smoke |
+| B2 — UptimeRobot | 🟢 Free · home + `/contacto` · Email |
 | C — Content CI | ✅ done (required check ⏸) |
 | D — Lead events | ✅ key event + Lead funnel · dataLayer smoke |
 | E — SEO scripts | ✅ code + live snapshot · weekly 2nd → decay |

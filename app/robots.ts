@@ -29,7 +29,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/sentry-smoke', '/monitoring'],
+        disallow: ['/api/', '/alcance-proyecto/', '/sentry-smoke', '/monitoring'],
       },
       ...AI_TRAINING_BOTS.map((userAgent) => ({
         userAgent,

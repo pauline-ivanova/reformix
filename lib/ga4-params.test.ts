@@ -10,6 +10,7 @@ describe('inferServiceFromPath', () => {
     assert.equal(inferServiceFromPath('/cookies'), '')
     assert.equal(inferServiceFromPath('/privacidad'), '')
     assert.equal(inferServiceFromPath('/aviso-legal'), '')
+    assert.equal(inferServiceFromPath('/alcance-proyecto/montaje-muebles-cocinas'), '')
   })
 
   it('returns service slug from landing paths', () => {

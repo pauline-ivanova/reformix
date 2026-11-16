@@ -64,7 +64,7 @@ Tunnel: `/monitoring` в `next.config` (prod/preview builds).
 
 - [x] `beforeSend` / `ignoreErrors` / `denyUrls`: Turnstile timeouts, `M_ID`, `removeChild`, local `.next` / EPIPE noise
 - [x] ContactForm: Turnstile `error-callback` + `expired-callback` + `remove` on unmount (без uncaught в Sentry)
-- [ ] Stale Issues (A/B/5/P… — Turnstile / M_ID / PhotoIcon / local `.next`) — **resolve вручную** в UI (токены `event:read` / `org:ci` не умеют менять status; нужен `event:admin` или клик в https://reformix-barcelona.sentry.io/)
+- [x] Stale Issues (A + 5 — Turnstile / `removeChild`) — resolved в UI 2026-11-16 (токены `event:read` / `org:ci` status не меняют; нужен UI / `event:admin`)
 
 ## 6. Опционально
 
