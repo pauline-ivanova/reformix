@@ -12,7 +12,7 @@ URL para compartir (después de la solicitud / en el hilo):
 3. El cuestionario llega a **Telegram** (resumen + enlace Google Maps + `.vcf` + archivos) y a **Gmail** con subject:
    `Alcance proyecto — Montaje de muebles y cocinas — {Nombre}`.
 4. En el mail/Telegram: botón/enlace **Ver obra en Google Maps** (dirección del paso 3) y adjunto **`.vcf`** para guardar el contacto (Google Contacts / iPhone).
-5. Si el cliente dejó email → ack corto automático (`Hemos recibido tu alcance — …`). No lleva la ficha completa.
+5. Al cliente no se le envía mail de confirmación: basta el mensaje de éxito en la web («Te responderemos en el hilo…»).
 6. **No responder** al correo de alcance. Contestar al cliente en el hilo original (o WhatsApp). El mail de alcance no lleva Reply-To del cliente a propósito.
 
 ## Plantillas (código)
@@ -23,7 +23,6 @@ URL para compartir (después de la solicitud / en el hilo):
 | Resumen Irina (HTML mail, bloques) | `buildAlcanceSummaryHtml` |
 | Resumen Irina (Telegram HTML, bloques) | `buildAlcanceSummaryTelegramHtml` |
 | Subject admin | `buildAlcanceEmailSubject` |
-| Ack cliente | `buildAlcanceClientAckHtml` / `buildAlcanceClientAckSubject` |
 | Maps | `buildAlcanceMapsSearchUrl` |
 | Contacto `.vcf` | `buildAlcanceVCard` / `alcanceVCardFilename` |
 

@@ -751,24 +751,6 @@ export function buildAlcanceSummaryTelegramHtml(
   return parts.join('\n');
 }
 
-/** Short client confirmation (only when they provided email). */
-export function buildAlcanceClientAckHtml(
-  data: Pick<AlcanceMontajePayload, 'nombre'>,
-): string {
-  const name = escapeHtml(data.nombre.trim() || 'hola');
-  return `
-    <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;">
-      <p>Hola ${name},</p>
-      <p>Hemos recibido los detalles de tu proyecto de montaje. Te responderemos en la conversación ya abierta (email o WhatsApp).</p>
-      <p style="color:#6b7280;font-size:13px;">Reformix Barcelona</p>
-    </div>
-  `.trim();
-}
-
-export function buildAlcanceClientAckSubject(): string {
-  return `Hemos recibido tu alcance — ${ALCANCE_SERVICE_LABEL}`;
-}
-
 function escapeVCard(value: string): string {
   return value
     .replace(/\\/g, '\\\\')

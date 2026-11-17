@@ -4,8 +4,6 @@ import { Resend } from 'resend';
 import {
   alcanceFullName,
   alcanceVCardFilename,
-  buildAlcanceClientAckHtml,
-  buildAlcanceClientAckSubject,
   buildAlcanceEmailSubject,
   buildAlcanceSummaryHtml,
   buildAlcanceSummaryTelegramHtml,
@@ -406,21 +404,6 @@ export async function POST(request: NextRequest) {
         });
       } catch (emailError) {
         console.error('Error sending alcance admin email:', emailError);
-      }
-
-      if (payload.email?.trim()) {
-        try {
-          const fromEmail =
-            process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
-          await resend.emails.send({
-            from: fromEmail,
-            to: [payload.email.trim()],
-            subject: buildAlcanceClientAckSubject(),
-            html: buildAlcanceClientAckHtml(payload),
-          });
-        } catch (ackError) {
-          console.error('Error sending alcance client ack:', ackError);
-        }
       }
     } else {
       console.warn('RESEND_API_KEY not configured. Alcance email not sent.');

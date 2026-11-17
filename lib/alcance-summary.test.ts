@@ -4,8 +4,6 @@ import {
   ALCANCE_MUNICIPIO_SUGGESTIONS,
   alcanceVCardFilename,
   filterMunicipioSuggestions,
-  buildAlcanceClientAckHtml,
-  buildAlcanceClientAckSubject,
   buildAlcanceEmailSubject,
   buildAlcanceMapsSearchUrl,
   buildAlcancePendiente,
@@ -248,18 +246,6 @@ describe('buildAlcanceSummaryTelegramHtml', () => {
     assert.match(html, /Llamar: tel:\+34674610599/);
     assert.match(html, /diseño\.pdf/);
     assert.doesNotMatch(html, /<div/);
-  });
-});
-
-describe('client ack template', () => {
-  it('uses a stable subject and greets by name', () => {
-    assert.equal(
-      buildAlcanceClientAckSubject(),
-      'Hemos recibido tu alcance — Montaje de muebles y cocinas',
-    );
-    const html = buildAlcanceClientAckHtml(basePayload());
-    assert.match(html, /Hola Juliana/);
-    assert.match(html, /conversación ya abierta/);
   });
 });
 
